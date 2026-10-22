@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metric Quest: The Time Traveler's Journey</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+
+  body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  .game-container {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(100, 200, 255, 0.3);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(100, 200, 255, 0.1);
+    position: relative;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 1.4em;
+    font-weight: 700;
+    background: linear-gradient(90deg, #64c8ff, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stats { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .stat {
+    background: rgba(100, 200, 255, 0.15);
+    border: 1px solid rgba(100, 200, 255, 0.4);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+  }
+
+  .stat span { color: #64c8ff; }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #64c8ff, #a78bfa);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(100, 200, 255, 0.8);
+    width: 0%;
+  }
+
+  .screen { display: none; animation: fadeIn 0.5s ease; }
+  .screen.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .menu-title {
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #64c8ff, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .menu-subtitle {
+    text-align: center;
+    color: #a0a0c0;
+    margin-bottom: 30px;
+    font-style: italic;
+  }
+
+  .level-select {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .level-card {
+    background: rgba(100, 200, 255, 0.08);
+    border: 2px solid rgba(100, 200, 255, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .level-card:hover {
+    transform: translateY(-5px);
+    border-color: #64c8ff;
+    box-shadow: 0 10px 30px rgba(100, 200, 255, 0.3);
+  }
+
+  .level-card.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(255, 100, 100, 0.3);
+  }
+
+  .level-card.locked:hover { transform: none; box-shadow: none; }
+
+  .level-icon { font-size: 2.5em; margin-bottom: 10px; }
+  .level-name { font-weight: 700; margin-bottom: 5px; color: #64c8ff; }
+  .level-desc { font-size: 0.85em; color: #a0a0c0; }
+  .level-score { font-size: 0.8em; color: #fbbf24; margin-top: 8px; }
+
+  .btn {
+    background: linear-gradient(135deg, #64c8ff, #a78bfa);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(100, 200, 255, 0.4);
+  }
+
+  .btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(100, 200, 255, 0.6);
+  }
+
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(100, 200, 255, 0.4);
+    box-shadow: none;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: rgba(100, 200, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(100, 200, 255, 0.3);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .q-num { font-size: 0.9em; color: #a0a0c0; }
+  .q-timer { font-size: 0.9em; color: #fbbf24; font-weight: 700; }
+
+  .question-box {
+    background: rgba(100, 200, 255, 0.08);
+    border: 2px solid rgba(100, 200, 255, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .question-text {
+    font-size: 1.3em;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+
+  .question-hint {
+    font-size: 0.85em;
+    color: #a0a0c0;
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  .answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 500px) {
+    .answers { grid-template-columns: 1fr; }
+  }
+
+  .answer-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(100, 200, 255, 0.3);
+    color: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+    padding-left: 20px;
+  }
+
+  .answer-btn:hover:not(:disabled) {
+    background: rgba(100, 200, 255, 0.15);
+    border-color: #64c8ff;
+    transform: translateX(5px);
+  }
+
+  .answer-btn.correct {
+    background: rgba(34, 197, 94, 0.3);
+    border-color: #22c55e;
+    animation: pulse 0.5s ease;
+  }
+
+  .answer-btn.wrong {
+    background: rgba(239, 68, 68, 0.3);
+    border-color: #ef4444;
+    animation: shake 0.5s ease;
+  }
+
+  .answer-btn:disabled { cursor: default; }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+  }
+
+  .feedback {
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .feedback.correct {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid #22c55e;
+    color: #4ade80;
+    display: block;
+  }
+
+  .feedback.wrong {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    display: block;
+  }
+
+  .hint-box {
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid #fbbf24;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    color: #fbbf24;
+    font-size: 0.9em;
+    display: none;
+  }
+
+  .hint-box.show { display: block; animation: fadeIn 0.3s ease; }
+
+  .end-screen { text-align: center; padding: 20px; }
+
+  .end-icon {
+    font-size: 4em;
+    margin-bottom: 15px;
+    animation: pulse 1s ease infinite;
+  }
+
+  .end-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #64c8ff, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .end-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .end-stat {
+    background: rgba(100, 200, 255, 0.1);
+    border: 1px solid rgba(100, 200, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px 25px;
+    min-width: 120px;
+  }
+
+  .end-stat-value {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #64c8ff;
+  }
+
+  .end-stat-label {
+    font-size: 0.85em;
+    color: #a0a0c0;
+    margin-top: 5px;
+  }
+
+  .ref-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #64c8ff, #a78bfa);
+    color: #fff;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(100, 200, 255, 0.5);
+    z-index: 100;
+    transition: transform 0.3s;
+  }
+
+  .ref-toggle:hover { transform: scale(1.1) rotate(10deg); }
+
+  .ref-panel {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    background: rgba(26, 26, 46, 0.98);
+    border: 2px solid #64c8ff;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 99;
+    display: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .ref-panel.show { display: block; animation: fadeIn 0.3s ease; }
+
+  .ref-panel h3 {
+    color: #64c8ff;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+  }
+
+  .ref-section {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(100, 200, 255, 0.2);
+  }
+
+  .ref-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .ref-section h4 {
+    color: #a78bfa;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+  }
+
+  .ref-item {
+    font-size: 0.85em;
+    color: #d0d0e0;
+    padding: 4px 0;
+    font-family: 'Courier New', monospace;
+  }
+
+  .streak {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #fbbf24, #f472b6);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #fff;
+    display: none;
+    animation: pulse 0.5s ease;
+    z-index: 10;
+  }
+
+  .streak.show { display: block; }
+
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    animation: confettiFall 3s linear forwards;
+    z-index: 200;
+    pointer-events: none;
+    top: -20px;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="game-container">
+  <div class="streak" id="streak">🔥 0</div>
+
+  <!-- MENU SCREEN -->
+  <div class="screen active" id="menuScreen">
+    <div class="menu-title">🎮 Metric Quest</div>
+    <div class="menu-subtitle">The Time Traveler's Journey</div>
+    <div class="level-select" id="levelSelect"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="resetProgress()">🔄 Reset Progress</button>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div class="screen" id="gameScreen">
+    <div class="header">
+      <div class="title" id="levelTitle">Level</div>
+      <div class="stats">
+        <div class="stat">🪙 <span id="coins">0</span></div>
+        <div class="stat">⭐ <span id="score">0</span></div>
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="q-header">
+      <div class="q-num" id="qNum">Question 1 / 10</div>
+      <div class="q-timer" id="qTimer">⏱️ 30s</div>
+    </div>
+
+    <div class="question-box">
+      <div class="question-text" id="questionText"></div>
+    </div>
+
+    <div class="hint-box" id="hintBox"></div>
+
+    <div class="answers" id="answers"></div>
+
+    <div class="feedback" id="feedback"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="hintBtn" onclick="useHint()">💡 Hint (-5 🪙)</button>
+      <button class="btn btn-secondary" onclick="backToMenu()">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- END SCREEN -->
+  <div class="screen" id="endScreen">
+    <div class="end-screen">
+      <div class="end-icon" id="endIcon">🏆</div>
+      <div class="end-title" id="endTitle">Level Complete!</div>
+      <div class="end-stats">
+        <div class="end-stat">
+          <div class="end-stat-value" id="endCorrect">0</div>
+          <div class="end-stat-label">Correct</div>
+        </div>
+        <div class="end-stat">
+          <div class="end-stat-value" id="endCoins">0</div>
+          <div class="end-stat-label">Coins Earned</div>
+        </div>
+        <div class="end-stat">
+          <div class="end-stat-value" id="endAccuracy">0%</div>
+          <div class="end-stat-label">Accuracy</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="retryBtn" onclick="retryLevel()">🔄 Retry</button>
+        <button class="btn btn-secondary" onclick="backToMenu()">🏠 Menu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reference Chart -->
+<button class="ref-toggle" onclick="toggleRef()">📐</button>
+<div class="ref-panel" id="refPanel">
+  <h3>📐 Conversion Reference</h3>
+
+  <div class="ref-section">
+    <h4>📏 Length</h4>
+    <div class="ref-item">1 km = 1000 m</div>
+    <div class="ref-item">1 m = 100 cm</div>
+    <div class="ref-item">1 cm = 10 mm</div>
+  </div>
+
+  <div class="ref-section">
+    <h4>⚖️ Mass</h4>
+    <div class="ref-item">1 kg = 1000 g</div>
+    <div class="ref-item">1 g = 1000 mg</div>
+  </div>
+
+  <div class="ref-section">
+    <h4>💧 Capacity</h4>
+    <div class="ref-item">1 L = 1000 mL</div>
+  </div>
+
+  <div class="ref-section">
+    <h4>⏰ Time</h4>
+    <div class="ref-item">1 min = 60 sec</div>
+    <div class="ref-item">1 hr = 60 min</div>
+    <div class="ref-item">1 day = 24 hr</div>
+    <div class="ref-item">1 week = 7 days</div>
+    <div class="ref-item">1 month ≈ 4 weeks</div>
+    <div class="ref-item">1 year = 12 months</div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA & STATE
+============================================================ */
+const COINS_KEY = 'metricQuestCoins';
+const PROGRESS_KEY = 'metricQuestProgress';
+const QUESTIONS_PER_LEVEL = 10;
+const TIME_PER_Q = 30;
+
+let state = {
+  currentLevel: 0,
+  currentQ: 0,
+  score: 0,
+  coins: parseInt(localStorage.getItem(COINS_KEY) || '0'),
+  streak: 0,
+  questions: [],
+  answered: false,
+  timer: null,
+  timeLeft: 0,
+  hintUsed: false,
+  correctCount: 0
+};
+
+/* ============================================================
+   UTILITY FUNCTIONS
+============================================================ */
+function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildQuestion(question, correct, distractors, hint) {
+  const all = [correct, ...distractors].map(String);
+  const unique = [...new Set(all)];
+  while (unique.length < 4) {
+    const fake = randInt(1, 9999) + ' units';
+    if (!unique.includes(fake)) unique.push(fake);
+  }
+  return {
+    question,
+    correct: String(correct),
+    options: shuffle(unique.slice(0, 4)),
+    hint
+  };
+}
+
+/* ============================================================
+   QUESTION GENERATORS
+============================================================ */
+function genLengthMC() {
+  const isToCm = Math.random() < 0.5;
+  const n = randInt(1, 15);
+  if (isToCm) {
+    return buildQuestion(
+      `Convert ${n} m to centimeters.`,
+      (n * 100) + ' cm',
+      [(n * 10) + ' cm', (n * 1000) + ' cm', (n + 100) + ' cm', (n * 50) + ' cm'],
+      '1 m = 100 cm. Multiply by 100.'
+    );
+  } else {
+    const cm = n * 100;
+    return buildQuestion(
+      `Convert ${cm} cm to meters.`,
+      n + ' m',
+      [(cm / 10) + ' m', (cm * 100) + ' m', (cm / 1000) + ' m', (cm / 50) + ' m'],
+      '1 m = 100 cm. Divide by 100.'
+    );
+  }
+}
+
+function genLengthKM() {
+  const isToM = Math.random() < 0.5;
+  const n = randInt(1, 12);
+  if (isToM) {
+    return buildQuestion(
+      `Convert ${n} km to meters.`,
+      (n * 1000) + ' m',
+      [(n * 100) + ' m', (n * 10) + ' m', (n * 10000) + ' m', (n + 1000) + ' m'],
+      '1 km = 1000 m. Multiply by 1000.'
+    );
+  } else {
+    const m = n * 1000;
+    return buildQuestion(
+      `Convert ${m} m to kilometers.`,
+      n + ' km',
+      [(m / 100) + ' km', (m / 10) + ' km', (m / 10000) + ' km', (m + 1000) + ' km'],
+      '1 km = 1000 m. Divide by 1000.'
+    );
+  }
+}
+
+function genMassKG() {
+  const isToG = Math.random() < 0.5;
+  const n = randInt(1, 15);
+  if (isToG) {
+    return buildQuestion(
+      `Convert ${n} kg to grams.`,
+      (n * 1000) + ' g',
+      [(n * 100) + ' g', (n * 10) + ' g', (n * 10000) + ' g', (n + 1000) + ' g'],
+      '1 kg = 1000 g. Multiply by 1000.'
+    );
+  } else {
+    const g = n * 1000;
+    return buildQuestion(
+      `Convert ${g} g to kilograms.`,
+      n + ' kg',
+      [(g / 100) + ' kg', (g / 10) + ' kg', (g / 10000) + ' kg', (g + 1000) + ' kg'],
+      '1 kg = 1000 g. Divide by 1000.'
+    );
+  }
+}
+
+function genMassMG() {
+  const isToMg = Math.random() < 0.5;
+  const n = randInt(1, 12);
+  if (isToMg) {
+    return buildQuestion(
+      `Convert ${n} g to milligrams.`,
+      (n * 1000) + ' mg',
+      [(n * 100) + ' mg', (n * 10) + ' mg', (n * 10000) + ' mg', (n + 1000) + ' mg'],
+      '1 g = 1000 mg. Multiply by 1000.'
+    );
+  } else {
+    const mg = n * 1000;
+    return buildQuestion(
+      `Convert ${mg} mg to grams.`,
+      n + ' g',
+      [(mg / 100) + ' g', (mg / 10) + ' g', (mg / 10000) + ' g', (mg + 1000) + ' g'],
+      '1 g = 1000 mg. Divide by 1000.'
+    );
+  }
+}
+
+function genCapacity() {
+  const isToML = Math.random() < 0.5;
+  const n = randInt(1, 12);
+  if (isToML) {
+    return buildQuestion(
+      `Convert ${n} L to milliliters.`,
+      (n * 1000) + ' mL',
+      [(n * 100) + ' mL', (n * 10) + ' mL', (n * 10000) + ' mL', (n + 1000) + ' mL'],
+      '1 L = 1000 mL. Multiply by 1000.'
+    );
+  } else {
+    const ml = n * 1000;
+    return buildQuestion(
+      `Convert ${ml} mL to liters.`,
+      n + ' L',
+      [(ml / 100) + ' L', (ml / 10) + ' L', (ml / 10000) + ' L', (ml + 1000) + ' L'],
+      '1 L = 1000 mL. Divide by 1000.'
+    );
+  }
+}
+
+function genTimeSec() {
+  const isToSec = Math.random() < 0.5;
+  const n = randInt(1, 12);
+  if (isToSec) {
+    return buildQuestion(
+      `Convert ${n} minutes to seconds.`,
+      (n * 60) + ' sec',
+      [(n * 100) + ' sec', (n * 30) + ' sec', (n * 60 + 60) + ' sec', (n * 10) + ' sec'],
+      '1 min = 60 sec. Multiply by 60.'
+    );
+  } else {
+    const s = n * 60;
+    return buildQuestion(
+      `Convert ${s} seconds to minutes.`,
+      n + ' min',
+      [(s / 100) + ' min', (s / 30) + ' min', (s / 10) + ' min', (s + 60) + ' min'],
+      '1 min = 60 sec. Divide by 60.'
+    );
+  }
+}
+
+function genTimeMin() {
+  const isToMin = Math.random() < 0.5;
+  const n = randInt(1, 10);
+  if (isToMin) {
+    return buildQuestion(
+      `Convert ${n} hours to minutes.`,
+      (n * 60) + ' min',
+      [(n * 100) + ' min', (n * 30) + ' min', (n * 60 + 60) + ' min', (n * 10) + ' min'],
+      '1 hr = 60 min. Multiply by 60.'
+    );
+  } else {
+    const m = n * 60;
+    return buildQuestion(
+      `Convert ${m} minutes to hours.`,
+      n + ' hr',
+      [(m / 100) + ' hr', (m / 30) + ' hr', (m / 10) + ' hr', (m + 60) + ' hr'],
+      '1 hr = 60 min. Divide by 60.'
+    );
+  }
+}
+
+function genTimeHr() {
+  const isToHr = Math.random() < 0.5;
+  const n = randInt(1, 7);
+  if (isToHr) {
+    return buildQuestion(
+      `Convert ${n} days to hours.`,
+      (n * 24) + ' hr',
+      [(n * 12) + ' hr', (n * 60) + ' hr', (n * 24 + 24) + ' hr', (n * 48) + ' hr'],
+      '1 day = 24 hr. Multiply by 24.'
+    );
+  } else {
+    const h = n * 24;
+    return buildQuestion(
+      `Convert ${h} hours to days.`,
+      n + ' days',
+      [(h / 12) + ' days', (h / 60) + ' days', (h + 24) + ' days', (h / 48) + ' days'],
+      '1 day = 24 hr. Divide by 24.'
+    );
+  }
+}
+
+function genTimeDays() {
+  const isToDays = Math.random() < 0.5;
+  const n = randInt(2, 8);
+  if (isToDays) {
+    return buildQuestion(
+      `Convert ${n} weeks to days.`,
+      (n * 7) + ' days',
+      [(n * 5) + ' days', (n * 30) + ' days', (n * 7 + 7) + ' days', (n * 14) + ' days'],
+      '1 week = 7 days. Multiply by 7.'
+    );
+  } else {
+    const d = n * 7;
+    return buildQuestion(
+      `Convert ${d} days to weeks.`,
+      n + ' weeks',
+      [(d / 5) + ' weeks', (d / 30) + ' weeks', (d + 7) + ' weeks', (d / 14) + ' weeks'],
+      '1 week = 7 days. Divide by 7.'
+    );
+  }
+}
+
+function genTimeWeeks() {
+  const isToMonths = Math.random() < 0.5;
+  const n = randInt(2, 6);
+  if (isToMonths) {
+    return buildQuestion(
+      `Convert ${n} months to weeks (use 1 month = 4 weeks).`,
+      (n * 4) + ' weeks',
+      [(n * 5) + ' weeks', (n * 30) + ' weeks', (n * 2) + ' weeks', (n * 7) + ' weeks'],
+      '1 month ≈ 4 weeks. Multiply by 4.'
+    );
+  } else {
+    const w = n * 4;
+    return buildQuestion(
+      `Convert ${w} weeks to months (use 1 month = 4 weeks).`,
+      n + ' months',
+      [(w / 5) + ' months', (w / 30) + ' months', (w / 2) + ' months', (w / 7) + ' months'],
+      '1 month ≈ 4 weeks. Divide by 4.'
+    );
+  }
+}
+
+function genTimeMonths() {
+  const isToMonths = Math.random() < 0.5;
+  const n = randInt(1, 10);
+  if (isToMonths) {
+    return buildQuestion(
+      `Convert ${n} years to months.`,
+      (n * 12) + ' months',
+      [(n * 10) + ' months', (n * 30) + ' months', (n * 24) + ' months', (n * 6) + ' months'],
+      '1 year = 12 months. Multiply by 12.'
+    );
+  } else {
+    const m = n * 12;
+    return buildQuestion(
+      `Convert ${m} months to years.`,
+      n + ' years',
+      [(m / 10) + ' years', (m / 30) + ' years', (m / 24) + ' years', (m / 6) + ' years'],
+      '1 year = 12 months. Divide by 12.'
+    );
+  }
+}
+
+function genElapsed() {
+  const type = randInt(1, 3);
+
+  if (type === 1) {
+    const startH = randInt(1, 11);
+    const startM = [0, 15, 30, 45][randInt(0, 3)];
+    const durH = randInt(1, 3);
+    const durM = [0, 15, 30, 45][randInt(0, 3)];
+
+    let totalM = startM + durM;
+    let carryH = Math.floor(totalM / 60);
+    totalM = totalM % 60;
+    let endH = startH + durH + carryH;
+    let period = endH >= 12 ? 'PM' : 'AM';
+    if (endH > 12) endH -= 12;
+    if (endH === 0) endH = 12;
+
+    const startPeriod = startH >= 12 ? 'PM' : 'AM';
+    const displayStartH = startH > 12 ? startH - 12 : startH;
+    const answer = `${endH}:${String(totalM).padStart(2, '0')} ${period}`;
+
+    return {
+      question: `A movie starts at ${displayStartH}:${String(startM).padStart(2, '0')} ${startPeriod} and lasts ${durH}h ${durM}m. What time does it end?`,
+      correct: answer,
+      options: shuffle([
+        answer,
+        `${endH}:${String((totalM + 15) % 60).padStart(2, '0')} ${period}`,
+        `${(endH % 12) + 1}:${String(totalM).padStart(2, '0')} ${period}`,
+        `${endH}:${String((totalM + 30) % 60).padStart(2, '0')} ${period}`
+      ]),
+      hint: 'Add hours and minutes separately. If minutes exceed 60, carry over.'
+    };
+  } else if (type === 2) {
+    const startH = randInt(8, 11);
+    const startM = [0, 15, 30][randInt(0, 2)];
+    const durH = randInt(1, 3);
+    const durM = [15, 30, 45][randInt(0, 2)];
+
+    let endM = startM + durM;
+    let carryH = Math.floor(endM / 60);
+    endM = endM % 60;
+    const endH = startH + durH + carryH;
+
+    const answer = `${durH} hr ${durM} min`;
+    return {
+      question: `You study from ${startH}:${String(startM).padStart(2, '0')} AM to ${endH}:${String(endM).padStart(2, '0')} AM. How long did you study?`,
+      correct: answer,
+      options: shuffle([
+        answer,
+        `${durH + 1} hr ${durM} min`,
+        `${durH} hr ${(durM + 15) % 60} min`,
+        `${durH + 2} hr ${durM} min`
+      ]),
+      hint: 'Subtract the start time from the end time.'
+    };
+  } else {
+    const startH = randInt(1, 10);
+    const startM = [0, 15, 30, 45][randInt(0, 3)];
+    const addM = [20, 25, 40, 50, 90][randInt(0, 4)];
+
+    let totalM = startM + addM;
+    let carryH = Math.floor(totalM / 60);
+    totalM = totalM % 60;
+    let endH = startH + carryH;
+    const period = endH >= 12 ? 'PM' : 'AM';
+    if (endH > 12) endH -= 12;
+
+    const answer = `${endH}:${String(totalM).padStart(2, '0')} ${period}`;
+    return {
+      question: `It is ${startH}:${String(startM).padStart(2, '0')} AM. In ${addM} minutes, what time will it be?`,
+      correct: answer,
+      options: shuffle([
+        answer,
+        `${endH}:${String((totalM + 15) % 60).padStart(2, '0')} ${period}`,
+        `${(endH % 12) + 1}:${String(totalM).padStart(2, '0')} ${period}`,
+        `${endH}:${String((totalM + 30) % 60).padStart(2, '0')} ${period}`
+      ]),
+      hint: 'Add the minutes. If you reach 60, that becomes 1 hour.'
+    };
+  }
+}
+
+function genMixed() {
+  const gens = [genLengthMC, genLengthKM, genMassKG, genMassMG, genCapacity, genTimeSec, genTimeMin, genTimeHr];
+  return gens[randInt(0, gens.length - 1)]();
+}
+
+/* ============================================================
+   LEVELS CONFIGURATION
+============================================================ */
+const LEVELS = [
+  { id: 'length1',   name: 'Conversion Canyon',    icon: '📏', desc: 'Meters ↔ Centimeters',       generator: genLengthMC },
+  { id: 'length2',   name: 'Kilometer Cliffs',     icon: '🏔️', desc: 'Kilometers ↔ Meters',        generator: genLengthKM },
+  { id: 'mass1',     name: 'Mass Market',          icon: '⚖️', desc: 'Kilograms ↔ Grams',          generator: genMassKG },
+  { id: 'mass2',     name: 'Micro Lab',            icon: '🧪', desc: 'Grams ↔ Milligrams',         generator: genMassMG },
+  { id: 'capacity1', name: 'Liquid Lagoon',        icon: '💧', desc: 'Liters ↔ Milliliters',       generator: genCapacity },
+  { id: 'time1',     name: 'Time Tunnel I',        icon: '⏱️', desc: 'Seconds ↔ Minutes',          generator: genTimeSec },
+  { id: 'time2',     name: 'Time Tunnel II',       icon: '🕐', desc: 'Minutes ↔ Hours',            generator: genTimeMin },
+  { id: 'time3',     name: 'Daybreak Dimension',   icon: '🌅', desc: 'Hours ↔ Days',               generator: genTimeHr },
+  { id: 'time4',     name: 'Weekly Warp',          icon: '📅', desc: 'Days ↔ Weeks',               generator: genTimeDays },
+  { id: 'time5',     name: 'Monthly Maze',         icon: '🗓️', desc: 'Weeks ↔ Months',             generator: genTimeWeeks },
+  { id: 'time6',     name: 'Yearly Yonder',        icon: '🎆', desc: 'Months ↔ Years',             generator: genTimeMonths },
+  { id: 'elapsed1',  name: 'Elapsed Time Escape',  icon: '🚀', desc: 'Elapsed time word problems', generator: genElapsed },
+  { id: 'mixed1',    name: 'Grand Challenge',      icon: '👑', desc: 'All units mixed!',           generator: genMixed }
+];
+
+/* ============================================================
+   PROGRESS MANAGEMENT
+============================================================ */
+function getProgress() {
+  try { return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); }
+  catch (e) { return {}; }
+}
+
+function saveProgress(levelId, stars) {
+  const p = getProgress();
+  p[levelId] = Math.max(p[levelId] || 0, stars);
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify(p));
+}
+
+function isLevelUnlocked(idx) {
+  if (idx === 0) return true;
+  const p = getProgress();
+  return (p[LEVELS[idx - 1].id] || 0) >= 1;
+}
+
+function saveCoins() {
+  localStorage.setItem(COINS_KEY, state.coins.toString());
+}
+
+function resetProgress() {
+  if (confirm('Reset all progress and coins? This cannot be undone.')) {
+    localStorage.removeItem(PROGRESS_KEY);
+    localStorage.removeItem(COINS_KEY);
+    state.coins = 0;
+    updateStats();
+    renderMenu();
+  }
+}
+
+/* ============================================================
+   MENU RENDERING
+============================================================ */
+function renderMenu() {
+  const container = document.getElementById('levelSelect');
+  if (!container) return;
+
+  const progress = getProgress();
+  container.innerHTML = '';
+
+  LEVELS.forEach((level, idx) => {
+    const unlocked = isLevelUnlocked(idx);
+    const stars = progress[level.id] || 0;
+    const starDisplay = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
+
+    const card = document.createElement('div');
+    card.className = 'level-card' + (unlocked ? '' : ' locked');
+    card.innerHTML =
+      '<div class="level-icon">' + (unlocked ? level.icon : '🔒') + '</div>' +
+      '<div class="level-name">' + level.name + '</div>' +
+      '<div class="level-desc">' + level.desc + '</div>' +
+      (unlocked
+        ? '<div class="level-score">' + starDisplay + '</div>'
+        : '<div class="level-score">Complete previous level</div>');
+
+    if (unlocked) {
+      card.onclick = (function(i) { return function() { startLevel(i); }; })(idx);
+    }
+    container.appendChild(card);
+  });
+
+  updateStats();
+}
+
+function updateStats() {
+  const coinsEl = document.getElementById('coins');
+  const scoreEl = document.getElementById('score');
+  if (coinsEl) coinsEl.textContent = state.coins;
+  if (scoreEl) scoreEl.textContent = state.score;
+}
+
+/* ============================================================
+   GAME FLOW
+============================================================ */
+function startLevel(idx) {
+  state.currentLevel = idx;
+  state.currentQ = 0;
+  state.score = 0;
+  state.correctCount = 0;
+  state.streak = 0;
+  state.questions = [];
+
+  const level = LEVELS[idx];
+  for (let i = 0; i < QUESTIONS_PER_LEVEL; i++) {
+    state.questions.push(level.generator());
+  }
+
+  document.getElementById('levelTitle').textContent = level.icon + ' ' + level.name;
+  showScreen('gameScreen');
+  updateStats();
+  loadQuestion();
+}
+
+function loadQuestion() {
+  if (state.currentQ >= state.questions.length) {
+    endLevel();
+    return;
+  }
+
+  state.answered = false;
+  state.hintUsed = false;
+
+  const q = state.questions[state.currentQ];
+
+  document.getElementById('qNum').textContent = 'Question ' + (state.currentQ + 1) + ' / ' + state.questions.length;
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('hintBox').className = 'hint-box';
+  document.getElementById('hintBox').textContent = '';
+  document.getElementById('hintBtn').disabled = false;
+  document.getElementById('hintBtn').textContent = '💡 Hint (-5 🪙)';
+
+  const pct = (state.currentQ / state.questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  const answersEl = document.getElementById('answers');
+  answersEl.innerHTML = '';
+
+  q.options.forEach(function(opt) {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = opt;
+    btn.onclick = function() { checkAnswer(opt, btn); };
+    answersEl.appendChild(btn);
+  });
+
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(state.timer);
+  state.timeLeft = TIME_PER_Q;
+  updateTimerDisplay();
+
+  state.timer = setInterval(function() {
+    state.timeLeft--;
+    updateTimerDisplay();
+    if (state.timeLeft <= 0) {
+      clearInterval(state.timer);
+      if (!state.answered) timeOut();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const el = document.getElementById('qTimer');
+  el.textContent = '⏱️ ' + state.timeLeft + 's';
+  el.style.color = state.timeLeft <= 10 ? '#ef4444' : '#fbbf24';
+}
+
+function timeOut() {
+  state.answered = true;
+  state.streak = 0;
+  updateStreakDisplay();
+
+  const q = state.questions[state.currentQ];
+  document.querySelectorAll('.answer-btn').forEach(function(b) {
+    b.disabled = true;
+    if (b.textContent === q.correct) b.classList.add('correct');
+  });
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback wrong';
+  fb.textContent = "⏰ Time's up! The correct answer is " + q.correct;
+
+  state.currentQ++;
+  setTimeout(function() {
+    if (state.currentQ < state.questions.length) loadQuestion();
+    else endLevel();
+  }, 2200);
+}
+
+function checkAnswer(selected, btn) {
+  if (state.answered) return;
+  state.answered = true;
+  clearInterval(state.timer);
+
+  const q = state.questions[state.currentQ];
+  document.querySelectorAll('.answer-btn').forEach(function(b) { b.disabled = true; });
+
+  const fb = document.getElementById('feedback');
+
+  if (selected === q.correct) {
+    btn.classList.add('correct');
+    state.correctCount++;
+    state.streak++;
+
+    const timeBonus = Math.floor(state.timeLeft / 3);
+    const streakBonus = Math.min(state.streak, 5) * 2;
+    const points = 10 + timeBonus + streakBonus;
+    state.score += points;
+
+    fb.className = 'feedback correct';
+    fb.textContent = '✅ Correct! +' + points + ' points' +
+      (state.streak >= 3 ? ' (🔥 ' + state.streak + ' streak!)' : '');
+
+    if (state.streak >= 3) fireConfetti(15);
+  } else {
+    btn.classList.add('wrong');
+    state.streak = 0;
+
+    document.querySelectorAll('.answer-btn').forEach(function(b) {
+      if (b.textContent === q.correct) b.classList.add('correct');
+    });
+
+    fb.className = 'feedback wrong';
+    fb.textContent = '❌ Not quite. The answer is ' + q.correct;
+  }
+
+  updateStreakDisplay();
+  state.currentQ++;
+  updateStats();
+
+  setTimeout(function() {
+    if (state.currentQ < state.questions.length) loadQuestion();
+    else endLevel();
+  }, 2000);
+}
+
+function updateStreakDisplay() {
+  const el = document.getElementById('streak');
+  if (state.streak >= 2) {
+    el.textContent = '🔥 ' + state.streak;
+    el.classList.add('show');
+  } else {
+    el.classList.remove('show');
+  }
+}
+
+function useHint() {
+  if (state.hintUsed) return;
+  if (state.coins < 5) {
+    alert('Not enough coins! You need 5 🪙');
+    return;
+  }
+  state.hintUsed = true;
+  state.coins -= 5;
+  saveCoins();
+  updateStats();
+
+  const q = state.questions[state.currentQ];
+  const hintBox = document.getElementById('hintBox');
+  hintBox.className = 'hint-box show';
+  hintBox.textContent = '💡 ' + q.hint;
+
+  document.getElementById('hintBtn').disabled = true;
+  document.getElementById('hintBtn').textContent = '✓ Hint used';
+}
+
+function endLevel() {
+  clearInterval(state.timer);
+
+  const level = LEVELS[state.currentLevel];
+  const accuracy = Math.round((state.correctCount / state.questions.length) * 100);
+
+  let stars = 0;
+  if (accuracy >= 90) stars = 3;
+  else if (accuracy >= 70) stars = 2;
+  else if (accuracy >= 50) stars = 1;
+
+  const coinsEarned = state.correctCount * 10 + (stars === 3 ? 50 : stars === 2 ? 25 : 0);
+  state.coins += coinsEarned;
+  saveCoins();
+  saveProgress(level.id, stars);
+
+  document.getElementById('endCorrect').textContent = state.correctCount + '/' + state.questions.length;
+  document.getElementById('endCoins').textContent = '+' + coinsEarned;
+  document.getElementById('endAccuracy').textContent = accuracy + '%';
+
+  const icon = document.getElementById('endIcon');
+  const title = document.getElementById('endTitle');
+
+  if (stars === 3) {
+    icon.textContent = '🏆';
+    title.textContent = 'Perfect Mastery!';
+    fireConfetti(60);
+  } else if (stars === 2) {
+    icon.textContent = '🎉';
+    title.textContent = 'Great Job!';
+    fireConfetti(30);
+  } else if (stars === 1) {
+    icon.textContent = '👍';
+    title.textContent = 'Level Complete!';
+  } else {
+    icon.textContent = '😅';
+    title.textContent = 'Keep Trying!';
+  }
+
+  updateStats();
+  showScreen('endScreen');
+}
+
+function retryLevel() {
+  startLevel(state.currentLevel);
+}
+
+function backToMenu() {
+  clearInterval(state.timer);
+  showScreen('menuScreen');
+  renderMenu();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+}
+
+function toggleRef() {
+  document.getElementById('refPanel').classList.toggle('show');
+}
+
+function fireConfetti(count) {
+  const colors = ['#64c8ff', '#a78bfa', '#f472b6', '#fbbf24', '#4ade80'];
+  for (let i = 0; i < count; i++) {
+    (function(i) {
+      setTimeout(function() {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = (Math.random() * 100) + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        c.style.animationDuration = (2 + Math.random() * 2) + 's';
+        document.body.appendChild(c);
+        setTimeout(function() { c.remove(); }, 4000);
+      }, i * 30);
+    })(i);
+  }
+}
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+window.addEventListener('DOMContentLoaded', function() {
+  renderMenu();
+});
+</script>
+</body>
+</html>
