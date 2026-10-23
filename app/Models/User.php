@@ -33,6 +33,24 @@ class User extends Authenticatable
         'is_approved',
         'is_active',
         'email_verified_at',
+        // Student profile fields
+        'nickname',
+        'avatar_character',
+        'avatar_upload_path',
+        'birthdate',
+        'favorite_math_topic',
+        'bio',
+        'hobbies',
+        'game_mode_preference',
+        'sound_effects_volume',
+        'music_volume',
+        'practice_reminders',
+        'streak_alerts',
+        'display_badge',
+        'original_username',
+        'last_username_change',
+        'username_changes_count',
+        'profile_updated_at',
     ];
 
     /**
@@ -54,6 +72,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_approved' => 'boolean',
         'is_active' => 'boolean',
+        'birthdate' => 'date',
+        'hobbies' => 'array',
+        'practice_reminders' => 'boolean',
+        'streak_alerts' => 'boolean',
+        'last_username_change' => 'datetime',
+        'profile_updated_at' => 'datetime',
     ];
 
     // ========== RELATIONSHIPS ==========
@@ -96,6 +120,22 @@ class User extends Authenticatable
     public function teacherStudents()
     {
         return $this->hasMany(User::class, 'created_by_teacher_id');
+    }
+
+    /**
+     * Profile change logs for this user.
+     */
+    public function profileChangeLogs()
+    {
+        return $this->hasMany(ProfileChangeLog::class, 'user_id');
+    }
+
+    /**
+     * Teacher notifications for this teacher.
+     */
+    public function teacherNotifications()
+    {
+        return $this->hasMany(TeacherNotification::class, 'teacher_id');
     }
 
     // ========== HELPER METHODS ==========
@@ -145,5 +185,55 @@ class User extends Authenticatable
             'geometry_genius' => '🤖',
             default => '🧑‍🎓',
         };
+    }
+
+    /**
+     * Check if student can change username (not exceeded daily limit).
+     */
+    public function canChangeUsername()
+    {
+        // If never changed before, can change
+        if (!$this->last_username_change) {
+            return true;
+        }
+
+        // If last change was before today, reset counter (allow change)
+        $today = \Carbon\Carbon::today();
+        if (\Carbon\Carbon::parse($this->last_username_change)->isBefore($today)) {
+            return true;
+        }
+
+        // Check if under daily limit (3 changes per day)
+        return ($this->username_changes_count ?? 0) < 3;
+    }
+
+    /**
+     * Get remaining username changes for today.
+     */
+    public function getRemainingUsernameChanges()
+    {
+        if (!$this->last_username_change) {
+            return 3;
+        }
+
+        $today = \Carbon\Carbon::today();
+        if (\Carbon\Carbon::parse($this->last_username_change)->isBefore($today)) {
+            return 3;
+        }
+
+        return max(0, 3 - ($this->username_changes_count ?? 0));
+    }
+
+    /**
+     * Get the avatar URL (either uploaded or preset character).
+     */
+    public function getAvatarUrl()
+    {
+        if ($this->avatar_upload_path) {
+            return asset('storage/' . $this->avatar_upload_path);
+        }
+
+        // Return preset character emoji/icon
+        return $this->avatar_character ?? $this->character_avatar;
     }
 }

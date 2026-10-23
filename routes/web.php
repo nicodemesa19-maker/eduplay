@@ -84,6 +84,15 @@ Route::prefix('teacher')->middleware(['auth', 'teacher'])->name('teacher.')->gro
     Route::match(['delete', 'post', 'get'], '/reset-student-password/{id}', [TeacherController::class, 'resetStudentPassword'])->name('reset-student-password');
     Route::match(['delete', 'post', 'get'], '/move-student/{id}', [TeacherController::class, 'moveStudent'])->name('move-student');
     Route::get('/progress-api', [TeacherController::class, 'progressApi'])->name('progress-api');
+    
+    // Teacher Student Profile Management Routes
+    Route::get('/student-profile/{studentId}', [\App\Http\Controllers\TeacherStudentProfileController::class, 'show'])->name('student-profile.show');
+    Route::get('/student-profile/{studentId}/changelog', [\App\Http\Controllers\TeacherStudentProfileController::class, 'changeLog'])->name('student-profile.changelog');
+    Route::post('/student-profile/{studentId}/revert-username', [\App\Http\Controllers\TeacherStudentProfileController::class, 'revertUsername'])->name('student-profile.revert-username');
+    Route::post('/student-profile/{studentId}/clear-field', [\App\Http\Controllers\TeacherStudentProfileController::class, 'clearField'])->name('student-profile.clear-field');
+    Route::post('/student-profile/{studentId}/edit-username', [\App\Http\Controllers\TeacherStudentProfileController::class, 'editUsername'])->name('student-profile.edit-username');
+    Route::post('/notification/{notificationId}/mark-read', [\App\Http\Controllers\TeacherStudentProfileController::class, 'markNotificationRead'])->name('notification.mark-read');
+    Route::get('/notifications/unread-count', [\App\Http\Controllers\TeacherStudentProfileController::class, 'getUnreadCount'])->name('notifications.unread-count');
 });
 
 // Student Routes
@@ -109,4 +118,13 @@ Route::prefix('student')->middleware(['auth', 'student'])->name('student.')->gro
     Route::get('/welcome', [\App\Http\Controllers\WelcomeController::class, 'showWelcome'])->name('welcome');
     Route::post('/welcome/submit', [\App\Http\Controllers\WelcomeController::class, 'submitIcebreaker'])->name('welcome.submit');
     Route::get('/welcome/questions', [\App\Http\Controllers\WelcomeController::class, 'getQuestions'])->name('welcome.questions');
+    
+    // Student Profile Routes
+    Route::get('/profile', [\App\Http\Controllers\StudentProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [\App\Http\Controllers\StudentProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [\App\Http\Controllers\StudentProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/update-username', [\App\Http\Controllers\StudentProfileController::class, 'updateUsername'])->name('profile.update-username');
+    Route::post('/profile/update-password', [\App\Http\Controllers\StudentProfileController::class, 'updatePassword'])->name('profile.update-password');
+    Route::post('/profile/update-avatar', [\App\Http\Controllers\StudentProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
+    Route::get('/profile/history', [\App\Http\Controllers\StudentProfileController::class, 'history'])->name('profile.history');
 });
