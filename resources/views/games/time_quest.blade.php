@@ -199,19 +199,6 @@
     border-color:var(--pink);color:var(--pink);
   }
   .tq .eduplay-nav-btn.eduplay-btn-exit:hover{background:rgba(255,61,174,.25);color:#fff;box-shadow:0 0 15px rgba(255,61,174,.4)}
-  .tq .eduplay-nav-btn.eduplay-btn-hint{
-    background:linear-gradient(135deg,rgba(255,217,61,.18),rgba(255,217,61,.1));
-    border-color:var(--gold);color:var(--gold);
-    font-weight:800;
-  }
-  .tq .eduplay-nav-btn.eduplay-btn-hint:hover{background:rgba(255,217,61,.28);color:#fff;box-shadow:0 0 20px rgba(255,217,61,.5)}
-  .tq .eduplay-nav-btn.eduplay-btn-hint:disabled{
-    opacity:.4;cursor:not-allowed;transform:none;
-  }
-  .tq .eduplay-nav-btn.eduplay-btn-hint:disabled:hover{
-    background:linear-gradient(135deg,rgba(255,217,61,.18),rgba(255,217,61,.1));
-    box-shadow:none;
-  }
 
   /* ---------- Layout ---------- */
   main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(340px,1fr);gap:24px;align-items:stretch}
@@ -281,6 +268,65 @@
     text-shadow:0 0 10px rgba(0,229,255,.5);
   }
   .pips{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;flex:1;max-width:240px}
+  
+  /* Hint button in quiz panel */
+  .hint-btn-quiz {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:40px;
+    padding:0 18px;
+    border-radius:12px;
+    border:2px solid var(--gold);
+    background:linear-gradient(135deg,rgba(255,217,61,.18),rgba(255,217,61,.1));
+    color:var(--gold);
+    font-family:'Baloo 2',sans-serif;
+    font-size:.95rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:all .25s;
+    white-space:nowrap;
+    position:relative;
+    overflow:hidden;
+  }
+  .hint-btn-quiz::before {
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(255,217,61,.2),transparent);
+    opacity:0;
+    transition:opacity .25s;
+  }
+  .hint-btn-quiz:hover:not(:disabled) {
+    background:rgba(255,217,61,.28);
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(255,217,61,.5);
+    color:#fff;
+  }
+  .hint-btn-quiz:hover:not(:disabled)::before {
+    opacity:1;
+  }
+  .hint-btn-quiz:disabled {
+    opacity:.35;
+    cursor:not-allowed;
+    transform:none;
+  }
+  .hint-btn-quiz:disabled:hover {
+    background:linear-gradient(135deg,rgba(255,217,61,.18),rgba(255,217,61,.1));
+    box-shadow:none;
+    color:var(--gold);
+  }
+  .hint-btn-quiz i {
+    font-size:1.15rem;
+  }
+  .hint-cost {
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    font-size:.85rem;
+    opacity:.85;
+  }
   .pip{
     height:8px;border-radius:4px;
     background:rgba(255,255,255,.14);
@@ -977,7 +1023,15 @@
 
     /* Quiz panel */
     .quiz-panel { padding: 16px 16px 20px; border-radius: 16px; }
-    .quiz-top { margin-bottom: 14px; }
+    .quiz-top { margin-bottom: 14px; flex-wrap: wrap; }
+    .hint-btn-quiz { 
+      order: 3; 
+      width: 100%; 
+      margin-top: 8px;
+      min-height: 44px;
+    }
+    .q-label { order: 1; }
+    .pips { order: 2; max-width: 150px; }
     .q-ask { font-size: 1.08rem; margin-bottom: 16px; }
 
     /* Sticky Next keeps the primary action reachable */
@@ -1171,9 +1225,6 @@
         <div class="stat coins"><span class="label">Coins</span><span class="val" id="uiCoins">50</span></div>
       </div>
       <div class="eduplay-game-nav">
-        <button type="button" class="eduplay-nav-btn eduplay-btn-hint" id="hintBtn" title="Use 20 coins for a hint" onclick="useHint()">
-          <i class="bi bi-lightbulb-fill"></i> <span>Hint (20🪙)</span>
-        </button>
         <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
           <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
         </button>
@@ -1204,6 +1255,11 @@
       <div class="quiz-top">
         <div class="q-label" id="qLabel">Get ready…</div>
         <div class="pips" id="pips" aria-hidden="true"></div>
+        <button type="button" class="hint-btn-quiz" id="hintBtn" onclick="useHint()" title="Use 20 coins to eliminate 2 wrong answers">
+          <i class="bi bi-lightbulb-fill"></i>
+          <span>Hint</span>
+          <span class="hint-cost">(20🪙)</span>
+        </button>
       </div>
       <div class="quiz-mid">
         <div id="qText">Loading…</div>
