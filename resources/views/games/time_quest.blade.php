@@ -96,12 +96,13 @@
   }
   .tq-title{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
   
-  /* Desktop: Group stats and nav on the right */
+  /* Desktop: Group stats and nav on the right in single row */
   .tq-head-right {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 12px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
   }
   .tq-exit{
     display:inline-flex;align-items:center;gap:6px;flex:none;
@@ -293,10 +294,13 @@
   }
   .mobile-menu-items .eduplay-nav-btn i {
     font-size: 1.4rem;
+    flex-shrink: 0;
   }
   .mobile-menu-items .eduplay-nav-btn span {
     flex: 1;
     text-align: left;
+    display: block !important;
+    visibility: visible !important;
   }
   .tq .eduplay-nav-btn{
     display:inline-flex;align-items:center;justify-content:center;gap:6px;
