@@ -173,10 +173,10 @@
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label class="t-label">Username</label>
-                <input type="text" name="username" value="{{ old('username') }}" placeholder="e.g. jdelacruz" required class="t-input">
+                <input type="text" name="username" value="{{ old('username') }}" placeholder="e.g. Juan Dela Cruz or jdelacruz" required class="t-input">
                 @error('username')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                 <small class="t-muted" style="font-size:0.8rem;display:block;margin-top:4px;">
-                  <i class="bi bi-info-circle me-1"></i>Used for logging in
+                  <i class="bi bi-info-circle me-1"></i>Used for logging in. Can contain spaces.
                 </small>
               </div>
               <div class="col-md-6">
