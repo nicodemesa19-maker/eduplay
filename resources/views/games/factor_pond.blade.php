@@ -6,6 +6,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;}
+button{-webkit-tap-highlight-color:transparent;}
 #gw{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;z-index:10;background:linear-gradient(180deg,#0d5c63 0%,#0a4a52 40%,#052d33 100%);}
 #gw::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0px,rgba(255,255,255,.06) 20px,transparent 40px,transparent 80px);animation:shimmer 14s linear infinite;}
 @keyframes shimmer{0%{transform:translateX(-80px)}100%{transform:translateX(80px)}}
@@ -23,7 +24,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 
 
 /* ============================================================
-   FLASH CARD SYSTEM — ALWAYS ON TOP, ZERO SCROLLBARS
+   FLASH CARD SYSTEM — ALWAYS ON TOP
    ============================================================ */
 .overlay, .fc-overlay {
     position: fixed !important;
@@ -33,19 +34,18 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     background: rgba(2, 14, 20, 0.94) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    z-index: 999999 !important; /* ALWAYS ON TOP OF EVERYTHING */
+    z-index: 999999 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 16px !important;
     animation: fadeUp 0.25s cubic-bezier(.34,1.56,.64,1);
-    overflow: hidden !important; /* ZERO OUTER SCROLLBAR */
+    overflow: hidden !important;
 }
 .overlay.hidden, .fc-overlay.hidden {
     display: none !important;
 }
 
-/* Flashcard Deck Container with Stacked Cards Illusion */
 .fc-deck {
     position: relative;
     width: 100%;
@@ -53,7 +53,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     margin: auto;
 }
 
-/* Background Deck Layers — Physical Stack Illusion */
 .fc-deck-stack-1 {
     position: absolute;
     inset: 10px 18px -10px;
@@ -77,7 +76,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
 }
 
-/* The Active Front Flash Card */
 .fc-card {
     position: relative;
     z-index: 3;
@@ -97,11 +95,11 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     background: linear-gradient(90deg, #5eead4 0%, #22d3ee 35%, #fbbf24 70%, #f43f5e 100%);
 }
 
-/* Card Header */
 .fc-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     margin-bottom: 12px;
 }
 .fc-badge {
@@ -132,6 +130,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     align-items: center;
     gap: 4px;
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 .fc-quick-action-btn:hover {
     background: rgba(13, 148, 136, 0.3);
@@ -152,7 +151,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     color: #fff;
 }
 
-/* Flashcard Slides */
 .fc-slide {
     display: flex;
     flex-direction: column;
@@ -188,7 +186,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     max-width: 440px;
 }
 
-/* Flashcard Visual Containers */
 .fc-box {
     background: rgba(0, 0, 0, 0.35);
     border: 1.5px solid rgba(94, 234, 212, 0.2);
@@ -230,8 +227,13 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     line-height: 1.35;
 }
 .fc-tip b { color: #5eead4; }
+/* Card 5 shows keyboard tips on desktop and touch tips on touch devices */
+.fc-tip.touch-tip { display: none; }
+@media (hover: none) and (pointer: coarse) {
+    .fc-tip.kbd-tip { display: none; }
+    .fc-tip.touch-tip { display: block; }
+}
 
-/* Flashcard Footer Navigation */
 .fc-footer {
     display: flex;
     align-items: center;
@@ -255,6 +257,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     font-weight: 800;
     cursor: pointer;
     transition: all 0.2s ease;
+    touch-action: manipulation;
 }
 .fc-nav-btn:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.14);
@@ -274,7 +277,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     transform: translateY(-2px);
 }
 
-/* Dot Indicators */
 .fc-dots {
     display: flex;
     align-items: center;
@@ -296,7 +298,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     box-shadow: 0 0 10px rgba(94, 234, 212, 0.7);
 }
 
-/* Demo Fish in Flash Cards */
 .demo-strip{display:flex;gap:12px;justify-content:center;margin:6px 0 10px;}
 .demo-fish{width:62px;height:62px;border-radius:50%;background:rgba(20,184,166,.15);border:2px solid rgba(94,234,212,.4);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:900;color:#67e8f9;flex-direction:column;gap:2px;}
 .demo-fish.selected{background:rgba(251,191,36,.22);border-color:rgba(251,191,36,.8);color:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.45);}
@@ -304,7 +305,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 .demo-fish-wrap{display:flex;flex-direction:column;align-items:center;}
 
 /* ============================================================
-   GAME SCREEN & HUD (Upper-Right Button Group, No Restart)
+   GAME SCREEN & HUD
    ============================================================ */
 #gameScreen{display:none;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center;padding:12px 18px;}
 .gi{width:100%;max-width:1280px;display:flex;flex-direction:column;gap:10px;}
@@ -335,7 +336,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 .hs-sub{font-size:14px;color:rgba(204,251,241,.65);font-weight:700;letter-spacing:1px;text-transform:uppercase;}
 .score-pill-chip{color:#fbbf24;font-weight:900;font-size:15px;margin-left:4px;}
 
-/* Upper-Right Buttons Group */
 .eduplay-game-nav {
     display: flex;
     gap: 7px;
@@ -356,6 +356,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     text-decoration: none;
     font-family: 'Inter', sans-serif;
     white-space: nowrap;
+    touch-action: manipulation;
 }
 .eduplay-nav-btn:hover {
     transform: translateY(-2px);
@@ -427,16 +428,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 .mission-info{display:flex;flex-direction:column;gap:2px;padding-left:6px;}
 .mission-tag{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#5eead4;}
 .mission-txt{font-size:19px;font-weight:800;color:#fff;text-shadow:0 0 16px rgba(94,234,212,.45);font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em;}
-#castBtn{background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;font-size:17px;font-weight:900;padding:10px 24px;border-radius:11px;border:none;cursor:pointer;box-shadow:0 5px 18px rgba(249,115,22,.5),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s;font-family:'Space Grotesk',sans-serif;letter-spacing:.3px;white-space:nowrap;flex-shrink:0;}
+#castBtn{background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;font-size:17px;font-weight:900;padding:10px 24px;border-radius:11px;border:none;cursor:pointer;box-shadow:0 5px 18px rgba(249,115,22,.5),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s;font-family:'Space Grotesk',sans-serif;letter-spacing:.3px;white-space:nowrap;flex-shrink:0;touch-action:manipulation;}
 #castBtn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 8px 24px rgba(249,115,22,.7),inset 0 1px 0 rgba(255,255,255,.3);}
 #castBtn:active{transform:scale(.97);}
 #castBtn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 
 /* ============================================================
-   POND & CALIBRATED SWEET-SPOT FISH (A little smaller & graceful)
+   POND & FISH
    ============================================================ */
 #pond{position:relative;width:100%;height:clamp(340px, 60vh, 580px);border-radius:24px;overflow:hidden;background:radial-gradient(ellipse at 30% 22%,rgba(120,255,240,.10),transparent 55%),radial-gradient(ellipse at 78% 78%,rgba(0,220,220,.16),transparent 55%),linear-gradient(180deg,#0e9aa6 0%,#0a7682 30%,#065560 60%,#023a44 100%);border:2px solid rgba(94,234,212,.28);box-shadow:0 22px 60px rgba(0,30,30,.7),0 0 0 1px rgba(94,234,212,.08) inset,0 0 90px rgba(34,211,238,.14),inset 0 0 70px rgba(0,0,0,.28),inset 0 8px 30px rgba(255,255,255,.06);}
 #pond::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 160px 50px at 22% 42%,rgba(255,255,255,.09),transparent),radial-gradient(ellipse 110px 40px at 62% 26%,rgba(255,255,255,.07),transparent),radial-gradient(ellipse 140px 45px at 82% 62%,rgba(255,255,255,.09),transparent),radial-gradient(ellipse 130px 40px at 40% 82%,rgba(255,255,255,.06),transparent);animation:caustic 8s ease-in-out infinite alternate;}
+@keyframes caustic{from{opacity:.6;transform:translateX(-10px)}to{opacity:1;transform:translateX(10px)}}
 #pond::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 120%,transparent 45%,rgba(0,10,18,.45) 100%);}
 
 .pond-decor{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
@@ -449,7 +451,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 @keyframes lilySway{from{transform:translateY(0) rotate(-3deg);}to{transform:translateY(-4px) rotate(3deg);}}
 .pond-decor .rocks{position:absolute;left:0;right:0;bottom:0;width:100%;height:70px;opacity:.9;}
 
-/* Ambient Creatures */
 .turtle{position:absolute;width:86px;height:64px;pointer-events:none;z-index:2;opacity:.95;filter:drop-shadow(0 8px 16px rgba(0,0,0,.45)) drop-shadow(0 0 8px rgba(0,0,0,.25));animation:turtleSwim var(--tdur,44s) linear infinite;animation-delay:var(--tdelay,0s);will-change:left,transform;}
 .turtle-svg{width:100%;height:100%;display:block;overflow:visible;}
 .turtle-flipper{transform-box:fill-box;transform-origin:right center;animation:turtleFlap 2.6s ease-in-out infinite alternate;animation-delay:var(--flapDelay,0s);}
@@ -480,9 +481,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 .snail-ant{transform-box:fill-box;transform-origin:0% 100%;animation:antWiggle 2.2s ease-in-out infinite alternate;}
 @keyframes antWiggle{from{transform:rotate(-8deg);}to{transform:rotate(8deg);}}
 
-/* ═══════════════════════════════════════
-   🐟 CALIBRATED FISH: ~125px (A little smaller, graceful & clear)
-   ═══════════════════════════════════════ */
+/* Fish (~125px desktop, ~96px on phones) */
 .fish {
     position: absolute;
     left: -62px;
@@ -492,6 +491,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     z-index: 2;
     cursor: pointer;
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     will-change: transform;
     transition: opacity .3s ease;
 }
@@ -610,7 +612,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 @keyframes rise{0%{bottom:0;opacity:.7}100%{bottom:100%;opacity:0}}
 .ripple{position:absolute;border-radius:50%;border:2.5px solid rgba(255,255,255,.55);width:20px;height:20px;transform:translate(-50%,-50%);animation:rippleO .8s ease forwards;pointer-events:none;z-index:5;}
 @keyframes rippleO{0%{width:20px;height:20px;opacity:.8}100%{width:75px;height:75px;opacity:0}}
-.splash{position:fixed;pointer-events:none;z-index:300;font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:900;color:#fbbf24;text-shadow:0 0 18px rgba(251,191,36,.8);animation:splashP .8s ease forwards;transform:translate(-50%,-50%);}
+.splash{position:fixed;pointer-events:none;z-index:300;font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:900;color:#fbbf24;text-shadow:0 0 18px rgba(251,191,36,.8);animation:splashP .8s ease forwards;transform:translate(-50%,-50%);white-space:nowrap;}
 @keyframes splashP{0%{opacity:1;transform:translate(-50%,-50%) scale(.5)}40%{opacity:1;transform:translate(-50%,-80%) scale(1.15)}100%{opacity:0;transform:translate(-50%,-140%) scale(.8)}}
 
 /* Pause Overlay */
@@ -618,6 +620,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     display: none; position: fixed !important; inset: 0 !important; background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     z-index: 9998 !important; align-items: center; justify-content: center; flex-direction: column;
+    padding: 16px; overflow-y: auto;
 }
 .pause-overlay.active { display: flex !important; }
 .pause-card {
@@ -625,6 +628,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
     border: 1.5px solid rgba(94, 234, 212, 0.45); border-radius: 24px;
     padding: 32px 28px; text-align: center; max-width: 390px; width: 90%;
     box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 30px rgba(94, 234, 212, 0.2); color: #fff;
+    margin: auto;
 }
 .pause-card h2 { color: #5eead4; font-size: 1.7rem; font-weight: 800; margin: 0 0 6px; font-family: 'Space Grotesk', sans-serif; }
 .pause-card p { color: rgba(204, 251, 241, 0.7); margin: 0 0 16px; font-size: 1.1rem; }
@@ -642,16 +646,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 .bnr-title{font-family:'Space Grotesk',sans-serif;font-size:1.02rem;font-weight:900;color:#fff;margin-bottom:2px;text-shadow:0 0 14px rgba(94,234,212,.6);}
 .bnr-msg{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.4;}
 .bnr-btns{display:flex;gap:8px;flex-shrink:0;}
-.bbtn{padding:8px 14px;border-radius:10px;font-size:.76rem;font-weight:700;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .2s;text-decoration:none;white-space:nowrap;}
+.bbtn{padding:8px 14px;border-radius:10px;font-size:.76rem;font-weight:700;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .2s;text-decoration:none;white-space:nowrap;touch-action:manipulation;}
 .bbtn:active{transform:scale(.97);}
 .bbtn-p{background:linear-gradient(135deg,#0d9488,#0891b2);color:#fff;box-shadow:0 4px 14px rgba(13,148,136,.5);}
 .bbtn-p:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(13,148,136,.7);}
 
 /* Wrong Answer Modal */
-#wrongOverlay{display:none;position:fixed !important;inset:0 !important;background:rgba(2,15,18,.68);z-index:99990 !important;align-items:center;justify-content:center;padding:20px;}
+#wrongOverlay{display:none;position:fixed !important;inset:0 !important;background:rgba(2,15,18,.68);z-index:99990 !important;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
 #wrongOverlay.show{display:flex !important;animation:fadeIn .25s ease;}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.wrong-box{background:linear-gradient(135deg,rgba(28,14,14,.97),rgba(40,18,18,.97));border:1.5px solid rgba(248,113,113,.55);border-radius:24px;padding:22px 24px 18px;text-align:center;max-width:440px;width:100%;box-shadow:0 0 80px rgba(120,20,20,.55),inset 0 1px 0 rgba(255,255,255,.08);animation:wrongPop .42s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;}
+.wrong-box{background:linear-gradient(135deg,rgba(28,14,14,.97),rgba(40,18,18,.97));border:1.5px solid rgba(248,113,113,.55);border-radius:24px;padding:22px 24px 18px;text-align:center;max-width:440px;width:100%;margin:auto;box-shadow:0 0 80px rgba(120,20,20,.55),inset 0 1px 0 rgba(255,255,255,.08);animation:wrongPop .42s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;}
 @keyframes wrongPop{from{opacity:0;transform:translateY(-20px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 .wrong-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(248,113,113,.9),transparent);}
 .wrong-ico{font-size:44px;line-height:1;margin-bottom:4px;animation:wrongShake .55s ease;}
@@ -667,31 +671,164 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
 .wr-line em{font-style:normal;color:#5eead4;font-weight:800;}
 .wrong-progress{height:4px;width:100%;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-bottom:12px;}
 .wrong-progress-bar{height:100%;width:100%;background:linear-gradient(90deg,#f87171,#fca5a5);border-radius:99px;box-shadow:0 0 10px rgba(248,113,113,.7);}
-.wrong-continue{background:linear-gradient(135deg,#0d9488,#0891b2);color:#fff;font-size:17px;font-weight:900;padding:10px 26px;border-radius:11px;border:none;cursor:pointer;box-shadow:0 6px 22px rgba(13,148,136,.55),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;font-family:'Space Grotesk',sans-serif;letter-spacing:.3px;width:100%;}
+.wrong-continue{background:linear-gradient(135deg,#0d9488,#0891b2);color:#fff;font-size:17px;font-weight:900;padding:10px 26px;border-radius:11px;border:none;cursor:pointer;box-shadow:0 6px 22px rgba(13,148,136,.55),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;font-family:'Space Grotesk',sans-serif;letter-spacing:.3px;width:100%;touch-action:manipulation;}
 .wrong-continue:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(13,148,136,.75),inset 0 1px 0 rgba(255,255,255,.3);}
 .wrong-continue:active{transform:scale(.97);}
 
-/* Responsive */
-@media(max-width:900px){
-    .tq-instr-card, .tut-card{padding:20px 18px 16px !important;}
-    .tq-instr-title{font-size:1.65rem !important;}
-    .tq-features-grid{grid-template-columns:1fr;gap:8px;}
-    .tq-concepts-grid{grid-template-columns:1fr;gap:8px;}
-    .tq-tips-grid{grid-template-columns:1fr;gap:6px;}
-    .tq-compare-hero{flex-direction:column;gap:10px;padding:10px 12px;}
-    .tq-instr-footer{flex-direction:column;align-items:stretch;}
-    .tq-actions-row{width:100%;justify-content:stretch;}
-    .tq-actions-row .btn{width:100%;}
-    #hud{padding:8px 12px;gap:8px;}
-    .hv.rose{font-size:14px;}
-    .lvlbadge{font-size:11.5px;padding:4px 10px;}
-    .tq-step-tab span:not(.tq-num){display:none;}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablets / small laptops: tighten the HUD */
+@media (max-width: 900px) {
+    #hud { padding: 8px 12px; gap: 8px; }
+    .hv.rose { font-size: 17px; }
+    .lvlbadge { font-size: 14px; padding: 4px 12px; }
+    .eduplay-nav-btn { padding: 6px 9px; font-size: 14px; }
+    .mission-txt { font-size: 17px; }
 }
-@media(max-width:600px){
-    #pond{height:min(58vh, 420px);border-radius:20px;}
-    .fish{width:100px;height:70px;left:-50px;top:-35px;}
-    .fish-num{font-size:20px;}
-    .eduplay-nav-btn span{display:none;}
+
+/* ── PHONES (and landscape phones): scrollable page, 2-row HUD,
+      bigger tap targets, fixed bottom "Cast Net" bar ── */
+@media (max-width: 680px), (max-height: 560px) and (pointer: coarse) {
+
+    /* The page container scrolls instead of clipping content */
+    #gw {
+        display: block;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+    #gameScreen {
+        min-height: 100%;
+        height: auto;
+        justify-content: flex-start;
+        padding: calc(8px + env(safe-area-inset-top, 0px)) 10px calc(96px + env(safe-area-inset-bottom, 0px));
+    }
+    .gi { gap: 8px; }
+
+    /* HUD: row 1 = lives + level/score, row 2 = icon-only buttons */
+    #hud {
+        flex-wrap: wrap;
+        padding: 8px 12px;
+        gap: 8px 10px;
+        border-radius: 16px;
+    }
+    .hp { order: 1; }
+    .hc { order: 2; align-items: flex-end; }
+    .eduplay-game-nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 6px;
+    }
+    #hud .eduplay-nav-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 9px 6px;
+        font-size: 17px;
+    }
+    #hud .eduplay-nav-btn span { display: none; }
+    .eduplay-btn-fs { display: none !important; }   /* fullscreen is unreliable on phones */
+    .hl { font-size: 11px; letter-spacing: 1.5px; }
+    .hv.rose { font-size: 16px; letter-spacing: 1px; }
+    .lvlbadge { font-size: 13px; padding: 3px 12px; }
+    .hs-sub { font-size: 11px; letter-spacing: .5px; }
+    .score-pill-chip { font-size: 12px; margin-left: 2px; }
+
+    #pmeta { font-size: 12px; margin-top: 3px; }
+    #ptrack { height: 9px; }
+
+    /* Mission + Cast Net become a fixed bottom action bar (always reachable) */
+    #mission {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 60;
+        border-radius: 18px 18px 0 0;
+        border-bottom: none;
+        padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+        gap: 10px;
+    }
+    .mission-info { flex: 1; min-width: 0; padding-left: 4px; }
+    .mission-tag { font-size: 11px; letter-spacing: 1.2px; }
+    .mission-txt { font-size: 15px; line-height: 1.2; }
+    #castBtn { padding: 14px 18px; font-size: 16px; border-radius: 13px; }
+
+    /* Pond: fills the remaining screen height; smaller fish and scenery */
+    #pond {
+        height: min(58vh, 440px);
+        height: clamp(300px, calc(100dvh - 310px), 560px);
+        border-radius: 20px;
+    }
+    .fish { width: 96px; height: 68px; left: -48px; top: -34px; }
+    .fish--decor { width: 60px; height: 43px; left: -30px; top: -22px; }
+    .fish-num { font-size: 20px; }
+    .turtle { width: 64px; height: 48px; }
+    .turtle + .turtle { display: none; }
+    .dragonfly + .dragonfly { display: none; }
+    .lily { max-width: 54px; }
+    .pond-decor .rocks { height: 44px; }
+    .reed { width: 5px; }
+
+    /* Pause card + end banner */
+    .pause-card { padding: 24px 18px; }
+    .pause-card .eduplay-game-nav { flex-wrap: wrap; }
+    .pause-card .eduplay-nav-btn { flex: 1; justify-content: center; padding: 9px 10px; font-size: 14px; }
+    .bnr-box { flex-wrap: wrap; justify-content: center; text-align: center; padding: 14px; gap: 10px; }
+    .bnr-mid { flex: 1 1 100%; order: 2; }
+    .bnr-left { order: 1; flex-direction: row; gap: 10px; }
+    .bnr-btns { order: 3; flex-wrap: wrap; justify-content: center; width: 100%; }
+    .bnr-btns .bbtn { flex: 1 1 100%; justify-content: center; padding: 12px 14px; font-size: .9rem; }
+    .bnr-btns .eduplay-nav-btn { flex: 1; justify-content: center; font-size: 14px; }
+
+    /* Wrong answer modal scrolls on short screens */
+    #wrongOverlay { padding: 12px; align-items: flex-start; }
+    .wrong-box { padding: 18px 16px 14px; border-radius: 20px; }
+    .wrong-ico { font-size: 36px; }
+    .wrong-title { font-size: 1.2rem; }
+    .wr-line { font-size: 13px; }
+    .wrong-continue { padding: 13px 20px; font-size: 16px; }
+
+    /* Flash-card tutorial: scrollable, compact, single column */
+    .overlay, .fc-overlay {
+        height: 100dvh !important;
+        padding: 10px !important;
+        align-items: flex-start !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    .fc-deck-stack-1, .fc-deck-stack-2 { display: none; }
+    .fc-card { padding: 18px 16px 16px; border-radius: 22px; }
+    .fc-top { flex-wrap: wrap; gap: 8px; }
+    .fc-badge { font-size: .68rem; letter-spacing: .6px; padding: 4px 10px; text-align: left; }
+    .fc-quick-action-btn { font-size: .8rem; padding: 5px 12px; }
+    .fc-slide { min-height: 0; }
+    .fc-title { font-size: 1.25rem !important; }
+    .fc-desc { font-size: .92rem; }
+    .fc-box { padding: 12px; }
+    .fc-row-2 { grid-template-columns: 1fr; gap: 8px; }
+    .fc-item { padding: 10px; }
+    .fc-item-lbl { font-size: .9rem; }
+    .fc-item-math { font-size: 1rem; }
+    .fc-item-sub { font-size: .9rem; }
+    .fc-tip { font-size: .9rem; }
+    .fc-nav-btn { padding: 10px 12px; font-size: .95rem; }
+    .fc-footer { gap: 8px; }
+    .fc-dots { gap: 4px; }
+    .fc-dot { width: 7px; height: 7px; }
+    .fc-dot.active { width: 16px; }
+    .demo-strip { gap: 8px; }
+    .demo-fish { width: 54px; height: 54px; font-size: 21px; }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+    .hv.rose { font-size: 14px; }
+    .mission-txt { font-size: 14px; }
+    #castBtn { padding: 13px 14px; font-size: 15px; }
+    .fish { width: 88px; height: 62px; left: -44px; top: -31px; }
+    .fish-num { font-size: 18px; }
 }
 </style>
 
@@ -699,7 +836,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
   <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
 
   <!-- ============================================================
-       GAME SCREEN (Upper-Right Button Group, No Restart Button)
+       GAME SCREEN
        ============================================================ -->
   <div id="gameScreen">
     <div class="gi">
@@ -716,7 +853,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
           <div class="hs-sub">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span> <span class="score-pill-chip">• Score: <span id="scoreVal">0</span>/10</span></div>
         </div>
 
-        <!-- Upper Right Corner: All Action & Navigation Buttons -->
+        <!-- Action & Navigation Buttons -->
         <div class="eduplay-game-nav">
           <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
             <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
@@ -748,7 +885,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
           <div style="font-size:2.8rem;margin-bottom:0.4rem;">⏸</div>
           <h2>Pond Paused</h2>
           <p>Fish are resting! When you're ready, jump back into the pond.</p>
-          <button class="bbtn bbtn-p" style="width:100%;padding:11px 24px;font-size:1rem;" onclick="togglePause()">▶ Resume Fishing</button>
+          <button class="bbtn bbtn-p" style="width:100%;padding:11px 24px;font-size:1rem;justify-content:center;" onclick="togglePause()">▶ Resume Fishing</button>
           <div class="eduplay-game-nav" style="margin-top:14px;display:flex;gap:8px;justify-content:center;">
             <button type="button" class="eduplay-nav-btn eduplay-btn-help" onclick="openTut(true)"><i class="bi bi-question-circle-fill"></i> <span>Tutorial</span></button>
             <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
@@ -770,7 +907,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
         </div>
       </div>
 
-      <!-- MISSION & CAST NET BAR -->
+      <!-- MISSION & CAST NET BAR (fixed bottom bar on phones) -->
       <div id="mission">
         <div class="mission-info">
           <div class="mission-tag" id="missionMode">🎯 Factors Mission</div>
@@ -789,11 +926,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
        ============================================================ -->
   <div id="overlay" class="fc-overlay" role="dialog" aria-modal="true" aria-label="Factor Pond Flash Cards">
     <div class="fc-deck">
-      <!-- Physical Stack Layers -->
       <div class="fc-deck-stack-1"></div>
       <div class="fc-deck-stack-2"></div>
 
-      <!-- Active Front Flash Card -->
       <div class="fc-card">
         <div class="fc-top">
           <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 5</span>
@@ -802,10 +937,10 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
           </button>
         </div>
 
-        <!-- CARD 1: Check Your Mission -->
+        <!-- CARD 1 -->
         <div id="fcSlide1" class="fc-slide">
           <h3 class="fc-title" style="color:#5eead4;"><span>🎯</span> Look Before You Fish!</h3>
-          <p class="fc-desc">Read the top mission banner before tapping fish. You will hunt for either <b>Factors</b> or <b>Multiples</b>:</p>
+          <p class="fc-desc">Read the mission banner before tapping fish. You will hunt for either <b>Factors</b> or <b>Multiples</b>:</p>
           <div class="fc-row-2 fc-box">
             <div class="fc-item">
               <div class="fc-item-ico">🔢</div>
@@ -821,11 +956,11 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
             </div>
           </div>
           <div class="fc-tip">
-            💡 <b>Rule of Thumb:</b> Glance at the top banner first so you know which fish to catch!
+            💡 <b>Rule of Thumb:</b> Glance at the mission banner first so you know which fish to catch!
           </div>
         </div>
 
-        <!-- CARD 2: What is a Factor? -->
+        <!-- CARD 2 -->
         <div id="fcSlide2" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#22d3ee;"><span>🔢</span> What is a Factor?</h3>
           <p class="fc-desc">A factor divides the target number with <b>0 remainder</b>. If there is a remainder, it is NOT a factor!</p>
@@ -848,7 +983,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
           </div>
         </div>
 
-        <!-- CARD 3: What is a Multiple? -->
+        <!-- CARD 3 -->
         <div id="fcSlide3" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#fbbf24;"><span>✖️</span> What is a Multiple?</h3>
           <p class="fc-desc">Multiples come from your times table or skip-counting! Multiply the target by 1, 2, 3, 4, 5 and so on.</p>
@@ -862,21 +997,21 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
           </div>
         </div>
 
-        <!-- CARD 4: How to Catch Fish -->
+        <!-- CARD 4 -->
         <div id="fcSlide4" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#34d399;"><span>🐟</span> Tap Fish &amp; Cast Net</h3>
-          <p class="fc-desc">Click fish to pick them. Selected fish glow with a bright <b style="color:#fbbf24;">golden ring ✨</b>:</p>
+          <p class="fc-desc">Tap fish to pick them. Selected fish glow with a bright <b style="color:#fbbf24;">golden ring ✨</b>:</p>
           <div class="demo-strip" style="margin:4px 0 10px;">
             <div class="demo-fish-wrap"><div class="demo-fish selected">2</div><div class="demo-fish-lbl">✅ Picked</div></div>
             <div class="demo-fish-wrap"><div class="demo-fish">5</div><div class="demo-fish-lbl">Not picked</div></div>
             <div class="demo-fish-wrap"><div class="demo-fish selected">4</div><div class="demo-fish-lbl">✅ Picked</div></div>
           </div>
           <div class="fc-tip">
-            💡 <b>Need to unpick?</b> Click any picked fish again. When ready, click <b>🪝 Cast Net!</b>
+            💡 <b>Need to unpick?</b> Tap any picked fish again. When ready, tap <b>🪝 Cast Net!</b>
           </div>
         </div>
 
-        <!-- CARD 5: 5 Lives & How to Win -->
+        <!-- CARD 5 -->
         <div id="fcSlide5" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#f43f5e;"><span>❤️</span> 5 Lives &amp; 10 to Win</h3>
           <p class="fc-desc">Keep your hearts safe and fill your net to clear the level!</p>
@@ -892,12 +1027,15 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Inter',sans-serif;
               <div class="fc-item-sub">Make <b>10 perfect net casts</b> to unlock the next level!</div>
             </div>
           </div>
-          <div class="fc-tip">
+          <div class="fc-tip kbd-tip">
             💡 <b>Shortcuts:</b> Press <b>P</b> to pause anytime. Press <b>Space</b> to Cast Net!
+          </div>
+          <div class="fc-tip touch-tip">
+            💡 <b>Tip:</b> Tap <b>Pause</b> anytime to rest. Tap <b>🪝 Cast Net!</b> when you're ready!
           </div>
         </div>
 
-        <!-- Flashcard Footer Navigation -->
+        <!-- Footer Navigation -->
         <div class="fc-footer">
           <button class="fc-nav-btn" id="fcPrevBtn" type="button" onclick="stepFlashCard(-1)">
             <i class="bi bi-arrow-left"></i> Prev
@@ -944,8 +1082,11 @@ const CSRF='{{ csrf_token() }}';
 const MAX_LIVES=5,WIN_POINTS=10;
 const WRONG_MODAL_MS=5000;
 
+/* Same breakpoint as the mobile CSS block */
+const mobileMQ = window.matchMedia('(max-width: 680px), (max-height: 560px) and (pointer: coarse)');
+function isMobile(){ return mobileMQ.matches; }
+
 const overlay=document.getElementById('overlay');
-const tutorialOverlay=null;
 const gameScreen=document.getElementById('gameScreen');
 const wrongOverlay=document.getElementById('wrongOverlay');
 const wrongReasonEl=document.getElementById('wrongReason');
@@ -1194,11 +1335,15 @@ function setupPondDecor(container){
     container.insertBefore(decor, container.firstChild);
 }
 
-/* ═══ FISH ENGINE ═══ */
+/* ═══ FISH ENGINE (adaptive to pond size / phone) ═══ */
 let fishList = [];
 let fishRAF = null;
 let lastFrameT = 0;
 const pondBounds = { w: 1280, h: 480 };
+
+/* Padding that keeps a fish fully inside the pond (smaller fish on phones) */
+function padX(){ return isMobile() ? 50 : 65; }
+function padY(){ return isMobile() ? 44 : 60; }
 
 function refreshBounds(){
     if (pondEl){
@@ -1208,16 +1353,22 @@ function refreshBounds(){
     }
 }
 window.addEventListener('resize', refreshBounds);
+window.addEventListener('orientationchange', () => setTimeout(refreshBounds, 250));
+if (mobileMQ.addEventListener) mobileMQ.addEventListener('change', refreshBounds);
+else if (mobileMQ.addListener) mobileMQ.addListener(refreshBounds);
 
 function getFishBounds(container){
     return { w: pondEl.clientWidth || 1280, h: pondEl.clientHeight || 480 };
 }
 
 function computeSpawnPositions(count, bw, bh){
-    const cols = Math.min(5, Math.ceil(count / 2));
+    // Narrow ponds get fewer columns so fish don't spawn on top of each other
+    const maxCols = bw < 520 ? 3 : 5;
+    const cols = Math.min(maxCols, Math.ceil(count / 2));
     const rows = Math.ceil(count / cols);
     const cellW = bw / cols;
     const cellH = bh / rows;
+    const px = padX() + 5, py = padY();
     const out = [];
     for (let i = 0; i < count; i++){
         const c = i % cols;
@@ -1227,8 +1378,8 @@ function computeSpawnPositions(count, bw, bh){
         const jx = (Math.random() - 0.5) * cellW * 0.4;
         const jy = (Math.random() - 0.5) * cellH * 0.4;
         out.push({
-            x: Math.max(70, Math.min(bw - 70, cx + jx)),
-            y: Math.max(60, Math.min(bh - 60, cy + jy))
+            x: Math.max(px, Math.min(bw - px, cx + jx)),
+            y: Math.max(py, Math.min(bh - py, cy + jy))
         });
     }
     return shuffle(out);
@@ -1237,11 +1388,14 @@ function computeSpawnPositions(count, bw, bh){
 function registerFish(el, container, opts){
     opts = opts || {};
     const bounds = getFishBounds(container);
-    const cruiseSpeed = opts.speed || (24 + Math.random() * 18);
+    // Slightly slower on phones so fish are easier to tap in a narrow pond
+    const speedMul = isMobile() ? 0.78 : 1;
+    const cruiseSpeed = (opts.speed || (24 + Math.random() * 18)) * speedMul;
     const initialDir  = Math.random() < 0.5 ? 1 : -1;
+    const px = padX(), py = padY();
     const sp = opts.spawn || {
-        x: 70 + Math.random() * Math.max(40, bounds.w - 140),
-        y: 60 + Math.random() * Math.max(40, bounds.h - 120)
+        x: (px + 5) + Math.random() * Math.max(40, bounds.w - (px + 5) * 2),
+        y: py + Math.random() * Math.max(40, bounds.h - py * 2)
     };
     const f = {
         el,
@@ -1261,7 +1415,7 @@ function registerFish(el, container, opts){
         homeY: sp.y,
         wanderPhase: Math.random() * Math.PI * 2,
         wanderSpeed: 0.45 + Math.random() * 0.55,
-        wanderAmp: 15 + Math.random() * 24,
+        wanderAmp: (isMobile() ? 12 : 15) + Math.random() * (isMobile() ? 16 : 24),
         sepRadius: opts.sepRadius || 68
     };
     el.style.opacity = '0';
@@ -1274,6 +1428,9 @@ function registerFish(el, container, opts){
 function stepFish(f, dt, now){
     const bounds = getFishBounds(f.container);
     const bw = bounds.w, bh = bounds.h;
+    const mob = isMobile();
+    const px = padX(), py = padY();
+    const sepX = mob ? 56 : 70, sepY = mob ? 42 : 52;
 
     f.x += f.dirX * f.cruiseSpeed * dt;
     f.wanderPhase += dt * f.wanderSpeed;
@@ -1285,23 +1442,22 @@ function stepFish(f, dt, now){
         if (o === f || o.container !== f.container) continue;
         const dx = f.x - o.x;
         const dy = targetY - o.y;
-        if (Math.abs(dx) < 70 && Math.abs(dy) < 52){
+        if (Math.abs(dx) < sepX && Math.abs(dy) < sepY){
             pushY += (dy > 0 ? 22 : -22);
         }
     }
     targetY += pushY;
-    targetY = Math.max(60, Math.min(bh - 60, targetY));
+    targetY = Math.max(py, Math.min(bh - py, targetY));
     f.y += (targetY - f.y) * Math.min(1, dt * 2.4);
 
-    const padX = 65;
-    if (f.x < padX){
-        f.x = padX;
+    if (f.x < px){
+        f.x = px;
         f.dirX = 1;
-        f.homeY = 60 + Math.random() * Math.max(20, bh - 120);
-    } else if (f.x > bw - padX){
-        f.x = bw - padX;
+        f.homeY = py + Math.random() * Math.max(20, bh - py * 2);
+    } else if (f.x > bw - px){
+        f.x = bw - px;
         f.dirX = -1;
-        f.homeY = 60 + Math.random() * Math.max(20, bh - 120);
+        f.homeY = py + Math.random() * Math.max(20, bh - py * 2);
     }
 
     const targetFace = f.dirX > 0 ? -1 : 1;
@@ -1346,7 +1502,7 @@ function revealFish(delayStep){
 }
 
 function spawnBubbles(container){
-    const count = 7;
+    const count = isMobile() ? 4 : 7;
     for (let i = 0; i < count; i++){
         const b = document.createElement('div');
         b.className = 'bubble';
@@ -1412,13 +1568,12 @@ const MULTIPLE_TARGETS = {
 
 function buildMission(mode, boost){
     const effGrade = Math.min(6, Math.max(4, GRADE_NUM + (boost ? 1 : 0)));
-    const MIN_TOTAL_FISH = 10; // At least 10 numbered fish
+    const MIN_TOTAL_FISH = 10;
     if (mode === 'factors'){
         const pool = FACTOR_TARGETS[effGrade] || FACTOR_TARGETS[4];
         const target = pool[rand(0, pool.length - 1)];
         const allF = getFactors(target);
         if (allF.length < 2) return null;
-        // Select 3 to 5 correct factors (or all factors if fewer)
         const correctCount = Math.min(allF.length, rand(3, Math.min(5, allF.length)));
         const correct = shuffle(allF).slice(0, Math.max(2, correctCount));
         const distractors = [];
@@ -1489,6 +1644,7 @@ function generateMission(){
 function renderPond(nums){
     clearPond(pondEl);
     spawnBubbles(pondEl);
+    refreshBounds();
     const b = getFishBounds(pondEl);
     const spawns = computeSpawnPositions(nums.length, b.w, b.h);
     nums.forEach((n, i) => {
@@ -1497,8 +1653,9 @@ function renderPond(nums){
         pondEl.appendChild(el);
         registerFish(el, pondEl, { spawn: spawns[i] });
     });
-    // Add 2 subtle background decor fish
-    for (let i = 0; i < 2; i++){
+    // Subtle background decor fish (just one on phones)
+    const decorCount = isMobile() ? 1 : 2;
+    for (let i = 0; i < decorCount; i++){
         const el = createDecorFishEl(rand(0, PAL.length - 1));
         pondEl.appendChild(el);
         registerFish(el, pondEl, { speed: 20 + Math.random() * 14, isDecor: true, sepRadius: 68 });
@@ -1542,6 +1699,7 @@ function showWrongModal(){
     wrongModalActive = true;
     wrongReasonEl.innerHTML = buildWrongExplanation();
     wrongOverlay.classList.add('show');
+    wrongOverlay.scrollTop = 0;
     wrongProgressEl.style.transition = 'none';
     wrongProgressEl.style.width = '100%';
     void wrongProgressEl.offsetWidth;
@@ -1578,8 +1736,9 @@ function castNet(){
     });
     const isPerfect = (wrongPicks.length === 0 && missed.length === 0);
     const rect = pondEl.getBoundingClientRect();
+    // Keep the splash text on-screen (pond may be partly scrolled off on phones)
     const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
+    const cy = Math.max(80, Math.min(window.innerHeight - 140, rect.top + rect.height / 2));
     if (isPerfect){
         score++;
         spawnSplashText('✨ Perfect Catch! +1', cx, cy);
@@ -1633,6 +1792,11 @@ function endGame(won){
         bnrPlayBtn.textContent = '🔄 Try Again';
     }
     endBanner.classList.add('show');
+    // On phones the banner sits above the pond; make sure it's in view
+    if (isMobile()){
+        const gw = document.getElementById('gw');
+        if (gw) gw.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
 function saveProgress(lvl){
@@ -1686,7 +1850,7 @@ bnrPlayBtn.addEventListener('click', () => {
 
 castBtn.addEventListener('click', castNet);
 
-/* Fullscreen Helper */
+/* Fullscreen Helper (button is hidden on phones) */
 window.toggleFullscreen = function(){
     const w = document.getElementById('gw') || document.documentElement;
     if (!document.fullscreenElement) {
@@ -1710,7 +1874,6 @@ document.addEventListener('fullscreenchange', () => {
 /* Pause Controller */
 window.togglePause = function(){
     if (!gameOn) return;
-    // Don't toggle pause if flashcard tutorial overlay is currently open
     if (overlay && !overlay.classList.contains('hidden')) return;
 
     isPaused = !isPaused;
@@ -1761,9 +1924,9 @@ window.openTut = function(fromGame = false){
     const topActionBtn = document.getElementById('fcQuickActionBtn');
 
     if (fromGame){
-        isPaused = true; // Pause fish movement
+        isPaused = true;
         const pauseOv = document.getElementById('pauseOverlay');
-        if (pauseOv) pauseOv.classList.remove('active'); // Hide pause card
+        if (pauseOv) pauseOv.classList.remove('active');
         if (topActionBtn){
             topActionBtn.className = 'fc-quick-action-btn is-close';
             topActionBtn.innerHTML = '&times;';
@@ -1779,7 +1942,10 @@ window.openTut = function(fromGame = false){
         }
     }
 
-    if (ov) ov.classList.remove('hidden');
+    if (ov){
+        ov.classList.remove('hidden');
+        ov.scrollTop = 0;
+    }
     goFlashCard(1);
 };
 
@@ -1788,19 +1954,16 @@ window.goFlashCard = function(cardNum){
     if (cardNum > TOTAL_FC_CARDS) cardNum = TOTAL_FC_CARDS;
     currentFcCard = cardNum;
 
-    // Show active slide, hide others
     for (let i = 1; i <= TOTAL_FC_CARDS; i++){
         const slide = document.getElementById('fcSlide' + i);
         if (slide) slide.classList.toggle('hidden', i !== currentFcCard);
     }
 
-    // Update dots
     const dots = document.querySelectorAll('#fcDots .fc-dot');
     dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === currentFcCard - 1);
     });
 
-    // Update Badge
     const badge = document.getElementById('fcBadge');
     if (badge){
         const tags = ['THE MISSION', 'FACTORS', 'MULTIPLES', 'HOW TO PLAY', 'LIVES & WIN'];
@@ -1808,13 +1971,11 @@ window.goFlashCard = function(cardNum){
         badge.textContent = '🃏 ' + prefix + ' • CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' • ' + tags[currentFcCard - 1];
     }
 
-    // Update Prev button
     const prevBtn = document.getElementById('fcPrevBtn');
     if (prevBtn){
         prevBtn.disabled = (currentFcCard === 1);
     }
 
-    // Update Next button
     const nextBtn = document.getElementById('fcNextBtn');
     if (nextBtn){
         if (currentFcCard === TOTAL_FC_CARDS){
@@ -1831,7 +1992,6 @@ window.goFlashCard = function(cardNum){
 
 window.stepFlashCard = function(delta){
     if (currentFcCard === TOTAL_FC_CARDS && delta > 0){
-        // Finished last card!
         closeTut(true);
         return;
     }
@@ -1843,7 +2003,7 @@ window.closeTut = function(andStartGame = false){
     if (ov) ov.classList.add('hidden');
 
     if (tutOpenedFromGame){
-        isPaused = false; // Resume game
+        isPaused = false;
         const pauseBtn = document.getElementById('pauseBtn');
         if (pauseBtn){
             pauseBtn.classList.remove('paused');

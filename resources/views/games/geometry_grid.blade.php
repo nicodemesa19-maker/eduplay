@@ -9,7 +9,9 @@
 
 <style>
   *, *::before, *::after { box-sizing: border-box; }
-  .geo-root { font-family:'Outfit','Segoe UI',sans-serif; background:#080c1a; min-height:100vh; padding:10px; position:relative; overflow:hidden; }
+  html { -webkit-text-size-adjust: 100%; }
+  .geo-root { font-family:'Outfit','Segoe UI',sans-serif; background:#080c1a; min-height:100vh; min-height:100dvh; padding:10px; padding-left:max(10px, env(safe-area-inset-left)); padding-right:max(10px, env(safe-area-inset-right)); padding-bottom:max(10px, env(safe-area-inset-bottom)); position:relative; overflow-x:hidden; overflow-x:clip; }
+  .geo-root button, .geo-root a { touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
   .geo-root::before { content:''; position:fixed; inset:0; background:
     radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.8) 0%,transparent 100%),
     radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.6) 0%,transparent 100%),
@@ -28,8 +30,8 @@
   .geo-topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
   .geo-title { font-weight:900; font-size:clamp(1.5rem,3vw,2.3rem); background:linear-gradient(135deg,#818cf8,#38bdf8,#34d399); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
   .geo-top-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .geo-badge { background:linear-gradient(135deg,#f59e0b,#d97706); color:#1e1b02; font-weight:800; font-size:.85rem; letter-spacing:1px; padding:7px 20px; border-radius:50px; box-shadow:0 0 20px rgba(245,158,11,.35); }
-  .geo-timer { background:linear-gradient(135deg,#6366f1,#4f46e5); color:white; box-shadow:0 0 20px rgba(99,102,241,.35); transition:all .3s; }
+  .geo-badge { background:linear-gradient(135deg,#f59e0b,#d97706); color:#1e1b02; font-weight:800; font-size:.85rem; letter-spacing:1px; padding:7px 20px; border-radius:50px; box-shadow:0 0 20px rgba(245,158,11,.35); white-space:nowrap; }
+  .geo-timer { background:linear-gradient(135deg,#6366f1,#4f46e5); color:white; box-shadow:0 0 20px rgba(99,102,241,.35); transition:all .3s; font-variant-numeric:tabular-nums; }
   .geo-timer.warning { background:linear-gradient(135deg,#f59e0b,#d97706); color:#1e1b02; animation:timerPulse 1s infinite; }
   .geo-timer.danger { background:linear-gradient(135deg,#ef4444,#dc2626); color:white; animation:timerPulse .5s infinite; }
   @keyframes timerPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
@@ -39,8 +41,8 @@
   .geo-pause-btn.paused { background:rgba(52,211,153,.15); border-color:rgba(52,211,153,.4); color:#34d399; }
   .geo-exit-btn { background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.4); color:#ef4444; }
   .geo-exit-btn:hover { background:rgba(239,68,68,.3); transform:scale(1.05); }
-  .geo-shape-tag { padding:7px 16px; border-radius:50px; font-weight:700; font-size:.82rem; }
-  .geo-q-type-tag { padding:5px 14px; border-radius:50px; font-weight:700; font-size:.78rem; letter-spacing:.5px; }
+  .geo-shape-tag { padding:7px 16px; border-radius:50px; font-weight:700; font-size:.82rem; white-space:nowrap; }
+  .geo-q-type-tag { padding:5px 14px; border-radius:50px; font-weight:700; font-size:.78rem; letter-spacing:.5px; white-space:nowrap; }
   .qtag-computation { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.3); }
   .qtag-visual      { background:rgba(251,191,36,.15); color:#fbbf24; border:1px solid rgba(251,191,36,.3); }
   .qtag-fact        { background:rgba(129,140,248,.15); color:#818cf8; border:1px solid rgba(129,140,248,.3); }
@@ -57,11 +59,10 @@
   .geo-bar-fill { height:100%; background:linear-gradient(90deg,#6366f1,#38bdf8,#34d399); border-radius:10px; transition:width .5s; box-shadow:0 0 10px rgba(99,102,241,.5); }
 
   /* GAME GRID */
-  .geo-game-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:stretch; min-height:calc(100vh - 220px); }
-  @media(max-width:950px){ .geo-game-grid{grid-template-columns:1fr} }
+  .geo-game-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; align-items:stretch; min-height:calc(100vh - 220px); }
 
   /* CANVAS PANEL */
-  .geo-canvas-panel { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:26px; padding:24px; backdrop-filter:blur(10px); display:flex; flex-direction:column; height:100%; }
+  .geo-canvas-panel { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:26px; padding:24px; backdrop-filter:blur(10px); display:flex; flex-direction:column; height:100%; min-width:0; }
   .geo-canvas-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
   .canvas-meta-title { font-weight:700; color:#e2e8f0; font-size:.95rem; }
   .canvas-meta-sub { color:#64748b; font-size:.75rem; margin-top:2px; }
@@ -70,7 +71,7 @@
   .icon-p { background:rgba(59,130,246,.15); }
   .icon-tr { background:rgba(245,158,11,.15); }
 
-  canvas#gc { width:100%; height:auto; max-height:500px; display:block; border-radius:16px; background:#040711; box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 0 25px rgba(99,102,241,.08); border:1px solid rgba(255,255,255,.05); flex-shrink:0; }
+  canvas#gc { width:100%; height:auto; aspect-ratio:1/1; max-height:500px; display:block; margin:0 auto; border-radius:16px; background:#040711; box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 0 25px rgba(99,102,241,.08); border:1px solid rgba(255,255,255,.05); flex-shrink:0; }
 
   .geo-canvas-legend { display:flex; gap:16px; margin-top:16px; flex-wrap:wrap; }
   .legend-item { display:flex; align-items:center; gap:6px; font-size:.8rem; color:#64748b; font-weight:600; }
@@ -78,22 +79,24 @@
 
   /* SCORE */
   .geo-score-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:20px; display:flex; gap:14px; margin-top:auto; }
+  .geo-canvas-legend + .geo-score-card { margin-top:16px; }
   .score-item { flex:1; text-align:center; }
   .score-val { font-weight:900; font-size:1.8rem; color:white; }
   .score-lbl { font-size:.75rem; color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
   .s-div { width:1px; background:rgba(255,255,255,.07); align-self:stretch; }
 
   /* QUESTION PANEL */
-  .geo-q-panel { display:flex; flex-direction:column; gap:16px; height:100%; }
+  .geo-q-panel { display:flex; flex-direction:column; gap:16px; height:100%; min-width:0; }
   .geo-q-card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:22px; padding:26px; backdrop-filter:blur(10px); position:relative; overflow:hidden; flex:1; display:flex; flex-direction:column; }
   .geo-q-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,#6366f1,#38bdf8,#34d399); }
   .q-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
   .q-num { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6366f1; }
-  .q-text { font-size:1.15rem; font-weight:700; color:#f1f5f9; line-height:1.55; margin-bottom:22px; }
+  .q-text { font-size:1.15rem; font-weight:700; color:#f1f5f9; line-height:1.55; margin-bottom:22px; overflow-wrap:anywhere; }
 
   /* MCQ */
   .ans-grid { display:flex; flex-direction:column; gap:10px; flex:1; }
-  .ans-btn { background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12); color:#cbd5e1; font-family:'Outfit',sans-serif; font-weight:600; font-size:.95rem; padding:15px 20px; border-radius:13px; text-align:left; cursor:pointer; transition:all .18s; display:flex; align-items:center; gap:11px; }
+  .ans-btn { background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12); color:#cbd5e1; font-family:'Outfit',sans-serif; font-weight:600; font-size:.95rem; padding:15px 20px; min-height:54px; border-radius:13px; text-align:left; cursor:pointer; transition:all .18s; display:flex; align-items:center; gap:11px; }
+  .ans-btn > span:nth-child(2) { min-width:0; overflow-wrap:anywhere; }
   .ans-btn:hover:not(:disabled) { background:rgba(99,102,241,.15); border-color:rgba(99,102,241,.5); color:#e2e8f0; transform:translateX(4px); }
   .ans-btn.correct { background:rgba(16,185,129,.2); border-color:#10b981; color:#34d399; box-shadow:0 0 18px rgba(16,185,129,.2); }
   .ans-btn.wrong { background:rgba(239,68,68,.15); border-color:#ef4444; color:#f87171; }
@@ -101,6 +104,7 @@
   .ans-letter { width:32px; height:32px; border-radius:7px; background:rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.85rem; flex-shrink:0; transition:all .18s; }
   .ans-btn.correct .ans-letter { background:#10b981; color:white; }
   .ans-btn.wrong .ans-letter { background:#ef4444; color:white; }
+  .ans-hint { margin-left:auto; font-size:.95rem; color:#64748b; font-weight:700; flex-shrink:0; }
 
   /* FEEDBACK */
   .geo-fb { border-radius:13px; padding:14px 18px; font-weight:700; font-size:.95rem; display:none; align-items:flex-start; gap:10px; line-height:1.4; margin-top:16px; }
@@ -143,6 +147,7 @@
     position: relative;
     overflow: hidden;
     max-height: 94vh;
+    max-height: 94dvh;
     display: flex;
     flex-direction: column;
     padding: 28px 34px 24px;
@@ -161,6 +166,7 @@
     margin-bottom: 12px;
     padding-bottom: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
   }
   .tut-tag-badge {
     display: inline-flex;
@@ -180,9 +186,11 @@
     background: transparent;
     border: none;
     color: #94a3b8;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
     line-height: 1;
+    min-width: 44px;
+    min-height: 44px;
     transition: color 0.18s;
   }
   .tut-close-btn:hover { color: #ffffff; }
@@ -195,6 +203,8 @@
     overflow-x: auto;
     padding-bottom: 4px;
     scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    flex-shrink: 0;
   }
   .tut-topic-tabs::-webkit-scrollbar { height: 4px; }
   .tut-topic-tabs::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 10px; }
@@ -213,6 +223,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    flex-shrink: 0;
   }
   .tut-tab-btn:hover {
     background: rgba(99, 102, 241, 0.15);
@@ -233,12 +244,15 @@
     flex: 1;
     min-height: 0;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
   .tut-slide-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    gap: 8px;
   }
   .tut-topic-indicator {
     font-size: 1.1rem;
@@ -252,6 +266,7 @@
     font-weight: 700;
     color: #64748b;
     letter-spacing: 0.5px;
+    white-space: nowrap;
   }
 
   /* Card Content Details */
@@ -292,9 +307,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-bottom: 14px;
-  }
-  @media(max-width: 600px) {
-    .tut-visual-grid { grid-template-columns: 1fr; }
   }
   .tut-mini-box {
     background: rgba(255, 255, 255, 0.04);
@@ -342,6 +354,7 @@
     font-weight: 800;
     color: #38bdf8;
     letter-spacing: 0.5px;
+    overflow-wrap:anywhere;
   }
   .tut-formula-sub {
     font-size: 1.05rem;
@@ -375,6 +388,10 @@
     margin-bottom: 14px;
   }
 
+  /* Formula sheet rows */
+  .tut-formula-row { border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .tut-formula-row .tut-fr-eq { font-family:var(--font-mono, monospace); font-weight:800; color:#ffffff; text-align:right; }
+
   /* Dots & Actions */
   .tut-dots {
     display: flex;
@@ -403,7 +420,10 @@
     justify-content: space-between;
     padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 10px;
+    flex-wrap: wrap;
   }
+  .tut-actions-right { display:flex; gap:10px; margin-left:auto; }
   .tut-skip-btn {
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(251, 191, 36, 0.28);
@@ -464,9 +484,9 @@
   .tut-start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6); }
 
   /* COMPLETE */
-  .complete-overlay { position:fixed; inset:0; background:rgba(0,0,0,.92); backdrop-filter:blur(15px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .3s; }
+  .complete-overlay { position:fixed; inset:0; background:rgba(0,0,0,.92); backdrop-filter:blur(15px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .3s; overflow-y:auto; }
   .complete-overlay.show { opacity:1; pointer-events:all; }
-  .complete-card { background:linear-gradient(160deg,#0f172a,#1e293b); border:1px solid rgba(255,255,255,.1); border-radius:30px; max-width:460px; width:100%; padding:44px 38px; text-align:center; box-shadow:0 40px 80px rgba(0,0,0,.6); }
+  .complete-card { background:linear-gradient(160deg,#0f172a,#1e293b); border:1px solid rgba(255,255,255,.1); border-radius:30px; max-width:460px; width:100%; padding:44px 38px; text-align:center; box-shadow:0 40px 80px rgba(0,0,0,.6); margin:auto; }
   .complete-icon { font-size:4.5rem; margin-bottom:14px; display:block; animation:bounceIn .5s ease; }
   @keyframes bounceIn { 0%{transform:scale(0)} 70%{transform:scale(1.15)} 100%{transform:scale(1)} }
   .complete-title { font-weight:900; font-size:1.9rem; color:white; margin-bottom:7px; }
@@ -479,9 +499,9 @@
   .complete-btn:hover { transform:translateY(-3px); box-shadow:0 0 45px rgba(99,102,241,.6); }
 
   /* PAUSE OVERLAY */
-  .pause-overlay { position:fixed; inset:0; background:rgba(0,0,0,.85); backdrop-filter:blur(12px); z-index:9998; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .3s; }
+  .pause-overlay { position:fixed; inset:0; background:rgba(0,0,0,.85); backdrop-filter:blur(12px); z-index:9998; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .3s; overflow-y:auto; }
   .pause-overlay.show { opacity:1; pointer-events:all; }
-  .pause-card { background:linear-gradient(160deg,#0f172a,#1e293b); border:1px solid rgba(251,191,36,.3); border-radius:30px; max-width:400px; width:100%; padding:40px; text-align:center; box-shadow:0 40px 80px rgba(0,0,0,.6); }
+  .pause-card { background:linear-gradient(160deg,#0f172a,#1e293b); border:1px solid rgba(251,191,36,.3); border-radius:30px; max-width:400px; width:100%; padding:40px; text-align:center; box-shadow:0 40px 80px rgba(0,0,0,.6); margin:auto; }
   .pause-icon { font-size:4rem; margin-bottom:16px; display:block; animation:bounceIn .4s ease; }
   .pause-title { font-weight:900; font-size:1.8rem; color:white; margin-bottom:10px; }
   .pause-text { color:#94a3b8; font-size:.95rem; margin-bottom:28px; }
@@ -505,8 +525,162 @@
   .confirm-btn-exit:hover { transform:translateY(-2px); box-shadow:0 0 30px rgba(239,68,68,.5); }
 
   /* CONFETTI */
-  .confetti-piece { position:fixed; width:10px; height:10px; top:-10px; z-index:10000; animation:cfall linear forwards; border-radius:2px; }
+  .confetti-piece { position:fixed; width:10px; height:10px; top:-10px; z-index:10000; animation:cfall linear forwards; border-radius:2px; pointer-events:none; }
   @keyframes cfall { to{transform:translateY(105vh) rotate(720deg)} }
+
+  /* ==========================================================================
+     RESPONSIVE / MOBILE-ADAPTIVE
+     ========================================================================== */
+
+  /* Tablets & below: single column */
+  @media (max-width: 950px) {
+    .geo-game-grid { grid-template-columns: minmax(0,1fr); min-height: 0; gap: 14px; }
+    .geo-canvas-panel, .geo-q-panel { height: auto; }
+    .geo-canvas-panel { padding: 18px; }
+    canvas#gc { max-width: 520px; max-height: none; }
+    .geo-score-card { margin-top: 14px; }
+    .tut-visual-grid { gap: 10px; }
+  }
+
+  /* Phones */
+  @media (max-width: 600px) {
+    .geo-root { padding: 8px; padding-left:max(8px, env(safe-area-inset-left)); padding-right:max(8px, env(safe-area-inset-right)); }
+    .geo-topbar { margin-bottom: 12px; gap: 8px; }
+    .geo-title { font-size: 1.35rem; }
+    .geo-top-meta { width: 100%; gap: 6px; justify-content: flex-start; }
+    .geo-badge { font-size: .75rem; padding: 6px 12px; letter-spacing: .5px; }
+    .geo-shape-tag { font-size: .72rem; padding: 6px 11px; }
+    .geo-q-type-tag { font-size: .68rem; padding: 5px 10px; }
+
+    /* Game nav: icon-only, full-width row, large tap targets */
+    .eduplay-game-nav { display: flex !important; width: 100%; gap: 8px; margin-top: 2px; }
+    .eduplay-game-nav .eduplay-nav-btn { flex: 1; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: .78rem; padding: 8px 6px; }
+    .eduplay-game-nav .eduplay-nav-btn span { font-size: .75rem; }
+
+    .geo-progress-row { margin-bottom: 12px; }
+    .geo-progress-label { font-size: .68rem; }
+    .geo-progress-count { font-size: .78rem; }
+
+    .geo-canvas-panel { padding: 12px; border-radius: 20px; }
+    .geo-canvas-header { margin-bottom: 10px; }
+    .canvas-icon { width: 38px; height: 38px; font-size: 1.1rem; }
+    canvas#gc { border-radius: 12px; max-width: min(100%, 440px); }
+
+    .geo-canvas-legend { gap: 6px 12px; margin-top: 10px; }
+    .legend-item { font-size: .7rem; gap: 5px; }
+    .ldot { width: 8px; height: 8px; }
+
+    .geo-score-card { padding: 10px 6px; gap: 6px; border-radius: 14px; margin-top: 10px; }
+    .score-val { font-size: 1.35rem; }
+    .score-lbl { font-size: .62rem; letter-spacing: .5px; }
+
+    .geo-q-panel { gap: 12px; }
+    .geo-q-card { padding: 18px 14px; border-radius: 18px; }
+    .q-meta { margin-bottom: 10px; }
+    .q-text { font-size: 1.05rem; margin-bottom: 16px; line-height: 1.5; }
+
+    .ans-grid { gap: 9px; }
+    .ans-btn { padding: 12px 12px; min-height: 56px; font-size: .95rem; gap: 10px; border-radius: 12px; }
+    .ans-btn:hover:not(:disabled) { transform: none; }
+    .ans-letter { width: 30px; height: 30px; }
+    .geo-fb { padding: 12px 14px; font-size: .88rem; margin-top: 12px; }
+
+    /* Sticky "Next" so it's always reachable with a thumb */
+    .geo-next {
+      position: sticky;
+      bottom: calc(8px + env(safe-area-inset-bottom));
+      z-index: 20;
+      padding: 15px 20px;
+      min-height: 54px;
+      box-shadow: 0 8px 26px rgba(0,0,0,.55), 0 0 18px rgba(99,102,241,.35);
+    }
+
+    /* Field guide becomes a full-screen sheet */
+    .tut-overlay { padding: 0; align-items: stretch; }
+    .tut-card {
+      max-width: none; max-height: none; height: 100%; height: 100dvh;
+      border-radius: 0; border-width: 0;
+      padding: 18px 14px calc(14px + env(safe-area-inset-bottom));
+    }
+    .tut-header { margin-bottom: 10px; padding-bottom: 8px; }
+    .tut-tag-badge { font-size: .8rem; padding: 5px 11px; gap: 6px; }
+    .tut-tab-btn { font-size: .85rem; padding: 7px 12px; }
+    .tut-topic-tabs { margin-bottom: 10px; }
+    .tut-topic-indicator { font-size: .85rem; letter-spacing: 1px; }
+    .tut-slide-num { font-size: .75rem; }
+    .tut-card-hero { gap: 10px; }
+    .tut-hero-icon { width: 40px; height: 40px; font-size: 1.5rem; }
+    .tut-card-title { font-size: 1.15rem; }
+    .tut-card-desc { font-size: .92rem; margin-bottom: 12px; }
+    .tut-card-hero p { font-size: .85rem !important; }
+    .tut-visual-grid { grid-template-columns: 1fr; gap: 10px; }
+    .tut-mini-box { padding: 12px 13px; }
+    .tut-mini-box h5 { font-size: 1rem; }
+    .tut-mini-box p { font-size: .92rem; }
+    .tut-formula-pill { padding: 11px 13px; }
+    .tut-formula-title { font-size: .8rem; }
+    .tut-formula-eq { font-size: 1.1rem; }
+    .tut-formula-sub { font-size: .92rem; }
+    .tut-example-card { font-size: .95rem; padding: 11px 13px; }
+    .tut-callout { font-size: .92rem; padding: 10px 12px; align-items: flex-start; }
+    .tut-formula-row { flex-direction: column; align-items: flex-start; }
+    .tut-formula-row .tut-fr-eq { text-align: left; }
+    .tut-actions { position: sticky; bottom: 0; background: #0f1a34; padding-top: 10px; gap: 8px; }
+    .tut-skip-btn { font-size: .8rem; padding: 10px 12px; min-height: 44px; }
+    .tut-prev, .tut-next, .tut-start-btn { font-size: .9rem; padding: 10px 16px; min-height: 44px; }
+    .tut-actions-right { gap: 8px; }
+
+    /* Dialogs */
+    .complete-overlay, .pause-overlay, .confirm-overlay { padding: 14px; }
+    .complete-card { padding: 28px 20px; border-radius: 24px; }
+    .complete-icon { font-size: 3.5rem; }
+    .complete-title { font-size: 1.5rem; }
+    .complete-sub { font-size: .88rem; margin-bottom: 20px; }
+    .complete-stats { gap: 8px; margin-bottom: 20px; }
+    .complete-stat { padding: 10px 12px; min-width: 80px; }
+    .complete-stat-val { font-size: 1.2rem; }
+    .pause-card, .confirm-card { padding: 28px 20px; border-radius: 24px; }
+    .pause-title { font-size: 1.5rem; }
+    .confirm-actions { flex-direction: column-reverse; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 360px) {
+    .geo-badge { padding: 5px 9px; font-size: .7rem; }
+    .eduplay-game-nav .eduplay-nav-btn span { display: none; }
+    .q-text { font-size: .98rem; }
+    .ans-btn { font-size: .9rem; }
+  }
+
+  /* Landscape phones: side-by-side with compact chrome */
+  @media (max-height: 520px) and (orientation: landscape) {
+    .geo-game-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; min-height: 0; }
+    .geo-topbar { margin-bottom: 8px; }
+    .geo-title { font-size: 1.2rem; }
+    .geo-progress-row { margin-bottom: 8px; }
+    .geo-canvas-panel { padding: 10px; }
+    .geo-canvas-header { margin-bottom: 6px; }
+    canvas#gc { max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px); width: auto; max-width: 100%; }
+    .geo-canvas-legend { display: none; }
+    .geo-score-card { padding: 6px; margin-top: 8px; }
+    .score-val { font-size: 1.1rem; }
+    .geo-q-card { padding: 14px; }
+    .q-text { font-size: .98rem; margin-bottom: 10px; }
+    .ans-btn { min-height: 44px; padding: 8px 12px; }
+    .tut-overlay { padding: 8px; }
+    .tut-card { height: auto; max-height: 100dvh; border-radius: 18px; padding: 12px 16px; }
+  }
+
+  /* Touch devices: hide keyboard-shortcut hints, remove hover shifts */
+  @media (hover: none) and (pointer: coarse) {
+    .ans-hint { display: none; }
+    .ans-btn:hover:not(:disabled) { transform: none; background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #cbd5e1; }
+    .ans-btn:active:not(:disabled) { background: rgba(99,102,241,.2); border-color: rgba(99,102,241,.55); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .geo-root::after, .geo-timer.warning, .geo-timer.danger { animation: none; }
+  }
 </style>
 
 <div class="geo-root">
@@ -599,7 +773,7 @@
       <div class="tut-tag-badge" id="tutTagText">
         <i class="fas fa-shapes"></i> Field Guide &amp; Instructions
       </div>
-      <button type="button" class="tut-close-btn" onclick="closeTutorial()" title="Close Guide">&times;</button>
+      <button type="button" class="tut-close-btn" onclick="closeTutorial()" title="Close Guide" aria-label="Close guide">&times;</button>
     </div>
 
     <!-- Topic Selector Tabs -->
@@ -636,7 +810,7 @@
 
       <div class="tut-actions">
         <button type="button" class="tut-skip-btn" id="tutSkipBtn" onclick="closeTutorial()">Skip to Challenge ⏩</button>
-        <div style="display:flex; gap:10px; margin-left:auto;">
+        <div class="tut-actions-right">
           <button type="button" class="tut-prev" id="tutPrevBtn" style="display:none;" onclick="tutPrev()">← Back</button>
           <button type="button" class="tut-next" id="tutNextBtn" onclick="tutNext()">Continue →</button>
           <button type="button" class="tut-start-btn" id="tutStartBtn" onclick="closeTutorial()" style="display:none;">Let's Play! 🚀</button>
@@ -686,6 +860,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 (function(){
+  // Ensure a mobile viewport exists (in case layouts.app doesn't define one)
+  if(!document.querySelector('meta[name="viewport"]')){
+    const m=document.createElement('meta');
+    m.name='viewport';
+    m.content='width=device-width, initial-scale=1, viewport-fit=cover';
+    document.head.appendChild(m);
+  }
+
   const GAME_ID = {{ $game->id ?? 0 }};
   const CSRF    = '{{ csrf_token() }}';
   const USER_ID = '{{ auth()->id() ?? 0 }}';
@@ -710,6 +892,13 @@
   const canvas = document.getElementById('gc');
   const ctx    = canvas.getContext('2d');
   const GRID   = 10, CELL = canvas.width / GRID;
+
+  /* Font scale: canvas is drawn at 520px then CSS-scaled down on phones,
+     so labels are enlarged to stay readable. */
+  function fontScale(){
+    const w = canvas.clientWidth || canvas.width;
+    return Math.max(1, Math.min(1.7, 520 / Math.max(w, 1) * 0.78));
+  }
 
   /* ═══════════════════════════════════════════════════
      CANVAS UTILITIES
@@ -753,7 +942,7 @@
   }
 
   function drawLabel(text,x,y,color,ox=8,oy=0){
-    ctx.save();ctx.shadowColor='#000';ctx.shadowBlur=8;ctx.font='bold 15px "Outfit",sans-serif';ctx.fillStyle=color;
+    ctx.save();ctx.shadowColor='#000';ctx.shadowBlur=8;ctx.font=`bold ${Math.round(15*fontScale())}px "Outfit",sans-serif`;ctx.fillStyle=color;
     ctx.fillText(text,gx(x)+ox,gy(y)+oy);ctx.restore();
   }
 
@@ -789,7 +978,7 @@
     // Label (kept optional/blank for questions where naming the point IS the answer)
     if(label){
       ctx.save();
-      ctx.font='bold 14px "Outfit",sans-serif';ctx.fillStyle=color;
+      ctx.font=`bold ${Math.round(14*fontScale())}px "Outfit",sans-serif`;ctx.fillStyle=color;
       ctx.shadowColor='#000';ctx.shadowBlur=6;
       ctx.fillText(label,gx(px)+labelOx,gy(py)+labelOy);
       ctx.restore();
@@ -798,7 +987,7 @@
 
   function drawVertLabel(text,gxv,gyv,ox,oy){
     ctx.save();
-    ctx.font='bold 16px "Outfit",sans-serif';ctx.fillStyle='white';
+    ctx.font=`bold ${Math.round(16*fontScale())}px "Outfit",sans-serif`;ctx.fillStyle='white';
     ctx.shadowColor='#000';ctx.shadowBlur=6;
     ctx.fillText(text,gx(gxv)+ox,gy(gyv)+oy);
     ctx.restore();
@@ -1223,7 +1412,7 @@
           <div class="tut-card-hero">
             <div class="tut-hero-icon" style="color:#a78bfa;">🎯</div>
             <div>
-              <h3 class="tut-card-title">The 3 Question Missions &amp; Hotkeys</h3>
+              <h3 class="tut-card-title">The 3 Question Missions &amp; Controls</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Each level tests your knowledge with 3 different question types.</p>
             </div>
           </div>
@@ -1241,8 +1430,8 @@
               <p>Test your understanding of angle sums, polygon properties, theorems, and famous mathematical discoveries.</p>
             </div>
             <div class="tut-mini-box" style="border-color:rgba(56,189,248,0.3);">
-              <h5 style="color:#38bdf8;">⌨️ Keyboard Shortcuts</h5>
-              <p>Press keys <b>[1]</b>, <b>[2]</b>, <b>[3]</b>, <b>[4]</b> or <b>[A]</b>–<b>[D]</b> to answer! Press <b>[Enter]</b> to advance.</p>
+              <h5 style="color:#38bdf8;">👆 Controls</h5>
+              <p>Tap an answer to choose it, then tap <b>Next</b>. On a keyboard: <b>[1]</b>–<b>[4]</b> or <b>[A]</b>–<b>[D]</b> to answer, <b>[Enter]</b> to advance.</p>
             </div>
           </div>
         `
@@ -1447,7 +1636,7 @@
               <h5 style="color:#f472b6;">Rhombus</h5>
               <p>Parallelogram with <b>all 4 sides equal</b>. Diagonals intersect at perpendicular right angles (90°)!</p>
             </div>
-            <div class="tut-mini-box" style="grid-column: span 2;">
+            <div class="tut-mini-box" style="grid-column: 1 / -1;">
               <h5 style="color:#fbbf24;">Square</h5>
               <p>The ultimate shape: both a Rectangle AND a Rhombus! (4 equal sides + 4 right angles).</p>
             </div>
@@ -1519,17 +1708,17 @@
             </div>
           </div>
           <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px; font-size:1.0rem;">
-            <div style="background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <div class="tut-formula-row" style="background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3);">
               <div><b style="color:#34d399;">🔺 Triangle</b><br><small style="color:#94a3b8;">Angles = 180°</small></div>
-              <div style="font-family:var(--font-mono, monospace); font-weight:800; color:#ffffff; text-align:right;">Area = ½ × b × h<br><small style="color:#94a3b8;">P = a + b + c</small></div>
+              <div class="tut-fr-eq">Area = ½ × b × h<br><small style="color:#94a3b8;">P = a + b + c</small></div>
             </div>
-            <div style="background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.3); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <div class="tut-formula-row" style="background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.3);">
               <div><b style="color:#60a5fa;">◈ Parallelogram</b><br><small style="color:#94a3b8;">Angles = 360°</small></div>
-              <div style="font-family:var(--font-mono, monospace); font-weight:800; color:#ffffff; text-align:right;">Area = b × h<br><small style="color:#94a3b8;">P = 2(a + b)</small></div>
+              <div class="tut-fr-eq">Area = b × h<br><small style="color:#94a3b8;">P = 2(a + b)</small></div>
             </div>
-            <div style="background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <div class="tut-formula-row" style="background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3);">
               <div><b style="color:#fbbf24;">🏔️ Trapezoid</b><br><small style="color:#94a3b8;">Angles = 360°</small></div>
-              <div style="font-family:var(--font-mono, monospace); font-weight:800; color:#ffffff; text-align:right;">Area = ½(b₁ + b₂)h<br><small style="color:#94a3b8;">Midsegment = ½(b₁ + b₂)</small></div>
+              <div class="tut-fr-eq">Area = ½(b₁ + b₂)h<br><small style="color:#94a3b8;">Midsegment = ½(b₁ + b₂)</small></div>
             </div>
           </div>
         `
@@ -1768,6 +1957,13 @@
 
   };
 
+  /* Auto-pause when the tab/app goes to background on mobile */
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden && !S.paused && S.gameStarted && S.timerStarted){
+      window.togglePause();
+    }
+  });
+
   /* ═══════════════════════════════════════════════════
      EXIT CONFIRMATION
      Shown whenever the player tries to leave the game
@@ -1822,7 +2018,11 @@
 
   function updateTopicTabsUI(){
     document.querySelectorAll('.tut-tab-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.id === 'tab-' + S.currentTopic);
+      const active = btn.id === 'tab-' + S.currentTopic;
+      btn.classList.toggle('active', active);
+      if(active && btn.scrollIntoView){
+        try{ btn.scrollIntoView({inline:'center', block:'nearest'}); }catch(e){}
+      }
     });
   }
 
@@ -1848,6 +2048,8 @@
 
     // Render HTML content of the slide
     document.getElementById('tutContentArea').innerHTML = sl.html;
+    const body = document.querySelector('.tut-slide-body');
+    if(body) body.scrollTop = 0;
 
     // Render dots
     let dots = '';
@@ -1895,6 +2097,25 @@
     }
   };
 
+  /* Swipe left/right to navigate guide slides on touch screens */
+  (function(){
+    const el = document.getElementById('tutOverlay');
+    let sx = 0, sy = 0;
+    el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+    el.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5){
+        if(dx < 0){
+          const slides = TUTORIALS[S.currentTopic] || [];
+          if(S.tutIdx < slides.length - 1) tutNext();
+        } else {
+          tutPrev();
+        }
+      }
+    }, {passive:true});
+  })();
+
   /* ═══════════════════════════════════════════════════
      QUESTIONS
   ═══════════════════════════════════════════════════ */
@@ -1934,11 +2155,20 @@
     const opts=[...q.opts]; shuffle(opts);
     opts.forEach((opt,i)=>{
       const btn=document.createElement('button');
+      btn.type='button';
       btn.className='ans-btn';
-      btn.innerHTML=`<span class="ans-letter">${letters[i]}</span><span>${opt}</span><span style="margin-left:auto; font-size:0.95rem; color:#64748b; font-weight:700;">[${i+1}]</span>`;
+      btn.innerHTML=`<span class="ans-letter">${letters[i]}</span><span>${opt}</span><span class="ans-hint">[${i+1}]</span>`;
       btn.onclick=()=>checkAns(opt,btn,q.correct);
       div.appendChild(btn);
     });
+
+    // On phones, bring the new question into view after a canvas/answers change
+    if(S.qi > 0 && window.innerWidth <= 950){
+      const qp = document.querySelector('.geo-canvas-panel');
+      if(qp && qp.scrollIntoView){
+        try{ qp.scrollIntoView({behavior:'smooth', block:'start'}); }catch(e){}
+      }
+    }
   }
 
   function checkAns(selected,btn,correct){
@@ -2065,6 +2295,23 @@
   }
 
   /* ═══════════════════════════════════════════════════
+     RESIZE / ROTATE: redraw canvas so label sizes stay readable
+  ═══════════════════════════════════════════════════ */
+  let resizeTimer = null;
+  function redrawCurrent(){
+    if(!S.questions.length || !S.questions[S.qi]) return;
+    runCanvasFn(S.questions[S.qi].canvasFn, getShape(S.lvl));
+  }
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(redrawCurrent, 120);
+  });
+  window.addEventListener('orientationchange', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(redrawCurrent, 250);
+  });
+
+  /* ═══════════════════════════════════════════════════
      KEYBOARD CONTROLS & SHORTCUTS
   ═══════════════════════════════════════════════════ */
   document.addEventListener('keydown', function(e){
@@ -2095,6 +2342,7 @@
     if(e.key === 'Enter' || e.key === ' '){
       const nb = document.getElementById('nextBtn');
       if(nb && nb.classList.contains('show')){
+        e.preventDefault();
         nb.click();
       }
     }

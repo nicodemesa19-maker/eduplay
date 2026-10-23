@@ -2,14 +2,32 @@
 @section('hide-nav', true)
 @section('content')
 {{-- Bootstrap CSS & Icons already loaded by layouts.app --}}
+{{-- NOTE: layouts.app <head> must contain:
+     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> --}}
 <style>
+        :root {
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-left: env(safe-area-inset-left, 0px);
+            --safe-right: env(safe-area-inset-right, 0px);
+        }
+
+        html { -webkit-text-size-adjust: 100%; }
+
         body {
             background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            background-attachment: fixed;
             min-height: 100vh;
+            min-height: 100dvh;
             position: relative;
             overflow-x: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
+
+        /* Faster taps, no double-tap zoom on interactive game elements */
+        button, a, .canister, .rm-trial-can, .rm-fc-dot { touch-action: manipulation; }
+        .canister, .rm-trial-can { -webkit-user-select: none; user-select: none; }
 
         /* ANIMATED STARS */
         .stars {
@@ -39,6 +57,8 @@
             z-index: 1;
             margin: 2rem auto;
             max-width: 1000px;
+            padding-left: max(12px, var(--safe-left));
+            padding-right: max(12px, var(--safe-right));
         }
 
         .game-card {
@@ -57,6 +77,7 @@
         .title-section {
             background: linear-gradient(135deg, rgba(100, 181, 246, 0.2) 0%, rgba(66, 165, 245, 0.1) 100%);
             border-bottom: 2px solid #4a5a8a;
+            border-radius: 1.3rem 1.3rem 0 0;
         }
 
         .title-text {
@@ -71,6 +92,7 @@
             border-radius: 0.75rem;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            white-space: nowrap;
         }
 
         .btn-new-round {
@@ -167,28 +189,12 @@
         }
 
         @keyframes rocketLaunch {
-            0% {
-                transform: translateY(0) translateX(0) rotate(-3deg) scale(1);
-                opacity: 1;
-            }
-            15% {
-                transform: translateY(-50px) translateX(0px) rotate(0deg) scale(1.1);
-            }
-            30% {
-                transform: translateY(-150px) translateX(100px) rotate(20deg) scale(1.15);
-            }
-            50% {
-                transform: translateY(-400px) translateX(250px) rotate(35deg) scale(1.1);
-                opacity: 1;
-            }
-            75% {
-                transform: translateY(-700px) translateX(450px) rotate(40deg) scale(0.6);
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-1000px) translateX(600px) rotate(45deg) scale(0.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) translateX(0) rotate(-3deg) scale(1); opacity: 1; }
+            15% { transform: translateY(-50px) translateX(0px) rotate(0deg) scale(1.1); }
+            30% { transform: translateY(-150px) translateX(100px) rotate(20deg) scale(1.15); }
+            50% { transform: translateY(-400px) translateX(250px) rotate(35deg) scale(1.1); opacity: 1; }
+            75% { transform: translateY(-700px) translateX(450px) rotate(40deg) scale(0.6); opacity: 0.6; }
+            100% { transform: translateY(-1000px) translateX(600px) rotate(45deg) scale(0.2); opacity: 0; }
         }
 
         .rocket-container.returning {
@@ -196,24 +202,11 @@
         }
 
         @keyframes rocketReturn {
-            0% {
-                transform: translateY(-1000px) translateX(-600px) rotate(-135deg) scale(0.2);
-                opacity: 0;
-            }
-            30% {
-                opacity: 1;
-                transform: translateY(-400px) translateX(-250px) rotate(-100deg) scale(0.6);
-            }
-            60% {
-                transform: translateY(-100px) translateX(-80px) rotate(-45deg) scale(0.9);
-            }
-            85% {
-                transform: translateY(-20px) translateX(-10px) rotate(-10deg) scale(1.05);
-            }
-            100% {
-                transform: translateY(0) translateX(0) rotate(-3deg) scale(1);
-                opacity: 1;
-            }
+            0% { transform: translateY(-1000px) translateX(-600px) rotate(-135deg) scale(0.2); opacity: 0; }
+            30% { opacity: 1; transform: translateY(-400px) translateX(-250px) rotate(-100deg) scale(0.6); }
+            60% { transform: translateY(-100px) translateX(-80px) rotate(-45deg) scale(0.9); }
+            85% { transform: translateY(-20px) translateX(-10px) rotate(-10deg) scale(1.05); }
+            100% { transform: translateY(0) translateX(0) rotate(-3deg) scale(1); opacity: 1; }
         }
 
         .rocket-svg {
@@ -293,6 +286,7 @@
             font-size: 1.3rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 2;
+            white-space: nowrap;
         }
 
         .gauge-label {
@@ -335,9 +329,7 @@
             transition: left 0.5s ease;
         }
 
-        .canister:hover:not(.used)::before {
-            left: 100%;
-        }
+        .canister:hover:not(.used)::before { left: 100%; }
 
         .canister:hover:not(.used) {
             transform: translateY(-3px);
@@ -358,10 +350,7 @@
             50% { box-shadow: 0 6px 20px rgba(76, 175, 80, 0.8); }
         }
 
-        .canister.used {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
+        .canister.used { opacity: 0.3; cursor: not-allowed; }
 
         /* MESSAGE AREA */
         .message-area {
@@ -393,9 +382,7 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
-        #gameModal .modal-dialog {
-            max-width: 480px;
-        }
+        #gameModal .modal-dialog { max-width: 480px; }
 
         .space-modal-content {
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.98) 50%, rgba(15, 23, 42, 0.96) 100%);
@@ -510,9 +497,7 @@
             color: #ffffff !important;
         }
 
-        .modal-btn-primary:active {
-            transform: scale(0.98);
-        }
+        .modal-btn-primary:active { transform: scale(0.98); }
 
         .modal-btn-secondary {
             background: rgba(255, 255, 255, 0.08) !important;
@@ -565,6 +550,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            padding: 16px;
         }
         .pause-overlay.active { display: flex; }
         .pause-card {
@@ -573,6 +559,8 @@
             border-radius: 1.5rem;
             padding: 2.5rem 3rem;
             text-align: center;
+            width: 100%;
+            max-width: 460px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(100,200,255,0.15);
         }
         .pause-card h2 { color: #64b5f6; font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; text-shadow: 0 0 20px rgba(100,181,246,0.5); }
@@ -597,15 +585,16 @@
         @keyframes rmPopIn{from{transform:scale(0)}to{transform:scale(1)}}
         #rmTutOverlay{display:none;position:fixed;inset:0;background:rgba(10,20,50,.92);backdrop-filter:blur(10px);z-index:3000;align-items:center;justify-content:center;padding:16px;}
         #rmTutOverlay.show{display:flex;animation:rmFadeUp .4s ease;}
-        
+
 /* ============================================================
-   ROCKET MATH FLASH CARD SYSTEM — ALWAYS ON TOP, ZERO SCROLLBARS
+   ROCKET MATH FLASH CARD SYSTEM — ALWAYS ON TOP
    ============================================================ */
 #rmTutOverlay.fc-overlay {
     position: fixed !important;
     inset: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
+    height: 100dvh !important;
     background: rgba(2, 6, 20, 0.94) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
@@ -615,11 +604,11 @@
     justify-content: center !important;
     padding: 16px !important;
     animation: rmFadeUp 0.25s cubic-bezier(.34,1.56,.64,1);
-    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
 }
-#rmTutOverlay.fc-overlay.show {
-    display: flex !important;
-}
+#rmTutOverlay.fc-overlay.show { display: flex !important; }
 
 .rm-fc-deck {
     position: relative;
@@ -674,6 +663,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     margin-bottom: 12px;
 }
 .rm-fc-badge {
@@ -704,6 +694,7 @@
     align-items: center;
     gap: 4px;
     transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 .rm-fc-quick-action-btn:hover {
     background: rgba(100, 181, 246, 0.35);
@@ -732,9 +723,7 @@
     min-height: 245px;
     animation: rmFcSlideIn 0.25s cubic-bezier(.34,1.56,.64,1);
 }
-.rm-fc-slide.hidden {
-    display: none !important;
-}
+.rm-fc-slide.hidden { display: none !important; }
 @keyframes rmFcSlideIn {
     from { opacity: 0; transform: scale(0.96) translateY(6px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
@@ -822,15 +811,13 @@
     font-weight: 800;
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 .rm-fc-nav-btn:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.14);
     transform: translateY(-1px);
 }
-.rm-fc-nav-btn:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-}
+.rm-fc-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .rm-fc-nav-btn.primary {
     background: linear-gradient(135deg, #0284c7 0%, #0891b2 100%);
     border: none;
@@ -841,11 +828,7 @@
     transform: translateY(-2px);
 }
 
-.rm-fc-dots {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
+.rm-fc-dots { display: flex; align-items: center; gap: 6px; }
 .rm-fc-dot {
     width: 8px;
     height: 8px;
@@ -929,7 +912,6 @@
             cursor: default;
         }
 
-
         /* demo gauge */
         .demo-gauge-wrap{display:flex;gap:12px;align-items:center;justify-content:center;margin:10px 0;}
         .demo-gauge{width:28px;height:70px;background:rgba(0,0,0,.3);border-radius:8px;border:2px solid #4a5a8a;position:relative;overflow:hidden;}
@@ -955,9 +937,9 @@
         .rm-tut-skip:hover{color:rgba(100,181,246,.8);}
 
         /* Trial overlay */
-        #rmTrialOverlay{display:none;position:fixed;inset:0;background:rgba(10,20,50,.92);backdrop-filter:blur(10px);z-index:3000;align-items:center;justify-content:center;padding:16px;}
+        #rmTrialOverlay{display:none;position:fixed;inset:0;background:rgba(10,20,50,.92);backdrop-filter:blur(10px);z-index:3000;align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
         #rmTrialOverlay.show{display:flex;animation:rmFadeUp .4s ease;}
-        .rm-trial-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2.5px solid rgba(100,181,246,.4);border-radius:24px;padding:34px 34px 28px;width:100%;max-width:720px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+        .rm-trial-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2.5px solid rgba(100,181,246,.4);border-radius:24px;padding:34px 34px 28px;width:100%;max-width:720px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);margin:auto;}
         .rm-trial-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(100,181,246,.14);border:1.5px solid rgba(100,181,246,.35);border-radius:99px;padding:5px 16px;font-size:11px;font-weight:800;color:#64b5f6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
         .rm-trial-title{font-size:1.2rem;font-weight:900;color:#64b5f6;margin-bottom:3px;}
         .rm-trial-sub{font-size:12.5px;color:rgba(200,220,255,.5);margin-bottom:14px;line-height:1.5;}
@@ -976,13 +958,13 @@
         .rm-trial-can.used{opacity:.3;cursor:not-allowed;}
         .rm-trial-mission{background:rgba(100,181,246,.1);border:1px solid rgba(100,181,246,.22);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px;color:#e8f0ff;line-height:1.5;}
         .rm-trial-status{font-size:13px;color:rgba(200,220,255,.6);margin-bottom:10px;min-height:20px;}
-        .rm-trial-skip{font-size:11px;color:rgba(100,181,246,.4);cursor:pointer;background:none;border:none;text-decoration:underline;text-underline-offset:3px;transition:color .15s;}
+        .rm-trial-skip{font-size:11px;color:rgba(100,181,246,.4);cursor:pointer;background:none;border:none;text-decoration:underline;text-underline-offset:3px;transition:color .15s;padding:8px;}
         .rm-trial-skip:hover{color:rgba(100,181,246,.75);}
 
         /* Ready modal */
-        #rmReadyOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:3100;align-items:center;justify-content:center;padding:16px;}
+        #rmReadyOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:3100;align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
         #rmReadyOverlay.show{display:flex;animation:rmFadeUp .3s ease;}
-        .rm-ready-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2.5px solid rgba(100,181,246,.5);border-radius:24px;padding:34px 28px;text-align:center;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:rmPopIn .45s cubic-bezier(.34,1.56,.64,1);color:#e8f0ff;}
+        .rm-ready-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2.5px solid rgba(100,181,246,.5);border-radius:24px;padding:34px 28px;text-align:center;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:rmPopIn .45s cubic-bezier(.34,1.56,.64,1);color:#e8f0ff;margin:auto;}
         .rm-ready-ico{font-size:56px;line-height:1;margin-bottom:8px;animation:rmFlt 3s ease-in-out infinite;}
         .rm-ready-stars{font-size:24px;letter-spacing:6px;margin-bottom:8px;}
         .rm-ready-title{font-size:1.4rem;font-weight:900;color:#64b5f6;margin-bottom:4px;text-shadow:0 0 16px rgba(100,181,246,.4);}
@@ -991,6 +973,186 @@
         .rm-ready-start:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(56,189,248,.6);}
         .rm-ready-practice{background:rgba(100,181,246,.1);color:#64b5f6;border:1.5px solid rgba(100,181,246,.3);padding:10px 22px;border-radius:11px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;display:block;width:100%;}
         .rm-ready-practice:hover{background:rgba(100,181,246,.18);color:#90caf9;}
+
+        /* =====================================================================
+           ADAPTIVE / MOBILE-FIRST OVERRIDES
+           Breakpoints: ≤991 tablet · ≤767 phone · ≤575 small phone · landscape
+           ===================================================================== */
+
+        /* Touch devices: remove sticky hover lifts, give bigger tap feedback */
+        @media (hover: none) {
+            .canister:hover:not(.used),
+            .btn-new-round:hover,
+            .modal-btn-primary:hover,
+            .modal-btn-secondary:hover,
+            .btn-resume:hover,
+            .btn-hint-coin:hover:not(:disabled),
+            .rm-fc-nav-btn:hover:not(:disabled),
+            .rm-trial-can:hover:not(.used),
+            .rm-ready-start:hover { transform: none; }
+            .canister:active:not(.used),
+            .rm-trial-can:active:not(.used) { transform: scale(0.95); }
+            .btn-hint-coin:active, .rm-fc-nav-btn:active, .btn-resume:active { transform: scale(0.96); }
+        }
+
+        /* ---------- Tablet (≤ 991px) ---------- */
+        @media (max-width: 991.98px) {
+            .game-container { margin: 1rem auto; }
+            .rocket-animation-container { width: 190px; height: 190px; }
+            .gauge-box { height: 160px; }
+        }
+
+        /* ---------- Phone (≤ 767px) ---------- */
+        @media (max-width: 767.98px) {
+            body { background-attachment: scroll; }
+
+            .game-container {
+                margin: 0 auto;
+                padding-top: calc(8px + var(--safe-top));
+                padding-bottom: calc(12px + var(--safe-bottom));
+            }
+            .game-card {
+                border-width: 2px;
+                border-radius: 1.1rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            }
+            .title-section { padding: 0.75rem !important; border-radius: 1rem 1rem 0 0; }
+            .game-card .p-4 { padding: 0.75rem !important; }
+            .game-card .p-4.pt-0 { padding-top: 0 !important; }
+            .title-text { font-size: 1.35rem; text-align: center; }
+
+            /* Header: title on top, badges in a compact wrapping row */
+            .title-section .col-md-7 { justify-content: center !important; gap: 6px !important; }
+            .score-badge { padding: 0.3rem 0.6rem; font-size: 0.8rem; border-radius: 0.6rem; }
+
+            /* Nav buttons: horizontal row of icon-only buttons */
+            .title-section .eduplay-game-nav {
+                display: flex;
+                width: 100%;
+                gap: 6px;
+                justify-content: center;
+                margin: 4px 0 0 !important;
+            }
+            .title-section .eduplay-game-nav .eduplay-nav-btn {
+                flex: 1 1 0;
+                justify-content: center;
+                padding: 8px 6px;
+                min-height: 40px;
+            }
+            .title-section .eduplay-game-nav .eduplay-nav-btn span { display: none; }
+
+            /* Mission briefing */
+            .problem-section { padding: 0.85rem !important; border-width: 1.5px; }
+            .problem-label { font-size: 0.8rem; margin-bottom: 0.4rem !important; }
+            .problem-text { font-size: 1rem; line-height: 1.55; margin-bottom: 0.6rem !important; }
+            .problem-highlight { padding: 0.1rem 0.35rem; }
+            .target-hint .d-flex { justify-content: center !important; }
+            .btn-hint-coin { width: 100%; justify-content: center; font-size: 0.92rem; min-height: 44px; }
+
+            /* Rocket + gauge stack vertically & centre */
+            .panel-card { border-width: 1.5px; }
+            .panel-card.p-4 { padding: 0.75rem !important; }
+            .panel-card .row.align-items-center { flex-direction: column; text-align: center; margin-bottom: 0.5rem !important; }
+            .panel-card .row.align-items-center > .col-auto,
+            .panel-card .row.align-items-center > .col { width: 100%; flex: 0 0 100%; max-width: 100%; }
+            .rocket-animation-container { width: 150px; height: 150px; margin: 0 auto 0.5rem; }
+            .gauge-box { height: 90px; border-radius: 0.75rem; }
+            .gauge-text { font-size: 1.05rem; }
+            .gauge-label { font-size: 0.85rem; }
+            .warning-box { font-size: 0.85rem; padding: 0.5rem !important; }
+
+            /* Canisters: 4 per row is too tight, keep 2 per row but large tap targets */
+            #canisterGrid { --bs-gutter-x: 0.5rem; --bs-gutter-y: 0.5rem; }
+            .canister {
+                padding: 0.9rem 0.4rem;
+                font-size: 1.15rem;
+                min-height: 56px;
+                border-width: 2px;
+                border-radius: 0.85rem;
+            }
+
+            .message-area { font-size: 0.9rem; padding: 0.6rem !important; border-radius: 0.8rem; }
+
+            /* Results modal: bottom-sheet style */
+            #gameModal .modal-dialog { margin: 0.75rem; max-width: none; }
+            .space-modal-content { border-radius: 1.2rem !important; }
+            .modal-icon-badge { width: 60px; height: 60px; }
+            #modalEmoji { font-size: 2rem; }
+            #modalTitleText { font-size: 1.35rem; }
+            #modalDesc { font-size: 0.95rem; }
+            #gameModal .modal-footer { flex-direction: column; align-items: stretch !important; }
+            #gameModal .modal-footer > * { width: 100%; justify-content: center; margin: 0; }
+            .modal-btn-primary { padding: 0.8rem 1rem; font-size: 1rem; min-height: 48px; }
+
+            /* Pause card */
+            .pause-card { padding: 1.5rem 1.25rem; border-width: 2px; }
+            .pause-card h2 { font-size: 1.6rem; }
+            .pause-card kbd { display: none; }
+            .pause-card p { font-size: 0.85rem; }
+            .btn-resume { width: 100%; min-height: 48px; }
+
+            /* Flash-card tutorial deck */
+            #rmTutOverlay.fc-overlay { padding: 10px !important; align-items: flex-start !important; padding-top: calc(10px + var(--safe-top)) !important; padding-bottom: calc(10px + var(--safe-bottom)) !important; }
+            .rm-fc-deck-stack-1, .rm-fc-deck-stack-2 { display: none; }
+            .rm-fc-card { padding: 20px 14px 16px; border-radius: 20px; }
+            .rm-fc-top { flex-wrap: wrap; justify-content: center; }
+            .rm-fc-badge { font-size: 0.68rem; letter-spacing: 0.4px; padding: 4px 10px; text-align: center; }
+            .rm-fc-slide { min-height: 0; }
+            .rm-fc-title { font-size: 1.15rem !important; }
+            .rm-fc-desc { font-size: 0.84rem; }
+            .rm-fc-box { padding: 8px; }
+            .rm-fc-row-2 { gap: 8px; }
+            .rm-fc-item { padding: 8px 6px; }
+            .rm-fc-item-lbl { font-size: 0.72rem; letter-spacing: 0.4px; }
+            .rm-fc-item-sub { font-size: 0.74rem; }
+            .rm-fc-item-math { font-size: 0.95rem; }
+            .rm-fc-tip { font-size: 0.82rem; }
+            .rm-fc-footer { gap: 6px; }
+            .rm-fc-nav-btn { padding: 10px 12px; min-height: 44px; font-size: 0.8rem; }
+            .rm-fc-dot { width: 7px; height: 7px; }
+            .rm-fc-dot.active { width: 16px; }
+
+            /* Trial + ready overlays */
+            #rmTrialOverlay { align-items: flex-start; padding-top: calc(12px + var(--safe-top)); padding-bottom: calc(12px + var(--safe-bottom)); }
+            .rm-trial-box { padding: 20px 14px 16px; border-radius: 20px; }
+            .rm-trial-layout { flex-direction: column; align-items: center; gap: 10px; }
+            .rm-trial-gauge { width: 100%; height: 22px; }
+            .rm-trial-gfill { top: 0; bottom: 0; right: auto; width: 0; height: 100% !important; }
+            .rm-trial-gauge-col { width: 100%; }
+            .rm-trial-can-col { width: 100%; }
+            .rm-trial-can { min-height: 48px; }
+            .rm-ready-box { padding: 24px 18px; }
+            .rm-ready-start, .rm-ready-practice { min-height: 48px; }
+        }
+
+        /* ---------- Small phones (≤ 575px) ---------- */
+        @media (max-width: 575.98px) {
+            .title-text { font-size: 1.2rem; }
+            .score-badge { font-size: 0.74rem; padding: 0.28rem 0.5rem; }
+            .problem-text { font-size: 0.95rem; }
+            .rocket-animation-container { width: 130px; height: 130px; }
+            .canister { font-size: 1.05rem; min-height: 52px; }
+            .rm-fc-badge { font-size: 0.62rem; }
+        }
+
+        /* ---------- Landscape phones (short viewport): side-by-side layout ---------- */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .game-container { margin: 0 auto; }
+            .rocket-animation-container { width: 110px; height: 110px; }
+            .gauge-box { height: 70px; }
+            .panel-card .row.align-items-center { flex-direction: row; }
+            .panel-card .row.align-items-center > .col-auto { width: auto; flex: 0 0 auto; }
+            .panel-card .row.align-items-center > .col { flex: 1 1 0; width: auto; }
+            .canister { min-height: 44px; padding: 0.5rem 0.3rem; }
+            .rm-fc-slide { min-height: 0; }
+            .modal-icon-badge { display: none; }
+        }
+
+        /* Respect reduced-motion preferences (also saves battery on phones) */
+        @media (prefers-reduced-motion: reduce) {
+            .star, .canister.attached, .gauge-fill.overweight, .gauge-fill.success,
+            .warning-box, .modal-icon-badge, .modal-top-bar { animation: none !important; }
+        }
 </style>
 
 <!-- STARS BACKGROUND -->
@@ -1056,7 +1218,7 @@
                         <div class="panel-card p-4">
                             <div class="row align-items-center mb-3">
                                 <div class="col-auto">
-                                    {{-- === NEW: LOTTIE ROCKET ANIMATION CONTAINER === --}}
+                                    {{-- === LOTTIE ROCKET ANIMATION CONTAINER === --}}
                                     <div class="rocket-animation-container" id="rocketAnimation">
                                         {{-- The Lottie animation will be injected here by lottie-web --}}
                                     </div>
@@ -1186,7 +1348,7 @@
                 <!-- CARD 2: Load Fuel Canisters -->
                 <div id="rmFcSlide2" class="rm-fc-slide hidden">
                     <h3 class="rm-fc-title" style="color:#34d399;"><span>⛽</span> Load Fuel Canisters</h3>
-                    <p class="rm-fc-desc">Click fuel canisters on the right to attach them to the rocket. Click again to remove them!</p>
+                    <p class="rm-fc-desc">Tap fuel canisters to attach them to the rocket. Tap again to remove them!</p>
                     <div class="rm-fc-row-2 rm-fc-box">
                         <div class="rm-fc-item">
                             <div class="rm-fc-item-ico">⛽</div>
@@ -1207,7 +1369,7 @@
                 <!-- CARD 3: Watch the Fuel Gauge -->
                 <div id="rmFcSlide3" class="rm-fc-slide hidden">
                     <h3 class="rm-fc-title" style="color:#fbbf24;"><span>⚡</span> Hit Exact Fuel Level</h3>
-                    <p class="rm-fc-desc">The fuel gauge on the left must be filled to <b>exactly</b> the target amount:</p>
+                    <p class="rm-fc-desc">The fuel gauge must be filled to <b>exactly</b> the target amount:</p>
                     <div class="rm-fc-box" style="display:flex;justify-content:space-around;text-align:center;">
                         <div>
                             <div style="font-size:1.4rem;">🔵</div>
@@ -1313,7 +1475,7 @@
         <div class="rm-trial-box">
             <div class="rm-trial-badge">🎮 Practice Round</div>
             <h2 class="rm-trial-title">Trial Mission</h2>
-            <p class="rm-trial-sub">Load exactly <strong id="rmTrialTarget">5</strong> liters of fuel by clicking canisters!</p>
+            <p class="rm-trial-sub">Load exactly <strong id="rmTrialTarget">5</strong> liters of fuel by tapping canisters!</p>
             <div class="rm-trial-mission" id="rmTrialMissionText">The alien captain needs <strong>2 liters</strong> for takeoff and <strong>3 liters</strong> for landing. How much fuel in total?</div>
             <div class="rm-trial-layout">
                 <div class="rm-trial-gauge-col">
@@ -1325,7 +1487,7 @@
                     <div class="rm-trial-cans" id="rmTrialCans"></div>
                 </div>
             </div>
-            <div class="rm-trial-status" id="rmTrialStatus">Click canisters to load fuel into the gauge!</div>
+            <div class="rm-trial-status" id="rmTrialStatus">Tap canisters to load fuel into the gauge!</div>
             <button class="rm-trial-skip" onclick="rmSkipToRealGame()">Skip practice &amp; start now</button>
         </div>
     </div>
@@ -1344,11 +1506,19 @@
 
     {{-- Bootstrap JS already loaded by layouts.app --}}
 
-    {{-- === NEW: LOTTIE-WEB LIBRARY (CDN) === --}}
+    {{-- === LOTTIE-WEB LIBRARY (CDN) === --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
     <script>
         const RM_TUTORIAL_KEY = 'rm_tutorial_done';
+
+        // ===== PRACTICE ROUND CONFIG (these were referenced but never defined) =====
+        const RM_TRIAL_TARGET = 5.0;
+        const RM_TRIAL_CANS   = [1.0, 2.0, 3.0, 4.0];
+        let rmTrialAttached   = new Set();
+        let rmTrialTotal      = 0;
+        let rmTutStep         = 0;
+
         // ===== WORD PROBLEMS DATABASE =====
         const WORD_PROBLEMS = {
             easy: [
@@ -1435,7 +1605,7 @@
             currentProblem: null,
         };
 
-        // ===== === NEW: LOTTIE ROCKET ANIMATION SETUP === =====
+        // ===== LOTTIE ROCKET ANIMATION SETUP =====
         let rocketAnimation = null;
 
         function initRocketAnimation() {
@@ -1474,18 +1644,12 @@
             const skin = ROCKET_SKINS[currentSkinIdx];
             const rocketContainer = document.getElementById('rocketAnimation');
             const svgFallback = document.getElementById('rocketContainer');
-            
-            if (rocketContainer) {
-                rocketContainer.style.filter = skin.filter;
-            }
-            if (svgFallback) {
-                svgFallback.style.filter = skin.filter;
-            }
+
+            if (rocketContainer) rocketContainer.style.filter = skin.filter;
+            if (svgFallback) svgFallback.style.filter = skin.filter;
 
             const nameEl = document.getElementById('skinName');
-            if (nameEl) {
-                nameEl.textContent = skin.name;
-            }
+            if (nameEl) nameEl.textContent = skin.name;
         }
 
         function cycleRocketSkin() {
@@ -1530,6 +1694,12 @@
         };
         const togglePause = window.togglePause;
 
+        // Auto-pause when the phone locks / user switches app or tab
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && GameState.gameStarted && !GameState.isPaused && !GameState.sessionEnded) {
+                togglePause();
+            }
+        });
 
         // ===== SESSION TIMER =====
         function formatTime(secs) {
@@ -1626,7 +1796,6 @@
                 document.getElementById('mapBtn').style.display = 'none';
             }
 
-
             setTimeout(() => {
                 const gameModal = new bootstrap.Modal(document.getElementById('gameModal'));
                 gameModal.show();
@@ -1634,10 +1803,11 @@
             }, won ? 2200 : 400);
         }
 
-        // ===== INITIALIZE STARS =====
+        // ===== INITIALIZE STARS (fewer on small/low-power screens) =====
         function initStars() {
             const container = document.getElementById('starsContainer');
-            for (let i = 0; i < 100; i++) {
+            const count = window.innerWidth < 768 ? 45 : 100;
+            for (let i = 0; i < count; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
@@ -1762,7 +1932,7 @@
             GameState.canisters.forEach((val, idx) => {
                 const col = document.createElement('div');
                 col.className = 'col-6';
-                
+
                 const el = document.createElement('div');
                 el.className = 'canister';
                 if (GameState.attached.has(idx)) el.classList.add('attached');
@@ -1770,7 +1940,7 @@
                 el.textContent = val.toFixed(2);
                 el.dataset.index = idx;
                 el.addEventListener('click', () => handleCanisterClick(idx));
-                
+
                 col.appendChild(el);
                 grid.appendChild(col);
             });
@@ -1785,7 +1955,7 @@
 
             fill.classList.remove('overweight', 'success');
             const rocket = document.getElementById('rocketContainer');
-            
+
             if (GameState.success) {
                 fill.classList.add('success');
             } else if (GameState.total > GameState.target) {
@@ -1880,7 +2050,6 @@
             setMessage(`💡 Target fuel revealed: ${GameState.target.toFixed(2)} liters (-5 🪙)`);
         }
 
-
         function resetRound() {
             if (GameState.sessionEnded) return; // don't reset after session ends
             GameState.total = 0;
@@ -1896,7 +2065,7 @@
 
             renderCanisters();
             updateGauge();
-            setMessage('Click canisters to attach fuel');
+            setMessage('Tap canisters to attach fuel');
 
             // Reset the Lottie animation to the standing frame
             if (rocketAnimation) {
@@ -1966,6 +2135,11 @@
                 createLaunchEffects();
                 updateGauge();
 
+                // On phones the rocket is above the canisters — bring it into view
+                if (window.innerWidth < 768) {
+                    document.getElementById('rocketAnimation').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
                 // Check if player hit the max score cap (10)
                 if (GameState.score >= MAX_SCORE) {
                     setTimeout(() => triggerLevelComplete(), 2200);
@@ -1991,10 +2165,11 @@
         function createLaunchEffects() {
             const container = document.body;
             const rocketRect = document.querySelector('.rocket-animation-container').getBoundingClientRect();
-            
+            const particleCount = window.innerWidth < 768 ? 16 : 30; // lighter on phones
+
             // Fire trail particles
             const fireColors = ['#ff4500', '#ff6347', '#ffa500', '#ffff00', '#ff8c00'];
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
                     particle.style.position = 'fixed';
@@ -2007,30 +2182,30 @@
                     particle.style.pointerEvents = 'none';
                     particle.style.zIndex = '9999';
                     particle.style.boxShadow = '0 0 10px currentColor';
-                    
+
                     container.appendChild(particle);
-                    
+
                     let startTime = Date.now();
                     const angle = Math.PI / 2 + (Math.random() - 0.5) * Math.PI / 4;
                     const velocity = 3 + Math.random() * 3;
                     const life = 600 + Math.random() * 400;
-                    
+
                     function animate() {
                         const elapsed = Date.now() - startTime;
                         if (elapsed > life) {
                             particle.remove();
                             return;
                         }
-                        
+
                         const progress = elapsed / life;
                         const x = parseFloat(particle.style.left) + Math.cos(angle) * velocity;
                         const y = parseFloat(particle.style.top) + Math.sin(angle) * velocity;
-                        
+
                         particle.style.left = x + 'px';
                         particle.style.top = y + 'px';
                         particle.style.opacity = 1 - progress;
                         particle.style.transform = `scale(${1 - progress * 0.5})`;
-                        
+
                         requestAnimationFrame(animate);
                     }
                     animate();
@@ -2041,8 +2216,9 @@
         function createConfetti() {
             const container = document.body;
             const colors = ['#64b5f6', '#42a5f5', '#ffd866', '#ffeb3b', '#4caf50', '#8bc34a', '#ff6b6b'];
-            
-            for (let i = 0; i < 50; i++) {
+            const pieces = window.innerWidth < 768 ? 28 : 50; // lighter on phones
+
+            for (let i = 0; i < pieces; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.style.position = 'fixed';
@@ -2054,31 +2230,31 @@
                     confetti.style.pointerEvents = 'none';
                     confetti.style.zIndex = '9999';
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                    
+
                     container.appendChild(confetti);
-                    
+
                     let startTime = Date.now();
                     const rotation = Math.random() * 360;
                     const duration = 2000 + Math.random() * 1000;
                     const drift = (Math.random() - 0.5) * 100;
-                    
+
                     function animate() {
                         const elapsed = Date.now() - startTime;
                         if (elapsed > duration) {
                             confetti.remove();
                             return;
                         }
-                        
+
                         const progress = elapsed / duration;
                         const y = progress * (window.innerHeight + 20);
                         const x = parseFloat(confetti.style.left) + (drift * progress * 0.01);
                         const rotate = rotation * progress * 4;
-                        
+
                         confetti.style.top = y + 'px';
                         confetti.style.left = x + '%';
                         confetti.style.transform = `rotate(${rotate}deg)`;
                         confetti.style.opacity = 1 - progress;
-                        
+
                         requestAnimationFrame(animate);
                     }
                     animate();
@@ -2202,6 +2378,10 @@
                     nextBtn.innerHTML = '<span>Next</span> <i class="bi bi-arrow-right"></i>';
                 }
             }
+
+            // Keep the card at the top when the overlay scrolls on small screens
+            const ov = document.getElementById('rmTutOverlay');
+            if (ov) ov.scrollTop = 0;
         }
 
         function rmStepFlashCard(delta) {
@@ -2211,6 +2391,27 @@
             }
             rmGoFlashCard(rmCurrentFcCard + delta);
         }
+
+        // Swipe left/right to flip flash cards on touch screens
+        (function enableFlashCardSwipe() {
+            let startX = 0, startY = 0;
+            document.addEventListener('touchstart', (e) => {
+                const ov = document.getElementById('rmTutOverlay');
+                if (!ov || !ov.classList.contains('show')) return;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+            document.addEventListener('touchend', (e) => {
+                const ov = document.getElementById('rmTutOverlay');
+                if (!ov || !ov.classList.contains('show')) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                    if (dx < 0 && rmCurrentFcCard < RM_TOTAL_FC_CARDS) rmGoFlashCard(rmCurrentFcCard + 1);
+                    if (dx > 0 && rmCurrentFcCard > 1) rmGoFlashCard(rmCurrentFcCard - 1);
+                }
+            }, { passive: true });
+        })();
 
         function rmStartPracticeFromTut() {
             const ov = document.getElementById('rmTutOverlay');
@@ -2235,7 +2436,7 @@
             rmTrialAttached = new Set(); rmTrialTotal = 0;
             rmRenderTrialCans();
             rmUpdateTrialGauge();
-            document.getElementById('rmTrialStatus').textContent = 'Click canisters to load fuel into the gauge!';
+            document.getElementById('rmTrialStatus').textContent = 'Tap canisters to load fuel into the gauge!';
             document.getElementById('rmTrialOverlay').classList.add('show');
         }
 
@@ -2280,7 +2481,14 @@
             const totalEl = document.getElementById('rmTrialTotal');
             totalEl.textContent = rmTrialTotal.toFixed(1);
             const pct = Math.min(100, (rmTrialTotal / RM_TRIAL_TARGET) * 100);
-            fill.style.height = pct + '%';
+            // Vertical gauge on desktop/tablet, horizontal bar on phones (see CSS)
+            if (window.innerWidth < 768) {
+                fill.style.width = pct + '%';
+                fill.style.height = '100%';
+            } else {
+                fill.style.height = pct + '%';
+                fill.style.width = '';
+            }
             if (rmTrialTotal > RM_TRIAL_TARGET) fill.style.background = 'linear-gradient(to top,#ff4444,#ff6b6b)';
             else if (Math.abs(rmTrialTotal - RM_TRIAL_TARGET) < 0.001) fill.style.background = 'linear-gradient(to top,#4caf50,#8bc34a)';
             else fill.style.background = 'linear-gradient(to top,#42a5f5,#64b5f6)';
@@ -2309,7 +2517,7 @@
             rmTrialAttached = new Set(); rmTrialTotal = 0;
             rmRenderTrialCans();
             rmUpdateTrialGauge();
-            document.getElementById('rmTrialStatus').textContent = 'Click canisters to load fuel into the gauge!';
+            document.getElementById('rmTrialStatus').textContent = 'Tap canisters to load fuel into the gauge!';
             document.getElementById('rmTrialOverlay').classList.add('show');
         }
 
@@ -2370,8 +2578,10 @@
                 el.classList.remove('exit-left', 'enter-right');
             });
             document.querySelectorAll('.rm-dot').forEach((d, i) => d.classList.toggle('active', i === 0));
-            document.getElementById('rmTutBack').disabled = true;
-            document.getElementById('rmTutNext').textContent = 'Next →';
+            const back = document.getElementById('rmTutBack');
+            const next = document.getElementById('rmTutNext');
+            if (back) back.disabled = true;
+            if (next) next.textContent = 'Next →';
             // Hide trial/ready overlays, show tutorial
             document.getElementById('rmTrialOverlay').classList.remove('show');
             document.getElementById('rmReadyOverlay').classList.remove('show');

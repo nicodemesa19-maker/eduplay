@@ -4,6 +4,8 @@
 @section('hide-nav', true)
 
 @section('content')
+{{-- NOTE: layouts.app <head> must contain:
+     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> --}}
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
@@ -26,14 +28,23 @@
     --font-heading: 'Space Grotesk', -apple-system, sans-serif;
     --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'Space Grotesk', monospace;
+
+    /* Safe-area insets (notches / home bars) */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
   }
 
   * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
 
   html, body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,7 +57,12 @@
     font-family: var(--font-body);
     font-weight: 600;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
+
+  /* Faster taps / no double-tap zoom on interactive elements */
+  button, a, .answer-card, .tut-dot, .lab-tab-btn { touch-action: manipulation; }
+  .answer-card { -webkit-user-select: none; user-select: none; }
 
   /* ── FLOATING METRIC SYMBOLS & UNITS LAYER ── */
   #sym-layer {
@@ -71,6 +87,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .sym { animation: none; opacity: 0.22; }
+    .timer-pill.urgent, .victory-icon, .modal-top-bar { animation: none !important; }
   }
 
   /* Metric Ruler Tape Tick Overlay (Top & Bottom Ambient Accents) */
@@ -144,6 +161,7 @@
     font-size: 0.82rem;
     letter-spacing: 0.4px;
     box-shadow: 0 0 16px rgba(14, 165, 233, 0.4);
+    white-space: nowrap;
   }
 
   .coins-pill {
@@ -160,6 +178,7 @@
     box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
     cursor: default;
     transition: transform 0.2s;
+    white-space: nowrap;
   }
   .coins-pill:hover { transform: scale(1.04); }
 
@@ -174,6 +193,7 @@
     border-radius: 50px;
     font-weight: 800;
     font-size: 0.88rem;
+    white-space: nowrap;
   }
 
   .streak-pill {
@@ -188,6 +208,7 @@
     font-weight: 800;
     font-size: 0.88rem;
     box-shadow: 0 0 12px rgba(236, 72, 153, 0.25);
+    white-space: nowrap;
   }
 
   /* Eduplay Action Nav Buttons */
@@ -298,6 +319,7 @@
     border: 1.5px solid rgba(255, 255, 255, 0.14);
     color: #e2e8f0;
     transition: all 0.25s;
+    white-space: nowrap;
   }
   .ladder-node.active-unit {
     border-color: #38bdf8;
@@ -314,6 +336,7 @@
     background: rgba(56, 189, 248, 0.12);
     padding: 2px 7px;
     border-radius: 5px;
+    white-space: nowrap;
   }
   .ladder-rule-tip {
     font-size: 0.95rem;
@@ -374,6 +397,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
   }
   .q-chip {
     font-size: 0.84rem;
@@ -385,6 +409,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 5px 12px;
     border-radius: 8px;
+    white-space: nowrap;
   }
   .topic-category-chip {
     display: inline-flex;
@@ -485,6 +510,7 @@
     color: #ffffff;
     letter-spacing: 0.2px;
     max-width: 90%;
+    overflow-wrap: anywhere;
   }
 
   /* ── 4 ANSWER TABLETS GRID ── */
@@ -515,6 +541,8 @@
     position: relative;
     user-select: none;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    min-width: 0;
   }
   .answer-card:hover:not(:disabled) {
     background: rgba(56, 189, 248, 0.14);
@@ -543,6 +571,7 @@
     flex: 1;
     text-align: left;
     font-weight: 800;
+    overflow-wrap: anywhere;
   }
   .ans-key-hint {
     font-size: 0.9rem;
@@ -672,6 +701,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-wrap: wrap;
   }
   .quick-keys-hint kbd {
     background: rgba(255, 255, 255, 0.08);
@@ -803,6 +833,7 @@
     font-size: 0.74rem;
     color: #94a3b8;
     font-weight: 700;
+    gap: 8px;
   }
 
   /* ==========================================================================
@@ -817,6 +848,8 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .tut-overlay.active {
     display: flex;
@@ -839,11 +872,13 @@
     padding: 36px 44px 32px;
     display: flex;
     flex-direction: column;
+    margin: auto;
   }
   .tut-deck-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
     margin-bottom: 16px;
     padding-bottom: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -870,6 +905,7 @@
     cursor: pointer;
     line-height: 1;
     transition: color 0.2s;
+    padding: 0 6px;
   }
   .btn-close-tut:hover { color: #ffffff; }
 
@@ -932,6 +968,7 @@
     font-weight: 800;
     font-size: 0.92rem;
     text-transform: uppercase;
+    white-space: nowrap;
   }
   .rule-badge.multiply { background: rgba(16, 185, 129, 0.25); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); }
   .rule-badge.divide { background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.5); }
@@ -968,6 +1005,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
     padding-top: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -1006,6 +1044,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
   }
   .btn-tut-nav.prev {
     background: rgba(255, 255, 255, 0.08);
@@ -1059,6 +1098,7 @@
     width: 100%;
     max-width: 98vw;
     height: 98vh;
+    height: 98dvh;
     background: linear-gradient(175deg, #0f172a 0%, #0b1120 100%);
     border: 2px solid rgba(56, 189, 248, 0.4);
     border-radius: 16px;
@@ -1067,6 +1107,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     animation: slideDrawer 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   @keyframes slideDrawer {
@@ -1099,6 +1140,8 @@
     margin-bottom: 20px;
     overflow-x: auto;
     padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
   .lab-tab-btn {
     background: rgba(255, 255, 255, 0.05);
@@ -1121,7 +1164,8 @@
 
   .lab-content-section {
     display: none;
-    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    /* min(100%, 480px) lets cards shrink on phones instead of overflowing */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
     gap: 20px;
   }
   .lab-content-section.active { display: grid; animation: fadeIn 0.25s ease; }
@@ -1131,6 +1175,7 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 24px 28px;
+    min-width: 0;
   }
   .lab-card h4 {
     margin: 0 0 16px;
@@ -1148,6 +1193,7 @@
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
+    gap: 12px;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
   }
   .lab-rule-item:last-child { border-bottom: none; }
@@ -1162,6 +1208,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    overflow-y: auto;
   }
   .pause-overlay.active { display: flex; }
   .pause-card {
@@ -1173,6 +1220,7 @@
     max-width: 420px;
     width: 100%;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+    margin: auto;
   }
   .pause-card h2 {
     font-family: var(--font-heading);
@@ -1214,6 +1262,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    overflow-y: auto;
   }
   .victory-overlay.active {
     display: flex;
@@ -1228,6 +1277,7 @@
     max-width: 480px;
     width: 100%;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(56, 189, 248, 0.25);
+    margin: auto;
   }
   .victory-icon {
     font-size: 4rem;
@@ -1333,6 +1383,217 @@
     0% { transform: translateY(0) rotate(0deg); opacity: 1; }
     100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
   }
+
+  /* ==========================================================================
+     ADAPTIVE / MOBILE-FIRST OVERRIDES
+     Breakpoints: ≤991 tablet · ≤767 phone · ≤479 small phone · landscape
+     ========================================================================== */
+
+  /* Touch devices: no sticky hover lifts, keyboard-hint row hidden */
+  @media (hover: none) {
+    .eduplay-nav-btn:hover,
+    .answer-card:hover:not(:disabled),
+    .hint-btn:hover:not(:disabled),
+    .btn-open-lab:hover,
+    .btn-tut-nav.next:hover,
+    .resume-btn:hover,
+    .btn-v-primary:hover,
+    .coins-pill:hover { transform: none; }
+    .answer-card:active:not(:disabled) { transform: scale(0.97); background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; }
+    .hint-btn:active:not(:disabled), .btn-tut-nav:active, .btn-v-primary:active,
+    .btn-v-secondary:active, .resume-btn:active { transform: scale(0.96); }
+    .quick-keys-hint { display: none; }
+    .ans-key-hint { display: none; }
+  }
+
+  /* ---------- Tablet (≤ 991px) ---------- */
+  @media (max-width: 991.98px) {
+    .app-container { padding-top: calc(48px + var(--safe-top)); }
+    .challenge-station { padding: 18px 18px; }
+    .lab-drawer { padding: 20px 22px; }
+    .lab-drawer-header h3 { font-size: 2rem; }
+    .lab-tab-btn { font-size: 1.05rem; padding: 12px 20px; }
+  }
+
+  /* ---------- Phone (≤ 767px) ---------- */
+  @media (max-width: 767.98px) {
+    html, body { justify-content: flex-start; }
+
+    .ruler-tape-top, .ruler-tape-bottom { height: 6px; }
+
+    .app-container {
+      width: 100%;
+      padding: calc(14px + var(--safe-top)) calc(10px + var(--safe-right)) calc(20px + var(--safe-bottom)) calc(10px + var(--safe-left));
+    }
+
+    /* Masthead: stacked, centered */
+    .masthead { flex-direction: column; align-items: stretch; gap: 10px; }
+
+    /* Title on row 1, the 4 stat pills share row 2 (CSS Grid = reliable one-row layout) */
+    .masthead .masthead-left {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 6px;
+      width: 100%;
+      align-items: stretch;
+      text-align: center;
+    }
+    .masthead .masthead-left .title-group { grid-column: 1 / -1; }
+    .title-group h1 { font-size: 1.5rem; }
+    .title-group p { font-size: 0.74rem; }
+
+    .masthead .masthead-left .level-badge,
+    .masthead .masthead-left .coins-pill,
+    .masthead .masthead-left .score-pill,
+    .masthead .masthead-left .streak-pill {
+      min-width: 0;
+      width: 100%;
+      justify-content: center;
+      font-size: 0.78rem;
+      padding: 7px 4px;
+      gap: 4px;
+      margin: 0;
+    }
+
+    /* Nav: horizontal row of icon-only buttons */
+    .masthead .eduplay-game-nav {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      width: 100%;
+    }
+    .masthead .eduplay-game-nav .eduplay-nav-btn {
+      justify-content: center;
+      padding: 10px 4px;
+      min-height: 42px;
+      font-size: 1rem;
+    }
+    .masthead .eduplay-game-nav .eduplay-nav-btn span { display: none; }
+
+    /* Ladder banner: compact + horizontally scrollable steps */
+    .metric-ladder-banner { padding: 8px 10px; gap: 6px; border-radius: 12px; }
+    .ladder-title { font-size: 0.74rem; width: 100%; }
+    .ladder-steps {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      width: 100%;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .ladder-steps::-webkit-scrollbar { display: none; }
+    .ladder-node { font-size: 0.76rem; padding: 3px 8px; flex-shrink: 0; }
+    .ladder-op { font-size: 0.7rem; flex-shrink: 0; }
+    .ladder-rule-tip { font-size: 0.8rem; width: 100%; line-height: 1.3; }
+
+    /* Challenge card */
+    .quest-layout { gap: 12px; }
+    .challenge-station { padding: 14px 12px; border-radius: 18px; }
+    .station-header { margin-bottom: 10px; padding-bottom: 10px; flex-wrap: nowrap; }
+    .q-progress-group { flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
+    .timer-wrap { flex-shrink: 0; }
+    .q-chip { font-size: 0.74rem; padding: 4px 9px; }
+    .topic-category-chip { font-size: 0.74rem; padding: 4px 9px; }
+    .timer-pill { font-size: 0.82rem; padding: 4px 11px; }
+    .q-progress-bar-bg { margin-bottom: 12px; }
+
+    .question-station { padding: 16px 12px; border-radius: 16px; margin-bottom: 12px; }
+    .question-text { max-width: 100%; font-size: 1.12rem; line-height: 1.4; }
+    .quest-mode-tag { font-size: 0.68rem; margin-bottom: 8px; }
+
+    /* Answer buttons: big, thumb-friendly */
+    .answers-grid { gap: 10px; margin-bottom: 12px; }
+    .answer-card { padding: 14px 14px; min-height: 58px; font-size: 1.05rem; border-radius: 14px; }
+    .ans-badge { width: 26px; height: 26px; margin-right: 10px; }
+
+    .feedback-box { font-size: 0.88rem; padding: 10px 12px; }
+    .hint-reveal-box { font-size: 0.86rem; padding: 10px 12px; }
+
+    .station-bottom-bar { justify-content: center; }
+    .hint-btn { width: 100%; justify-content: center; min-height: 46px; font-size: 0.95rem; }
+
+    /* Sidebar below the game */
+    .sidebar-box { padding: 12px; border-radius: 16px; }
+    .cheat-item { font-size: 0.88rem; }
+    .btn-open-lab { min-height: 44px; }
+
+    /* Tutorial deck: scrolls, compact */
+    .tut-overlay { padding: 10px; align-items: flex-start; padding-top: calc(10px + var(--safe-top)); padding-bottom: calc(10px + var(--safe-bottom)); }
+    .tut-deck { padding: 18px 14px 16px; border-radius: 20px; }
+    .tut-deck-header { margin-bottom: 10px; padding-bottom: 8px; }
+    .tut-deck-tag { font-size: 0.68rem; letter-spacing: 0.3px; padding: 4px 9px; line-height: 1.3; }
+    .btn-close-tut { font-size: 2.2rem; min-width: 44px; min-height: 44px; }
+    .fc-title { font-size: 1.2rem; flex-wrap: wrap; }
+    .fc-desc { font-size: 0.94rem; margin-bottom: 12px; }
+    .fc-visual-box { padding: 12px; margin-bottom: 12px; border-radius: 14px; }
+    .fc-grid-2 { grid-template-columns: 1fr; gap: 8px; }
+    .fc-mini-card { padding: 12px; }
+    .fc-mini-card h5 { font-size: 0.94rem; }
+    .fc-mini-card p { font-size: 0.86rem; }
+    .ladder-rule-row { flex-wrap: wrap; font-size: 0.92rem; padding: 8px 10px; }
+    .rule-badge { font-size: 0.78rem; }
+    .tut-deck-nav { flex-direction: column; gap: 12px; }
+    .tut-nav-btns { width: 100%; }
+    .btn-tut-nav { flex: 1; justify-content: center; min-height: 46px; padding: 8px 10px; font-size: 0.94rem; }
+
+    /* Metric Lab: full-screen sheet */
+    .lab-overlay { align-items: stretch; }
+    .lab-drawer {
+      max-width: 100vw;
+      height: 100%;
+      border-radius: 0;
+      border-width: 0;
+      padding: calc(14px + var(--safe-top)) 14px calc(14px + var(--safe-bottom));
+    }
+    .lab-drawer-header { margin-bottom: 12px; padding-bottom: 10px; }
+    .lab-drawer-header h3 { font-size: 1.35rem; gap: 8px; }
+    .lab-tabs { gap: 8px; margin-bottom: 12px; }
+    .lab-tab-btn { font-size: 0.9rem; padding: 10px 14px; border-radius: 10px; }
+    .lab-content-section { gap: 12px; }
+    .lab-card { padding: 14px 14px; border-radius: 14px; }
+    .lab-card h4 { font-size: 1.05rem; margin-bottom: 10px; }
+    .lab-rule-item { font-size: 0.88rem; padding: 8px 0; flex-wrap: wrap; row-gap: 2px; }
+    .lab-card > div[style*="font-size:1.15rem"] { font-size: 0.95rem !important; line-height: 1.6 !important; }
+
+    /* Pause & victory */
+    .pause-card { padding: 24px 18px; border-radius: 20px; }
+    .pause-card h2 { font-size: 1.5rem; }
+    .resume-btn { min-height: 48px; }
+    .victory-card { padding: 24px 16px; border-radius: 22px; }
+    .victory-icon { font-size: 3.2rem; }
+    .victory-title { font-size: 1.65rem; }
+    .victory-stats-grid { gap: 8px; margin: 14px 0; }
+    .v-stat-val { font-size: 1.15rem; }
+    .v-stat-lbl { font-size: 0.7rem; }
+    .v-coins-banner { font-size: 0.9rem; padding: 8px 10px; margin-bottom: 14px; }
+    .v-actions-row { flex-direction: column-reverse; }
+    .btn-v-primary, .btn-v-secondary { width: 100%; min-height: 48px; }
+  }
+
+  /* ---------- Small phones (≤ 479px) ---------- */
+  @media (max-width: 479.98px) {
+    .title-group h1 { font-size: 1.3rem; }
+    .question-text { font-size: 1.05rem; }
+    .answer-card { font-size: 1rem; }
+    .masthead .eduplay-game-nav { gap: 4px; }
+    .tut-deck-tag { font-size: 0.62rem; }
+  }
+
+  /* ---------- Landscape phones (short viewport) ---------- */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .app-container { padding-top: calc(12px + var(--safe-top)); }
+    .quest-layout { grid-template-columns: minmax(0, 1fr) 260px; }
+    .answers-grid { grid-template-columns: 1fr 1fr; }
+    .question-station { padding: 10px; margin-bottom: 8px; }
+    .question-text { font-size: 1rem; }
+    .answer-card { min-height: 46px; padding: 8px 12px; }
+    .masthead { flex-direction: row; }
+    .masthead .masthead-left { display: flex; flex-wrap: wrap; text-align: left; }
+    .title-group p { display: none; }
+    .victory-card, .pause-card { padding: 16px; }
+    .victory-icon { font-size: 2.2rem; margin-bottom: 0; }
+    .victory-stats-grid { margin: 8px 0; }
+  }
 </style>
 
 <!-- ==========================================================================
@@ -1371,27 +1632,27 @@
 
     <!-- Eduplay Action Nav -->
     <div class="eduplay-game-nav">
-      <button type="button" class="eduplay-nav-btn eduplay-btn-guide" id="btnOpenTutorial" title="Tutorial &amp; Rules Guide">
+      <button type="button" class="eduplay-nav-btn eduplay-btn-guide" id="btnOpenTutorial" title="Tutorial &amp; Rules Guide" aria-label="Field Guide">
         <i class="bi bi-book-half"></i> <span>Field Guide</span>
       </button>
 
-      <button type="button" class="eduplay-nav-btn eduplay-btn-lab" id="btnOpenLab" title="Metric Lab Reference">
+      <button type="button" class="eduplay-nav-btn eduplay-btn-lab" id="btnOpenLab" title="Metric Lab Reference" aria-label="Metric Lab">
         <i class="bi bi-rulers"></i> <span>Metric Lab</span>
       </button>
 
-      <button type="button" class="eduplay-nav-btn eduplay-btn-sound" id="btnSoundToggle" title="Sound Effects (M)">
+      <button type="button" class="eduplay-nav-btn eduplay-btn-sound" id="btnSoundToggle" title="Sound Effects (M)" aria-label="Toggle sound">
         <i class="bi bi-volume-up-fill" id="soundIcon"></i>
       </button>
 
-      <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="btnPauseGame" title="Pause Game (P or Esc)">
+      <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="btnPauseGame" title="Pause Game (P or Esc)" aria-label="Pause">
         <i class="bi bi-pause-fill"></i> <span>Pause</span>
       </button>
 
-      <a href="{{ route('student.map', 'the_metric_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
+      <a href="{{ route('student.map', 'the_metric_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map" aria-label="Game Map">
         <i class="bi bi-map-fill"></i> <span>Map</span>
       </a>
 
-      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress">
+      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress" aria-label="Exit">
         <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
       </a>
     </div>
@@ -1415,7 +1676,7 @@
   <main class="quest-layout">
 
     <!-- CHALLENGE STATION (LEFT) -->
-    <section class="challenge-station" aria-label="Current Challenge Station">
+    <section class="challenge-station" id="challengeStation" aria-label="Current Challenge Station">
       <div>
         <div class="station-header">
           <div class="q-progress-group">
@@ -1567,7 +1828,7 @@
       <span class="tut-deck-tag" id="tutTag">
         <i class="bi bi-journal-bookmark-fill"></i> Field Guide &amp; Instructions • Card <span id="fcPageNum">1 / 5</span>
       </span>
-      <button type="button" class="btn-close-tut" onclick="closeTutorial()" title="Close Instructions">&times;</button>
+      <button type="button" class="btn-close-tut" onclick="closeTutorial()" title="Close Instructions" aria-label="Close instructions">&times;</button>
     </div>
 
     <!-- CARD 1: Welcome & Mission -->
@@ -1665,7 +1926,7 @@
         Time conversions use special clocks and calendars instead of base-10:
       </p>
       <div class="fc-visual-box">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-family:var(--font-mono); font-size:0.82rem; color:#e2e8f0;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:8px; font-family:var(--font-mono); font-size:0.82rem; color:#e2e8f0;">
           <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">⏱️ 1 min = 60 s</div>
           <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">🕐 1 hr = 60 min</div>
           <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">🌅 1 day = 24 hr</div>
@@ -1691,7 +1952,7 @@
           <span style="color:#fbbf24; font-weight:800;">-5 🪙</span>
         </div>
         <div class="ladder-rule-row" style="margin-bottom:8px;">
-          <div><b style="color:#38bdf8;">⌨️ Hotkeys</b><br><small style="color:#94a3b8;">Press 1, 2, 3, or 4 on your keyboard to instantly select an answer.</small></div>
+          <div><b style="color:#38bdf8;">⌨️ Hotkeys</b><br><small style="color:#94a3b8;">On a keyboard, press 1, 2, 3, or 4 to instantly select an answer. On a phone or tablet, just tap.</small></div>
           <span style="color:#38bdf8; font-weight:800;">Keys 1–4</span>
         </div>
         <div class="ladder-rule-row">
@@ -1728,7 +1989,7 @@
   <div class="lab-drawer">
     <div class="lab-drawer-header">
       <h3 id="labTitle"><i class="bi bi-rulers"></i> Metric Laboratory</h3>
-      <button type="button" class="btn-close-tut" onclick="closeLab()">&times;</button>
+      <button type="button" class="btn-close-tut" onclick="closeLab()" aria-label="Close Metric Lab">&times;</button>
     </div>
 
     <!-- Realm Tabs -->
@@ -1878,10 +2139,10 @@
     <p>Catch your breath! Ready to jump back into the measurement quest?</p>
     <button type="button" class="resume-btn" onclick="togglePause()">▶ Resume Quest</button>
     <div class="eduplay-game-nav" style="display:flex;gap:10px;width:100%;justify-content:center;margin-top:14px;">
-      <a href="{{ route('student.map', 'the_metric_quest') }}" class="eduplay-nav-btn eduplay-btn-map" style="flex:1;">
+      <a href="{{ route('student.map', 'the_metric_quest') }}" class="eduplay-nav-btn eduplay-btn-map" style="flex:1;justify-content:center;">
         <i class="bi bi-map-fill"></i> <span>Game Map</span>
       </a>
-      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1;">
+      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1;justify-content:center;">
         <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
       </a>
     </div>
@@ -1941,6 +2202,9 @@
   const TUTORIAL_KEY = 'eduplay_metric_tut_done_' + USER_ID;
   const SOUND_KEY = 'eduplay_metric_muted_' + USER_ID;
 
+  // Phone / small-screen helper (used for lighter effects + scroll helpers)
+  const isSmallScreen = () => window.matchMedia('(max-width: 767.98px)').matches;
+
   // Query Params & Map Navigation Flags
   const urlParams = new URLSearchParams(window.location.search);
   const paramLevel = parseInt(urlParams.get('level'), 10);
@@ -1962,7 +2226,7 @@
   const TIME_PER_Q = 30;
 
   /* ==========================================================================
-     FLOATING METRIC SYMBOLS (Populated immediately across screen)
+     FLOATING METRIC SYMBOLS (fewer on phones to save battery / keep it clean)
      ========================================================================== */
   (function initFloatingSigns(){
     const syms = [
@@ -1976,14 +2240,18 @@
     const layer = document.getElementById('sym-layer');
     if (!layer) return;
 
-    for (let i = 0; i < 65; i++) {
+    const total = isSmallScreen() ? 24 : 65;
+    for (let i = 0; i < total; i++) {
       const s = document.createElement('span');
       s.className = 'sym';
       const t = syms[Math.floor(Math.random() * syms.length)];
       s.textContent = t;
       s.style.left = (Math.random() * 96 + 2) + 'vw';
       s.style.top = (Math.random() * 95) + 'vh';
-      s.style.fontSize = (t.length > 5 ? 0.95 + Math.random() * 0.45 : 1.3 + Math.random() * 1.5) + 'rem';
+      const small = isSmallScreen();
+      s.style.fontSize = (t.length > 5
+        ? (small ? 0.7 + Math.random() * 0.3 : 0.95 + Math.random() * 0.45)
+        : (small ? 1 + Math.random() * 0.9 : 1.3 + Math.random() * 1.5)) + 'rem';
       s.style.animationDelay = -(Math.random() * 20) + 's';
       s.style.animationDuration = (12 + Math.random() * 14) + 's';
       s.style.color = colors[Math.floor(Math.random() * colors.length)];
@@ -2513,6 +2781,25 @@
   }
 
   /* ==========================================================================
+     MOBILE HELPERS
+     ========================================================================== */
+  // On phones the feedback box sits below the answers; keep it visible.
+  function scrollFeedbackIntoView() {
+    if (!isSmallScreen()) return;
+    const fb = document.getElementById('feedbackBox');
+    if (fb) fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  // On phones, bring the new question back into view after each answer.
+  function scrollQuestionIntoView() {
+    if (!isSmallScreen()) return;
+    const st = document.getElementById('challengeStation');
+    if (st) {
+      const top = st.getBoundingClientRect().top + window.pageYOffset - 8;
+      if (Math.abs(window.pageYOffset - top) > 40) window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  }
+
+  /* ==========================================================================
      CORE GAME LOOP
      ========================================================================== */
   function startStage(idx, showInstruction = false) {
@@ -2602,6 +2889,13 @@
     fb.className = 'feedback-box';
     fb.innerHTML = '';
 
+    // Reset hint button (it was left disabled/changed after a previous hint)
+    const btnHint = document.getElementById('btnHint');
+    if (btnHint) {
+      btnHint.innerHTML = '<span>🪙</span> <span>Hint (5 🪙)</span>';
+    }
+    updateCoinsUI();
+
     // Reset Progress Bar
     const pct = (state.currentQ / state.questions.length) * 100;
     document.getElementById('progressBar').style.width = pct + '%';
@@ -2621,7 +2915,7 @@
       card.setAttribute('data-key', keyLabels[idx]);
 
       card.innerHTML = `
-        <div style="display:flex; align-items:center;">
+        <div style="display:flex; align-items:center; min-width:0;">
           <span class="ans-badge">${letterLabels[idx]}</span>
           <span class="ans-val">${opt}</span>
         </div>
@@ -2631,6 +2925,8 @@
       card.onclick = () => selectAnswer(opt, card);
       grid.appendChild(card);
     });
+
+    scrollQuestionIntoView();
 
     const tutOverlay = document.getElementById('tutOverlay');
     const isTutOpen = tutOverlay && tutOverlay.classList.contains('active');
@@ -2748,6 +3044,7 @@
     const fb = document.getElementById('feedbackBox');
     fb.className = 'feedback-box wrong';
     fb.innerHTML = `<i class="bi bi-alarm"></i> <span>Time's up! The correct conversion is <b>${q.correct}</b>.</span>`;
+    scrollFeedbackIntoView();
 
     advanceToNextQuestion(2400);
   }
@@ -2779,7 +3076,7 @@
         <span><b>Correct!</b> +${points} pts ${state.streak >= 2 ? `(🔥 ${state.streak}x Streak!)` : ''}</span>
       `;
 
-      if (state.streak >= 3) spawnConfetti(18);
+      if (state.streak >= 3) spawnConfetti(isSmallScreen() ? 10 : 18);
     } else {
       cardEl.classList.add('wrong');
       soundWrong();
@@ -2799,6 +3096,7 @@
     }
 
     updateStatsUI();
+    scrollFeedbackIntoView();
     advanceToNextQuestion(1900);
   }
 
@@ -2847,6 +3145,9 @@
     const btn = document.getElementById('btnHint');
     btn.disabled = true;
     btn.innerHTML = `<span>✓</span> <span>Hint Revealed</span>`;
+
+    // On phones the hint appears above the answers — make sure it's seen
+    if (isSmallScreen()) hintBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   /* ==========================================================================
@@ -2877,7 +3178,7 @@
 
     if (isWin) {
       soundWin();
-      spawnConfetti(55);
+      spawnConfetti(isSmallScreen() ? 32 : 55);
       icon.textContent = stars === 3 ? '🏆' : '🎉';
       title.textContent = stars === 3 ? 'Perfect Mastery!' : 'Stage Conquered!';
       subtitle.textContent = `Great expedition work! You achieved ${accuracy}% accuracy.`;
@@ -2936,7 +3237,9 @@
     clearInterval(state.timer);
     currentCardIdx = 0;
     updateFlashCardUI();
-    document.getElementById('tutOverlay').classList.add('active');
+    const ov = document.getElementById('tutOverlay');
+    ov.classList.add('active');
+    ov.scrollTop = 0;
   }
   window.openTutorial = openTutorial;
 
@@ -2958,6 +3261,8 @@
     soundClick();
     currentCardIdx = idx;
     updateFlashCardUI();
+    const ov = document.getElementById('tutOverlay');
+    if (ov) ov.scrollTop = 0;
   };
 
   window.stepFlashCard = function(dir) {
@@ -2996,6 +3301,24 @@
     }
   }
 
+  // Swipe left/right to flip tutorial cards on touch screens
+  (function enableTutorialSwipe() {
+    let sx = 0, sy = 0;
+    const ov = document.getElementById('tutOverlay');
+    if (!ov) return;
+    ov.addEventListener('touchstart', (e) => {
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+    }, { passive: true });
+    ov.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        window.stepFlashCard(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  })();
+
   /* ==========================================================================
      METRIC LAB REFERENCE DRAWER LOGIC
      ========================================================================== */
@@ -3003,10 +3326,25 @@
     initAudio();
     soundClick();
     document.getElementById('labOverlay').classList.add('active');
+    // Pause the question timer while the reference is open (fair on small screens)
+    if (state.gameStarted && !state.isPaused && !state.answered) {
+      clearInterval(state.timer);
+      state.labPaused = true;
+    }
   };
 
   window.closeLab = function() {
     document.getElementById('labOverlay').classList.remove('active');
+    if (state.labPaused) {
+      state.labPaused = false;
+      if (!state.isPaused && !state.answered) {
+        // Resume with the remaining time rather than restarting at 30s
+        const remaining = state.timeLeft;
+        startTimer();
+        state.timeLeft = remaining;
+        updateTimerUI();
+      }
+    }
   };
 
   window.switchLabTab = function(tabName) {
@@ -3043,6 +3381,16 @@
       if (!state.answered) startTimer();
     }
   };
+
+  // Auto-pause when the phone locks or the player switches apps/tabs
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && state.gameStarted && !state.isPaused && !state.answered &&
+        state.currentQ < state.questions.length) {
+      const tut = document.getElementById('tutOverlay');
+      if (tut && tut.classList.contains('active')) return;
+      window.togglePause();
+    }
+  });
 
   /* ==========================================================================
      KEYBOARD CONTROLS & LISTENERS

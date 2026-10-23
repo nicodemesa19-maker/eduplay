@@ -6,7 +6,7 @@
 
 <style>
   /* ==========================================================================
-     MDAS MAZE — BALANCED CYBER ARCADE (30 Tiles, 6x5 Grid, 96px 3D Dice)
+     MDAS MAZE — BALANCED CYBER ARCADE (30 Tiles, adaptive 6x5 / 3x10 grid)
      ========================================================================== */
   :root {
     --bg-dark: #070b19;
@@ -44,7 +44,7 @@
     overflow-x: hidden;
   }
 
-  /* ── FLOATING MATH SYMBOLS LAYER (From Welcome/Index Page) ── */
+  /* ── FLOATING MATH SYMBOLS LAYER ── */
   #sym-layer {
     position: fixed; inset: 0;
     pointer-events: none; z-index: 0; overflow: hidden;
@@ -60,20 +60,10 @@
     filter: drop-shadow(0 0 10px currentColor);
   }
   @keyframes floatDrift {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0;
-    }
-    8% {
-      opacity: 0.42;
-    }
-    90% {
-      opacity: 0.42;
-    }
-    100% {
-      transform: translateY(-115vh) rotate(360deg);
-      opacity: 0;
-    }
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    8% { opacity: 0.42; }
+    90% { opacity: 0.42; }
+    100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .sym { animation: none; opacity: 0.25; }
@@ -90,7 +80,7 @@
     z-index: 0;
   }
 
-  /* ── APPLICATION CONTAINER (Fits Viewport Nicely) ── */
+  /* ── APPLICATION CONTAINER ── */
   .app-container {
     position: relative;
     z-index: 1;
@@ -307,7 +297,6 @@
     justify-content: space-between;
   }
 
-  /* ── BOARD TOOLBAR WITH SPACIOUS MDAS RULES BUTTON ── */
   .board-toolbar {
     display: flex;
     align-items: center;
@@ -345,7 +334,6 @@
     box-shadow: 0 0 8px currentColor;
   }
 
-  /* Dedicated Uncramped MDAS Rules Button */
   .mdas-rules-btn {
     display: inline-flex;
     align-items: center;
@@ -372,25 +360,19 @@
     box-shadow: 0 6px 20px rgba(168, 85, 247, 0.45);
   }
 
-  /* ── 30-TILE MAZE GRID (6 cols x 5 rows) ── */
+  /* ── 30-TILE MAZE GRID (columns are set by JS: 6 on desktop, 3 on phones) ── */
   .maze-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 9px;
     position: relative;
     flex: 1;
     align-content: stretch;
   }
-  @media (max-width: 680px) {
-    .maze-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-    }
-  }
 
-  /* ── BALANCED 30 TILES (Fits Viewport Seamlessly) ── */
   .cell {
     position: relative;
+    min-width: 0;
     min-height: clamp(75px, 10.8vh, 98px);
     border-radius: 14px;
     display: flex;
@@ -441,9 +423,9 @@
     text-transform: uppercase;
     letter-spacing: 0.6px;
     margin-top: 2px;
+    text-align: center;
   }
 
-  /* Vibrant Neon Maze Cells */
   .cell.start {
     background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0.12) 100%);
     border-color: rgba(16, 185, 129, 0.8);
@@ -568,7 +550,6 @@
     justify-content: space-between;
   }
 
-  /* Player Card */
   .player-card {
     display: flex;
     align-items: center;
@@ -602,7 +583,6 @@
     color: #94a3b8;
   }
 
-  /* Stats Grid */
   .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -641,7 +621,6 @@
     gap: 4px;
   }
 
-  /* Progress Track */
   .progress-wrap {
     margin-top: 10px;
     padding-top: 8px;
@@ -654,6 +633,7 @@
     color: #94a3b8;
     font-weight: 700;
     margin-bottom: 4px;
+    gap: 8px;
   }
   .progress-bar-bg {
     width: 100%;
@@ -671,7 +651,7 @@
     box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
   }
 
-  /* ── 3D CYBER DICE CONTAINER (Classic 96px Size) ── */
+  /* ── 3D CYBER DICE ── */
   .dice-panel { text-align: center; }
   .dice-stage {
     width: 96px;
@@ -814,7 +794,6 @@
     border: 1px solid rgba(56, 189, 248, 0.3);
   }
 
-  /* Big Expression Box */
   .expr-box {
     font-family: var(--font-heading);
     font-weight: 800;
@@ -834,7 +813,6 @@
   .expr-box .op-a { color: #34d399; font-weight: 900; }
   .expr-box .op-s { color: #fbbf24; font-weight: 900; }
 
-  /* MDAS Quick Reminder Strip inside Challenge */
   .challenge-rule-strip {
     background: rgba(255, 255, 255, 0.04);
     border-radius: 10px;
@@ -847,7 +825,6 @@
   }
   .challenge-rule-strip b { color: #38bdf8; }
 
-  /* Coin Hint Bar */
   .coin-hint-bar {
     display: flex;
     justify-content: space-between;
@@ -884,6 +861,7 @@
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
   }
   .btn-coin-hint:hover:not(:disabled) {
@@ -896,7 +874,6 @@
     filter: grayscale(0.5);
   }
 
-  /* Revealed Hint Box */
   .hint-reveal-box {
     display: none;
     background: rgba(16, 185, 129, 0.1);
@@ -919,7 +896,6 @@
     gap: 6px;
   }
 
-  /* Challenge Form & Mini Keypad */
   .challenge-form {
     display: flex;
     flex-direction: column;
@@ -967,7 +943,6 @@
   }
   .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* Cyber Keypad for Quick Click/Touch */
   .keypad-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -985,6 +960,7 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.15s;
+    touch-action: manipulation;
   }
   .key-btn:hover {
     background: rgba(255, 255, 255, 0.15);
@@ -995,7 +971,6 @@
   .key-btn.del { background: rgba(244, 63, 94, 0.15); border-color: rgba(244, 63, 94, 0.35); color: #fb7185; }
   .key-btn.clear { background: rgba(148, 163, 184, 0.15); border-color: rgba(148, 163, 184, 0.35); color: #94a3b8; }
 
-  /* Feedback Area */
   .challenge-feedback {
     margin-top: 12px;
     font-size: 0.92rem;
@@ -1031,7 +1006,7 @@
   }
 
   /* ==========================================================================
-     FLASH CARD DECK MODAL (Instructions & In-Game Tutorial)
+     FLASH CARD DECK MODAL
      ========================================================================== */
   .fc-overlay {
     position: fixed; inset: 0;
@@ -1092,6 +1067,7 @@
     margin-bottom: 18px;
     padding-bottom: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 8px;
   }
   .fc-badge {
     font-size: 0.92rem;
@@ -1117,6 +1093,7 @@
     padding: 4px 8px;
     border-radius: 8px;
     transition: all 0.2s;
+    white-space: nowrap;
   }
   .fc-quick-action-btn:hover {
     color: #ffffff;
@@ -1367,9 +1344,116 @@
   }
 
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ==========================================================================
+     MOBILE ADAPTIVE LAYOUT (phones: 3 columns x 10 rows snake path)
+     ========================================================================== */
+  @media (max-width: 680px) {
+    .app-container {
+      width: 100%;
+      padding: 6px 10px calc(130px + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Masthead: compact, icon-only buttons */
+    .masthead { gap: 8px; margin-bottom: 6px; padding-bottom: 6px; }
+    .masthead-left { gap: 8px; width: 100%; }
+    .title-group { order: 3; width: 100%; }
+    .title-group h1 { font-size: 1.5rem; }
+    .title-group p { display: none; }
+    .level-badge, .coins-pill { font-size: 0.74rem; padding: 4px 10px; }
+    .eduplay-game-nav { width: 100%; justify-content: space-between; gap: 6px; }
+    .eduplay-nav-btn { flex: 1; justify-content: center; padding: 8px 6px; font-size: 1rem; }
+    .eduplay-nav-btn span { display: none; }
+
+    /* Ribbon: shrink */
+    .mdas-order-ribbon { padding: 6px 8px; margin-bottom: 8px; justify-content: center; }
+    .ribbon-label, .ribbon-tip { display: none; }
+    .ribbon-steps { justify-content: center; gap: 4px; }
+    .ribbon-step { font-size: 0.68rem; padding: 3px 6px; }
+    .ribbon-arrow small { display: none; }
+
+    /* Board */
+    .board-panel { padding: 10px; border-radius: 18px; }
+    .board-toolbar { flex-wrap: wrap; gap: 8px; }
+    .path-key { gap: 5px; font-size: 0.68rem; flex: 1; }
+    .path-key span { padding: 3px 8px; }
+    .mdas-rules-btn { padding: 6px 12px; font-size: 0.78rem; }
+    .maze-grid { gap: 7px; }
+    .cell { min-height: 74px; border-radius: 12px; border-width: 1.5px; }
+    .cell:hover { transform: none; }
+    .cell-num { font-size: 0.72rem; top: 4px; left: 6px; }
+    .cell .op-label { font-size: 0.95rem; }
+    .cell.start .op-label, .cell.finish .op-label { font-size: 0.9rem; }
+    .cell.neutral .op-label { font-size: 0.8rem; }
+    .cell .op-sub { font-size: 0.58rem; }
+    .token { width: 34px; height: 34px; font-size: 1.2rem; border-width: 2px; }
+
+    .sidebar { gap: 10px; }
+    .sidebar-panel { padding: 12px; }
+    .progress-header { font-size: 0.78rem; }
+
+    /* Dice + Roll become a fixed bottom action bar (always reachable) */
+    .dice-panel {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+      border-radius: 18px 18px 0 0;
+      border-bottom: none;
+    }
+    .dice-panel h3, .dice-panel .roll-hint { display: none; }
+    .dice-stage {
+      flex-shrink: 0;
+      margin: -19px;            /* 96px box scaled to ~58px */
+      transform: scale(0.6);
+    }
+    .roll-btn { margin: 0; padding: 15px 0; font-size: 1.05rem; flex: 1; width: auto; }
+
+    /* Challenge modal */
+    .challenge-overlay { padding: 10px; align-items: flex-start; overflow-y: auto; }
+    .challenge-card {
+      padding: 16px;
+      border-radius: 22px;
+      margin: auto;
+      max-height: 96dvh;
+      overflow-y: auto;
+    }
+    .expr-box { font-size: 1.6rem; padding: 14px 8px; letter-spacing: 0.5px; }
+    .coin-hint-bar { flex-direction: column; align-items: stretch; text-align: center; }
+    .challenge-input { font-size: 1.2rem; padding: 10px; }
+    .submit-btn { padding: 0 20px; }
+    .key-btn { padding: 12px 0; font-size: 1.1rem; }
+
+    /* Tutorial cards */
+    .fc-overlay { padding: 10px; align-items: flex-start; overflow-y: auto; }
+    .fc-deck-stack-1, .fc-deck-stack-2 { display: none; }
+    .fc-card { padding: 18px 16px; border-radius: 22px; max-height: 96dvh; overflow-y: auto; }
+    .fc-badge { font-size: 0.74rem; letter-spacing: 0.4px; }
+    .fc-quick-action-btn { font-size: 0.82rem; }
+    .fc-title { font-size: 1.25rem; }
+    .fc-desc { font-size: 0.92rem; }
+    .fc-box { padding: 12px; }
+    .fc-item { padding: 10px; }
+    .fc-tip { font-size: 0.86rem; }
+    .fc-nav-btn { padding: 8px 12px; font-size: 0.88rem; }
+    .fc-dots { gap: 5px; }
+
+    .pause-box, .winner-card { padding: 26px 20px; }
+    .winner-card h2 { font-size: 1.7rem; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 380px) {
+    .cell { min-height: 66px; }
+    .cell .op-label { font-size: 0.85rem; }
+    .ribbon-step { font-size: 0.62rem; }
+  }
 </style>
 
-<!-- ── FLOATING MATH SYMBOLS LAYER (From Index Page) ── -->
+<!-- ── FLOATING MATH SYMBOLS LAYER ── -->
 <div id="sym-layer" aria-hidden="true"></div>
 
 <div class="cyber-grid-bg"></div>
@@ -1445,7 +1529,7 @@
         </button>
       </div>
 
-      <!-- 30-Tile Serpent Grid (6 cols x 5 rows) -->
+      <!-- 30-Tile Serpent Grid (6x5 desktop / 3x10 mobile) -->
       <div class="maze-grid" id="mazeGrid" role="grid" aria-label="Maze Grid"></div>
     </section>
 
@@ -1500,7 +1584,7 @@
         </div>
       </div>
 
-      <!-- 3D Cyber Dice Stage Panel (Classic 96px Size) -->
+      <!-- 3D Cyber Dice Stage Panel -->
       <div class="sidebar-panel dice-panel">
         <h3>
           <span>3D Cyber Dice</span>
@@ -1528,8 +1612,7 @@
 
 <!-- ==========================================================================
      CHALLENGE MODAL WITH COIN HINT SYSTEM
-     ========================================================================== */
--->
+     ========================================================================== -->
 <div class="challenge-overlay" id="challengeOverlay" role="dialog" aria-modal="true" aria-labelledby="challengeBadge">
   <div class="challenge-card">
     <div class="challenge-header">
@@ -1613,7 +1696,7 @@
         </button>
       </div>
 
-      <!-- CARD 1: Mission Overview -->
+      <!-- CARD 1 -->
       <div id="fcSlide1" class="fc-slide">
         <h3 class="fc-title" style="color:#38bdf8;"><span>🎲</span> Welcome to MDAS Maze!</h3>
         <p class="fc-desc">Roll the 3D dice, navigate the 30-tile cyber maze trail, and solve Order of Operations challenges to reach the golden Finish Portal!</p>
@@ -1634,18 +1717,18 @@
         </div>
       </div>
 
-      <!-- CARD 2: The MDAS Golden Rule -->
+      <!-- CARD 2 -->
       <div id="fcSlide2" class="fc-slide hidden">
         <h3 class="fc-title" style="color:#c084fc;"><span>🧠</span> The MDAS Golden Rule</h3>
         <p class="fc-desc">In mathematics, operations must follow a strict priority sequence:</p>
         <div class="fc-box" style="border-color:rgba(168, 85, 247, 0.4);">
           <div style="display:flex; flex-direction:column; gap:8px;">
-            <div style="display:flex; align-items:center; gap:10px;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
               <span class="fc-item-badge good" style="font-size:1.0rem; padding:4px 10px;">Priority 1</span>
               <span style="font-weight:800; color:#fb7185;">Multiply (×)</span> &amp; <span style="font-weight:800; color:#38bdf8;">Divide (÷)</span>
               <span style="color:#94a3b8; font-size:0.8rem;">(Solve from Left to Right!)</span>
             </div>
-            <div style="display:flex; align-items:center; gap:10px;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
               <span class="fc-item-badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; font-size:1.0rem; padding:4px 10px;">Priority 2</span>
               <span style="font-weight:800; color:#34d399;">Add (+)</span> &amp; <span style="font-weight:800; color:#fbbf24;">Subtract (−)</span>
               <span style="color:#94a3b8; font-size:0.8rem;">(Solve from Left to Right!)</span>
@@ -1657,7 +1740,7 @@
         </div>
       </div>
 
-      <!-- CARD 3: Step-by-Step Walkthrough & Common Traps -->
+      <!-- CARD 3 -->
       <div id="fcSlide3" class="fc-slide hidden">
         <h3 class="fc-title" style="color:#34d399;"><span>🔍</span> Step-by-Step Walkthrough</h3>
         <p class="fc-desc">Let's walk through an example expression: <b style="color:#fff;">10 − 2 × 4 + 3</b></p>
@@ -1671,7 +1754,7 @@
         </div>
       </div>
 
-      <!-- CARD 4: Coin Hints ("How to Solve It") -->
+      <!-- CARD 4 -->
       <div id="fcSlide4" class="fc-slide hidden">
         <h3 class="fc-title" style="color:#fbbf24;"><span>🪙</span> Coin Hints — How to Solve It!</h3>
         <p class="fc-desc">Stuck on a tricky problem? Spend <b>5 🪙 Coins</b> to get instant guidance!</p>
@@ -1692,7 +1775,7 @@
         </div>
       </div>
 
-      <!-- CARD 5: Board Zones & Controls -->
+      <!-- CARD 5 -->
       <div id="fcSlide5" class="fc-slide hidden">
         <h3 class="fc-title" style="color:#f43f5e;"><span>🏆</span> Zones, Scoring &amp; Controls</h3>
         <p class="fc-desc">Master the 30 board tiles and clear all 10 stages:</p>
@@ -1779,8 +1862,11 @@
   const COINS_KEY = 'eduplay_mdas_coins_' + USER_ID;
   const SOUND_KEY = 'eduplay_mdas_muted_' + USER_ID;
 
-  /* 30 Tiles Configuration: 6 columns x 5 rows */
-  const COLS = 6, ROWS = 5, BOARD_SIZE = 30; // Exactly 30 tiles
+  /* 30 tiles. Columns adapt: 6 (desktop, 6x5) or 3 (phones, 3x10) */
+  const BOARD_SIZE = 30;
+  const mobileMQ = window.matchMedia('(max-width: 680px)');
+  let COLS = mobileMQ.matches ? 3 : 6;
+
   const ZONES = ["red", "blue", "green", "gold"];
   const ZONE_CONFIG = {
     red:   { label: "× +", name: "Multiplication & Addition" },
@@ -1794,7 +1880,7 @@
   };
 
   /* ==========================================================================
-     FLOATING MATH SIGNS (Prominent, Visible Immediately across Screen)
+     FLOATING MATH SIGNS
      ========================================================================== */
   (function initFloatingMathSigns(){
     const syms = [
@@ -1807,7 +1893,9 @@
     const layer = document.getElementById('sym-layer');
     if(!layer) return;
 
-    for(let i = 0; i < 65; i++){
+    // Fewer symbols on phones for performance
+    const count = window.matchMedia('(max-width: 680px)').matches ? 30 : 65;
+    for(let i = 0; i < count; i++){
       const s = document.createElement('span');
       s.className = 'sym';
       const t = syms[Math.floor(Math.random() * syms.length)];
@@ -2178,7 +2266,7 @@
   }
 
   /* ==========================================================================
-     BOARD INITIALIZATION & RENDERING (30 TILES, 6 COLS x 5 ROWS)
+     BOARD INITIALIZATION & RENDERING (30 tiles, adaptive columns)
      ========================================================================== */
   const mazeGrid = document.getElementById("mazeGrid");
   const scoreDisplay = document.getElementById("scoreDisplay");
@@ -2190,6 +2278,10 @@
   const statusHint = document.getElementById("statusHint");
 
   function buildBoard() {
+    // Adaptive columns: 3 on phones, 6 on larger screens
+    COLS = mobileMQ.matches ? 3 : 6;
+    mazeGrid.style.gridTemplateColumns = 'repeat(' + COLS + ', minmax(0, 1fr))';
+
     boardTiles = [];
     for (var i = 0; i < BOARD_SIZE; i++) {
       var type;
@@ -2302,6 +2394,14 @@
     well.appendChild(tok);
     highlightActiveTile(index);
     if (hop) soundHop();
+
+    // Keep the active tile visible on phones (the board is tall there)
+    if (mobileMQ.matches) {
+      var cell = mazeGrid.querySelector('.cell[data-index="' + index + '"]');
+      if (cell && cell.scrollIntoView) {
+        cell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
   }
 
   function updateStatsUI() {
@@ -2314,7 +2414,7 @@
   }
 
   /* ==========================================================================
-     DICE ROLLING PHYSICS (Classic 96px Size)
+     DICE ROLLING PHYSICS
      ========================================================================== */
   function mod360(v){ return ((v % 360) + 360) % 360; }
 
@@ -2442,7 +2542,10 @@
 
     updateCoinsUI();
     challengeOverlay.classList.add("active");
-    setTimeout(function(){ answerInput.focus(); }, 120);
+    // On touch devices the on-screen keypad is used, so don't focus (avoids phone keyboard popping up)
+    if (!isTouchDevice) {
+      setTimeout(function(){ answerInput.focus(); }, 120);
+    }
   }
 
   /* Coin Hint Functionality */
@@ -2474,7 +2577,7 @@
     } else {
       answerInput.value += key;
     }
-    answerInput.focus();
+    if (!isTouchDevice) answerInput.focus();
   };
 
   answerForm.addEventListener("submit", function(e){
@@ -2558,14 +2661,13 @@
   const TUT_TOTAL = 5;
   const tutOverlay = document.getElementById("tutorialOverlay");
 
-  var tutorialOpen = false; // tracks whether tutorial overlay is blocking play
+  var tutorialOpen = false;
 
   function openTut(fromGame = false) {
     tutCard = 1;
     tutorialOpen = true;
     renderFlashCard(tutCard);
     tutOverlay.classList.add("active");
-    // Block rolling while tutorial is open
     if (rollBtn) rollBtn.disabled = true;
   }
   window.openTut = openTut;
@@ -2573,7 +2675,6 @@
   function closeTut(markAsDone = false) {
     tutorialOpen = false;
     tutOverlay.classList.remove("active");
-    // Re-enable rolling only if the game is in a rollable state
     if (rollBtn && gameActive && !isPaused && !busy && !awaitingAnswer) {
       rollBtn.disabled = false;
     }
@@ -2660,7 +2761,7 @@
       if (wasAwaiting) {
         answerInput.disabled = false;
         submitBtn.disabled = false;
-        answerInput.focus();
+        if (!isTouchDevice) answerInput.focus();
       }
     }
   }
@@ -2698,7 +2799,6 @@
       if (e.key === "Escape") togglePause();
       return;
     }
-    // If tutorial is open, Escape closes it
     if (tutorialOpen) {
       if (e.key === "Escape") closeTut(true);
       return;
@@ -2712,8 +2812,6 @@
       isMuted = !isMuted;
       localStorage.setItem(SOUND_KEY, isMuted ? 'true' : 'false');
       updateSoundUI();
-    } else if (tutOverlay.classList.contains("active")) {
-      if (e.key >= "1" && e.key <= "5") goFlashCard(parseInt(e.key, 10));
     }
   });
 
@@ -2779,6 +2877,26 @@
   /* ==========================================================================
      STARTUP
      ========================================================================== */
+  // Touch devices use the on-screen keypad instead of the phone keyboard
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+  if (isTouchDevice) {
+    answerInput.readOnly = true;
+    answerInput.setAttribute('inputmode', 'none');
+  }
+
+  // Rebuild the board when the layout switches between phone and desktop
+  // (rotating the device, resizing the window)
+  function onLayoutChange() {
+    buildBoard();
+    renderToken();
+    updateStatsUI();
+  }
+  if (mobileMQ.addEventListener) {
+    mobileMQ.addEventListener('change', onLayoutChange);
+  } else if (mobileMQ.addListener) {
+    mobileMQ.addListener(onLayoutChange); // older Safari
+  }
+
   window.scrollTo(0, 0);
   buildBoard();
   renderToken();

@@ -4,9 +4,12 @@
 @section('content')
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; -webkit-text-size-adjust: 100%; }
+button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
 /* ─── Starfield ───────────────────────────────────────────── */
+/* #gameWrapper is the scroll container so tall layouts (phones) can scroll.
+   Its children use margin:auto to stay centered when there is spare room. */
 #gameWrapper {
     position: fixed;
     top: 0;
@@ -17,10 +20,17 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 16px 20px 24px;
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
     font-family: 'Inter', sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     background:
         radial-gradient(ellipse 120% 60% at 50% -10%, rgba(88,28,135,0.55) 0%, transparent 60%),
         radial-gradient(ellipse 80% 40% at 20% 80%, rgba(30,64,175,0.35) 0%, transparent 55%),
@@ -29,11 +39,11 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; }
     z-index: 10;
 }
 
-/* Animated twinkling stars */
+/* Animated twinkling stars (fixed so they stay put while the content scrolls) */
 #gameWrapper::before,
 #gameWrapper::after {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
@@ -75,19 +85,19 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; }
 @keyframes twinkle2 { 0%{opacity:.7} 60%{opacity:.3} 100%{opacity:.9} }
 
 /* Floating nebula blobs */
-.nebula { position:absolute; border-radius:50%; pointer-events:none; filter:blur(70px); opacity:.18; z-index:0; }
+.nebula { position:fixed; border-radius:50%; pointer-events:none; filter:blur(70px); opacity:.18; z-index:0; }
 .nebula-1 { width:400px; height:300px; background:radial-gradient(#7c3aed,transparent); top:-80px; left:-100px; animation:drift 18s ease-in-out infinite alternate; }
 .nebula-2 { width:350px; height:250px; background:radial-gradient(#1d4ed8,transparent); bottom:10%; right:-80px; animation:drift 22s ease-in-out infinite alternate-reverse; }
 .nebula-3 { width:250px; height:200px; background:radial-gradient(#be185d,transparent); bottom:30%; left:5%; animation:drift 15s ease-in-out infinite alternate; }
 @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(30px,20px) scale(1.12)} }
 
-/* All content above starfield — nebulas must stay absolute so they don't consume flex space */
+/* All content above starfield — nebulas must stay out of the flex flow */
 #gameWrapper > *:not(.nebula) { position: relative; z-index: 1; }
-#gameWrapper > .nebula { position: absolute; z-index: 0; }
+#gameWrapper > .nebula { position: fixed; z-index: 0; }
+/* The tutorial is a true full-screen overlay (the rule above would otherwise make it relative) */
+#gameWrapper > #tutorialScreen { position: fixed; z-index: 10005; }
 
 /* ─── Game-area container ─────────────────────────────────── */
-/* FIX: widened + set to fill available height so the game uses the
-   whole screen instead of sitting small in a corner with dead space. */
 #gameWrap {
     width: 100%;
     max-width: 1320px;
@@ -103,6 +113,8 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; }
 #gameScreen {
     width: 100%;
     height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -282,13 +294,16 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; }
     transition: bottom .2s, opacity .2s;
     filter: blur(2px);
 }
-.ship:hover {
-    transform: translateY(-6px);
-    border-color: rgba(167,139,250,0.7);
-    box-shadow: 0 12px 30px rgba(88,28,135,0.45), 0 0 0 1px rgba(167,139,250,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
-    background: linear-gradient(160deg, rgba(109,40,217,0.3) 0%, rgba(30,10,60,0.7) 100%);
+/* Hover effects only on devices that actually hover (not touch) */
+@media (hover: hover) {
+    .ship:hover {
+        transform: translateY(-6px);
+        border-color: rgba(167,139,250,0.7);
+        box-shadow: 0 12px 30px rgba(88,28,135,0.45), 0 0 0 1px rgba(167,139,250,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+        background: linear-gradient(160deg, rgba(109,40,217,0.3) 0%, rgba(30,10,60,0.7) 100%);
+    }
+    .ship:hover::after { bottom: -6px; opacity: 1; }
 }
-.ship:hover::after { bottom: -6px; opacity: 1; }
 .ship:active { transform: scale(0.95); }
 
 .ship-num {
@@ -392,6 +407,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     background: rgba(5,5,15,0.82); backdrop-filter: blur(10px);
     border-radius: 24px; align-items: center; justify-content: center;
     flex-direction: column; z-index: 50;
+    text-align: center; padding: 16px;
 }
 #pauseOverlay.active { display: flex; }
 #pauseOverlay h2 { color: #fff; font-size: 2.4rem; font-weight: 900; margin-bottom: 6px; text-shadow: 0 0 30px rgba(167,139,250,0.8); }
@@ -401,7 +417,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     color: #fff; font-size: 1rem; font-weight: 800;
     padding: 14px 44px; border-radius: 14px; border: none; cursor: pointer;
     box-shadow: 0 6px 24px rgba(124,58,237,.45); transition: all .2s;
-    letter-spacing: .5px;
+    letter-spacing: .5px; min-height: 48px;
 }
 .resume-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(124,58,237,.6); }
 
@@ -547,13 +563,14 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
     align-items: center; justify-content: center; z-index: 9999; padding: 16px;
+    overflow-y: auto;
 }
 #endModal.show { display: flex; }
 .modal-box {
     background: linear-gradient(145deg,#12082a,#0f172a);
     border: 1px solid rgba(139,92,246,0.25);
     border-radius: 28px; padding: 44px 36px; text-align: center;
-    max-width: 460px; width: 100%;
+    max-width: 460px; width: 100%; margin: auto;
     box-shadow: 0 28px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(139,92,246,0.1), 0 0 60px rgba(88,28,135,0.25);
     animation: modalPop .4s cubic-bezier(.34,1.56,.64,1);
 }
@@ -569,10 +586,10 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 .modal-btn-secondary { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.12); }
 .modal-btn-secondary:hover { background:rgba(255,255,255,0.12); color:#fff; }
 
-/* ─── Responsive ──────────────────────────────────────────── */
 /* ─── Tutorial System ─────────────────────────────────────── */
 @keyframes tutFadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tutPopIn{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes tutFlt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
 /* Overlay */
 #tutorialScreen{
@@ -580,16 +597,17 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     background:rgba(4,6,18,.92);
     backdrop-filter:blur(14px);
     z-index:10005;
-    display:flex;align-items:center;justify-content:center;padding:20px;
+    display:flex;align-items:flex-start;justify-content:center;padding:20px;
+    overflow-y:auto;
     animation:tutFadeUp .28s ease;
 }
 /* Card */
 .nw-tut-card{
     background:linear-gradient(165deg,#0e0b1e 0%,#111533 100%);
     border:2px solid rgba(139,92,246,.45);
-    border-radius:26px;max-width:820px;width:100%;
+    border-radius:26px;max-width:820px;width:100%;margin:auto;
     box-shadow:0 35px 80px rgba(0,0,0,.85),0 0 50px rgba(139,92,246,.2);
-    overflow:hidden;max-height:94vh;
+    overflow:hidden;max-height:94vh;max-height:94dvh;
     display:flex;flex-direction:column;padding:30px 36px 26px;
     position:relative;
 }
@@ -602,6 +620,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     display:flex;justify-content:space-between;align-items:center;
     margin-bottom:12px;padding-bottom:12px;
     border-bottom:1px solid rgba(255,255,255,.08);
+    flex-shrink:0;
 }
 .nw-tut-tag{
     display:inline-flex;align-items:center;gap:8px;
@@ -610,15 +629,15 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     border:1px solid rgba(139,92,246,.35);padding:5px 14px;border-radius:50px;
 }
 .nw-tut-close{
-    background:transparent;border:none;color:#94a3b8;font-size:1.5rem;
-    cursor:pointer;line-height:1;transition:color .18s;
+    background:transparent;border:none;color:#94a3b8;font-size:1.8rem;
+    cursor:pointer;line-height:1;transition:color .18s;min-width:44px;min-height:44px;
 }
 .nw-tut-close:hover{color:#fff;}
 /* Slide body */
-.nw-tut-body{display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;}
-.nw-tut-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.nw-tut-body{display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
+.nw-tut-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;}
 .nw-tut-indicator{font-size:.72rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#818cf8;}
-.nw-tut-slide-num{font-size:.75rem;font-weight:700;color:#64748b;letter-spacing:.5px;}
+.nw-tut-slide-num{font-size:.75rem;font-weight:700;color:#64748b;letter-spacing:.5px;white-space:nowrap;}
 /* Content area */
 .nw-tut-content{flex:1;}
 /* Hero row */
@@ -713,7 +732,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 .nw-tut-start:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(16,185,129,.55);}
 
 /* Trial Screen */
-#nwTrialScreen{display:none;width:100%;max-width:680px;margin:auto;background:rgba(12,5,30,.94);border:1px solid rgba(139,92,246,.38);border-radius:28px;padding:28px 24px 22px;text-align:center;backdrop-filter:blur(28px);box-shadow:0 0 70px rgba(88,28,135,.35);animation:tutFadeUp .5s cubic-bezier(.34,1.56,.64,1);color:#fff;overflow-y:auto;max-height:95vh;position:relative;z-index:1;}
+#nwTrialScreen{display:none;width:100%;max-width:680px;margin:auto;background:rgba(12,5,30,.94);border:1px solid rgba(139,92,246,.38);border-radius:28px;padding:28px 24px 22px;text-align:center;backdrop-filter:blur(28px);box-shadow:0 0 70px rgba(88,28,135,.35);animation:tutFadeUp .5s cubic-bezier(.34,1.56,.64,1);color:#fff;position:relative;z-index:1;}
 .trial-badge-nw{display:inline-flex;align-items:center;gap:7px;background:rgba(139,92,246,.18);border:1.5px solid rgba(167,139,250,.38);border-radius:99px;padding:5px 16px;font-size:11px;font-weight:800;color:#c4b5fd;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
 .trial-title-nw{font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:4px;}
 .trial-sub-nw{font-size:12.5px;color:rgba(200,180,255,.5);margin-bottom:16px;line-height:1.5;}
@@ -726,8 +745,10 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 #nwTrialShipGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
 .trial-ship{position:relative;background:linear-gradient(160deg,rgba(88,28,135,.22),rgba(15,8,40,.7));border:1.5px solid rgba(139,92,246,.3);border-radius:18px;padding:18px 10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:transform .18s cubic-bezier(.34,1.56,.64,1),border-color .18s,box-shadow .18s;overflow:hidden;}
 .trial-ship::after{content:'🔥';position:absolute;bottom:-20px;font-size:20px;opacity:0;transition:bottom .2s,opacity .2s;}
-.trial-ship:hover{transform:translateY(-5px);border-color:rgba(167,139,250,.7);box-shadow:0 10px 28px rgba(88,28,135,.4);}
-.trial-ship:hover::after{bottom:-4px;opacity:1;}
+@media (hover:hover){
+    .trial-ship:hover{transform:translateY(-5px);border-color:rgba(167,139,250,.7);box-shadow:0 10px 28px rgba(88,28,135,.4);}
+    .trial-ship:hover::after{bottom:-4px;opacity:1;}
+}
 .trial-ship:active{transform:scale(.95);}
 .trial-ship.correct{border-color:#34d399;background:linear-gradient(160deg,rgba(16,185,129,.35),rgba(6,60,40,.85));box-shadow:0 0 24px rgba(52,211,153,.5);transform:translateY(-4px) scale(1.03);}
 .trial-ship.wrong{border-color:#f87171;background:linear-gradient(160deg,rgba(239,68,68,.25),rgba(60,10,10,.7));box-shadow:0 0 24px rgba(239,68,68,.3);animation:nwShake .4s ease-in-out;}
@@ -735,31 +756,202 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 @keyframes nwShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}60%{transform:translateX(7px)}}
 .trial-ship-icon{font-size:36px;line-height:1;}
 .trial-ship-ans{font-size:26px;font-weight:900;color:#fff;text-shadow:0 0 14px rgba(167,139,250,.5);}
-.trial-skip-nw{font-size:11px;color:rgba(167,139,250,.4);cursor:pointer;background:none;border:none;text-decoration:underline;text-underline-offset:3px;transition:color .15s;}
+.trial-skip-nw{font-size:11px;color:rgba(167,139,250,.4);cursor:pointer;background:none;border:none;text-decoration:underline;text-underline-offset:3px;transition:color .15s;padding:10px 12px;}
 .trial-skip-nw:hover{color:rgba(167,139,250,.75);}
 
 /* Ready Modal */
 #nwReadyOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center;}
 #nwReadyOverlay.show{display:flex;animation:tutFadeUp .3s ease;}
-.nw-ready-box{background:linear-gradient(135deg,rgba(12,5,30,.97),rgba(10,20,50,.97));border:1.5px solid rgba(139,92,246,.5);border-radius:24px;padding:34px 30px;text-align:center;max-width:400px;width:90%;box-shadow:0 0 80px rgba(88,28,135,.5);animation:tutPopIn .45s cubic-bezier(.34,1.56,.64,1);}
+.nw-ready-box{background:linear-gradient(135deg,rgba(12,5,30,.97),rgba(10,20,50,.97));border:1.5px solid rgba(139,92,246,.5);border-radius:24px;padding:34px 30px;text-align:center;max-width:400px;width:100%;margin:auto;box-shadow:0 0 80px rgba(88,28,135,.5);animation:tutPopIn .45s cubic-bezier(.34,1.56,.64,1);}
 .nw-ready-ico{font-size:60px;line-height:1;margin-bottom:10px;animation:tutFlt 3s ease-in-out infinite;}
 .nw-ready-stars{font-size:26px;letter-spacing:6px;margin-bottom:8px;}
 .nw-ready-title{font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:5px;text-shadow:0 0 18px rgba(167,139,250,.5);}
 .nw-ready-sub{font-size:13px;color:rgba(200,180,255,.6);line-height:1.6;margin-bottom:16px;}
-.nw-ready-start{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-size:15px;font-weight:900;padding:13px 30px;border-radius:13px;border:none;cursor:pointer;box-shadow:0 8px 28px rgba(124,58,237,.5);transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;display:block;width:100%;margin-bottom:9px;}
+.nw-ready-start{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-size:15px;font-weight:900;padding:13px 30px;border-radius:13px;border:none;cursor:pointer;box-shadow:0 8px 28px rgba(124,58,237,.5);transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;display:block;width:100%;margin-bottom:9px;min-height:48px;}
 .nw-ready-start:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(124,58,237,.65);}
-.nw-ready-practice{background:rgba(139,92,246,.1);color:#c4b5fd;border:1.5px solid rgba(139,92,246,.3);padding:10px 22px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;display:block;width:100%;}
+.nw-ready-practice{background:rgba(139,92,246,.1);color:#c4b5fd;border:1.5px solid rgba(139,92,246,.3);padding:10px 22px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;display:block;width:100%;min-height:44px;}
 .nw-ready-practice:hover{background:rgba(139,92,246,.18);color:#e9d5ff;}
 
-@media (max-width: 580px) {
-    #nwTrialShipGrid{grid-template-columns:repeat(2,1fr);}
-    #shipGrid { grid-template-columns: repeat(2, 1fr); }
-    .ship { min-height: 130px; }
+/* ============================================================
+   RESPONSIVE / MOBILE-ADAPTIVE
+   ============================================================ */
+
+/* Tablets, small windows and short screens: let the game area grow and scroll
+   instead of squashing into 100% height */
+@media (max-width: 900px), (max-height: 700px) {
+    #gameScreen { height: auto !important; min-height: 100%; }
+    #gameWrap   { height: auto; max-height: none; }
+    #arenaWrap  { flex: none; }
+}
+
+/* Touch devices: hide keyboard-only hints */
+@media (hover: none) and (pointer: coarse) {
+    .ship-key   { display: none; }
+    .hint-keys  { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #gameWrapper::before, #gameWrapper::after, .nebula, #problemCard::before, .ship-icon, .nw-ready-ico { animation: none; }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+    #gameWrapper {
+        padding: 10px 10px 16px;
+        padding-top: max(10px, env(safe-area-inset-top));
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+    }
+    #gameWrap { gap: 10px; }
+
+    /* HUD → compact grid: Lives | Level | Score, then nav row */
+    #hud {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 10px 8px;
+        padding: 12px 12px;
+        border-radius: 16px;
+    }
+    .hud-right-group { display: contents !important; }
+    #hud .hud-pill { align-items: center; }
+    #hud .hud-center { flex: none; gap: 3px; }
+    .hud-label { font-size: 11px; letter-spacing: 1px; }
+    .hud-val   { font-size: 24px; }
+    .level-badge { font-size: 14px; padding: 4px 12px; }
+    .hs-label { font-size: 10px; }
+    #hud .eduplay-game-nav { grid-column: 1 / -1; display: flex !important; gap: 8px; width: 100%; }
+    .eduplay-game-nav .eduplay-nav-btn { flex: 1; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: .75rem; padding: 8px 6px; }
+    .eduplay-game-nav .eduplay-nav-btn span { font-size: .72rem; }
+
+    #progressMeta { font-size: 11px; }
+
+    /* Arena */
+    #arenaWrap { padding: 14px 12px 16px; border-radius: 18px; }
+    #flashOverlay { border-radius: 18px; }
+
+    #timerWrap { gap: 8px; margin-bottom: 12px; padding: 8px 10px; }
+    #timerLabel { font-size: 11px; min-width: 0; }
+    #timerIcon { font-size: 15px; }
+    #timerTrack { height: 9px; }
+    #timerNum { font-size: 17px; min-width: 34px; }
+
+    #problemCard { padding: 16px 14px; margin-bottom: 14px; min-height: 96px; border-radius: 14px; }
+    #problemEyebrow { font-size: 11px; margin-bottom: 8px; letter-spacing: 1.5px; }
+    #problemEyebrow::before, #problemEyebrow::after { width: 14px; }
+    #problemText { font-size: 16px; line-height: 1.5; }
+
+    #shipGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .ship { min-height: 130px; padding: 22px 8px 12px; gap: 6px; border-radius: 18px; }
+    .ship::before { border-radius: 18px; }
+    .ship-num { top: 8px; left: 8px; width: 22px; height: 22px; font-size: 11px; border-radius: 7px; }
+    .ship-lottie { width: 64px; height: 64px; }
     .ship-icon { font-size: 36px; }
-    .ship-answer { font-size: 24px; }
-    #problemText { font-size: 16px; }
-    #gameWrapper { padding: 10px 10px 16px; }
-    #arenaWrap { padding: 18px 16px 22px; }
+    .ship-answer { font-size: 26px; }
+
+    /* Controls bar */
+    #controls { padding: 8px 10px; justify-content: center; }
+    .ctrl-btn { min-height: 44px; padding: 10px 18px; font-size: 14px; }
+
+    /* Pause becomes a full-screen dialog so it's centered in the viewport, not the (scrolled) arena */
+    #pauseOverlay { position: fixed; z-index: 9998; border-radius: 0; }
+    #pauseOverlay h2 { font-size: 1.8rem; }
+    #pauseOverlay p { font-size: .95rem; margin-bottom: 20px; }
+    #pauseOverlay .eduplay-game-nav { flex-direction: column; width: 100%; max-width: 260px; }
+
+    /* End modal */
+    .modal-box { padding: 28px 20px; border-radius: 22px; }
+    .modal-end-icon { font-size: 54px; }
+    .modal-box h2 { font-size: 1.5rem; }
+    .modal-box p { font-size: 1rem; margin-bottom: 20px; }
+    .modal-btn-row { flex-direction: column !important; align-items: stretch !important; }
+    .modal-btn-row .modal-btn, .modal-btn-row .eduplay-nav-btn { width: 100%; min-height: 46px; justify-content: center; }
+
+    /* Instruction screen */
+    .instr-card { border-radius: 20px; }
+    .instr-header { padding: 14px 16px 12px; }
+    .instr-slide-body { padding: 16px 16px 4px; }
+    .instr-hero { gap: 12px; margin-bottom: 12px; }
+    .instr-hero-icon { width: 44px; height: 44px; font-size: 1.6rem; }
+    .instr-hero h3 { font-size: 1.1rem; }
+    .instr-hero p { font-size: .82rem; }
+    .instr-demo-ships { gap: 6px; }
+    .instr-demo-ship { min-width: 0; flex: 1; padding: 8px 4px; }
+    .instr-actions { padding: 0 14px 16px; }
+    .instr-btn-prev, .instr-btn-next, .start-btn { min-height: 44px; }
+    .instr-skip-lnk { padding: 10px 6px; }
+
+    /* Tutorial → full-screen sheet */
+    #tutorialScreen { padding: 0; align-items: stretch; }
+    .nw-tut-card {
+        max-width: none; max-height: none; height: 100%; height: 100dvh;
+        border-radius: 0; border-width: 0; margin: 0;
+        padding: 16px 14px calc(12px + env(safe-area-inset-bottom));
+    }
+    .nw-tut-tag { font-size: .72rem; padding: 5px 11px; }
+    .nw-tut-hero { gap: 10px; }
+    .nw-tut-hero-icon { width: 44px; height: 44px; font-size: 1.7rem; }
+    .nw-tut-hero h3 { font-size: 1.12rem; }
+    .nw-tut-hero p { font-size: .82rem; }
+    .nw-tut-desc { font-size: .92rem; margin-bottom: 12px; }
+    .nw-tut-box { padding: 12px 13px; }
+    .nw-tut-box h5 { font-size: .9rem; }
+    .nw-tut-box p { font-size: .84rem; }
+    .demo-ships { gap: 6px; }
+    .demo-ship { min-width: 0; flex: 1; padding: 10px 4px; }
+    .nw-tut-actions { position: sticky; bottom: 0; background: #0f1330; padding: 10px 0 4px; }
+    .nw-tut-skip { min-height: 44px; padding: 10px 12px; font-size: .75rem; }
+    .nw-tut-prev, .nw-tut-next, .nw-tut-start { min-height: 44px; padding: 10px 16px; font-size: .85rem; }
+
+    /* Trial */
+    #nwTrialScreen { padding: 18px 14px 14px; border-radius: 22px; }
+    .trial-prob-card { padding: 14px 14px; margin-bottom: 14px; }
+    .trial-prob-txt { font-size: 15px; }
+    #nwTrialShipGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .trial-ship { padding: 14px 8px 12px; }
+    .trial-ship .ship-lottie { width: 64px; height: 64px; }
+    .trial-ship-ans { font-size: 22px; }
+
+    /* Ready modal */
+    .nw-ready-box { padding: 26px 18px; border-radius: 20px; }
+    .nw-ready-ico { font-size: 50px; }
+    .nw-ready-title { font-size: 1.3rem; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+    .hud-val { font-size: 21px; }
+    .eduplay-game-nav .eduplay-nav-btn span { display: none; }
+    #problemText { font-size: 15px; }
+    .ship-answer { font-size: 23px; }
+    .ship-lottie { width: 56px; height: 56px; }
+}
+
+/* Landscape phones: 4-across ships, compact chrome */
+@media (max-height: 520px) and (orientation: landscape) {
+    #gameWrapper { padding: 8px 12px; }
+    #gameWrap { gap: 8px; }
+    #hud { padding: 6px 14px; }
+    .hud-val { font-size: 20px; }
+    .hud-label { font-size: 10px; }
+    .level-badge { font-size: 13px; padding: 3px 12px; }
+    .eduplay-game-nav .eduplay-nav-btn { min-height: 38px; }
+    #progressMeta { display: none; }
+    #arenaWrap { padding: 12px 16px 14px; border-radius: 16px; }
+    #timerWrap { margin-bottom: 8px; padding: 6px 10px; }
+    #problemCard { padding: 12px 16px; margin-bottom: 10px; min-height: 0; }
+    #problemEyebrow { margin-bottom: 4px; font-size: 11px; }
+    #problemText { font-size: 15px; line-height: 1.4; }
+    #shipGrid { gap: 10px; }
+    .ship { min-height: 108px; padding: 16px 6px 10px; gap: 4px; }
+    .ship-lottie { width: 52px; height: 52px; }
+    .ship-answer { font-size: 22px; }
+    .ship-key { display: none; }
+    #controls { display: none; }
+    #pauseOverlay { position: fixed; z-index: 9998; border-radius: 0; }
+    .nw-tut-card { height: auto; max-height: 100dvh; border-radius: 18px; padding: 14px 18px; }
+    #tutorialScreen { padding: 8px; }
 }
 </style>
 
@@ -778,7 +970,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
       <div class="nw-tut-tag">
         <i class="bi bi-rocket-takeoff-fill"></i> How to Play
       </div>
-      <button type="button" class="nw-tut-close" onclick="nwSkipTutorial()" title="Skip Tutorial">&times;</button>
+      <button type="button" class="nw-tut-close" onclick="nwSkipTutorial()" title="Skip Tutorial" aria-label="Skip tutorial">&times;</button>
     </div>
 
     {{-- Slide body --}}
@@ -808,7 +1000,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           </div>
           <div class="nw-tut-box">
             <h5 style="color:#38bdf8;"><i class="bi bi-controller"></i> Simple Controls</h5>
-            <p>Click any ship <strong style="color:#fff;">or</strong> press <kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">1</kbd>–<kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">4</kbd> on your keyboard.</p>
+            <p>Tap (or click) any ship <strong style="color:#fff;">or</strong> press <kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">1</kbd>–<kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">4</kbd> on your keyboard.</p>
           </div>
           <div class="nw-tut-box">
             <h5 style="color:#34d399;"><i class="bi bi-trophy-fill"></i> Goal</h5>
@@ -855,7 +1047,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
             <p>Four ships appear below the mission — only one is right.</p>
           </div>
         </div>
-        <p class="nw-tut-desc">Each ship has a number on it. Find the one that matches your answer and click it (or press its number key).</p>
+        <p class="nw-tut-desc">Each ship has a number on it. Find the one that matches your answer and tap it (or press its number key).</p>
         <div class="demo-ships" style="margin-bottom:12px;">
           <div class="demo-ship"><div class="demo-ship-icon">🚀</div><div class="demo-ship-num">4</div><div class="demo-ship-lbl">Key [1]</div></div>
           <div class="demo-ship correct-ship"><div class="demo-ship-icon">🛸</div><div class="demo-ship-num">6</div><div class="demo-ship-lbl" style="color:#34d399;">✅ Correct!</div></div>
@@ -964,7 +1156,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 <div id="nwTrialScreen">
     <div class="trial-badge-nw">🎮 Practice Round</div>
     <h2 class="trial-title-nw">Trial Mission</h2>
-    <p class="trial-sub-nw">Read the problem below and click the ship with the correct answer!</p>
+    <p class="trial-sub-nw">Read the problem below and tap the ship with the correct answer!</p>
     <div class="trial-prob-card">
         <div class="trial-prob-eye">Mission Briefing</div>
         <div class="trial-prob-txt" id="nwTrialProbText">Loading...</div>
@@ -1044,7 +1236,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         <div class="instr-hero-icon" style="color:#34d399;">🚀</div>
         <div>
           <h3>Pick a Ship &amp; Beat the Clock</h3>
-          <p>Four ships appear — click yours before time runs out!</p>
+          <p>Four ships appear — tap yours before time runs out!</p>
         </div>
       </div>
       <div class="instr-demo-ships">
@@ -1081,8 +1273,8 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
       </div>
       <div class="instr-grid">
         <div class="instr-box" style="border-color:rgba(251,191,36,.25);">
-          <h5 style="color:#fbbf24;"><i class="bi bi-keyboard-fill"></i> Keyboard</h5>
-          <p>Press <kbd>1</kbd>–<kbd>4</kbd> to select a ship. Press <kbd>P</kbd> or <kbd>Esc</kbd> to pause. Press <kbd>F</kbd> for fullscreen.</p>
+          <h5 style="color:#fbbf24;"><i class="bi bi-keyboard-fill"></i> Keyboard &amp; Touch</h5>
+          <p>Tap a ship, or press <kbd>1</kbd>–<kbd>4</kbd> to select one. Press <kbd>P</kbd> or <kbd>Esc</kbd> to pause. Press <kbd>F</kbd> for fullscreen.</p>
         </div>
         <div class="instr-box" style="border-color:rgba(139,92,246,.25);">
           <h5 style="color:#a78bfa;"><i class="bi bi-pause-circle-fill"></i> Pause</h5>
@@ -1123,7 +1315,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 </div>
 
 {{-- GAME SCREEN --}}
-<div id="gameScreen" style="display:none;width:100%;height:100%;">
+<div id="gameScreen" style="display:none;width:100%;">
 <div id="gameWrap">
 
     {{-- HUD --}}
@@ -1186,7 +1378,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         <div id="pauseOverlay">
             <div style="font-size:60px;margin-bottom:10px;filter:drop-shadow(0 0 20px rgba(167,139,250,.8));">⏸</div>
             <h2>Mission Paused</h2>
-            <p>Press <kbd style="background:rgba(255,255,255,0.15);border-radius:5px;padding:2px 8px;">P</kbd> or click Resume to continue</p>
+            <p>Press <kbd style="background:rgba(255,255,255,0.15);border-radius:5px;padding:2px 8px;">P</kbd> or tap Resume to continue</p>
             <button class="resume-btn" onclick="togglePause()">▶ Resume Mission</button>
             <div class="eduplay-game-nav" style="margin-top:14px;display:flex;gap:10px;justify-content:center;">
                 <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
@@ -1198,7 +1390,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     {{-- Controls --}}
     <div id="controls">
         <div class="hint-keys"><kbd>1-4</kbd> select &nbsp;·&nbsp; <kbd>F</kbd> fullscreen &nbsp;·&nbsp; <kbd>P</kbd> pause</div>
-        <button class="ctrl-btn btn-fs" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+        <button class="ctrl-btn btn-fs" id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
     </div>
 
 </div>{{-- end gameWrap --}}
@@ -1228,6 +1420,16 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
 <script>
+/* Ensure a mobile viewport exists (in case layouts.app doesn't define one) */
+(function(){
+    if(!document.querySelector('meta[name="viewport"]')){
+        const m=document.createElement('meta');
+        m.name='viewport';
+        m.content='width=device-width, initial-scale=1, viewport-fit=cover';
+        document.head.appendChild(m);
+    }
+})();
+
 const ROCKET_PALETTES = [
     { name: 'Cyan Explorer', filter: 'drop-shadow(0 0 16px rgba(56, 189, 248, 0.6)) hue-rotate(0deg)' },
     { name: 'Cosmic Violet', filter: 'drop-shadow(0 0 16px rgba(168, 85, 247, 0.7)) hue-rotate(55deg) saturate(1.3)' },
@@ -1269,6 +1471,9 @@ function nwRenderTutSlide(idx){
     if(backBtn) backBtn.disabled=(idx===0);
     if(nextBtn) nextBtn.style.display=(idx===NW_TOTAL_STEPS-1)?'none':'inline-block';
     if(startBtn) startBtn.style.display=(idx===NW_TOTAL_STEPS-1)?'inline-block':'none';
+    // Scroll the slide body back to the top on small screens
+    const body=document.querySelector('.nw-tut-body');
+    if(body) body.scrollTop=0;
     nwTutStep=idx;
 }
 
@@ -1289,6 +1494,21 @@ function nwSkipTutorial(){
     document.getElementById('tutorialScreen').style.display='none';
     document.getElementById('instructionScreen').style.display='';
 }
+
+/* Swipe left/right on the tutorial to change slides (touch screens) */
+(function(){
+    const ov=document.getElementById('tutorialScreen');
+    if(!ov) return;
+    let sx=0, sy=0;
+    ov.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+    ov.addEventListener('touchend',e=>{
+        const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+        if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.5){
+            if(dx<0 && nwTutStep<NW_TOTAL_STEPS-1) nwGoToStep(nwTutStep+1);
+            else if(dx>0 && nwTutStep>0) nwGoToStep(nwTutStep-1);
+        }
+    },{passive:true});
+})();
 
 /* ── Instruction screen slide logic ─────────────────────────────────────── */
 const INSTR_TOTAL = 4;
@@ -1390,7 +1610,7 @@ function nwTrialSelect(el,val,choices,shipIdx){
 function nwShowReadyModal(){
     const overlay=document.createElement('div');
     overlay.id='nwReadyOverlay';overlay.className='nwReadyOverlay';
-    overlay.style.cssText='display:flex;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center;animation:tutFadeUp .3s ease;';
+    overlay.style.cssText='display:flex;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center;padding:16px;overflow-y:auto;animation:tutFadeUp .3s ease;';
     overlay.innerHTML=`
         <div class="nw-ready-box">
             <div class="nw-ready-ico">🎉</div>
@@ -1566,6 +1786,11 @@ function nextProblem() {
     const choices = generateChoices(currentProblem.answer);
     renderProblem(choices);
     startTimer();
+    // On phones the page scrolls — bring the new problem back into view
+    const gw = document.getElementById('gameWrapper');
+    if (gw && gw.scrollTop > 0) {
+        try { gw.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { gw.scrollTop = 0; }
+    }
 }
 
 function renderProblem(choices) {
@@ -1726,6 +1951,11 @@ function togglePause() {
     }
 }
 
+// Auto-pause when the tab / app goes to the background (mobile friendly)
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && gameRunning && !isPaused && !answering) togglePause();
+});
+
 
 // ── End ───────────────────────────────────────────────────────────────────────
 function endGame(won) {
@@ -1780,11 +2010,27 @@ function saveProgress(levelToSave, won) {
 // ── Fullscreen ────────────────────────────────────────────────────────────────
 function toggleFullscreen() {
     if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
+        const de = document.documentElement;
+        const req = de.requestFullscreen || de.webkitRequestFullscreen;
+        if (req) { const p = req.call(de); if (p && p.catch) p.catch(() => {}); }
     } else {
         document.exitFullscreen();
     }
 }
+
+// iPhone Safari has no Fullscreen API for pages — hide the button (and the bar if it would be empty)
+(function(){
+    const de = document.documentElement;
+    const supported = !!(de.requestFullscreen || de.webkitRequestFullscreen);
+    if (!supported) {
+        const fsBtn = document.getElementById('fsBtn');
+        if (fsBtn) fsBtn.style.display = 'none';
+        if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
+            const bar = document.getElementById('controls');
+            if (bar) bar.style.display = 'none';
+        }
+    }
+})();
 
 document.addEventListener('fullscreenchange', () => {
     const wrapper = document.getElementById('gameWrapper');

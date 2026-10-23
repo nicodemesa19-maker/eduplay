@@ -52,6 +52,16 @@ Route::get('/home', fn() => redirect('/'))->name('home');
 // API: Check user type for forgot password flow
 Route::post('/api/check-user-type', [LoginController::class, 'checkUserType']);
 
+// Notification Routes (All authenticated users)
+Route::middleware('auth')->prefix('notifications')->name('notifications.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\NotificationController::class, 'index'])->name('index');
+    Route::get('/unread', [\App\Http\Controllers\NotificationController::class, 'getUnread'])->name('unread');
+    Route::post('/{id}/read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('mark-read');
+    Route::post('/mark-all-read', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('mark-all-read');
+    Route::delete('/{id}', [\App\Http\Controllers\NotificationController::class, 'delete'])->name('delete');
+    Route::delete('/read/all', [\App\Http\Controllers\NotificationController::class, 'deleteAllRead'])->name('delete-all-read');
+});
+
 // Admin Routes
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');

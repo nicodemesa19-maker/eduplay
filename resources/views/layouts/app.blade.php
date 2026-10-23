@@ -117,6 +117,61 @@
         }
         .logout-btn i { font-size: .85rem; }
 
+        /* Notification bell */
+        .notif-bell {
+            position: relative;
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,.65);
+            cursor: pointer;
+            transition: all .2s;
+            text-decoration: none;
+        }
+        .notif-bell:hover {
+            background: rgba(99,102,241,.2);
+            border-color: rgba(99,102,241,.4);
+            color: #a5b4fc;
+            transform: scale(1.05);
+        }
+        .notif-bell i {
+            font-size: 1.1rem;
+        }
+        .notif-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(239,68,68,.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        [data-bs-theme="light"] .notif-bell {
+            background: #f1f5f9;
+            border-color: #e2e8f0;
+            color: #64748b;
+        }
+        [data-bs-theme="light"] .notif-bell:hover {
+            background: #ede9fe;
+            border-color: #a78bfa;
+            color: #7c3aed;
+        }
+
         /* Light mode overrides */
         [data-bs-theme="light"] .app-nav {
             background: rgba(255,255,255,.97);
@@ -467,6 +522,14 @@
                     <i class="bi bi-moon-stars-fill" id="globalThemeIcon"></i>
                     <span id="globalThemeText" class="d-none d-sm-inline">Dark</span>
                 </button>
+
+                <!-- Notification Bell -->
+                <a href="{{ route('notifications.index') }}" class="notif-bell" title="Notifications">
+                    <i class="bi bi-bell-fill"></i>
+                    @if(Auth::user()->unreadNotificationsCount() > 0)
+                        <span class="notif-badge">{{ Auth::user()->unreadNotificationsCount() }}</span>
+                    @endif
+                </a>
 
                 <!-- User pill -->
                 <div class="user-pill d-none d-sm-flex">

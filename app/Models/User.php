@@ -138,6 +138,22 @@ class User extends Authenticatable
         return $this->hasMany(TeacherNotification::class, 'teacher_id');
     }
 
+    /**
+     * General notifications for this user.
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'user_id');
+    }
+
+    /**
+     * Get unread notifications count.
+     */
+    public function unreadNotificationsCount(): int
+    {
+        return $this->notifications()->unread()->count();
+    }
+
     // ========== HELPER METHODS ==========
 
     /**
