@@ -783,9 +783,9 @@
         const destEl = document.getElementById('eduplayExitDestName');
         const iconEl = document.getElementById('eduplayExitIcon');
 
-        if (titleEl) titleEl.textContent = isMap ? 'Return to Game Map?' : 'Exit to Progress?';
-        if (destEl) destEl.textContent = isMap ? 'Game Map' : 'My Progress';
-        if (iconEl) iconEl.textContent = isMap ? '🗺️' : '📊';
+        if (titleEl) titleEl.textContent = isMap ? 'Return to Game Map?' : 'Exit to Game Arena?';
+        if (destEl) destEl.textContent = isMap ? 'Game Map' : 'Game Arena';
+        if (iconEl) iconEl.textContent = isMap ? '🗺️' : '🎮';
 
         eduplayPauseGame();
 
@@ -860,9 +860,9 @@
             let destName = 'Game Map';
 
             if (!isMap || btn.classList.contains('eduplay-btn-exit')) {
-                // When exiting, destination is the progress page
-                targetUrl = '{{ route("student.myProgress") }}';
-                destName = 'My Progress';
+                // When exiting, destination is the game arena page
+                targetUrl = '{{ route("student.games") }}';
+                destName = 'Game Arena';
             }
 
             window.requestEduplayExit(targetUrl, destName);
