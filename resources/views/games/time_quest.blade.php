@@ -87,10 +87,22 @@
 
   /* ---------- Header with Arcade Vibes ---------- */
   .tq-head{
-    display:flex;justify-content:space-between;align-items:center;
-    gap:16px 20px;flex-wrap:wrap;margin-bottom:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px 20px;
+    flex-wrap:nowrap;
+    margin-bottom:18px;
   }
-  .tq-title{display:flex;align-items:center;gap:12px;min-width:0}
+  .tq-title{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+  
+  /* Desktop: Group stats and nav on the right */
+  .tq-head-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
   .tq-exit{
     display:inline-flex;align-items:center;gap:6px;flex:none;
     min-height:44px;padding:0 14px 0 10px;border-radius:12px;
@@ -1156,7 +1168,7 @@
      MOBILE ADAPTIVE LAYER
      ============================================================ */
   @media (max-width: 940px) {
-    /* Header stacks: title / stats grid / burger in corner */
+    /* Header stacks vertically on mobile */
     .tq-head {
       flex-direction: column;
       align-items: stretch;
@@ -1167,11 +1179,12 @@
     .tq-title { width: 100%; margin-bottom: 4px; }
     .tq-title h1 { font-size: 1.2rem; }
     .tq-title h1 .sub { font-size: .75rem; margin-top: 2px; }
-    .tq-head > div:last-child {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    
+    /* Right container becomes full-width and left-aligned on mobile */
+    .tq-head-right {
       width: 100%;
+      align-items: stretch;
+      gap: 10px;
     }
 
     /* Stats: show all 6 stats on mobile in 3x2 grid */
@@ -1179,8 +1192,6 @@
       width: 100%;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
-      order: 2;
-      margin-top: 0;
     }
     .stat { padding: 10px 12px; border-radius: 12px; }
     .stat .label { font-size: .68rem; font-weight: 700; }
@@ -1461,7 +1472,7 @@
     <div class="tq-title">
       <h1>🌏 Time Zone Quest <span class="sub">Manila vs. the world</span></h1>
     </div>
-    <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;width:100%;">
+    <div class="tq-head-right">
       <div class="stats" role="group" aria-label="Game stats">
         <div class="stat level"><span class="label">Level</span><span class="val" id="uiLevel">1</span></div>
         <div class="stat coins"><span class="label">Coins</span><span class="val" id="uiCoins">50</span></div>
