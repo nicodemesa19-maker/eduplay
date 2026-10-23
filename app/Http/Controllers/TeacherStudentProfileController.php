@@ -91,9 +91,8 @@ class TeacherStudentProfileController extends Controller
             'field_name' => 'username',
             'old_value' => $oldUsername,
             'new_value' => $student->original_username,
-            'changed_by' => 'teacher',
-            'teacher_id' => $teacher->id,
-            'reason' => $request->reason,
+            'changed_by_role' => 'teacher',
+            'changed_by_user_id' => $teacher->id,
         ]);
 
         return back()->with('success', 'Username reverted to original successfully.');
@@ -136,9 +135,8 @@ class TeacherStudentProfileController extends Controller
             'field_name' => $fieldName,
             'old_value' => is_array($oldValue) ? json_encode($oldValue) : $oldValue,
             'new_value' => null,
-            'changed_by' => 'teacher',
-            'teacher_id' => $teacher->id,
-            'reason' => $validated['reason'],
+            'changed_by_role' => 'teacher',
+            'changed_by_user_id' => $teacher->id,
         ]);
 
         return back()->with('success', ucfirst(str_replace('_', ' ', $fieldName)) . ' cleared successfully.');
@@ -176,9 +174,8 @@ class TeacherStudentProfileController extends Controller
             'field_name' => 'username',
             'old_value' => $oldUsername,
             'new_value' => $validated['username'],
-            'changed_by' => 'teacher',
-            'teacher_id' => $teacher->id,
-            'reason' => $validated['reason'],
+            'changed_by_role' => 'teacher',
+            'changed_by_user_id' => $teacher->id,
         ]);
 
         return back()->with('success', 'Username updated successfully.');

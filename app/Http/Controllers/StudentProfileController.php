@@ -140,7 +140,8 @@ class StudentProfileController extends Controller
                 'field_name' => $field,
                 'old_value' => is_array($change['old']) ? json_encode($change['old']) : $change['old'],
                 'new_value' => is_array($change['new']) ? json_encode($change['new']) : $change['new'],
-                'changed_by' => 'student',
+                'changed_by_role' => 'student',
+                'changed_by_user_id' => $user->id,
             ]);
         }
 
@@ -194,7 +195,8 @@ class StudentProfileController extends Controller
             'field_name' => 'username',
             'old_value' => $oldUsername,
             'new_value' => $newUsername,
-            'changed_by' => 'student',
+            'changed_by_role' => 'student',
+            'changed_by_user_id' => $user->id,
         ]);
 
         // Notify teacher
@@ -235,7 +237,8 @@ class StudentProfileController extends Controller
             'field_name' => 'password',
             'old_value' => '********',
             'new_value' => '********',
-            'changed_by' => 'student',
+            'changed_by_role' => 'student',
+            'changed_by_user_id' => $user->id,
         ]);
 
         return redirect()->route('student.profile.edit')
@@ -292,7 +295,8 @@ class StudentProfileController extends Controller
             'field_name' => 'avatar',
             'old_value' => $oldAvatar ?? $oldAvatarUpload ?? 'none',
             'new_value' => $user->avatar_character ?? $user->avatar_upload_path ?? 'none',
-            'changed_by' => 'student',
+            'changed_by_role' => 'student',
+            'changed_by_user_id' => $user->id,
         ]);
 
         return redirect()->route('student.profile.edit')

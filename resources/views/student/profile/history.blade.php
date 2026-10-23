@@ -120,8 +120,8 @@ h1,h2,h3{font-family:'Bungee',sans-serif;}
         <div class="timeline-item">
           <div class="d-flex justify-content-between align-items-start flex-wrap">
             <div>
-              <span class="timeline-badge {{ $log->changed_by === 'teacher' ? 'timeline-badge-teacher' : '' }}">
-                {{ $log->changed_by === 'teacher' ? '👨‍🏫 Teacher' : '👤 You' }}
+              <span class="timeline-badge {{ $log->changed_by_role === 'teacher' ? 'timeline-badge-teacher' : '' }}">
+                {{ $log->changed_by_role === 'teacher' ? '👨‍🏫 Teacher' : '👤 You' }}
               </span>
               <h5 class="mt-2" style="color:var(--text2);">
                 Changed {{ ucfirst(str_replace('_', ' ', $log->field_name)) }}
