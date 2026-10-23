@@ -122,6 +122,11 @@
   .stats{
     display:grid;grid-template-columns:repeat(2,minmax(80px,auto));gap:10px;
   }
+  
+  /* Hide mobile-only stats on desktop */
+  .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile {
+    display: none;
+  }
   .stat{
     background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(182,255,61,.08));
     border:1.5px solid var(--cyan);
@@ -163,22 +168,24 @@
     display: none;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 12px;
     border: 2px solid var(--cyan);
     background: linear-gradient(135deg,rgba(0,229,255,.15),rgba(0,229,255,.08));
     color: var(--cyan);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: all .2s;
-    position: relative;
+    position: fixed;
+    top: 16px;
+    right: 16px;
     z-index: 1001;
   }
   .burger-menu-btn:hover {
     background: rgba(0,229,255,.25);
     box-shadow: var(--glow-cyan);
-    transform: translateY(-2px);
+    transform: scale(1.05);
   }
   .burger-menu-btn.active {
     background: rgba(0,229,255,.3);
@@ -261,14 +268,19 @@
   }
   .mobile-menu-items .eduplay-nav-btn {
     width: 100%;
-    min-height: 52px;
-    font-size: 1rem;
+    min-height: 56px;
+    font-size: 1.05rem;
+    font-weight: 700;
     justify-content: flex-start;
-    gap: 12px;
-    padding: 0 20px;
+    gap: 14px;
+    padding: 0 22px;
   }
   .mobile-menu-items .eduplay-nav-btn i {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+  }
+  .mobile-menu-items .eduplay-nav-btn span {
+    flex: 1;
+    text-align: left;
   }
   .tq .eduplay-nav-btn{
     display:inline-flex;align-items:center;justify-content:center;gap:6px;
@@ -1140,15 +1152,16 @@
      MOBILE ADAPTIVE LAYER
      ============================================================ */
   @media (max-width: 940px) {
-    /* Header stacks: title / stats / nav */
+    /* Header stacks: title / stats / burger in corner */
     .tq-head {
       flex-direction: column;
       align-items: stretch;
       gap: 10px;
       margin-bottom: 10px;
+      padding-right: 64px; /* Make room for burger button */
     }
     .tq-title { width: 100%; }
-    .tq-title h1 { font-size: 1.05rem; }
+    .tq-title h1 { font-size: 1.15rem; }
     .tq-title h1 .sub { font-size: .72rem; }
     .tq-head > div:last-child {
       display: flex;
@@ -1157,15 +1170,30 @@
       width: 100%;
     }
 
-    /* Stats: compact 2-up row */
+    /* Stats: show all 5 stats on mobile in compact grid */
     .stats {
       width: 100%;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 6px;
+      order: 2;
+      margin-top: 0;
     }
     .stat { padding: 6px 8px; border-radius: 10px; }
     .stat .label { font-size: .65rem; }
     .stat .val { font-size: .95rem; }
+    
+    /* Show mobile-only stats */
+    .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile {
+      display: flex;
+    }
+    .stat.time-mobile .val { color: var(--cyan); text-shadow: 0 0 8px rgba(0,229,255,.5); }
+    .stat.score-mobile .val { color: var(--lime); text-shadow: 0 0 8px rgba(182,255,61,.5); }
+    .stat.streak-mobile .val { color: var(--gold); text-shadow: 0 0 8px rgba(255,217,61,.5); }
+    
+    /* Hide quiz panel stats on mobile */
+    .quiz-stats {
+      display: none;
+    }
 
     /* Nav: hide desktop buttons, show burger */
     .tq .eduplay-game-nav {
@@ -1395,7 +1423,8 @@
   }
 
   @media (max-width: 340px) {
-    .burger-menu-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+    .burger-menu-btn { width: 44px; height: 44px; font-size: 1.3rem; top: 14px; right: 14px; }
+    .tq-head { padding-right: 58px; }
   }
 
   /* ---------- Reduced motion ---------- */
@@ -1411,14 +1440,15 @@
     <div class="tq-title">
       <h1>🌏 Time Zone Quest <span class="sub">Manila vs. the world</span></h1>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;width:100%;">
       <div class="stats" role="group" aria-label="Game stats">
         <div class="stat level"><span class="label">Level</span><span class="val" id="uiLevel">1</span></div>
         <div class="stat coins"><span class="label">Coins</span><span class="val" id="uiCoins">50</span></div>
+        <!-- Mobile-only stats -->
+        <div class="stat time-mobile"><span class="label">Time</span><span class="val" id="uiTimeMobile">05:00</span></div>
+        <div class="stat score-mobile"><span class="label">Score</span><span class="val" id="uiScoreMobile">0</span></div>
+        <div class="stat streak-mobile"><span class="label">Streak</span><span class="val" id="uiStreakMobile">0</span></div>
       </div>
-      <button type="button" class="burger-menu-btn" id="burgerMenuBtn" onclick="toggleMobileMenu()" aria-label="Open menu">
-        <i class="bi bi-list"></i>
-      </button>
       <div class="eduplay-game-nav">
         <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
           <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
@@ -1431,6 +1461,11 @@
       </div>
     </div>
   </header>
+
+<!-- Burger menu button (mobile only) -->
+<button type="button" class="burger-menu-btn" id="burgerMenuBtn" onclick="toggleMobileMenu()" aria-label="Open menu">
+  <i class="bi bi-list"></i>
+</button>
 
 <!-- Mobile menu overlay -->
 <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()">
@@ -2126,6 +2161,15 @@ function updateHUD(){
   el('uiScore').textContent  = state.score;
   el('uiStreak').textContent = state.streak;
   el('uiCoins').textContent  = state.coins;
+  
+  // Update mobile stats
+  const timeMobile = el('uiTimeMobile');
+  const scoreMobile = el('uiScoreMobile');
+  const streakMobile = el('uiStreakMobile');
+  if (timeMobile) timeMobile.textContent = el('uiTime').textContent;
+  if (scoreMobile) scoreMobile.textContent = state.score;
+  if (streakMobile) streakMobile.textContent = state.streak;
+  
   renderPips();
   
   // Update hint button state
