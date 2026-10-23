@@ -143,7 +143,7 @@ class User extends Authenticatable
     /**
      * Check if user is admin.
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
@@ -151,7 +151,7 @@ class User extends Authenticatable
     /**
      * Check if user is teacher and approved.
      */
-    public function isTeacher()
+    public function isTeacher(): bool
     {
         return $this->role === 'teacher' && $this->is_approved;
     }
@@ -159,7 +159,7 @@ class User extends Authenticatable
     /**
      * Check if user is student.
      */
-    public function isStudent()
+    public function isStudent(): bool
     {
         return $this->role === 'student';
     }
@@ -167,7 +167,7 @@ class User extends Authenticatable
     /**
      * Check if teacher is pending approval.
      */
-    public function isPendingTeacher()
+    public function isPendingTeacher(): bool
     {
         return $this->role === 'teacher' && !$this->is_approved;
     }
@@ -175,7 +175,7 @@ class User extends Authenticatable
     /**
      * Get the character avatar emoji or icon class.
      */
-    public function getCharacterEmoji()
+    public function getCharacterEmoji(): string
     {
         return match ($this->character_avatar) {
             'math_wizard' => '🧙‍♂️',
@@ -190,7 +190,7 @@ class User extends Authenticatable
     /**
      * Check if student can change username (not exceeded daily limit).
      */
-    public function canChangeUsername()
+    public function canChangeUsername(): bool
     {
         // If never changed before, can change
         if (!$this->last_username_change) {
@@ -199,7 +199,9 @@ class User extends Authenticatable
 
         // If last change was before today, reset counter (allow change)
         $today = \Carbon\Carbon::today();
-        if (\Carbon\Carbon::parse($this->last_username_change)->isBefore($today)) {
+        $lastChange = \Carbon\Carbon::parse($this->last_username_change);
+        
+        if ($lastChange->isBefore($today)) {
             return true;
         }
 
@@ -210,14 +212,16 @@ class User extends Authenticatable
     /**
      * Get remaining username changes for today.
      */
-    public function getRemainingUsernameChanges()
+    public function getRemainingUsernameChanges(): int
     {
         if (!$this->last_username_change) {
             return 3;
         }
 
         $today = \Carbon\Carbon::today();
-        if (\Carbon\Carbon::parse($this->last_username_change)->isBefore($today)) {
+        $lastChange = \Carbon\Carbon::parse($this->last_username_change);
+        
+        if ($lastChange->isBefore($today)) {
             return 3;
         }
 
@@ -227,13 +231,13 @@ class User extends Authenticatable
     /**
      * Get the avatar URL (either uploaded or preset character).
      */
-    public function getAvatarUrl()
+    public function getAvatarUrl(): string
     {
         if ($this->avatar_upload_path) {
             return asset('storage/' . $this->avatar_upload_path);
         }
 
         // Return preset character emoji/icon
-        return $this->avatar_character ?? $this->character_avatar;
+        return $this->avatar_character ?? $this->character_avatar ?? '🧑‍🎓';
     }
 }
