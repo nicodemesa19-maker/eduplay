@@ -1652,7 +1652,7 @@
         <i class="bi bi-map-fill"></i> <span>Map</span>
       </a>
 
-      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress" aria-label="Exit">
+      <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena" aria-label="Exit">
         <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
       </a>
     </div>

@@ -825,7 +825,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                         <i class="bi bi-pause-fill"></i> <span>Pause</span>
                     </button>
                     <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-                    <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+                    <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
                 </div>
             </div>
             <div><div id="ptrack"><div id="pfill"></div></div><div id="pmeta"><span id="plabel">0 / 6 matched</span><span id="ppct">0%</span></div></div>

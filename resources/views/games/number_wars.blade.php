@@ -1341,7 +1341,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
                     <i class="bi bi-pause-fill"></i> <span>Pause</span>
                 </button>
                 <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-                <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+                <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
             </div>
 
         </div>

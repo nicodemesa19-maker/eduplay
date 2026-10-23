@@ -1551,7 +1551,7 @@
           <i class="bi bi-pause-fill"></i> <span>Pause</span>
         </button>
         <a href="{{ route('student.map', 'time_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-        <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+        <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
       </div>
     </div>
   </header>
@@ -1583,7 +1583,7 @@
         <i class="bi bi-map-fill"></i>
         <span>Game Map</span>
       </a>
-      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress">
+      <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
         <i class="bi bi-box-arrow-right"></i>
         <span>Exit</span>
       </a>
