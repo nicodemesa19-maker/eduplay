@@ -124,7 +124,7 @@
   }
   
   /* Hide mobile-only stats on desktop */
-  .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile {
+  .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile, .stat.round-mobile {
     display: none;
   }
   .stat{
@@ -1156,7 +1156,7 @@
      MOBILE ADAPTIVE LAYER
      ============================================================ */
   @media (max-width: 940px) {
-    /* Header stacks: title / stats / burger in corner */
+    /* Header stacks: title / stats grid / burger in corner */
     .tq-head {
       flex-direction: column;
       align-items: stretch;
@@ -1174,37 +1174,41 @@
       width: 100%;
     }
 
-    /* Stats: only show Level and Coins on mobile header */
+    /* Stats: show all 6 stats on mobile in 3x2 grid */
     .stats {
       width: 100%;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
       order: 2;
       margin-top: 0;
     }
-    .stat { padding: 10px 14px; border-radius: 12px; }
-    .stat .label { font-size: .72rem; }
-    .stat .val { font-size: 1.05rem; }
+    .stat { padding: 10px 12px; border-radius: 12px; }
+    .stat .label { font-size: .68rem; font-weight: 700; }
+    .stat .val { font-size: 1rem; }
     
-    /* Hide mobile-only stats (they stay in quiz panel) */
+    /* Show mobile-only stats in header */
     .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile {
+      display: flex;
+    }
+    .stat.time-mobile .val { color: var(--cyan); text-shadow: 0 0 8px rgba(0,229,255,.5); }
+    .stat.score-mobile .val { color: var(--lime); text-shadow: 0 0 8px rgba(182,255,61,.5); }
+    .stat.streak-mobile .val { color: var(--gold); text-shadow: 0 0 8px rgba(255,217,61,.5); }
+    
+    /* Add Round stat to mobile header */
+    .stat.round-mobile {
+      display: flex;
+      border-color: var(--pink);
+      background: linear-gradient(135deg,rgba(255,61,174,.12),rgba(255,61,174,.05));
+    }
+    .stat.round-mobile .val {
+      color: var(--pink);
+      text-shadow: 0 0 8px rgba(255,61,174,.5);
+    }
+    
+    /* Hide quiz panel stats on mobile */
+    .quiz-stats {
       display: none;
     }
-    
-    /* Show quiz panel stats on mobile */
-    .quiz-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-    }
-    .quiz-stat {
-      min-width: 0;
-      padding: 10px 14px;
-    }
-    .quiz-stat-label { font-size: .72rem; }
-    .quiz-stat-val { font-size: 1.15rem; }
 
     /* Nav: hide desktop buttons, show burger */
     .tq .eduplay-game-nav {
@@ -1465,6 +1469,7 @@
         <div class="stat time-mobile"><span class="label">Time</span><span class="val" id="uiTimeMobile">05:00</span></div>
         <div class="stat score-mobile"><span class="label">Score</span><span class="val" id="uiScoreMobile">0</span></div>
         <div class="stat streak-mobile"><span class="label">Streak</span><span class="val" id="uiStreakMobile">0</span></div>
+        <div class="stat round-mobile"><span class="label">Round</span><span class="val" id="uiRoundMobile">– / 10</span></div>
       </div>
       <div class="eduplay-game-nav">
         <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
@@ -2191,9 +2196,11 @@ function updateHUD(){
   const timeMobile = el('uiTimeMobile');
   const scoreMobile = el('uiScoreMobile');
   const streakMobile = el('uiStreakMobile');
+  const roundMobile = el('uiRoundMobile');
   if (timeMobile) timeMobile.textContent = el('uiTime').textContent;
   if (scoreMobile) scoreMobile.textContent = state.score;
   if (streakMobile) streakMobile.textContent = state.streak;
+  if (roundMobile) roundMobile.textContent = `${Math.min(state.round, TOTAL_ROUNDS)} / ${TOTAL_ROUNDS}`;
   
   renderPips();
   
