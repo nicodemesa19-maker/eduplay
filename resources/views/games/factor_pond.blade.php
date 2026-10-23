@@ -24,7 +24,7 @@ button{-webkit-tap-highlight-color:transparent;}
 
 
 /* ============================================================
-   FLASH CARD SYSTEM � ALWAYS ON TOP
+   FLASH CARD SYSTEM — ALWAYS ON TOP
    ============================================================ */
 .overlay, .fc-overlay {
     position: fixed !important;
@@ -844,12 +844,12 @@ button{-webkit-tap-highlight-color:transparent;}
         <!-- Left: Lives -->
         <div class="hp">
           <span class="hl">Lives</span>
-          <span class="hv rose" id="livesVal">??????????</span>
+          <span class="hv rose" id="livesVal">&#x2764;&#xFE0F;&#x2764;&#xFE0F;&#x2764;&#xFE0F;&#x2764;&#xFE0F;&#x2764;&#xFE0F;</span>
         </div>
 
         <!-- Center: Level & Score Info -->
         <div class="hc">
-          <div class="lvlbadge">🐸 <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
+          <div class="lvlbadge">🌊 <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
           <div class="hs-sub">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span> <span class="score-pill-chip">⭐ Score: <span id="scoreVal">0</span>/10</span></div>
         </div>
 
@@ -882,7 +882,7 @@ button{-webkit-tap-highlight-color:transparent;}
       <!-- PAUSE OVERLAY -->
       <div class="pause-overlay" id="pauseOverlay">
         <div class="pause-card">
-          <div style="font-size:2.8rem;margin-bottom:0.4rem;">?</div>
+          <div style="font-size:2.8rem;margin-bottom:0.4rem;">⏸️</div>
           <h2>Pond Paused</h2>
           <p>Fish are resting! When you're ready, jump back into the pond.</p>
           <button class="bbtn bbtn-p" style="width:100%;padding:11px 24px;font-size:1rem;justify-content:center;" onclick="togglePause()">▶️ Resume Fishing</button>
@@ -897,7 +897,7 @@ button{-webkit-tap-highlight-color:transparent;}
       <!-- WIN / GAME OVER BANNER -->
       <div id="endBanner">
         <div class="bnr-box">
-          <div class="bnr-left"><div class="bnr-ico" id="bnrIco">??</div><div class="bnr-stars" id="bnrStars"></div></div>
+          <div class="bnr-left"><div class="bnr-ico" id="bnrIco">🏆</div><div class="bnr-stars" id="bnrStars"></div></div>
           <div class="bnr-mid"><h2 class="bnr-title" id="bnrTitle"></h2><p class="bnr-msg" id="bnrMsg"></p></div>
           <div class="bnr-btns" style="display:flex;align-items:center;gap:8px;">
             <button class="bbtn bbtn-p" id="bnrPlayBtn">Play Again</button>
@@ -910,10 +910,10 @@ button{-webkit-tap-highlight-color:transparent;}
       <!-- MISSION & CAST NET BAR (fixed bottom bar on phones) -->
       <div id="mission">
         <div class="mission-info">
-          <div class="mission-tag" id="missionMode">?? Factors Mission</div>
+          <div class="mission-tag" id="missionMode">🎯 Factors Mission</div>
           <div class="mission-txt" id="missionText">Catch every FACTOR of 12</div>
         </div>
-        <button id="castBtn">?? Cast Net!</button>
+        <button id="castBtn">🪝 Cast Net!</button>
       </div>
 
       <!-- POND CANVAS -->
@@ -931,7 +931,7 @@ button{-webkit-tap-highlight-color:transparent;}
 
       <div class="fc-card">
         <div class="fc-top">
-          <span class="fc-badge" id="fcBadge">?? HOW TO PLAY � CARD 1 OF 5</span>
+          <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 5</span>
           <button class="fc-quick-action-btn" id="fcQuickActionBtn" type="button" onclick="closeTut(true)" title="Skip to Play">
             <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
           </button>
@@ -939,99 +939,99 @@ button{-webkit-tap-highlight-color:transparent;}
 
         <!-- CARD 1 -->
         <div id="fcSlide1" class="fc-slide">
-          <h3 class="fc-title" style="color:#5eead4;"><span>??</span> Look Before You Fish!</h3>
+          <h3 class="fc-title" style="color:#5eead4;"><span>🎯</span> Look Before You Fish!</h3>
           <p class="fc-desc">Read the mission banner before tapping fish. You will hunt for either <b>Factors</b> or <b>Multiples</b>:</p>
           <div class="fc-row-2 fc-box">
             <div class="fc-item">
-              <div class="fc-item-ico">??</div>
+              <div class="fc-item-ico">🔢</div>
               <div class="fc-item-lbl">Factors Mission</div>
               <div class="fc-item-math">Target: 16</div>
               <div class="fc-item-badge good">Catch: 1, 2, 4, 8, 16</div>
             </div>
             <div class="fc-item">
-              <div class="fc-item-ico">??</div>
+              <div class="fc-item-ico">✖️</div>
               <div class="fc-item-lbl">Multiples Mission</div>
               <div class="fc-item-math">Target: 5</div>
               <div class="fc-item-badge good">Catch: 5, 10, 15, 20...</div>
             </div>
           </div>
           <div class="fc-tip">
-            ?? <b>Rule of Thumb:</b> Glance at the mission banner first so you know which fish to catch!
+            💡 <b>Rule of Thumb:</b> Glance at the mission banner first so you know which fish to catch!
           </div>
         </div>
 
         <!-- CARD 2 -->
         <div id="fcSlide2" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#22d3ee;"><span>??</span> What is a Factor?</h3>
+          <h3 class="fc-title" style="color:#22d3ee;"><span>🔢</span> What is a Factor?</h3>
           <p class="fc-desc">A factor divides the target number with <b>0 remainder</b>. If there is a remainder, it is NOT a factor!</p>
           <div class="fc-row-2 fc-box">
             <div class="fc-item">
-              <div class="fc-item-ico">?</div>
+              <div class="fc-item-ico">✅</div>
               <div class="fc-item-lbl">Target: 12</div>
-              <div class="fc-item-math">12 � 4 = 3</div>
-              <div class="fc-item-badge good">0 Remainder ? Factor!</div>
+              <div class="fc-item-math">12 ÷ 4 = 3</div>
+              <div class="fc-item-badge good">0 Remainder ➔ Factor!</div>
             </div>
             <div class="fc-item">
-              <div class="fc-item-ico">?</div>
+              <div class="fc-item-ico">❌</div>
               <div class="fc-item-lbl">Target: 12</div>
-              <div class="fc-item-math">12 � 5 = 2 R 2</div>
-              <div class="fc-item-badge bad">Remainder 2 ? Not Factor</div>
+              <div class="fc-item-math">12 ÷ 5 = 2 R 2</div>
+              <div class="fc-item-badge bad">Remainder 2 ➔ Not Factor</div>
             </div>
           </div>
           <div class="fc-tip">
-            ?? <b>Golden Rule:</b> Factors are <b>always equal to or smaller</b> than the target number.
+            💡 <b>Golden Rule:</b> Factors are <b>always equal to or smaller</b> than the target number.
           </div>
         </div>
 
         <!-- CARD 3 -->
         <div id="fcSlide3" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#fbbf24;"><span>??</span> What is a Multiple?</h3>
+          <h3 class="fc-title" style="color:#fbbf24;"><span>✖️</span> What is a Multiple?</h3>
           <p class="fc-desc">Multiples come from your times table or skip-counting! Multiply the target by 1, 2, 3, 4, 5 and so on.</p>
           <div class="fc-box" style="text-align:center;border-color:rgba(251,191,36,0.35);">
             <div style="font-size:0.95rem;font-weight:800;color:#fbbf24;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Multiples of 6 (Skip Counting)</div>
             <div style="font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:900;color:#fff;letter-spacing:1px;margin-bottom:6px;">6, 12, 18, 24, 30, 36...</div>
-            <div style="font-size:0.95rem;color:rgba(254,240,138,0.85);font-weight:700;">6�1=6 &bull; 6�2=12 &bull; 6�3=18 &bull; 6�4=24</div>
+            <div style="font-size:0.95rem;color:rgba(254,240,138,0.85);font-weight:700;">6×1=6 &bull; 6×2=12 &bull; 6×3=18 &bull; 6×4=24</div>
           </div>
           <div class="fc-tip">
-            ?? <b>Golden Rule:</b> Multiples are <b>always equal to or bigger</b> than the target number.
+            💡 <b>Golden Rule:</b> Multiples are <b>always equal to or bigger</b> than the target number.
           </div>
         </div>
 
         <!-- CARD 4 -->
         <div id="fcSlide4" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#34d399;"><span>??</span> Tap Fish &amp; Cast Net</h3>
-          <p class="fc-desc">Tap fish to pick them. Selected fish glow with a bright <b style="color:#fbbf24;">golden ring ?</b>:</p>
+          <h3 class="fc-title" style="color:#34d399;"><span>🐟</span> Tap Fish &amp; Cast Net</h3>
+          <p class="fc-desc">Tap fish to pick them. Selected fish glow with a bright <b style="color:#fbbf24;">golden ring ✨</b>:</p>
           <div class="demo-strip" style="margin:4px 0 10px;">
             <div class="demo-fish-wrap"><div class="demo-fish selected">2</div><div class="demo-fish-lbl">✅ Picked</div></div>
             <div class="demo-fish-wrap"><div class="demo-fish">5</div><div class="demo-fish-lbl">Not picked</div></div>
             <div class="demo-fish-wrap"><div class="demo-fish selected">4</div><div class="demo-fish-lbl">✅ Picked</div></div>
           </div>
           <div class="fc-tip">
-            ?? <b>Need to unpick?</b> Tap any picked fish again. When ready, tap <b>?? Cast Net!</b>
+            💡 <b>Need to unpick?</b> Tap any picked fish again. When ready, tap <b>🪝 Cast Net!</b>
           </div>
         </div>
 
         <!-- CARD 5 -->
         <div id="fcSlide5" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#f43f5e;"><span>??</span> 5 Lives &amp; 10 to Win</h3>
+          <h3 class="fc-title" style="color:#f43f5e;"><span>❤️</span> 5 Lives &amp; 10 to Win</h3>
           <p class="fc-desc">Keep your hearts safe and fill your net to clear the level!</p>
           <div class="fc-row-2 fc-box">
             <div class="fc-item">
-              <div class="fc-item-ico">??</div>
+              <div class="fc-item-ico">💔</div>
               <div class="fc-item-lbl">Lose 1 Life</div>
               <div class="fc-item-sub">Picking wrong fish or leaving a matching fish behind.</div>
             </div>
             <div class="fc-item">
-              <div class="fc-item-ico">??</div>
+              <div class="fc-item-ico">🏆</div>
               <div class="fc-item-lbl">Win Level</div>
               <div class="fc-item-sub">Make <b>10 perfect net casts</b> to unlock the next level!</div>
             </div>
           </div>
           <div class="fc-tip kbd-tip">
-            ?? <b>Shortcuts:</b> Press <b>P</b> to pause anytime. Press <b>Space</b> to Cast Net!
+            💡 <b>Shortcuts:</b> Press <b>P</b> to pause anytime. Press <b>Space</b> to Cast Net!
           </div>
           <div class="fc-tip touch-tip">
-            ?? <b>Tip:</b> Tap <b>Pause</b> anytime to rest. Tap <b>?? Cast Net!</b> when you're ready!
+            💡 <b>Tip:</b> Tap <b>Pause</b> anytime to rest. Tap <b>🪝 Cast Net!</b> when you're ready!
           </div>
         </div>
 
@@ -1061,12 +1061,12 @@ button{-webkit-tap-highlight-color:transparent;}
 <!-- WRONG ANSWER MODAL -->
 <div id="wrongOverlay">
   <div class="wrong-box">
-    <div class="wrong-ico">??</div>
+    <div class="wrong-ico">🤔</div>
     <h2 class="wrong-title">Not Quite!</h2>
-    <p class="wrong-sub">Here's what went wrong with your cast�</p>
+    <p class="wrong-sub">Here's what went wrong with your cast…</p>
     <div class="wrong-reason" id="wrongReason"></div>
     <div class="wrong-progress"><div class="wrong-progress-bar" id="wrongProgress"></div></div>
-    <button class="wrong-continue" id="wrongContinueBtn">Got it � Continue ?</button>
+    <button class="wrong-continue" id="wrongContinueBtn">Got it — Continue ➔
   </div>
 </div>
 
@@ -1631,10 +1631,10 @@ function generateMission(){
     currentMissionMode = mission.mode;
     mission.correctSet.forEach(v => correctSet.add(v));
     if (mission.mode === 'factors'){
-        missionMode.textContent = '?? Factors Mission';
+        missionMode.textContent = '🎯 Factors Mission';
         missionText.textContent = 'Catch every FACTOR of ' + targetNumber;
     } else {
-        missionMode.textContent = '?? Multiples Mission';
+        missionMode.textContent = '✖️ Multiples Mission';
         missionText.textContent = 'Catch every MULTIPLE of ' + targetNumber;
     }
     renderPond(shuffle(mission.nums));
@@ -1741,7 +1741,7 @@ function castNet(){
     const cy = Math.max(80, Math.min(window.innerHeight - 140, rect.top + rect.height / 2));
     if (isPerfect){
         score++;
-        spawnSplashText('? Perfect Catch! +1', cx, cy);
+        spawnSplashText('🎯 Perfect Catch! +1', cx, cy);
         updateHUD();
         setTimeout(() => {
             pondLocked = false;
@@ -1751,13 +1751,13 @@ function castNet(){
     } else {
         lives--;
         updateHUD();
-        spawnSplashText('?? -1 Life', cx, cy);
+        spawnSplashText('💔 -1 Life', cx, cy);
         setTimeout(showWrongModal, 750);
     }
 }
 
 function updateHUD(){
-    livesEl.textContent = '??'.repeat(Math.max(0, lives)) + '??'.repeat(Math.max(0, MAX_LIVES - lives));
+    livesEl.innerHTML = '&#x2764;&#xFE0F;'.repeat(Math.max(0, lives)) + '&#x1F5A4;'.repeat(Math.max(0, MAX_LIVES - lives));
     scoreValEl.textContent = score;
     const pct = Math.round((score / WIN_POINTS) * 100);
     pfillEl.style.width = pct + '%';
@@ -1769,27 +1769,27 @@ function updateHUD(){
 function endGame(won){
     gameOn = false;
     const st = score >= 9 ? 3 : score >= 6 ? 2 : 1;
-    bnrStars.textContent = '?'.repeat(st);
+    bnrStars.textContent = '⭐'.repeat(st);
     if (won){
         if (currentLevel < MAX_LVL){
             currentLevel++;
             saveProgress(currentLevel);
-            bnrIco.textContent = '??';
+            bnrIco.textContent = '🏆';
             bnrTitle.textContent = 'Level ' + (currentLevel - 1) + ' Complete!';
             bnrMsg.textContent = '10 perfect catches! Moving to Level ' + currentLevel + '.';
-            bnrPlayBtn.textContent = '? Play Level ' + currentLevel;
+            bnrPlayBtn.textContent = '▶ Play Level ' + currentLevel;
         } else {
             saveProgress(currentLevel);
-            bnrIco.textContent = '??';
+            bnrIco.textContent = '🎉';
             bnrTitle.textContent = 'Master Angler!';
             bnrMsg.textContent = 'You cleared all ' + MAX_LVL + ' levels!';
-            bnrPlayBtn.textContent = '?? Play Again';
+            bnrPlayBtn.textContent = '🔄 Play Again';
         }
     } else {
-        bnrIco.textContent = '??';
+        bnrIco.textContent = '😔';
         bnrTitle.textContent = 'Out of Bait!';
         bnrMsg.textContent = 'Scored ' + score + ' catches. Try again!';
-        bnrPlayBtn.textContent = '?? Try Again';
+        bnrPlayBtn.textContent = '🔄 Try Again';
     }
     endBanner.classList.add('show');
     // On phones the banner sits above the pond; make sure it's in view
@@ -1968,7 +1968,7 @@ window.goFlashCard = function(cardNum){
     if (badge){
         const tags = ['THE MISSION', 'FACTORS', 'MULTIPLES', 'HOW TO PLAY', 'LIVES & WIN'];
         const prefix = tutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
-        badge.textContent = '?? ' + prefix + ' � CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' � ' + tags[currentFcCard - 1];
+        badge.textContent = '🃏 ' + prefix + ' • CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' • ' + tags[currentFcCard - 1];
     }
 
     const prevBtn = document.getElementById('fcPrevBtn');

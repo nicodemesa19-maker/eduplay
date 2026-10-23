@@ -730,7 +730,7 @@
             <div class="canvas-meta-title" id="canvasTitle">Triangle</div>
             <div class="canvas-meta-sub" id="canvasSub">Refer to the shape</div>
           </div>
-          <div class="canvas-icon icon-t" id="canvasIconEl">??</div>
+          <div class="canvas-icon icon-t" id="canvasIconEl">🔺</div>
         </div>
         <canvas id="gc" width="520" height="520"></canvas>
         <div class="geo-canvas-legend">
@@ -743,7 +743,7 @@
         <div class="geo-score-card">
           <div class="score-item"><div class="score-val" id="scoreVal">0</div><div class="score-lbl">Score</div></div>
           <div class="s-div"></div>
-          <div class="score-item"><div class="score-val" id="streakVal">0</div><div class="score-lbl">Streak ??</div></div>
+          <div class="score-item"><div class="score-val" id="streakVal">0</div><div class="score-lbl">Streak 🔥</div></div>
           <div class="s-div"></div>
           <div class="score-item"><div class="score-val" id="correctVal">0</div><div class="score-lbl">Correct</div></div>
         </div>
@@ -759,7 +759,7 @@
           <div class="ans-grid" id="answersDiv"></div>
           <div class="geo-fb" id="feedbackDiv"></div>
         </div>
-        <button class="geo-next" id="nextBtn">Next Question ?</button>
+        <button class="geo-next" id="nextBtn">Next Question ➔</button>
       </div>
 
     </div>
@@ -782,16 +782,16 @@
         <i class="fas fa-gamepad"></i> <span>How to Play</span>
       </button>
       <button type="button" class="tut-tab-btn" onclick="switchTutTopic('triangle')" id="tab-triangle">
-        <span>?? Triangle</span>
+        <span>🔺 Triangle</span>
       </button>
       <button type="button" class="tut-tab-btn" onclick="switchTutTopic('parallelogram')" id="tab-parallelogram">
       <span>🔷 Parallelogram</span>
       </button>
       <button type="button" class="tut-tab-btn" onclick="switchTutTopic('trapezoid')" id="tab-trapezoid">
-        <span>??? Trapezoid</span>
+        <span>⏢ Trapezoid</span>
       </button>
       <button type="button" class="tut-tab-btn" onclick="switchTutTopic('formulas')" id="tab-formulas">
-        <span>?? Formulas</span>
+        <span>📐 Formulas</span>
       </button>
     </div>
 
@@ -809,7 +809,7 @@
       <div class="tut-dots" id="tutDots"></div>
 
       <div class="tut-actions">
-        <button type="button" class="tut-skip-btn" id="tutSkipBtn" onclick="closeTutorial()">Skip to Challenge ?</button>
+        <button type="button" class="tut-skip-btn" id="tutSkipBtn" onclick="closeTutorial()">Skip to Challenge ➔</button>
         <div class="tut-actions-right">
           <button type="button" class="tut-prev" id="tutPrevBtn" style="display:none;" onclick="tutPrev()">⬅️ Back</button>
           <button type="button" class="tut-next" id="tutNextBtn" onclick="tutNext()">Continue ➡️</button>
@@ -823,7 +823,7 @@
 <!-- LEVEL COMPLETE OVERLAY -->
 <div class="complete-overlay" id="completeOverlay">
   <div class="complete-card">
-    <span class="complete-icon" id="cIcon">??</span>
+    <span class="complete-icon" id="cIcon">🎉</span>
     <div class="complete-title" id="cTitle">Level Complete!</div>
     <div class="complete-sub" id="cSub">Keep exploring!</div>
     <div class="complete-stats">
@@ -831,14 +831,14 @@
       <div class="complete-stat"><div class="complete-stat-val" id="cScore">-</div><div class="complete-stat-lbl">Points</div></div>
       <div class="complete-stat"><div class="complete-stat-val" id="cAcc">-</div><div class="complete-stat-lbl">Accuracy</div></div>
     </div>
-    <button class="complete-btn" id="cBtn">Continue ?</button>
+    <button class="complete-btn" id="cBtn">Continue ➔</button>
   </div>
 </div>
 
 <!-- PAUSE OVERLAY -->
 <div class="pause-overlay" id="pauseOverlay">
   <div class="pause-card">
-    <span class="pause-icon">??</span>
+    <span class="pause-icon">⏸️</span>
     <div class="pause-title">Game Paused</div>
     <div class="pause-text">Timer is paused. Take your time!</div>
     <button class="pause-btn" onclick="togglePause()">
@@ -1312,9 +1312,9 @@
       };
       markLine(2,2,3,7,'#f43f5e');
       markLine(8,2,7,7,'#f43f5e');
-      drawLabel('Equal legs ?',0.3,4.5,'#f43f5e');
-      drawLabel('? Equal legs',5.5,4.5,'#f43f5e',60,0);
-      // No "isosceles trapezoid" text � naming the shape is the answer.
+      drawLabel('Equal legs →',0.3,4.5,'#f43f5e');
+      drawLabel('← Equal legs',5.5,4.5,'#f43f5e',60,0);
+      // No "isosceles trapezoid" text — naming the shape is the answer.
     },
     drawRightTrapezoid(){
       clearAndGrid();
@@ -1332,8 +1332,8 @@
       ctx.stroke();
       ctx.restore();
       drawArrow(6,4.5,8.2,4.5,'#f43f5e');
-      drawLabel('Right angle leg ?',3,5,'#f43f5e',-20,0);
-      // No "right trapezoid" text � naming the shape is the answer.
+      drawLabel('Right angle leg →',3,5,'#f43f5e',-20,0);
+      // No "right trapezoid" text — naming the shape is the answer.
     },
   };
 
@@ -1382,7 +1382,7 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#38bdf8;">??</div>
+            <div class="tut-hero-icon" style="color:#38bdf8;">🎮</div>
             <div>
               <h3 class="tut-card-title">Welcome to Geometry Grid Explorer!</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Master calculating areas, perimeters, and geometric properties across 15 levels!</p>
@@ -1410,7 +1410,7 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#a78bfa;">??</div>
+            <div class="tut-hero-icon" style="color:#a78bfa;">📐</div>
             <div>
               <h3 class="tut-card-title">The 3 Question Missions &amp; Controls</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Each level tests your knowledge with 3 different question types.</p>
@@ -1418,20 +1418,20 @@
           </div>
           <div class="tut-visual-grid">
             <div class="tut-mini-box" style="border-color:rgba(52,211,153,0.3);">
-              <h5 style="color:#34d399;">?? Computation</h5>
+              <h5 style="color:#34d399;">🧮 Computation</h5>
               <p>Calculate Area, Perimeter, or missing side dimensions using geometric formulas and grid measurements.</p>
             </div>
             <div class="tut-mini-box" style="border-color:rgba(251,191,36,0.3);">
-              <h5 style="color:#fbbf24;">?? Visual Inspection</h5>
+              <h5 style="color:#fbbf24;">👁️ Visual Inspection</h5>
               <p>Identify geometric features on the canvas (e.g. altitudes, medians, centroids, midsegments, hypotenuses).</p>
             </div>
             <div class="tut-mini-box" style="border-color:rgba(129,140,248,0.3);">
-              <h5 style="color:#818cf8;">?? Fact &amp; Theory</h5>
+              <h5 style="color:#818cf8;">📚 Fact &amp; Theory</h5>
               <p>Test your understanding of angle sums, polygon properties, theorems, and famous mathematical discoveries.</p>
             </div>
             <div class="tut-mini-box" style="border-color:rgba(56,189,248,0.3);">
-              <h5 style="color:#38bdf8;">?? Controls</h5>
-              <p>Tap an answer to choose it, then tap <b>Next</b>. On a keyboard: <b>[1]</b>�<b>[4]</b> or <b>[A]</b>�<b>[D]</b> to answer, <b>[Enter]</b> to advance.</p>
+              <h5 style="color:#38bdf8;">🎮 Controls</h5>
+              <p>Tap an answer to choose it, then tap <b>Next</b>. On a keyboard: <b>[1]</b>–<b>[4]</b> or <b>[A]</b>–<b>[D]</b> to answer, <b>[Enter]</b> to advance.</p>
             </div>
           </div>
         `
@@ -1439,7 +1439,7 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#f59e0b;">??</div>
+            <div class="tut-hero-icon" style="color:#f59e0b;">⏱️</div>
             <div>
               <h3 class="tut-card-title">Timer, Scoring &amp; Level Passing</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Score high to earn 3 stars and unlock the next geometry expedition!</p>
@@ -1459,7 +1459,7 @@
             <b>⭐ Star Rating System:</b><br>
             • <b>3 Stars (⭐⭐⭐):</b> 8+ correct answers with high accuracy<br>
             • <b>2 Stars (⭐⭐):</b> 4–7 correct answers<br>
-            � <b>1 Star (?):</b> 1�3 correct answers
+            • <b>1 Star (⭐):</b> 1–3 correct answers
           </div>
         `
       }
@@ -1468,10 +1468,10 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#34d399;">??</div>
+            <div class="tut-hero-icon" style="color:#34d399;">🔺</div>
             <div>
               <h3 class="tut-card-title">Triangle Anatomy &amp; Core Rules</h3>
-              <p style="color:#94a3b8; margin:0; font-size:1.0rem;">3 sides, 3 vertices, interior angles always sum to 180�!</p>
+              <p style="color:#94a3b8; margin:0; font-size:1.0rem;">3 sides, 3 vertices, interior angles always sum to 180°!</p>
             </div>
           </div>
           <p class="tut-card-desc">
@@ -1484,19 +1484,19 @@
             </div>
             <div class="tut-mini-box">
               <h5 style="color:#f43f5e;">Perpendicular Height (h)</h5>
-              <p>The straight-up distance at a <b>90� right angle</b> from the base to the opposite top vertex.</p>
+              <p>The straight-up distance at a <b>90° right angle</b> from the base to the opposite top vertex.</p>
             </div>
           </div>
           <div class="tut-callout">
             <i class="fas fa-exclamation-triangle text-warning"></i>
-            <span><b>Crucial Rule:</b> Never measure along the slanted leg for height! Height must be perpendicular (?) to the base.</span>
+            <span><b>Crucial Rule:</b> Never measure along the slanted leg for height! Height must be perpendicular (⊥) to the base.</span>
           </div>
         `
       },
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#38bdf8;">??</div>
+            <div class="tut-hero-icon" style="color:#38bdf8;">🧮</div>
             <div>
               <h3 class="tut-card-title">Triangle Area Formula &amp; Example</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Why divide by 2? Because every triangle is exactly half of a parallelogram!</p>
@@ -1504,21 +1504,21 @@
           </div>
           <div class="tut-formula-pill">
             <span class="tut-formula-title">Triangle Area Formula</span>
-            <span class="tut-formula-eq">Area = � � base � height</span>
-            <span class="tut-formula-sub">or written as: (b � h) � 2</span>
+            <span class="tut-formula-eq">Area = ½ × base × height</span>
+            <span class="tut-formula-sub">or written as: (b × h) ÷ 2</span>
           </div>
           <div class="tut-example-card">
-            <b>?? Worked Example:</b><br>
-            � Given a triangle with <b>base = 6 cm</b> and <b>height = 4 cm</b>:<br>
-            � Step 1: Multiply base � height: 6 � 4 = 24<br>
-            � Step 2: Divide by 2: 24 � 2 = <b>12 cm�</b>
+            <b>📝 Worked Example:</b><br>
+            • Given a triangle with <b>base = 6 cm</b> and <b>height = 4 cm</b>:<br>
+            • Step 1: Multiply base × height: 6 × 4 = 24<br>
+            • Step 2: Divide by 2: 24 ÷ 2 = <b>12 cm²</b>
           </div>
         `
       },
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#818cf8;">??</div>
+            <div class="tut-hero-icon" style="color:#818cf8;">📐</div>
             <div>
               <h3 class="tut-card-title">Triangle Classifications</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Triangles are classified by their sides and by their angles.</p>
@@ -1527,11 +1527,11 @@
           <div class="tut-visual-grid">
             <div class="tut-mini-box">
               <h5 style="color:#34d399;">By Side Lengths</h5>
-              <p>� <b>Equilateral:</b> All 3 sides equal (all angles = 60�)<br>� <b>Isosceles:</b> Exactly 2 sides equal<br>� <b>Scalene:</b> No sides equal</p>
+              <p>• <b>Equilateral:</b> All 3 sides equal (all angles = 60°)<br>• <b>Isosceles:</b> Exactly 2 sides equal<br>• <b>Scalene:</b> No sides equal</p>
             </div>
             <div class="tut-mini-box">
               <h5 style="color:#60a5fa;">By Angle Sizes</h5>
-              <p>� <b>Right:</b> Exactly one 90� angle (a� + b� = c�)<br>� <b>Acute:</b> All 3 angles &lt; 90�<br>� <b>Obtuse:</b> One angle &gt; 90�</p>
+              <p>• <b>Right:</b> Exactly one 90° angle (a² + b² = c²)<br>• <b>Acute:</b> All 3 angles &lt; 90°<br>• <b>Obtuse:</b> One angle &gt; 90°</p>
             </div>
           </div>
         `
@@ -1539,7 +1539,7 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#fbbf24;">?</div>
+            <div class="tut-hero-icon" style="color:#fbbf24;">📐</div>
             <div>
               <h3 class="tut-card-title">The 4 Special Centers of a Triangle</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">These special points appear frequently in visual inspection questions!</p>
@@ -1570,7 +1570,7 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#60a5fa;">?</div>
+            <div class="tut-hero-icon" style="color:#60a5fa;">▱</div>
             <div>
               <h3 class="tut-card-title">Parallelogram Key Properties</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">4-sided polygon where opposite sides are parallel and equal.</p>
@@ -1586,8 +1586,8 @@
               <p>The two diagonals <b>bisect each other</b> (they cut each other exactly in half where they cross).</p>
             </div>
             <div class="tut-mini-box">
-              <h5 style="color:#fbbf24;">Angle Sum = 360�</h5>
-              <p>All 4 interior angles add up to <b>360�</b>. Consecutive angles (next to each other) always add up to <b>180�</b>.</p>
+              <h5 style="color:#fbbf24;">Angle Sum = 360°</h5>
+              <p>All 4 interior angles add up to <b>360°</b>. Consecutive angles (next to each other) always add up to <b>180°</b>.</p>
             </div>
             <div class="tut-mini-box">
               <h5 style="color:#34d399;">The Family</h5>
@@ -1599,29 +1599,29 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#38bdf8;">??</div>
+            <div class="tut-hero-icon" style="color:#38bdf8;">🧮</div>
             <div>
               <h3 class="tut-card-title">Parallelogram Area &amp; Perimeter</h3>
-              <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Area = base � height (No division by 2!)</p>
+              <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Area = base × height (No division by 2!)</p>
             </div>
           </div>
           <div class="tut-formula-pill">
             <span class="tut-formula-title">Parallelogram Formulas</span>
-            <span class="tut-formula-eq">Area = base � height</span>
-            <span class="tut-formula-sub">Perimeter = 2 � (side a + side b)</span>
+            <span class="tut-formula-eq">Area = base × height</span>
+            <span class="tut-formula-sub">Perimeter = 2 × (side a + side b)</span>
           </div>
           <div class="tut-example-card">
-            <b>?? Worked Example:</b><br>
-            � Given a parallelogram with <b>base = 8 cm</b> and <b>height = 5 cm</b>:<br>
-            � Calculation: Area = 8 � 5 = <b>40 cm�</b><br>
-            � If sides are 8 cm and 5 cm: Perimeter = 2 � (8 + 5) = <b>26 cm</b>
+            <b>📝 Worked Example:</b><br>
+            • Given a parallelogram with <b>base = 8 cm</b> and <b>height = 5 cm</b>:<br>
+            • Calculation: Area = 8 × 5 = <b>40 cm²</b><br>
+            • If sides are 8 cm and 5 cm: Perimeter = 2 × (8 + 5) = <b>26 cm</b>
           </div>
         `
       },
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#f472b6;">???????????</div>
+            <div class="tut-hero-icon" style="color:#f472b6;">◇</div>
             <div>
               <h3 class="tut-card-title">The Parallelogram Family</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Rectangles, Rhombuses, and Squares</p>
@@ -1630,11 +1630,11 @@
           <div class="tut-visual-grid">
             <div class="tut-mini-box">
               <h5 style="color:#38bdf8;">Rectangle</h5>
-              <p>Parallelogram with <b>4 right angles (90�)</b>. Diagonals are equal in length.</p>
+              <p>Parallelogram with <b>4 right angles (90°)</b>. Diagonals are equal in length.</p>
             </div>
             <div class="tut-mini-box">
               <h5 style="color:#f472b6;">Rhombus</h5>
-              <p>Parallelogram with <b>all 4 sides equal</b>. Diagonals intersect at perpendicular right angles (90�)!</p>
+              <p>Parallelogram with <b>all 4 sides equal</b>. Diagonals intersect at perpendicular right angles (90°)!</p>
             </div>
             <div class="tut-mini-box" style="grid-column: 1 / -1;">
               <h5 style="color:#fbbf24;">Square</h5>
@@ -1648,7 +1648,7 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#fbbf24;">???</div>
+            <div class="tut-hero-icon" style="color:#fbbf24;">⏢</div>
             <div>
               <h3 class="tut-card-title">Trapezoid Anatomy &amp; Types</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Exactly one pair of parallel sides (the bases)!</p>
@@ -1669,7 +1669,7 @@
             </div>
             <div class="tut-mini-box">
               <h5 style="color:#f59e0b;">Right Trapezoid</h5>
-              <p>One leg is perpendicular (90�) to both bases. That leg is exactly equal to the height!</p>
+              <p>One leg is perpendicular (90°) to both bases. That leg is exactly equal to the height!</p>
             </div>
           </div>
         `
@@ -1677,7 +1677,7 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#38bdf8;">??</div>
+            <div class="tut-hero-icon" style="color:#38bdf8;">⏢</div>
             <div>
               <h3 class="tut-card-title">Trapezoid Area &amp; Midsegment</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Average the two bases, then multiply by the height!</p>
@@ -1685,14 +1685,14 @@
           </div>
           <div class="tut-formula-pill">
             <span class="tut-formula-title">Trapezoid Formulas</span>
-            <span class="tut-formula-eq">Area = � � (b1 + b2) � height</span>
-            <span class="tut-formula-sub">Midsegment = � � (b1 + b2)</span>
+            <span class="tut-formula-eq">Area = ½ × (b₁ + b₂) × height</span>
+            <span class="tut-formula-sub">Midsegment = ½ × (b₁ + b₂)</span>
           </div>
           <div class="tut-example-card">
-            <b>?? Worked Example:</b><br>
-            � Given bases <b>b1 = 6 cm</b>, <b>b2 = 4 cm</b>, and <b>height = 5 cm</b>:<br>
-            � Step 1: Average the bases: (6 + 4) � 2 = 5 cm (Midsegment)<br>
-            � Step 2: Multiply by height: 5 � 5 = <b>25 cm�</b>!
+            <b>📝 Worked Example:</b><br>
+            • Given bases <b>b₁ = 6 cm</b>, <b>b₂ = 4 cm</b>, and <b>height = 5 cm</b>:<br>
+            • Step 1: Average the bases: (6 + 4) ÷ 2 = 5 cm (Midsegment)<br>
+            • Step 2: Multiply by height: 5 × 5 = <b>25 cm²</b>!
           </div>
         `
       }
@@ -1701,24 +1701,24 @@
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#38bdf8;">??</div>
+            <div class="tut-hero-icon" style="color:#38bdf8;">📐</div>
             <div>
               <h3 class="tut-card-title">Geometry Master Formula Quick-Sheet</h3>
               <p style="color:#94a3b8; margin:0; font-size:1.0rem;">All your essential geometry formulas in one easy reference table!</p>
             </div>
           </div>
           <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px; font-size:1.0rem;">
-            <div class="tut-formula-row" style="background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3);">
-              <div><b style="color:#34d399;">?? Triangle</b><br><small style="color:#94a3b8;">Angles = 180�</small></div>
-              <div class="tut-fr-eq">Area = � � b � h<br><small style="color:#94a3b8;">P = a + b + c</small></div>
+            <div style="background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+              <div><b style="color:#34d399;">🔺 Triangle</b><br><small style="color:#94a3b8;">Angles = 180°</small></div>
+              <div style="font-family:var(--font-mono, monospace); font-weight:800; color:#ffffff; text-align:right;">Area = ½ × b × h<br><small style="color:#94a3b8;">P = a + b + c</small></div>
             </div>
-            <div class="tut-formula-row" style="background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.3);">
-              <div><b style="color:#60a5fa;">🔷 Parallelogram</b><br><small style="color:#94a3b8;">Angles = 360°</small></div>
-              <div class="tut-fr-eq">Area = b � h<br><small style="color:#94a3b8;">P = 2(a + b)</small></div>
+            <div style="background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.3); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+              <div><b style="color:#60a5fa;">◈ Parallelogram</b><br><small style="color:#94a3b8;">Angles = 360°</small></div>
+              <div style="font-family:var(--font-mono, monospace); font-weight:800; color:#ffffff; text-align:right;">Area = b × h<br><small style="color:#94a3b8;">P = 2(a + b)</small></div>
             </div>
-            <div class="tut-formula-row" style="background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3);">
-              <div><b style="color:#fbbf24;">??? Trapezoid</b><br><small style="color:#94a3b8;">Angles = 360�</small></div>
-              <div class="tut-fr-eq">Area = �(b1 + b2)h<br><small style="color:#94a3b8;">Midsegment = �(b1 + b2)</small></div>
+            <div style="background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3); border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+              <div><b style="color:#fbbf24;">🏔️ Trapezoid</b><br><small style="color:#94a3b8;">Angles = 360°</small></div>
+              <div style="font-family:var(--font-mono, monospace); font-weight:800; color:#ffffff; text-align:right;">Area = ½(b₁ + b₂)h<br><small style="color:#94a3b8;">Midsegment = ½(b₁ + b₂)</small></div>
             </div>
           </div>
         `
@@ -1732,20 +1732,20 @@
      canvasFn: key into CANVAS_FNS (or null = default shape)
   --------------------------------------------------- */
   const ALL_Q = [
-    // ---- TRIANGLE (indices 0�19) ----
+    // ════ TRIANGLE (indices 0–19) ════
     // Mix of computation, visual, and fact questions
-    {q:"A triangle has a base of 6 cm and a height of 4 cm. What is its area?",correct:"12 cm�",opts:["12 cm�","24 cm�","10 cm�","8 cm�"],type:'computation',canvasFn:'triArea_6_4'},
+    {q:"A triangle has a base of 6 cm and a height of 4 cm. What is its area?",correct:"12 cm²",opts:["12 cm²","24 cm²","10 cm²","8 cm²"],type:'computation',canvasFn:'triArea_6_4'},
     {q:"Look at the shape. The arrow points to the intersection of the three MEDIANS. What is this special point called?",correct:"The centroid",opts:["The incenter","The circumcenter","The orthocenter","The centroid"],type:'visual',canvasFn:'drawCentroid'},
-    {q:"What is the sum of the interior angles of any triangle?",correct:"180�",opts:["90�","180�","270�","360�"],type:'fact',canvasFn:null},
-    {q:"A right triangle has a base of 8 cm and a height of 6 cm. What is its area?",correct:"24 cm�",opts:["24 cm�","48 cm�","14 cm�","36 cm�"],type:'computation',canvasFn:'triArea_8_6'},
+    {q:"What is the sum of the interior angles of any triangle?",correct:"180°",opts:["90°","180°","270°","360°"],type:'fact',canvasFn:null},
+    {q:"A right triangle has a base of 8 cm and a height of 6 cm. What is its area?",correct:"24 cm²",opts:["24 cm²","48 cm²","14 cm²","36 cm²"],type:'computation',canvasFn:'triArea_8_6'},
     {q:"The dashed lines show the three ALTITUDES of this triangle. Where do they all meet?",correct:"The orthocenter",opts:["The centroid","The circumcenter","The incenter","The orthocenter"],type:'visual',canvasFn:'drawOrthocenter'},
-    {q:"In an equilateral triangle, each angle measures exactly how many degrees?",correct:"60�",opts:["45�","60�","90�","120�"],type:'fact',canvasFn:null},
-    {q:"What is the area of a triangle with base 10 cm and height 4 cm?",correct:"20 cm�",opts:["20 cm�","40 cm�","14 cm�","25 cm�"],type:'computation',canvasFn:'triArea_10_4'},
+    {q:"In an equilateral triangle, each angle measures exactly how many degrees?",correct:"60°",opts:["45°","60°","90°","120°"],type:'fact',canvasFn:null},
+    {q:"What is the area of a triangle with base 10 cm and height 4 cm?",correct:"20 cm²",opts:["20 cm²","40 cm²","14 cm²","25 cm²"],type:'computation',canvasFn:'triArea_10_4'},
     {q:"The dashed lines show the PERPENDICULAR BISECTORS of each side. Where do they all meet?",correct:"The circumcenter",opts:["The centroid","The circumcenter","The incenter","The orthocenter"],type:'visual',canvasFn:'drawCircumcenter'},
-    {q:"Which ancient mathematician is credited with a� + b� = c�?",correct:"Pythagoras",opts:["Euclid","Archimedes","Pythagoras","Thales"],type:'fact',canvasFn:null},
-    {q:"A triangular sail has a base of 5 cm and a height of 8 cm. What is its area?",correct:"20 cm�",opts:["20 cm�","13 cm�","40 cm�","32 cm�"],type:'computation',canvasFn:'triArea_5_8'},
+    {q:"Which ancient mathematician is credited with a² + b² = c²?",correct:"Pythagoras",opts:["Euclid","Archimedes","Pythagoras","Thales"],type:'fact',canvasFn:null},
+    {q:"A triangular sail has a base of 5 cm and a height of 8 cm. What is its area?",correct:"20 cm²",opts:["20 cm²","13 cm²","40 cm²","32 cm²"],type:'computation',canvasFn:'triArea_5_8'},
     {q:"The dashed lines show the ANGLE BISECTORS of each vertex. Where do they all meet?",correct:"The incenter",opts:["The centroid","The circumcenter","The incenter","The orthocenter"],type:'visual',canvasFn:'drawIncenter'},
-    {q:"What is the sum of the EXTERIOR angles of any triangle?",correct:"360�",opts:["180�","270�","360�","540�"],type:'fact',canvasFn:null},
+    {q:"What is the sum of the EXTERIOR angles of any triangle?",correct:"360°",opts:["180°","270°","360°","540°"],type:'fact',canvasFn:null},
     {q:"A triangle with all sides equal to 5 cm. What type of triangle is it?",correct:"Equilateral triangle",opts:["Scalene triangle","Isosceles triangle","Right triangle","Equilateral triangle"],type:'computation',canvasFn:'triPerim'},
     {q:"The highlighted side is the longest side of this right triangle. What is it called?",correct:"The hypotenuse",opts:["The base","The leg","The median","The hypotenuse"],type:'visual',canvasFn:'drawHypotenuse'},
     {q:"Which mathematician wrote 'Elements,' formally organizing triangle geometry?",correct:"Euclid",opts:["Pythagoras","Archimedes","Euclid","Thales"],type:'fact',canvasFn:null},
@@ -1753,29 +1753,29 @@
     {q:"The Exterior Angle Theorem states that an exterior angle of a triangle equals the sum of which two angles?",correct:"The two non-adjacent interior angles",opts:["The two adjacent interior angles","The two non-adjacent interior angles","The two exterior angles","The two supplementary angles"],type:'fact',canvasFn:null},
     {q:"Which mathematician developed a formula using the semi-perimeter to find a triangle's area from only its three side lengths?",correct:"Heron of Alexandria",opts:["Euclid","Pythagoras","Heron of Alexandria","Archimedes"],type:'computation',canvasFn:null},
     {q:"Pascal's Triangle is a triangular arrangement of numbers. Who is it named after?",correct:"Blaise Pascal",opts:["Leonhard Euler","Blaise Pascal","Carl Gauss","Isaac Newton"],type:'fact',canvasFn:null},
-    {q:"A triangle with all angles less than 90� is called ______.",correct:"Acute triangle",opts:["Right triangle","Obtuse triangle","Acute triangle","Equilateral triangle"],type:'fact',canvasFn:null},
+    {q:"A triangle with all angles less than 90° is called ______.",correct:"Acute triangle",opts:["Right triangle","Obtuse triangle","Acute triangle","Equilateral triangle"],type:'fact',canvasFn:null},
 
-    // ---- PARALLELOGRAM (indices 20�34) ----
-    {q:"A parallelogram has a base of 6 cm and a height of 4 cm. What is its area?",correct:"24 cm�",opts:["24 cm�","12 cm�","48 cm�","20 cm�"],type:'computation',canvasFn:'paraArea_6_4'},
-    {q:"What is the area of a parallelogram with base 8 cm and height 5 cm?",correct:"40 cm�",opts:["13 cm�","20 cm�","40 cm�","80 cm�"],type:'computation',canvasFn:'paraArea_8_5'},
-    {q:"A floor tile is shaped like a parallelogram with base 7 cm and height 6 cm. What is its area?",correct:"42 cm�",opts:["42 cm�","13 cm�","21 cm�","84 cm�"],type:'computation',canvasFn:'paraArea_7_6'},
+    // ════ PARALLELOGRAM (indices 20–34) ════
+    {q:"A parallelogram has a base of 6 cm and a height of 4 cm. What is its area?",correct:"24 cm²",opts:["24 cm²","12 cm²","48 cm²","20 cm²"],type:'computation',canvasFn:'paraArea_6_4'},
+    {q:"What is the area of a parallelogram with base 8 cm and height 5 cm?",correct:"40 cm²",opts:["13 cm²","20 cm²","40 cm²","80 cm²"],type:'computation',canvasFn:'paraArea_8_5'},
+    {q:"A floor tile is shaped like a parallelogram with base 7 cm and height 6 cm. What is its area?",correct:"42 cm²",opts:["42 cm²","13 cm²","21 cm²","84 cm²"],type:'computation',canvasFn:'paraArea_7_6'},
     {q:"Look at the image. The arrows point to a special property of the diagonals. They ______ each other.",correct:"bisect",opts:["double","bisect","triple","perpendicular"],type:'visual',canvasFn:'drawParaDiagonals'},
     {q:"Which shapes in the image are ALL types of parallelograms?",correct:"Rectangle, Rhombus, and Square",opts:["Only Rectangle","Rectangle and Square only","Rectangle, Rhombus, and Square","Rhombus and Trapezoid"],type:'visual',canvasFn:'drawParaFamily'},
-    {q:"What is the sum of the interior angles of a parallelogram?",correct:"360�",opts:["180�","270�","360�","540�"],type:'fact',canvasFn:null},
-    {q:"In a parallelogram, consecutive angles (next to each other) always add up to ______.",correct:"180�",opts:["90�","180�","270�","360�"],type:'fact',canvasFn:null},
+    {q:"What is the sum of the interior angles of a parallelogram?",correct:"360°",opts:["180°","270°","360°","540°"],type:'fact',canvasFn:null},
+    {q:"In a parallelogram, consecutive angles (next to each other) always add up to ______.",correct:"180°",opts:["90°","180°","270°","360°"],type:'fact',canvasFn:null},
     {q:"True or False: Every rectangle is a parallelogram.",correct:"True",opts:["True","False","Only sometimes","Only if it's a square"],type:'fact',canvasFn:null},
     {q:"True or False: Every parallelogram is a rectangle.",correct:"False",opts:["True","False","Only if angles are acute","Only sometimes"],type:'fact',canvasFn:null},
-    {q:"What is the formula for the perimeter of a parallelogram with sides a and b?",correct:"2(a + b)",opts:["a + b","2(a + b)","4a","a � b"],type:'fact',canvasFn:null},
+    {q:"What is the formula for the perimeter of a parallelogram with sides a and b?",correct:"2(a + b)",opts:["a + b","2(a + b)","4a","a × b"],type:'fact',canvasFn:null},
     {q:"In a rhombus (a special parallelogram), what is true about the diagonals?",correct:"They are perpendicular to each other",opts:["They are equal in length","They are perpendicular to each other","They bisect the perimeter","They are parallel"],type:'fact',canvasFn:null},
     {q:"What do you call a parallelogram with four right angles?",correct:"Rectangle",opts:["Rhombus","Square","Rectangle","Trapezoid"],type:'fact',canvasFn:null},
     {q:"What is the name of a parallelogram with all four sides equal?",correct:"Rhombus",opts:["Rectangle","Rhombus","Square","Kite"],type:'fact',canvasFn:null},
     {q:"A parallelogram has sides of 5 cm and 8 cm. What is its perimeter?",correct:"26 cm",opts:["13 cm","26 cm","40 cm","30 cm"],type:'computation',canvasFn:'paraDefault'},
     {q:"Which branch of geometry, developed by Euclid, formally studies parallelograms?",correct:"Euclidean geometry",opts:["Non-Euclidean geometry","Analytic geometry","Euclidean geometry","Projective geometry"],type:'fact',canvasFn:null},
 
-    // ---- TRAPEZOID (indices 35�49) ----
-    {q:"A trapezoid has bases of 6 cm and 4 cm, and a height of 5 cm. What is its area?",correct:"25 cm�",opts:["25 cm�","50 cm�","10 cm�","30 cm�"],type:'computation',canvasFn:'trapArea_6_4_5'},
-    {q:"Find the area of a trapezoid with bases 8 cm and 4 cm, and height 6 cm.",correct:"36 cm�",opts:["36 cm�","72 cm�","24 cm�","48 cm�"],type:'computation',canvasFn:'trapArea_8_4_6'},
-    {q:"A highway sign is trapezoidal with bases 10 cm and 6 cm, and height 4 cm. What is its area?",correct:"32 cm�",opts:["32 cm�","64 cm�","16 cm�","40 cm�"],type:'computation',canvasFn:'trapArea_10_6_4'},
+    // ════ TRAPEZOID (indices 35–49) ════
+    {q:"A trapezoid has bases of 6 cm and 4 cm, and a height of 5 cm. What is its area?",correct:"25 cm²",opts:["25 cm²","50 cm²","10 cm²","30 cm²"],type:'computation',canvasFn:'trapArea_6_4_5'},
+    {q:"Find the area of a trapezoid with bases 8 cm and 4 cm, and height 6 cm.",correct:"36 cm²",opts:["36 cm²","72 cm²","24 cm²","48 cm²"],type:'computation',canvasFn:'trapArea_8_4_6'},
+    {q:"A highway sign is trapezoidal with bases 10 cm and 6 cm, and height 4 cm. What is its area?",correct:"32 cm²",opts:["32 cm²","64 cm²","16 cm²","40 cm²"],type:'computation',canvasFn:'trapArea_10_6_4'},
     {q:"The purple segment in the image connects the midpoints of the two legs. What is it called?",correct:"The midsegment",opts:["The altitude","The diagonal","The midsegment","The base"],type:'visual',canvasFn:'drawTrapMidSegment'},
     {q:"The image shows a trapezoid with equal legs and tick marks. What type of trapezoid is this?",correct:"Isosceles trapezoid",opts:["Right trapezoid","Isosceles trapezoid","Scalene trapezoid","Equilateral trapezoid"],type:'visual',canvasFn:'drawTrapIsosc'},
     {q:"The image shows a trapezoid with one leg forming a right angle with the bases. What is it called?",correct:"Right trapezoid",opts:["Right trapezoid","Isosceles trapezoid","Scalene trapezoid","Obtuse trapezoid"],type:'visual',canvasFn:'drawRightTrapezoid'},
@@ -1825,14 +1825,14 @@
      SHAPE CONFIG
   --------------------------------------------------- */
   const SHAPE_CFG = {
-    triangle:      {tag:'? TRIANGLE',      tagCls:'shape-tag-triangle',      icon:'??',iconCls:'icon-t',label:'Triangle'},
-    parallelogram: {tag:'? PARALLELOGRAM', tagCls:'shape-tag-parallelogram', icon:'?', iconCls:'icon-p',label:'Parallelogram'},
-    trapezoid:     {tag:'� TRAPEZOID',     tagCls:'shape-tag-trapezoid',     icon:'???',iconCls:'icon-tr',label:'Trapezoid'},
+    triangle:      {tag:'🔺 TRIANGLE',      tagCls:'shape-tag-triangle',      icon:'🔺',iconCls:'icon-t',label:'Triangle'},
+    parallelogram: {tag:'▱ PARALLELOGRAM', tagCls:'shape-tag-parallelogram', icon:'▱', iconCls:'icon-p',label:'Parallelogram'},
+    trapezoid:     {tag:'⏢ TRAPEZOID',     tagCls:'shape-tag-trapezoid',     icon:'⏢',iconCls:'icon-tr',label:'Trapezoid'},
   };
   const QTYPE_CFG = {
-    computation:{cls:'qtag-computation',label:'?? COMPUTATION'},
-    visual:     {cls:'qtag-visual',     label:'?? VISUAL'},
-    fact:       {cls:'qtag-fact',       label:'?? FACT'},
+    computation:{cls:'qtag-computation',label:'🧮 COMPUTATION'},
+    visual:     {cls:'qtag-visual',     label:'👁️ VISUAL'},
+    fact:       {cls:'qtag-fact',       label:'📚 FACT'},
   };
 
   /* ---------------------------------------------------
@@ -2182,7 +2182,7 @@
       const pts=10+Math.min(S.streak,5)*3;
       S.score+=pts;
       fb.className='geo-fb correct show';
-      fb.innerHTML=`? Correct! +${pts} points${S.streak>=3?' ?? '+S.streak+' streak!':''}`;
+      fb.innerHTML=`✓ Correct! +${pts} points${S.streak>=3?' 🔥 '+S.streak+' streak!':''}`;
       if(S.streak>=3) fireConfetti(18);
     } else {
       btn.classList.add('wrong'); S.streak=0;
