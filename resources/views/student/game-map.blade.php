@@ -18,9 +18,25 @@
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:#04020a;font-family:'Inter',sans-serif;color:#e8eef5;overflow-x:hidden;}
+html{ -webkit-text-size-adjust:100%; }
+body{
+  background:#04020a;
+  font-family:'Inter',sans-serif;
+  color:#e8eef5;
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
 
-.map-page{height:100vh;min-height:600px;display:flex;flex-direction:column;position:relative;overflow:hidden;background:#04020a;}
+.map-page{
+  height:100vh;
+  height:100dvh;
+  min-height:600px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+  background:#04020a;
+}
 
 /* ── video background ── */
 .map-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0;pointer-events:none;}
@@ -30,35 +46,339 @@ body{background:#04020a;font-family:'Inter',sans-serif;color:#e8eef5;overflow-x:
   radial-gradient(ellipse 700px 500px at 50% 50%, rgba(244,114,182,.07), transparent 65%),
   linear-gradient(180deg,rgba(4,2,10,.55) 0%,rgba(10,7,22,.45) 45%,rgba(12,10,30,.5) 75%,rgba(4,2,10,.65) 100%);}
 
-.map-header{position:relative;z-index:100;padding:14px 24px 12px;background:rgba(4,2,10,.75);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-.map-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:10px;letter-spacing:-.01em;}
-.map-title i{color:{{ $accent }};font-size:1.15rem;}
+/* ── header ── */
+.map-header{
+  position:relative;
+  z-index:100;
+  padding:
+    max(14px, env(safe-area-inset-top))
+    max(24px, env(safe-area-inset-right))
+    12px
+    max(24px, env(safe-area-inset-left));
+  background:rgba(4,2,10,.75);
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  flex-shrink:0;
+}
+
+.map-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.2rem;
+  font-weight:800;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  letter-spacing:-.01em;
+  min-width:0;
+}
+.map-title i{color:{{ $accent }};font-size:1.15rem;flex-shrink:0;}
 .map-title small{display:block;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.4);margin-top:1px;}
-.stat-pill{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:6px 13px;font-size:.78rem;font-weight:700;border:1px solid transparent;}
+
+.map-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.stat-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:10px;
+  padding:6px 13px;
+  font-size:.78rem;
+  font-weight:700;
+  border:1px solid transparent;
+  white-space:nowrap;
+}
 .sp-accent{background:color-mix(in srgb,{{ $accent }} 16%,transparent);border-color:color-mix(in srgb,{{ $accent }} 32%,transparent);color:{{ $accent }};}
 .sp-gold{background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.3);color:#fbbf24;}
-.btn-back-map{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:7px 15px;color:rgba(255,255,255,.55);font-size:.8rem;font-weight:700;text-decoration:none;transition:background .15s,color .15s;}
-.btn-back-map:hover{background:rgba(255,255,255,.12);color:#fff;}
-.btn-mute{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:7px 13px;color:rgba(255,255,255,.55);font-size:.8rem;font-weight:700;cursor:pointer;transition:background .15s,color .15s;user-select:none;}
+
+.btn-back-map,
+.btn-mute,
+.btn-tutorial{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  padding:7px 15px;
+  color:rgba(255,255,255,.55);
+  font-size:.8rem;
+  font-weight:700;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s,transform .12s;
+  user-select:none;
+  touch-action:manipulation;
+  min-height:38px;
+  white-space:nowrap;
+}
+.btn-back-map:hover,
 .btn-mute:hover{background:rgba(255,255,255,.12);color:#fff;}
-.btn-mute.muted{background:rgba(244,114,182,.1);border-color:rgba(244,114,182,.25);color:rgba(244,114,182,.7);}
-.btn-tutorial{display:inline-flex;align-items:center;gap:6px;background:rgba(251,191,36,.12);border:1.5px solid rgba(251,191,36,.3);border-radius:10px;padding:7px 14px;color:#fde68a;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .18s;user-select:none;text-decoration:none;}
-.btn-tutorial:hover{background:rgba(251,191,36,.24);color:#fef3c7;transform:translateY(-1px);box-shadow:0 4px 14px rgba(251,191,36,.2);}
 
-.progress-rail{position:relative;z-index:100;height:5px;background:rgba(255,255,255,.06);}
-.progress-fill{height:100%;background:linear-gradient(90deg,{{ $accent }},#fbbf24);width:{{ $percent }}%;transition:width .6s ease;box-shadow:0 0 10px color-mix(in srgb,{{ $accent }} 60%,transparent);}
+.btn-tutorial{
+  background:rgba(251,191,36,.12);
+  border:1.5px solid rgba(251,191,36,.3);
+  color:#fde68a;
+}
+.btn-tutorial:hover{
+  background:rgba(251,191,36,.24);
+  color:#fef3c7;
+  transform:translateY(-1px);
+  box-shadow:0 4px 14px rgba(251,191,36,.2);
+}
+.btn-mute.muted{
+  background:rgba(244,114,182,.1);
+  border-color:rgba(244,114,182,.25);
+  color:rgba(244,114,182,.7);
+}
 
-.map-scroll{position:relative;z-index:2;flex:1;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;display:flex;align-items:center;background:transparent;}
+/* ── progress rail ── */
+.progress-rail{
+  position:relative;
+  z-index:100;
+  height:5px;
+  background:rgba(255,255,255,.06);
+  flex-shrink:0;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,{{ $accent }},#fbbf24);
+  width:{{ $percent }}%;
+  transition:width .6s ease;
+  box-shadow:0 0 10px color-mix(in srgb,{{ $accent }} 60%,transparent);
+}
+
+/* ── map scroll area ── */
+.map-scroll{
+  position:relative;
+  z-index:2;
+  flex:1;
+  min-height:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x;
+  scroll-behavior:smooth;
+  display:flex;
+  align-items:center;
+  background:transparent;
+}
 .map-scroll::-webkit-scrollbar{height:8px;}
 .map-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.03);}
 .map-scroll::-webkit-scrollbar-thumb{background:color-mix(in srgb,{{ $accent }} 40%,transparent);border-radius:99px;}
+
 #mapSvg{display:block;height:100%;flex-shrink:0;}
 
-.scroll-cue{position:absolute;top:0;bottom:0;width:70px;pointer-events:none;z-index:5;opacity:0;transition:opacity .3s;}
+.scroll-cue{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:70px;
+  pointer-events:none;
+  z-index:5;
+  opacity:0;
+  transition:opacity .3s;
+}
 .scroll-cue.left{left:0;background:linear-gradient(90deg,#04020a,transparent);}
 .scroll-cue.right{right:0;background:linear-gradient(270deg,#04020a,transparent);}
 
-/* Character removed for cleaner map view */
+/* ============================================================
+   TABLET (≤900px)
+   ============================================================ */
+@media (max-width:900px){
+  .map-header{
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(14px, env(safe-area-inset-right))
+      10px
+      max(14px, env(safe-area-inset-left));
+    gap:8px;
+  }
+  .map-title{font-size:1.05rem;}
+  .map-title i{font-size:1.05rem;}
+  .map-title small{font-size:.68rem;}
+
+  .stat-pill{padding:5px 11px;font-size:.74rem;}
+
+  .btn-back-map,
+  .btn-mute,
+  .btn-tutorial{padding:6px 12px;font-size:.75rem;min-height:34px;}
+}
+
+/* ============================================================
+   PHONE (≤768px) — header stacks, becomes scrollable
+   ============================================================ */
+@media (max-width:768px){
+  .map-page{
+    min-height:0;
+  }
+
+  .map-header{
+    flex-direction:column;
+    align-items:stretch;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      10px
+      max(12px, env(safe-area-inset-left));
+    gap:8px;
+  }
+
+  .map-title{
+    font-size:1rem;
+    justify-content:center;
+    text-align:center;
+    gap:8px;
+  }
+  .map-title i{font-size:1rem;}
+  .map-title small{display:none;}
+
+  /* Actions become a horizontal scroll strip */
+  .map-actions{
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    gap:6px;
+    padding-bottom:2px;
+    margin:0 -12px;
+    padding-left:12px;
+    padding-right:12px;
+  }
+  .map-actions::-webkit-scrollbar{display:none;}
+
+  .stat-pill{
+    padding:5px 10px;
+    font-size:.72rem;
+    flex-shrink:0;
+  }
+
+  .btn-back-map,
+  .btn-mute,
+  .btn-tutorial{
+    padding:6px 11px;
+    font-size:.72rem;
+    min-height:34px;
+    flex-shrink:0;
+  }
+  .btn-back-map i,
+  .btn-mute i,
+  .btn-tutorial i{font-size:.9rem;}
+
+  .scroll-cue{width:40px;}
+}
+
+/* ============================================================
+   VERY SMALL PHONE (≤420px) — icons only
+   ============================================================ */
+@media (max-width:420px){
+  .btn-label{display:none;}
+
+  .btn-back-map,
+  .btn-mute,
+  .btn-tutorial{
+    padding:7px 10px;
+    min-width:38px;
+  }
+  .btn-back-map i,
+  .btn-mute i,
+  .btn-tutorial i{font-size:1rem;}
+
+  .stat-pill{
+    padding:4px 9px;
+    font-size:.68rem;
+  }
+  .stat-pill i{font-size:.72rem;}
+}
+
+/* ============================================================
+   TINY PHONE (≤340px)
+   ============================================================ */
+@media (max-width:340px){
+  .map-title{font-size:.9rem;}
+  .map-title i{font-size:.9rem;}
+  .stat-pill{padding:4px 8px;font-size:.64rem;}
+  .btn-back-map,
+  .btn-mute,
+  .btn-tutorial{padding:6px 8px;min-height:32px;}
+}
+
+/* ============================================================
+   LANDSCAPE PHONE — single-row header, tighter padding
+   ============================================================ */
+@media (max-height:500px) and (orientation:landscape){
+  .map-header{
+    flex-direction:row;
+    align-items:center;
+    padding:
+      max(6px, env(safe-area-inset-top))
+      max(10px, env(safe-area-inset-right))
+      6px
+      max(10px, env(safe-area-inset-left));
+    gap:8px;
+  }
+  .map-title{
+    font-size:.9rem;
+    justify-content:flex-start;
+    text-align:left;
+  }
+  .map-title small{display:none;}
+
+  .map-actions{
+    flex-wrap:wrap;
+    overflow:visible;
+    margin:0;
+    padding:0;
+  }
+
+  .stat-pill{padding:3px 8px;font-size:.65rem;}
+  .btn-back-map,
+  .btn-mute,
+  .btn-tutorial{padding:5px 9px;min-height:30px;font-size:.68rem;}
+}
+
+/* ============================================================
+   Touch feedback
+   ============================================================ */
+@media (hover:none){
+  .btn-back-map:active,
+  .btn-mute:active,
+  .btn-tutorial:active{
+    transform:scale(.96);
+    background:rgba(255,255,255,.15);
+  }
+  .btn-tutorial:active{
+    background:rgba(251,191,36,.3);
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .map-scroll{scroll-behavior:auto;}
+}
 </style>
 
 <div class="map-page" id="mapPage">
@@ -76,21 +396,24 @@ body{background:#04020a;font-family:'Inter',sans-serif;color:#e8eef5;overflow-x:
         <small>Star Map · sail right to advance</small>
       </div>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span class="stat-pill sp-accent"><i class="bi bi-layers-fill"></i> Level {{ $current }}/{{ $totalLevels }}</span>
-      <span class="stat-pill sp-gold"><i class="bi bi-trophy-fill"></i> {{ number_format($highScore) }}</span>
-      <a href="{{ route('student.dashboard') }}" class="btn-back-map"><i class="bi bi-house-fill"></i> Dashboard</a>
-      <button class="btn-tutorial" id="tutorialBtn" title="Replay the tutorial for this game">
-        <i class="bi bi-book-half"></i> Tutorial
+    <div class="map-actions">
+      <span class="stat-pill sp-accent"><i class="bi bi-layers-fill"></i> <span>Level {{ $current }}/{{ $totalLevels }}</span></span>
+      <span class="stat-pill sp-gold"><i class="bi bi-trophy-fill"></i> <span>{{ number_format($highScore) }}</span></span>
+      <a href="{{ route('student.dashboard') }}" class="btn-back-map" title="Dashboard" aria-label="Dashboard">
+        <i class="bi bi-house-fill"></i> <span class="btn-label">Dashboard</span>
+      </a>
+      <button class="btn-tutorial" id="tutorialBtn" title="Replay the tutorial for this game" aria-label="Tutorial">
+        <i class="bi bi-book-half"></i> <span class="btn-label">Tutorial</span>
       </button>
-      <button class="btn-mute" id="muteBtn" title="Toggle music"><i class="bi bi-music-note-beamed" id="muteIcon"></i> Music</button>
+      <button class="btn-mute" id="muteBtn" title="Toggle music" aria-label="Toggle music">
+        <i class="bi bi-music-note-beamed" id="muteIcon"></i> <span class="btn-label">Music</span>
+      </button>
     </div>
   </div>
 
   <div class="progress-rail"><div class="progress-fill"></div></div>
 
   <div class="map-scroll" id="mapScroll">
-    {{-- Character removed for cleaner map view --}}
     <svg id="mapSvg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet"></svg>
   </div>
 
@@ -123,13 +446,12 @@ var TUT_KEYS = {
   'rocket_math':      'rm_tutorial_done',
   'the_metric_quest': 'eduplay_metric_tut_done',
   'mdas_maze':        'mdas_maze_tutorial_done',
-  'geometry_grid':    'gg_tutorial_shown' // Special handling for Geometry Grid
+  'geometry_grid':    'gg_tutorial_shown'
 };
 
 /* ── Tutorial button ── */
 document.getElementById('tutorialBtn').addEventListener('click', function() {
   if (GAME_NAME === 'geometry_grid') {
-    // For Geometry Grid, set flags to open tutorial on game load
     localStorage.setItem('gg_open_tutorial', 'true');
     sessionStorage.setItem('gg_open_tutorial', 'true');
     var key = TUT_KEYS[GAME_NAME];
@@ -139,7 +461,6 @@ document.getElementById('tutorialBtn').addEventListener('click', function() {
     }
     window.location.href = PLAY_URL + (PLAY_URL.includes('?') ? '&' : '?') + 'tutorial=1&show_instruction=1';
   } else if (GAME_NAME === 'the_metric_quest') {
-    // Explicitly set tutorial flags so The Metric Quest always shows tutorial
     localStorage.setItem('mq_show_tutorial', 'true');
     sessionStorage.setItem('mq_show_tutorial', 'true');
     var key = TUT_KEYS[GAME_NAME];
@@ -149,7 +470,6 @@ document.getElementById('tutorialBtn').addEventListener('click', function() {
     }
     window.location.href = PLAY_URL + (PLAY_URL.includes('?') ? '&' : '?') + 'tutorial=1&show_instruction=1';
   } else {
-    // For other games, clear the "tutorial done" flag
     var key = TUT_KEYS[GAME_NAME];
     if (key) {
       localStorage.removeItem(key);
@@ -159,7 +479,7 @@ document.getElementById('tutorialBtn').addEventListener('click', function() {
   }
 });
 
-/* ── level base images (planet / island art per level) ── */
+/* ── level base images ── */
 var LEVEL_BASES = {
   1:  '{{ asset("images/map-bases/level1-base.png") }}',
   2:  '{{ asset("images/map-bases/level2-base.png") }}',
@@ -178,8 +498,7 @@ var LEVEL_BASES = {
   15: '{{ asset("images/map-bases/level15-base.png") }}'
 };
 
-
-/* ── sizing: medium node scale, character deliberately larger than a node ── */
+/* ── sizing ── */
 var VH = 400, PAD_X = 80, STEP = 130, NR = 26;
 var ROW_T = VH * 0.32, ROW_B = VH * 0.68;
 
@@ -221,7 +540,7 @@ var spaceBg = mk('linearGradient', {id:'spaceBg', x1:'0', y1:'0', x2:'1', y2:'0'
 defs.appendChild(spaceBg);
 svgEl.appendChild(defs);
 
-/* ── deep space backdrop (transparent — video handles the BG) ── */
+/* ── backdrop ── */
 svgEl.appendChild(mk('rect', {x:0, y:0, width:VW, height:VH, fill:'transparent'}));
 
 /* nebula glow blobs */
@@ -246,7 +565,7 @@ for (var s = 0; s < Math.floor(VW / 5); s++) {
   svgEl.appendChild(star);
 }
 
-/* constellations scattered along the route */
+/* constellations */
 var clusterCount = Math.max(3, Math.floor(VW / 380));
 for (var cl = 0; cl < clusterCount; cl++) {
   var baseX = rand(60, VW - 60), baseY = rand(60, VH - 60);
@@ -298,20 +617,18 @@ for (var a = 0; a < asteroidCount; a++) {
   svgEl.appendChild(drift);
 }
 
-/* ── route between nodes ── */
+/* ── routes ── */
 for (var pi = 0; pi < TOTAL - 1; pi++) {
   var na = positions[pi], nb = positions[pi+1];
   var done = (pi + 1) < CURRENT;
   var midx = (na.x + nb.x) / 2;
   var pathD = 'M'+na.x+' '+na.y+' Q'+midx+' '+na.y+' '+midx+' '+((na.y+nb.y)/2)+' Q'+midx+' '+nb.y+' '+nb.x+' '+nb.y;
-  /* shadow / outline pass for depth */
   svgEl.appendChild(mk('path', {
     d: pathD,
     stroke: 'rgba(0,0,0,0.55)', 'stroke-width':'10', 'stroke-linecap':'round',
     'stroke-dasharray': done ? 'none' : '2 12',
     fill:'none'
   }));
-  /* main coloured trail */
   svgEl.appendChild(mk('path', {
     d: pathD,
     stroke: done ? ACCENT : 'rgba(255,255,255,0.55)',
@@ -333,15 +650,12 @@ function iconPlay(g, cx, cy, color) {
   g.appendChild(mk('path', {d:'M'+(cx-4)+' '+(cy-6)+' L'+(cx+6)+' '+cy+' L'+(cx-4)+' '+(cy+6)+' Z', fill:color}));
 }
 
-/* ── level base images rendered behind nodes ── */
+/* ── level planet images ── */
 for (var lvl = 1; lvl <= TOTAL; lvl++) {
   var pos  = positions[lvl - 1];
-  
-  // Reuse the 15 base images via modulo if levels > 15
   var baseIdx = ((lvl - 1) % 15) + 1;
   var imgSrc = LEVEL_BASES[baseIdx];
-  
-  var imgSize = NR * 5.2;          /* big planet — clearly larger than the node ring */
+  var imgSize = NR * 5.2;
   var imgEl = mk('image', {
     href:   imgSrc,
     x:      pos.x - imgSize / 2,
@@ -351,7 +665,6 @@ for (var lvl = 1; lvl <= TOTAL; lvl++) {
     preserveAspectRatio: 'xMidYMid meet',
     opacity: '0.82'
   });
-  /* gentle slow rotation for the planet */
   imgEl.appendChild(mk('animateTransform', {
     attributeName: 'transform', type: 'rotate',
     from: '0 ' + pos.x + ' ' + pos.y,
@@ -409,7 +722,6 @@ positions.forEach(function(pos, idx) {
     'stroke-width': isCur ? '2.8' : '2',
     filter: isLocked ? '' : 'url(#glow)'}));
 
-  /* dark outline pass so the number reads against any background */
   var numShadow = mk('text', {x:pos.x, y:pos.y+7, 'text-anchor':'middle', 'font-family':'Space Grotesk,sans-serif', 'font-size':'22', 'font-weight':'900',
     stroke:'rgba(0,0,0,0.85)', 'stroke-width':'4', 'stroke-linejoin':'round', 'paint-order':'stroke',
     fill:'none'});
@@ -441,46 +753,65 @@ positions.forEach(function(pos, idx) {
   svgEl.appendChild(g);
 });
 
-/* ── layout: real-pixel scale for proper node sizing ── */
+/* ── layout ── */
 var mapScroll = document.getElementById('mapScroll');
-var scale, currentStep = 1;
+var scale = 1;
 
 function layout() {
-  var h = mapScroll.clientHeight;
+  var h = Math.max(200, mapScroll.clientHeight || VH);
   scale = h / VH;
   svgEl.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
   svgEl.style.width  = (VW * scale) + 'px';
   svgEl.style.height = h + 'px';
 }
 
-function centerOn(lvl) {
+function centerOn(lvl, behavior) {
   var p = positions[lvl - 1];
   var target = p.x * scale - mapScroll.clientWidth / 2;
-  mapScroll.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+  mapScroll.scrollTo({
+    left: Math.max(0, target),
+    behavior: behavior || 'smooth'
+  });
 }
 
-window.addEventListener('resize', layout);
+var isMobileLayout = function(){
+  return window.matchMedia('(max-width: 768px)').matches;
+};
+
+/* initial layout + auto-center */
 requestAnimationFrame(function(){
   layout();
-  if (CURRENT > 1) {
+  if (CURRENT > 1 && !isMobileLayout()) {
+    /* Desktop: cinematic glide */
     var step = 2;
     (function glide(){
       if (step > CURRENT) { centerOn(CURRENT); return; }
       centerOn(Math.min(step, TOTAL));
-      setTimeout(function(){ currentStep = step; step++; glide(); }, 420);
+      setTimeout(function(){ step++; glide(); }, 420);
     })();
   } else {
-    centerOn(1);
+    /* Mobile or Level 1: instant jump */
+    centerOn(CURRENT, 'auto');
   }
 });
 
-/* scroll cue fade */
+window.addEventListener('resize', function(){ layout(); });
+window.addEventListener('orientationchange', function(){
+  setTimeout(function(){ layout(); centerOn(CURRENT, 'auto'); }, 250);
+});
+
+/* re-layout when the header reflows (font load, keyboard, etc.) */
+if ('ResizeObserver' in window) {
+  new ResizeObserver(function(){ layout(); }).observe(mapScroll);
+}
+
+/* ── scroll cues ── */
 var cueL = document.getElementById('cueLeft'), cueR = document.getElementById('cueRight');
 function updateCues(){
   cueL.style.opacity = mapScroll.scrollLeft > 8 ? '0.9' : '0';
   cueR.style.opacity = (mapScroll.scrollLeft + mapScroll.clientWidth < mapScroll.scrollWidth - 8) ? '0.9' : '0';
 }
-mapScroll.addEventListener('scroll', updateCues);
+mapScroll.addEventListener('scroll', updateCues, {passive:true});
 window.addEventListener('resize', updateCues);
 requestAnimationFrame(updateCues);
 
@@ -490,7 +821,6 @@ requestAnimationFrame(updateCues);
 (function(){
   var audio   = document.getElementById('lobbyMusic');
   var btn     = document.getElementById('muteBtn');
-  var icon    = document.getElementById('muteIcon');
   var muted   = false;
   var started = false;
 
@@ -506,32 +836,28 @@ requestAnimationFrame(updateCues);
     }
   }
 
-  /* attempt autoplay immediately */
   tryPlay();
 
-  /* fallback: start on first user interaction if browser blocked autoplay */
   function onInteract() {
     tryPlay();
-    document.removeEventListener('click',   onInteract);
-    document.removeEventListener('keydown', onInteract);
+    document.removeEventListener('click',      onInteract);
+    document.removeEventListener('keydown',    onInteract);
     document.removeEventListener('touchstart', onInteract);
   }
   document.addEventListener('click',      onInteract);
-  document.addEventListener('keydown',   onInteract);
-  document.addEventListener('touchstart', onInteract);
+  document.addEventListener('keydown',    onInteract);
+  document.addEventListener('touchstart', onInteract, {passive:true});
 
-  /* mute toggle */
   btn.addEventListener('click', function(e){
     e.stopPropagation();
     tryPlay();
     muted = !muted;
     audio.muted = muted;
-    icon.className = muted ? 'bi bi-music-note-beamed' : 'bi bi-music-note-beamed';
     btn.classList.toggle('muted', muted);
-    btn.querySelector('i').className = muted ? 'bi bi-volume-mute-fill' : 'bi bi-music-note-beamed';
+    var icon = btn.querySelector('i');
+    if (icon) icon.className = muted ? 'bi bi-volume-mute-fill' : 'bi bi-music-note-beamed';
   });
 
-  /* stop music when navigating away */
   window.addEventListener('beforeunload', function(){ audio.pause(); });
 })();
 </script>
