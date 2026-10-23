@@ -1170,30 +1170,37 @@
       width: 100%;
     }
 
-    /* Stats: show all 5 stats on mobile in compact grid */
+    /* Stats: only show Level and Coins on mobile header */
     .stats {
       width: 100%;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 6px;
       order: 2;
       margin-top: 0;
     }
-    .stat { padding: 6px 8px; border-radius: 10px; }
-    .stat .label { font-size: .65rem; }
-    .stat .val { font-size: .95rem; }
+    .stat { padding: 8px 12px; border-radius: 10px; }
+    .stat .label { font-size: .7rem; }
+    .stat .val { font-size: 1rem; }
     
-    /* Show mobile-only stats */
+    /* Hide mobile-only stats (they stay in quiz panel) */
     .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile {
-      display: flex;
-    }
-    .stat.time-mobile .val { color: var(--cyan); text-shadow: 0 0 8px rgba(0,229,255,.5); }
-    .stat.score-mobile .val { color: var(--lime); text-shadow: 0 0 8px rgba(182,255,61,.5); }
-    .stat.streak-mobile .val { color: var(--gold); text-shadow: 0 0 8px rgba(255,217,61,.5); }
-    
-    /* Hide quiz panel stats on mobile */
-    .quiz-stats {
       display: none;
     }
+    
+    /* Show quiz panel stats on mobile */
+    .quiz-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+    }
+    .quiz-stat {
+      min-width: 0;
+      padding: 8px 12px;
+    }
+    .quiz-stat-label { font-size: .7rem; }
+    .quiz-stat-val { font-size: 1.1rem; }
 
     /* Nav: hide desktop buttons, show burger */
     .tq .eduplay-game-nav {
@@ -1293,6 +1300,12 @@
         max(22px,env(safe-area-inset-bottom))
         max(10px,env(safe-area-inset-left));
     }
+    .stats {
+      gap: 6px;
+    }
+    .stat { padding: 7px 10px; }
+    .stat .label { font-size: .68rem; }
+    .stat .val { font-size: .95rem; }
     .quiz-panel { padding: 12px 12px 16px; border-radius: 14px; }
     .quiz-stats {
       grid-template-columns: repeat(2, 1fr);
