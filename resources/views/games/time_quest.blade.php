@@ -88,7 +88,7 @@
   /* ---------- Header with Arcade Vibes ---------- */
   .tq-head{
     display:flex;justify-content:space-between;align-items:center;
-    gap:12px 16px;flex-wrap:wrap;margin-bottom:14px;
+    gap:16px 20px;flex-wrap:wrap;margin-bottom:18px;
   }
   .tq-title{display:flex;align-items:center;gap:12px;min-width:0}
   .tq-exit{
@@ -178,9 +178,9 @@
     cursor: pointer;
     transition: all .2s;
     position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 1001;
+    top: 20px;
+    right: 20px;
+    z-index: 1002;
   }
   .burger-menu-btn:hover {
     background: rgba(0,229,255,.25);
@@ -188,8 +188,10 @@
     transform: scale(1.05);
   }
   .burger-menu-btn.active {
-    background: rgba(0,229,255,.3);
-    color: #fff;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+    pointer-events: none;
   }
   
   /* Mobile menu overlay */
@@ -243,22 +245,24 @@
     text-shadow: 0 0 10px rgba(0,229,255,.5);
   }
   .mobile-menu-close {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    border: 1.5px solid var(--pink);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid var(--pink);
     background: rgba(255,61,174,.15);
     color: var(--pink);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all .2s;
+    flex-shrink: 0;
   }
   .mobile-menu-close:hover {
     background: rgba(255,61,174,.3);
     box-shadow: 0 0 15px rgba(255,61,174,.4);
+    transform: scale(1.05);
   }
   
   .mobile-menu-items {
@@ -1156,17 +1160,17 @@
     .tq-head {
       flex-direction: column;
       align-items: stretch;
-      gap: 10px;
-      margin-bottom: 10px;
-      padding-right: 64px; /* Make room for burger button */
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-right: 70px; /* Make room for burger button */
     }
-    .tq-title { width: 100%; }
-    .tq-title h1 { font-size: 1.15rem; }
-    .tq-title h1 .sub { font-size: .72rem; }
+    .tq-title { width: 100%; margin-bottom: 4px; }
+    .tq-title h1 { font-size: 1.2rem; }
+    .tq-title h1 .sub { font-size: .75rem; margin-top: 2px; }
     .tq-head > div:last-child {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       width: 100%;
     }
 
@@ -1174,13 +1178,13 @@
     .stats {
       width: 100%;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
+      gap: 10px;
       order: 2;
       margin-top: 0;
     }
-    .stat { padding: 8px 12px; border-radius: 10px; }
-    .stat .label { font-size: .7rem; }
-    .stat .val { font-size: 1rem; }
+    .stat { padding: 10px 14px; border-radius: 12px; }
+    .stat .label { font-size: .72rem; }
+    .stat .val { font-size: 1.05rem; }
     
     /* Hide mobile-only stats (they stay in quiz panel) */
     .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile {
@@ -1191,16 +1195,16 @@
     .quiz-stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
     }
     .quiz-stat {
       min-width: 0;
-      padding: 8px 12px;
+      padding: 10px 14px;
     }
-    .quiz-stat-label { font-size: .7rem; }
-    .quiz-stat-val { font-size: 1.1rem; }
+    .quiz-stat-label { font-size: .72rem; }
+    .quiz-stat-val { font-size: 1.15rem; }
 
     /* Nav: hide desktop buttons, show burger */
     .tq .eduplay-game-nav {
@@ -1491,13 +1495,21 @@
     </div>
     <div class="mobile-menu-items">
       <button type="button" class="eduplay-nav-btn eduplay-btn-help" title="How to Play &amp; Tutorial" onclick="openTut(true); toggleMobileMenu();">
-        <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
+        <i class="bi bi-question-circle-fill"></i>
+        <span>Tutorial</span>
       </button>
       <button type="button" class="eduplay-nav-btn eduplay-btn-pause" title="Pause Game" onclick="togglePause(); toggleMobileMenu();">
-        <i class="bi bi-pause-fill"></i> <span>Pause</span>
+        <i class="bi bi-pause-fill"></i>
+        <span>Pause</span>
       </button>
-      <a href="{{ route('student.map', 'time_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+      <a href="{{ route('student.map', 'time_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
+        <i class="bi bi-map-fill"></i>
+        <span>Game Map</span>
+      </a>
+      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Exit</span>
+      </a>
     </div>
   </div>
 </div>
