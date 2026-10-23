@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class TeacherStudentProfileController extends Controller
 {
     /**
-     * Constructor - ensure only authenticated teachers can access
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'teacher']);
-    }
-
-    /**
      * Show student profile details (teacher view)
      */
     public function show($studentId)

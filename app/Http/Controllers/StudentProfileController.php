@@ -61,14 +61,6 @@ class StudentProfileController extends Controller
     ];
 
     /**
-     * Constructor - ensure only authenticated students can access
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'student']);
-    }
-
-    /**
      * Show the student profile (read-only view)
      */
     public function show()
