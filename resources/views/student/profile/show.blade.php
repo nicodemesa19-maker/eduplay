@@ -140,7 +140,7 @@ h1,h2,h3{font-family:'Bungee',sans-serif;}
     @endif
     
     <h2 class="profile-name">{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</h2>
-    <p class="profile-username">@{{ $user->username }}</p>
+    <p class="profile-username">{{ '@' . $user->username }}</p>
     
     @if($user->bio)
       <p style="color:var(--muted);font-size:1.1rem;margin-top:16px;">
