@@ -157,6 +157,119 @@
   .tq .eduplay-game-nav{
     display:flex;align-items:center;gap:8px;flex-wrap:wrap;
   }
+  
+  /* Burger menu button */
+  .burger-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 2px solid var(--cyan);
+    background: linear-gradient(135deg,rgba(0,229,255,.15),rgba(0,229,255,.08));
+    color: var(--cyan);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all .2s;
+    position: relative;
+    z-index: 1001;
+  }
+  .burger-menu-btn:hover {
+    background: rgba(0,229,255,.25);
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-2px);
+  }
+  .burger-menu-btn.active {
+    background: rgba(0,229,255,.3);
+    color: #fff;
+  }
+  
+  /* Mobile menu overlay */
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .mobile-menu-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+  
+  /* Mobile menu panel */
+  .mobile-menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(320px, 85vw);
+    height: 100%;
+    background: linear-gradient(135deg, rgba(14,15,38,.98), rgba(10,12,30,.98));
+    border-left: 2px solid var(--cyan);
+    box-shadow: -10px 0 40px rgba(0,0,0,.8), 0 0 30px rgba(0,229,255,.2);
+    transform: translateX(100%);
+    transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    padding: 24px 20px;
+  }
+  .mobile-menu-overlay.active .mobile-menu-panel {
+    transform: translateX(0);
+  }
+  
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(0,229,255,.3);
+  }
+  .mobile-menu-title {
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.1rem;
+    color: var(--cyan);
+    text-shadow: 0 0 10px rgba(0,229,255,.5);
+  }
+  .mobile-menu-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1.5px solid var(--pink);
+    background: rgba(255,61,174,.15);
+    color: var(--pink);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .mobile-menu-close:hover {
+    background: rgba(255,61,174,.3);
+    box-shadow: 0 0 15px rgba(255,61,174,.4);
+  }
+  
+  .mobile-menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mobile-menu-items .eduplay-nav-btn {
+    width: 100%;
+    min-height: 52px;
+    font-size: 1rem;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 20px;
+  }
+  .mobile-menu-items .eduplay-nav-btn i {
+    font-size: 1.3rem;
+  }
   .tq .eduplay-nav-btn{
     display:inline-flex;align-items:center;justify-content:center;gap:6px;
     min-height:40px;padding:0 14px;border-radius:10px;
@@ -1054,29 +1167,12 @@
     .stat .label { font-size: .65rem; }
     .stat .val { font-size: .95rem; }
 
-    /* Nav: 4 equal-width buttons */
+    /* Nav: hide desktop buttons, show burger */
     .tq .eduplay-game-nav {
+      display: none;
+    }
+    .burger-menu-btn {
       display: flex;
-      gap: 6px;
-      width: 100%;
-    }
-    .tq .eduplay-nav-btn {
-      flex: 1 1 0;
-      min-width: 0;
-      min-height: 46px;
-      padding: 4px 4px;
-      flex-direction: column;
-      gap: 2px;
-      font-size: .72rem;
-      border-radius: 10px;
-    }
-    .tq .eduplay-nav-btn i { font-size: 1rem; }
-    .tq .eduplay-nav-btn span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 100%;
-      line-height: 1.1;
     }
 
     /* Map */
@@ -1299,8 +1395,7 @@
   }
 
   @media (max-width: 340px) {
-    .tq .eduplay-nav-btn span { display: none; }
-    .tq .eduplay-nav-btn { min-height: 40px; }
+    .burger-menu-btn { width: 40px; height: 40px; font-size: 1.2rem; }
   }
 
   /* ---------- Reduced motion ---------- */
@@ -1321,6 +1416,9 @@
         <div class="stat level"><span class="label">Level</span><span class="val" id="uiLevel">1</span></div>
         <div class="stat coins"><span class="label">Coins</span><span class="val" id="uiCoins">50</span></div>
       </div>
+      <button type="button" class="burger-menu-btn" id="burgerMenuBtn" onclick="toggleMobileMenu()" aria-label="Open menu">
+        <i class="bi bi-list"></i>
+      </button>
       <div class="eduplay-game-nav">
         <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
           <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
@@ -1333,6 +1431,28 @@
       </div>
     </div>
   </header>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()">
+  <div class="mobile-menu-panel" onclick="event.stopPropagation()">
+    <div class="mobile-menu-header">
+      <div class="mobile-menu-title">Menu</div>
+      <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+    <div class="mobile-menu-items">
+      <button type="button" class="eduplay-nav-btn eduplay-btn-help" title="How to Play &amp; Tutorial" onclick="openTut(true); toggleMobileMenu();">
+        <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
+      </button>
+      <button type="button" class="eduplay-nav-btn eduplay-btn-pause" title="Pause Game" onclick="togglePause(); toggleMobileMenu();">
+        <i class="bi bi-pause-fill"></i> <span>Pause</span>
+      </button>
+      <a href="{{ route('student.map', 'time_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
+      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Progress"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+    </div>
+  </div>
+</div>
 
   <main>
     <div class="map-panel">
@@ -1687,6 +1807,36 @@
 </div><!-- /.tq -->
 
 <script>
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+function toggleMobileMenu() {
+  const overlay = document.getElementById('mobileMenuOverlay');
+  const burgerBtn = document.getElementById('burgerMenuBtn');
+  
+  if (overlay && burgerBtn) {
+    overlay.classList.toggle('active');
+    burgerBtn.classList.toggle('active');
+    
+    // Update icon
+    const icon = burgerBtn.querySelector('i');
+    if (icon) {
+      if (overlay.classList.contains('active')) {
+        icon.className = 'bi bi-x';
+      } else {
+        icon.className = 'bi bi-list';
+      }
+    }
+    
+    // Prevent body scroll when menu is open
+    if (overlay.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+}
+
 /* ============================================================
    CITY DATA
    ============================================================ */
