@@ -180,18 +180,18 @@
     display: none;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
     border: 2px solid var(--cyan);
     background: linear-gradient(135deg,rgba(0,229,255,.15),rgba(0,229,255,.08));
     color: var(--cyan);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
     transition: all .2s;
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
     z-index: 1002;
   }
   .burger-menu-btn:hover {
@@ -1168,17 +1168,27 @@
      MOBILE ADAPTIVE LAYER
      ============================================================ */
   @media (max-width: 940px) {
+    /* Maximize space - reduce wrapper padding */
+    .wrap {
+      padding:
+        max(12px,env(safe-area-inset-top))
+        max(12px,env(safe-area-inset-right))
+        max(20px,env(safe-area-inset-bottom))
+        max(12px,env(safe-area-inset-left));
+    }
+    
     /* Header stacks vertically on mobile */
     .tq-head {
       flex-direction: column;
       align-items: stretch;
-      gap: 14px;
-      margin-bottom: 16px;
-      padding-right: 70px; /* Make room for burger button */
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-right: 54px; /* Make room for smaller burger button */
+      position: relative;
     }
-    .tq-title { width: 100%; margin-bottom: 4px; }
-    .tq-title h1 { font-size: 1.2rem; }
-    .tq-title h1 .sub { font-size: .75rem; margin-top: 2px; }
+    .tq-title { width: 100%; margin-bottom: 2px; }
+    .tq-title h1 { font-size: 1.3rem; line-height: 1.3; }
+    .tq-title h1 .sub { font-size: .78rem; margin-top: 2px; }
     
     /* Right container becomes full-width and left-aligned on mobile */
     .tq-head-right {
@@ -1187,15 +1197,33 @@
       gap: 10px;
     }
 
-    /* Stats: show all 6 stats on mobile in 3x2 grid */
+    /* Stats: evenly sized 3x2 grid with maximized space */
     .stats {
       width: 100%;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
       gap: 8px;
     }
-    .stat { padding: 10px 12px; border-radius: 12px; }
-    .stat .label { font-size: .68rem; font-weight: 700; }
-    .stat .val { font-size: 1rem; }
+    .stat {
+      padding: 12px 10px;
+      border-radius: 10px;
+      min-height: 62px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .stat .label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+    .stat .val {
+      font-size: 1.1rem;
+      margin-top: 2px;
+    }
     
     /* Show mobile-only stats in header */
     .stat.time-mobile, .stat.score-mobile, .stat.streak-mobile {
@@ -1227,6 +1255,16 @@
     }
     .burger-menu-btn {
       display: flex;
+    }
+    
+    /* Map and quiz panels - maximize space */
+    .map-panel {
+      min-height: clamp(200px, 35dvh, 320px);
+      margin-bottom: 12px;
+    }
+    
+    main {
+      gap: 12px;
     }
 
     /* Map */
@@ -1316,28 +1354,35 @@
       padding:
         max(10px,env(safe-area-inset-top))
         max(10px,env(safe-area-inset-right))
-        max(22px,env(safe-area-inset-bottom))
+        max(18px,env(safe-area-inset-bottom))
         max(10px,env(safe-area-inset-left));
     }
+    .tq-head {
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-right: 50px;
+    }
+    .tq-title h1 { font-size: 1.2rem; }
     .stats {
       gap: 6px;
     }
-    .stat { padding: 7px 10px; }
+    .stat {
+      padding: 10px 8px;
+      min-height: 58px;
+    }
     .stat .label { font-size: .68rem; }
-    .stat .val { font-size: .95rem; }
+    .stat .val { font-size: 1.05rem; }
+    .burger-menu-btn {
+      width: 38px;
+      height: 38px;
+      font-size: 1.2rem;
+      top: 14px;
+      right: 14px;
+    }
+    .map-panel {
+      min-height: clamp(180px, 32dvh, 280px);
+    }
     .quiz-panel { padding: 12px 12px 16px; border-radius: 14px; }
-    .quiz-stats {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 6px;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-    }
-    .quiz-stat {
-      padding: 6px 8px;
-      min-width: 0;
-    }
-    .quiz-stat-label { font-size: .65rem; }
-    .quiz-stat-val { font-size: 1rem; }
     .quiz-top { gap: 8px; margin-bottom: 10px; }
     .q-label { font-size: .82rem; }
     .pips { max-width: 150px; gap: 3px; }
@@ -1436,10 +1481,23 @@
   }
 
   @media (max-width: 400px) {
-    .stats { gap: 4px; }
-    .stat { padding: 5px 6px; }
-    .stat .label { font-size: .6rem; }
-    .stat .val { font-size: .85rem; }
+    .stats { gap: 5px; }
+    .stat {
+      padding: 8px 6px;
+      min-height: 54px;
+    }
+    .stat .label { font-size: .65rem; }
+    .stat .val { font-size: 1rem; }
+    .burger-menu-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      top: 12px;
+      right: 12px;
+    }
+    .tq-head {
+      padding-right: 46px;
+    }
     .quiz-stat { padding: 5px 6px; }
     .quiz-stat-label { font-size: .6rem; }
     .quiz-stat-val { font-size: .9rem; }
@@ -1455,8 +1513,7 @@
   }
 
   @media (max-width: 340px) {
-    .burger-menu-btn { width: 44px; height: 44px; font-size: 1.3rem; top: 14px; right: 14px; }
-    .tq-head { padding-right: 58px; }
+    .tq-head { padding-right: 44px; }
   }
 
   /* ---------- Reduced motion ---------- */
