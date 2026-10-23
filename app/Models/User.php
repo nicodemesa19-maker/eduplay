@@ -72,7 +72,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_approved' => 'boolean',
         'is_active' => 'boolean',
-        'birthdate' => 'date',
+        'birthdate' => 'datetime',
         'hobbies' => 'array',
         'practice_reminders' => 'boolean',
         'streak_alerts' => 'boolean',
