@@ -33,7 +33,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
 
 /* ============================================================
-   FLASH CARD SYSTEM � ALWAYS ON TOP
+   FLASH CARD SYSTEM � ALWAYS ON TOP
    ============================================================ */
 .fc-overlay {
     position: fixed !important;
@@ -341,7 +341,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 /* Hint pulse tooltip */
 .hint-pulse{position:relative;}
 .hint-pulse::after{
-    content:'?? Flip me!';
+    content:'👆 Flip me!';
     position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
     background:linear-gradient(135deg,#7c3aed,#4f46e5);
     color:#fff;font-size:11px;font-weight:800;white-space:nowrap;
@@ -356,7 +356,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     border:6px solid transparent;border-top-color:#4f46e5;
     pointer-events:none;
 }
-@media (hover:none){ .hint-pulse::after{content:'?? Tap me!';} }
+@media (hover:none){ .hint-pulse::after{content:'👆 Tap me!';} }
 @keyframes hintBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
 
 /* Trial progress bar */
@@ -616,7 +616,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     .hv{font-size:17px;}
 }
 
-/* Landscape phones: wide board (6 � 2), compact chrome */
+/* Landscape phones: wide board (6 � 2), compact chrome */
 @media (max-height:520px) and (orientation:landscape){
     #gameScreen{padding:2px 0;}
     .gi{max-width:none;gap:6px;}
@@ -656,7 +656,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <!-- Active Front Flash Card -->
             <div class="fc-card">
                 <div class="fc-top">
-                    <span class="fc-badge" id="fcBadge">?? HOW TO PLAY � CARD 1 OF 4</span>
+                    <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 4</span>
                     <button class="fc-quick-action-btn" id="fcQuickActionBtn" type="button" onclick="closeTut(true)" title="Skip to Play">
                         <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
                     </button>
@@ -664,8 +664,8 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
                 <!-- CARD 1: Word Problem & Answer Pairs -->
                 <div id="fcSlide1" class="fc-slide">
-                    <h3 class="fc-title"><span>??</span> Match Problems to Answers</h3>
-                    <p class="fc-desc">Hidden on the board are <b>6 Word Problem cards (??)</b> and <b>6 Answer cards (??)</b>. Find all matching pairs!</p>
+                    <h3 class="fc-title"><span>🎯</span> Match Problems to Answers</h3>
+                    <p class="fc-desc">Hidden on the board are <b>6 Word Problem cards (❓)</b> and <b>6 Answer cards (💡)</b>. Find all matching pairs!</p>
                     <div class="fc-row-2 fc-box">
                         <div class="fc-item">
                             <div class="fc-item-ico">??</div>
@@ -711,9 +711,9 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                     <div class="fc-box" style="text-align:center;border-color:rgba(251,191,36,0.35);">
                         <div style="font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:900;color:#fbbf24;margin-bottom:4px;">Star Goals</div>
                         <div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:6px;font-size:0.8rem;font-weight:700;">
-                            <div>??? &lt; 1:30</div>
-                            <div>?? &lt; 2:30</div>
-                            <div>? 3:30+</div>
+                            <div>⭐⭐⭐ &lt; 1:30</div>
+                            <div>⭐⭐ &lt; 2:30</div>
+                            <div>⭐ 3:30+</div>
                         </div>
                     </div>
                     <div class="fc-tip">
@@ -767,9 +767,9 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
          TRIAL SCREEN
     ------------------------------------------ -->
     <div id="trialScreen">
-        <div class="trial-badge">?? Practice Round</div>
+        <div class="trial-badge">🎮 Practice Round</div>
         <h2 class="trial-title">Trial Game</h2>
-        <p class="trial-sub">Match the <strong>2 pairs</strong> below to practice.<br>Find a problem card ?? and its answer ??!</p>
+        <p class="trial-sub">Match the <strong>2 pairs</strong> below to practice.<br>Find a problem card ❓ and its answer 💡!</p>
 
         <div class="trial-hud">
             <div class="trial-hud-item">
@@ -808,7 +808,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                     <span class="hv teal"><span id="matchedVal">0</span><span style="font-size:13px;color:rgba(255,255,255,.22)">/6</span></span>
                 </div>
                 <div class="hc">
-                    <div class="lvlbadge">?? <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
+                    <div class="lvlbadge">🃏 <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
                     <div style="font-size:9px;color:rgba(255,255,255,.25);font-weight:700;letter-spacing:1px;text-transform:uppercase;">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span></div>
                 </div>
                 <div class="hp"><span class="hl">Score</span><span class="hv gold"><span id="scoreVal">0</span></span></div>
@@ -839,7 +839,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                     <div style="font-size:3rem;margin-bottom:0.5rem;">?</div>
                     <h2>Game Paused</h2>
                     <p>Take your time! The timer has been paused. Resume when you're ready to find more matches.</p>
-                    <button class="mbtn mbtn-p" style="width:100%;padding:12px 28px;font-size:1.05rem;min-height:48px;" onclick="togglePause()">? Resume Game</button>
+                    <button class="mbtn mbtn-p" style="width:100%;padding:12px 28px;font-size:1.05rem;min-height:48px;" onclick="togglePause()">▶️ Resume Game</button>
                     <div class="eduplay-game-nav" style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
                         <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
                         <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
@@ -883,10 +883,10 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
         <div class="ready-stars" id="readyStars">???</div>
         <h2 class="ready-title">Trial Complete!</h2>
         <p class="ready-sub">You matched all pairs in the practice round.<br>You're ready for the real game!</p>
-        <div class="ready-score-badge" id="readyScoreBadge">?? Matched in <span id="readyTriesCount">0</span> tries</div>
+        <div class="ready-score-badge" id="readyScoreBadge">✅ Matched in <span id="readyTriesCount">0</span> tries</div>
         <div class="ready-buttons">
-            <button class="ready-btn-start" id="readyStartBtn">? Start Real Game!</button>
-            <button class="ready-btn-practice" id="readyPracticeBtn">?? Practice Again</button>
+            <button class="ready-btn-start" id="readyStartBtn">🚀 Start Real Game!</button>
+            <button class="ready-btn-practice" id="readyPracticeBtn">🔄 Practice Again</button>
         </div>
     </div>
 </div>
@@ -918,9 +918,9 @@ const TUTORIAL_KEY='mcm_tutorial_done';
 /* -------------------------------------------------------
    DOM REFS
 ------------------------------------------------------- */
-const tutorialScreen=document.getElementById('tutorialScreen'); // legacy (not in DOM) � guarded below
+const tutorialScreen=document.getElementById('tutorialScreen'); // legacy (not in DOM) � guarded below
 const trialScreen=document.getElementById('trialScreen');
-const instrScreen=document.getElementById('instrScreen');       // legacy (not in DOM) � guarded below
+const instrScreen=document.getElementById('instrScreen');       // legacy (not in DOM) � guarded below
 const gameScreen=document.getElementById('gameScreen');
 const readyOverlay=document.getElementById('readyOverlay');
 
@@ -1055,7 +1055,7 @@ window.goFlashCard = function(cardNum){
     if (badge){
         const tags = ['THE BOARD', 'HOW TO MATCH', 'STAR GOALS', 'READY TO PLAY'];
         const prefix = tutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
-        badge.textContent = '?? ' + prefix + ' � CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' � ' + tags[currentFcCard - 1];
+        badge.textContent = '🃏 ' + prefix + ' • CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' • ' + tags[currentFcCard - 1];
     }
 
     const prevBtn = document.getElementById('fcPrevBtn');
@@ -1067,9 +1067,9 @@ window.goFlashCard = function(cardNum){
     if (nextBtn){
         if (currentFcCard === TOTAL_FC_CARDS){
             if (tutOpenedFromGame){
-                nextBtn.innerHTML = '<span>? Return to Game</span>';
+                nextBtn.innerHTML = '<span>🎮 Return to Game</span>';
             } else {
-                nextBtn.innerHTML = '<span>?? Start Matching!</span>';
+                nextBtn.innerHTML = '<span>🚀 Start Matching!</span>';
             }
         } else {
             nextBtn.innerHTML = '<span>Next</span> <i class="bi bi-arrow-right"></i>';
@@ -1124,10 +1124,10 @@ window.closeTut = function(andStartGame = false){
 /* -------------------------------------------------------
    TRIAL GAME
 ------------------------------------------------------- */
-// Fixed simple trial pairs � no word problems so focus is on mechanics
+// Fixed simple trial pairs � no word problems so focus is on mechanics
 const TRIAL_DATA=[
     {pid:'t0',problem:'5 - 2 = ?',answer:'3'},
-    {pid:'t1',problem:'4 � 2 = ?',answer:'8'},
+    {pid:'t1',problem:'4 � 2 = ?',answer:'8'},
 ];
 
 let trialDeck=[],trialFlipped=[],trialMatched=0,trialTries=0,trialLock=false,trialHintRemoved=false;
@@ -1161,7 +1161,7 @@ function renderTrialBoard(){
         el.className='card type-'+cd.type;
         if(idx===0&&!trialHintRemoved)el.classList.add('hint-pulse');
         el.dataset.idx=idx;
-        const typeIcon=cd.type==='problem'?'??':'??';
+        const typeIcon=cd.type==='problem'?'❓':'💡';
         el.innerHTML='<div class="card-inner"><div class="face face-back"></div><div class="face face-front"><span class="ftype">'+typeIcon+'</span><span class="ftext">'+cd.label+'</span></div></div>';
         el.addEventListener('click',()=>onTrialCardClick(idx,el));
         trialBoardEl.appendChild(el);
@@ -1344,7 +1344,7 @@ function renderBoard(){
         const el=document.createElement('div');
         el.className='card type-'+cd.type;
         el.dataset.idx=idx;
-        const typeIcon=cd.type==='problem'?'??':'??';
+        const typeIcon=cd.type==='problem'?'❓':'💡';
         el.innerHTML='<div class="card-inner"><div class="face face-back"></div><div class="face face-front"><span class="ftype">'+typeIcon+'</span><span class="ftext">'+cd.label+'</span></div></div>';
         el.addEventListener('click',()=>onCardClick(idx,el));
         boardEl.appendChild(el);
@@ -1436,20 +1436,20 @@ function endGame(won){
             saveProgress(currentLevel, starScore);
             endIco.textContent='??';endTitle.textContent='Level '+(currentLevel-1)+' Complete!';
             endMsg.textContent=
-                'Finished in '+fmtTime(seconds)+' with '+tries+' tries � '+
+                'Finished in '+fmtTime(seconds)+' with '+tries+' tries � '+
                 (st===3?'?? 3-star time!':st===2?'?? 2-star time!':'? Keep practising to beat 1:30!')+
                 ' Advancing to Level '+currentLevel+'.';
             modalBtn.textContent='? Play Level '+currentLevel;
         }else{
             saveProgress(currentLevel, starScore);
-            endIco.textContent='??';endTitle.textContent='You Won!';
+            endIco.textContent='🎉';endTitle.textContent='You Won!';
             endMsg.textContent='Champion! All '+MAX_LVL+' levels cleared in '+fmtTime(seconds)+'!';
-            modalBtn.textContent='?? Play Again';
+            modalBtn.textContent='🔄 Play Again';
         }
     }else{
-        endIco.textContent='??';endTitle.textContent='Good Try!';
+        endIco.textContent='💪';endTitle.textContent='Good Try!';
         endMsg.textContent='You matched '+matchedCount+' / '+WIN_PAIRS+' pairs. Try again!';
-        modalBtn.textContent='?? Try Again';
+        modalBtn.textContent='🔄 Try Again';
     }
     endModal.classList.add('show');
     scrollTop0();
@@ -1483,7 +1483,7 @@ function initGame(){
    FULLSCREEN & CONTROL BUTTONS
 ------------------------------------------------------- */
 if(fsBtn){
-    // iPhone Safari doesn't support the Fullscreen API on elements � hide the button there
+    // iPhone Safari doesn't support the Fullscreen API on elements � hide the button there
     const fsSupported = !!(gwEl && (gwEl.requestFullscreen || gwEl.webkitRequestFullscreen));
     if(!fsSupported){ fsBtn.style.display='none'; }
     fsBtn.addEventListener('click',()=>{

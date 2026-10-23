@@ -24,7 +24,7 @@ button{-webkit-tap-highlight-color:transparent;}
 
 
 /* ============================================================
-   FLASH CARD SYSTEM ó ALWAYS ON TOP
+   FLASH CARD SYSTEM ÔøΩ ALWAYS ON TOP
    ============================================================ */
 .overlay, .fc-overlay {
     position: fixed !important;
@@ -849,8 +849,8 @@ button{-webkit-tap-highlight-color:transparent;}
 
         <!-- Center: Level & Score Info -->
         <div class="hc">
-          <div class="lvlbadge">?? <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
-          <div class="hs-sub">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span> <span class="score-pill-chip">ï Score: <span id="scoreVal">0</span>/10</span></div>
+          <div class="lvlbadge">üê∏ <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
+          <div class="hs-sub">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span> <span class="score-pill-chip">‚≠ê Score: <span id="scoreVal">0</span>/10</span></div>
         </div>
 
         <!-- Action & Navigation Buttons -->
@@ -885,7 +885,7 @@ button{-webkit-tap-highlight-color:transparent;}
           <div style="font-size:2.8rem;margin-bottom:0.4rem;">?</div>
           <h2>Pond Paused</h2>
           <p>Fish are resting! When you're ready, jump back into the pond.</p>
-          <button class="bbtn bbtn-p" style="width:100%;padding:11px 24px;font-size:1rem;justify-content:center;" onclick="togglePause()">? Resume Fishing</button>
+          <button class="bbtn bbtn-p" style="width:100%;padding:11px 24px;font-size:1rem;justify-content:center;" onclick="togglePause()">‚ñ∂Ô∏è Resume Fishing</button>
           <div class="eduplay-game-nav" style="margin-top:14px;display:flex;gap:8px;justify-content:center;">
             <button type="button" class="eduplay-nav-btn eduplay-btn-help" onclick="openTut(true)"><i class="bi bi-question-circle-fill"></i> <span>Tutorial</span></button>
             <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
@@ -931,7 +931,7 @@ button{-webkit-tap-highlight-color:transparent;}
 
       <div class="fc-card">
         <div class="fc-top">
-          <span class="fc-badge" id="fcBadge">?? HOW TO PLAY ï CARD 1 OF 5</span>
+          <span class="fc-badge" id="fcBadge">?? HOW TO PLAY ÔøΩ CARD 1 OF 5</span>
           <button class="fc-quick-action-btn" id="fcQuickActionBtn" type="button" onclick="closeTut(true)" title="Skip to Play">
             <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
           </button>
@@ -968,13 +968,13 @@ button{-webkit-tap-highlight-color:transparent;}
             <div class="fc-item">
               <div class="fc-item-ico">?</div>
               <div class="fc-item-lbl">Target: 12</div>
-              <div class="fc-item-math">12 ˜ 4 = 3</div>
+              <div class="fc-item-math">12 ÔøΩ 4 = 3</div>
               <div class="fc-item-badge good">0 Remainder ? Factor!</div>
             </div>
             <div class="fc-item">
               <div class="fc-item-ico">?</div>
               <div class="fc-item-lbl">Target: 12</div>
-              <div class="fc-item-math">12 ˜ 5 = 2 R 2</div>
+              <div class="fc-item-math">12 ÔøΩ 5 = 2 R 2</div>
               <div class="fc-item-badge bad">Remainder 2 ? Not Factor</div>
             </div>
           </div>
@@ -990,7 +990,7 @@ button{-webkit-tap-highlight-color:transparent;}
           <div class="fc-box" style="text-align:center;border-color:rgba(251,191,36,0.35);">
             <div style="font-size:0.95rem;font-weight:800;color:#fbbf24;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Multiples of 6 (Skip Counting)</div>
             <div style="font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:900;color:#fff;letter-spacing:1px;margin-bottom:6px;">6, 12, 18, 24, 30, 36...</div>
-            <div style="font-size:0.95rem;color:rgba(254,240,138,0.85);font-weight:700;">6◊1=6 &bull; 6◊2=12 &bull; 6◊3=18 &bull; 6◊4=24</div>
+            <div style="font-size:0.95rem;color:rgba(254,240,138,0.85);font-weight:700;">6ÔøΩ1=6 &bull; 6ÔøΩ2=12 &bull; 6ÔøΩ3=18 &bull; 6ÔøΩ4=24</div>
           </div>
           <div class="fc-tip">
             ?? <b>Golden Rule:</b> Multiples are <b>always equal to or bigger</b> than the target number.
@@ -1002,9 +1002,9 @@ button{-webkit-tap-highlight-color:transparent;}
           <h3 class="fc-title" style="color:#34d399;"><span>??</span> Tap Fish &amp; Cast Net</h3>
           <p class="fc-desc">Tap fish to pick them. Selected fish glow with a bright <b style="color:#fbbf24;">golden ring ?</b>:</p>
           <div class="demo-strip" style="margin:4px 0 10px;">
-            <div class="demo-fish-wrap"><div class="demo-fish selected">2</div><div class="demo-fish-lbl">? Picked</div></div>
+            <div class="demo-fish-wrap"><div class="demo-fish selected">2</div><div class="demo-fish-lbl">‚úÖ Picked</div></div>
             <div class="demo-fish-wrap"><div class="demo-fish">5</div><div class="demo-fish-lbl">Not picked</div></div>
-            <div class="demo-fish-wrap"><div class="demo-fish selected">4</div><div class="demo-fish-lbl">? Picked</div></div>
+            <div class="demo-fish-wrap"><div class="demo-fish selected">4</div><div class="demo-fish-lbl">‚úÖ Picked</div></div>
           </div>
           <div class="fc-tip">
             ?? <b>Need to unpick?</b> Tap any picked fish again. When ready, tap <b>?? Cast Net!</b>
@@ -1063,10 +1063,10 @@ button{-webkit-tap-highlight-color:transparent;}
   <div class="wrong-box">
     <div class="wrong-ico">??</div>
     <h2 class="wrong-title">Not Quite!</h2>
-    <p class="wrong-sub">Here's what went wrong with your castÖ</p>
+    <p class="wrong-sub">Here's what went wrong with your castÔøΩ</p>
     <div class="wrong-reason" id="wrongReason"></div>
     <div class="wrong-progress"><div class="wrong-progress-bar" id="wrongProgress"></div></div>
-    <button class="wrong-continue" id="wrongContinueBtn">Got it ó Continue ?</button>
+    <button class="wrong-continue" id="wrongContinueBtn">Got it ÔøΩ Continue ?</button>
   </div>
 </div>
 
@@ -1685,13 +1685,13 @@ function buildWrongExplanation(){
     let html = '';
     if (wrongPicks.length > 0){
         const verb = wrongPicks.length === 1 ? 'is' : 'are';
-        html += `<div class="wr-line wr-bad">? <span><strong>${joinList(wrongPicks)}</strong> ${verb} not a ${modeWord} of <strong>${targetNumber}</strong>.</span></div>`;
+        html += `<div class="wr-line wr-bad">‚ùå <span><strong>${joinList(wrongPicks)}</strong> ${verb} not a ${modeWord} of <strong>${targetNumber}</strong>.</span></div>`;
     }
     if (missed.length > 0){
         const verb = missed.length === 1 ? 'is a' : 'are';
-        html += `<div class="wr-line wr-miss">?? <span>You missed <strong>${joinList(missed)}</strong> ó ${verb === 'is a' ? 'it' : 'they'} <em>${verb} ${modeWord}${missed.length === 1 ? '' : 's'}</em> of ${targetNumber}.</span></div>`;
+        html += `<div class="wr-line wr-miss">‚ö†Ô∏è <span>You missed <strong>${joinList(missed)}</strong> ‚Ä¢ ${verb === 'is a' ? 'it' : 'they'} <em>${verb} ${modeWord}${missed.length === 1 ? '' : 's'}</em> of ${targetNumber}.</span></div>`;
     }
-    html += `<div class="wr-line wr-info">? <span>Correct ${modeWordPlural}: <strong>${joinList(correct)}</strong></span></div>`;
+    html += `<div class="wr-line wr-info">üí° <span>Correct ${modeWordPlural}: <strong>${joinList(correct)}</strong></span></div>`;
     return html;
 }
 
@@ -1968,7 +1968,7 @@ window.goFlashCard = function(cardNum){
     if (badge){
         const tags = ['THE MISSION', 'FACTORS', 'MULTIPLES', 'HOW TO PLAY', 'LIVES & WIN'];
         const prefix = tutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
-        badge.textContent = '?? ' + prefix + ' ï CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' ï ' + tags[currentFcCard - 1];
+        badge.textContent = '?? ' + prefix + ' ÔøΩ CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' ÔøΩ ' + tags[currentFcCard - 1];
     }
 
     const prevBtn = document.getElementById('fcPrevBtn');
@@ -1980,9 +1980,9 @@ window.goFlashCard = function(cardNum){
     if (nextBtn){
         if (currentFcCard === TOTAL_FC_CARDS){
             if (tutOpenedFromGame){
-                nextBtn.innerHTML = '<span>? Return to Game</span>';
+                nextBtn.innerHTML = '<span>üéÆ Return to Game</span>';
             } else {
-                nextBtn.innerHTML = '<span>?? Start Fishing!</span>';
+                nextBtn.innerHTML = '<span>üé£ Start Fishing!</span>';
             }
         } else {
             nextBtn.innerHTML = '<span>Next</span> <i class="bi bi-arrow-right"></i>';

@@ -587,7 +587,7 @@
         #rmTutOverlay.show{display:flex;animation:rmFadeUp .4s ease;}
 
 /* ============================================================
-   ROCKET MATH FLASH CARD SYSTEM ó ALWAYS ON TOP
+   ROCKET MATH FLASH CARD SYSTEM ÔøΩ ALWAYS ON TOP
    ============================================================ */
 #rmTutOverlay.fc-overlay {
     position: fixed !important;
@@ -976,7 +976,7 @@
 
         /* =====================================================================
            ADAPTIVE / MOBILE-FIRST OVERRIDES
-           Breakpoints: =991 tablet ∑ =767 phone ∑ =575 small phone ∑ landscape
+           Breakpoints: =991 tablet ÔøΩ =767 phone ÔøΩ =575 small phone ÔøΩ landscape
            ===================================================================== */
 
         /* Touch devices: remove sticky hover lifts, give bigger tap feedback */
@@ -1296,7 +1296,7 @@
             <div style="font-size:3rem;margin-bottom:0.5rem;">?</div>
             <h2>Game Paused</h2>
             <p>Press <kbd style="background:rgba(255,255,255,0.15);border-radius:5px;padding:2px 8px;font-size:13px;">P</kbd> or click Resume to continue</p>
-            <button class="btn-resume" onclick="togglePause()">? Resume Mission</button>
+            <button class="btn-resume" onclick="togglePause()">‚ñ∂Ô∏è Resume Mission</button>
             <div class="eduplay-game-nav" style="display:flex;gap:10px;width:100%;justify-content:center;margin-top:14px;">
                 <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" style="flex:1;">
                     <i class="bi bi-map-fill"></i> <span>Game Map</span>
@@ -1318,7 +1318,7 @@
             <!-- Active Front Flash Card -->
             <div class="rm-fc-card">
                 <div class="rm-fc-top">
-                    <span class="rm-fc-badge" id="rmFcBadge">?? HOW TO PLAY ï CARD 1 OF 4</span>
+                    <span class="rm-fc-badge" id="rmFcBadge">?? HOW TO PLAY ÔøΩ CARD 1 OF 4</span>
                     <button class="rm-fc-quick-action-btn" id="rmFcQuickActionBtn" type="button" onclick="rmCloseTut(true)" title="Skip to Play">
                         <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
                     </button>
@@ -1395,7 +1395,7 @@
                 <!-- CARD 4: Session Timer & Goals -->
                 <div id="rmFcSlide4" class="rm-fc-slide hidden">
                     <h3 class="rm-fc-title" style="color:#f59e0b;"><span>??</span> 5-Min Timer &amp; Goals</h3>
-                    <p class="rm-fc-desc">Launch as many rockets as you can in 5 minutes! Launch <b>8ñ10 rockets</b> to pass the level.</p>
+                    <p class="rm-fc-desc">Launch as many rockets as you can in 5 minutes! Launch <b>8ÔøΩ10 rockets</b> to pass the level.</p>
                     <div class="rm-fc-row-2 rm-fc-box">
                         <button type="button" class="rm-fc-item" onclick="rmStartPracticeFromTut()" style="cursor:pointer;background:rgba(56,189,248,0.14);border-color:rgba(56,189,248,0.4);color:#fff;">
                             <div class="rm-fc-item-ico">??</div>
@@ -1483,7 +1483,7 @@
                     <div class="rm-trial-gtext"><span id="rmTrialTotal">0.0</span> / 5.0L</div>
                 </div>
                 <div class="rm-trial-can-col">
-                    <div class="rm-trial-can-title">? Fuel Canisters</div>
+                    <div class="rm-trial-can-title">‚õΩ Fuel Canisters</div>
                     <div class="rm-trial-cans" id="rmTrialCans"></div>
                 </div>
             </div>
@@ -1780,7 +1780,7 @@
                 document.getElementById('modalDesc').textContent =
                     `Outstanding! You launched ${GameState.score} / ${MAX_SCORE} rockets correctly.`;
                 document.getElementById('modalScoreText').innerHTML =
-                    `? ${GameState.score} launches ó Level passed! Advancing to Level ${Math.min(currentLevel, MAX_LEVEL)}.<br><span class="badge mt-2" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.95rem; font-weight: 700; padding: 6px 12px;">?? +${coinsEarned} Coins Earned! Total: ${GameState.coins} ??</span>`;
+                    `? ${GameState.score} launches ÔøΩ Level passed! Advancing to Level ${Math.min(currentLevel, MAX_LEVEL)}.<br><span class="badge mt-2" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.95rem; font-weight: 700; padding: 6px 12px;">?? +${coinsEarned} Coins Earned! Total: ${GameState.coins} ??</span>`;
                 document.getElementById('modalScoreInfo').style.display = 'block';
                 document.getElementById('modalBtn').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Play Next Level';
                 document.getElementById('mapBtn').style.display = 'inline-block';
@@ -1790,7 +1790,7 @@
                 document.getElementById('modalDesc').textContent =
                     `You launched ${GameState.score} / ${WIN_SCORE} rockets needed. You need at least ${WIN_SCORE} to pass!`;
                 document.getElementById('modalScoreText').innerHTML =
-                    `? Only ${GameState.score} correct ó need ${WIN_SCORE} to advance.<br><span class="badge mt-2" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.95rem; font-weight: 700; padding: 6px 12px;">?? +${coinsEarned} Coins Earned! Total: ${GameState.coins} ??</span>`;
+                    `? Only ${GameState.score} correct ÔøΩ need ${WIN_SCORE} to advance.<br><span class="badge mt-2" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.95rem; font-weight: 700; padding: 6px 12px;">?? +${coinsEarned} Coins Earned! Total: ${GameState.coins} ??</span>`;
                 document.getElementById('modalScoreInfo').style.display = 'block';
                 document.getElementById('modalBtn').innerHTML = '?? Try Again';
                 document.getElementById('mapBtn').style.display = 'none';
@@ -1897,7 +1897,7 @@
             return shuffleArray(cans);
         }
 
-        // Shuffled-deck queues per difficulty ó guarantees no consecutive repeats
+        // Shuffled-deck queues per difficulty ÔøΩ guarantees no consecutive repeats
         const problemQueues = { easy: [], medium: [], hard: [] };
         let lastProblemText = '';
 
@@ -2111,7 +2111,7 @@
 
             GameState.attached.add(idx);
             GameState.total = newTotal;
-            setMessage(`Added ${GameState.canisters[idx].toFixed(2)}L ∑ Total: ${GameState.total.toFixed(2)}L`);
+            setMessage(`Added ${GameState.canisters[idx].toFixed(2)}L ÔøΩ Total: ${GameState.total.toFixed(2)}L`);
             renderCanisters();
             updateGauge();
 
@@ -2135,7 +2135,7 @@
                 createLaunchEffects();
                 updateGauge();
 
-                // On phones the rocket is above the canisters ó bring it into view
+                // On phones the rocket is above the canisters ÔøΩ bring it into view
                 if (window.innerWidth < 768) {
                     document.getElementById('rocketAnimation').scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
@@ -2149,7 +2149,7 @@
                         document.getElementById('modalEmoji').textContent = '??';
                         document.getElementById('modalTitleText').textContent = 'Launch Successful!';
                         document.getElementById('modalDesc').textContent =
-                            `You fueled exactly ${GameState.target.toFixed(2)} liters! Keep going ó ${GameState.score} / ${WIN_SCORE} needed.`;
+                            `You fueled exactly ${GameState.target.toFixed(2)} liters! Keep going ÔøΩ ${GameState.score} / ${WIN_SCORE} needed.`;
                         document.getElementById('modalScoreInfo').style.display = 'none';
                         document.getElementById('modalBtn').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Next Mission';
                         document.getElementById('mapBtn').style.display = 'none';
@@ -2358,7 +2358,7 @@
             if (badge) {
                 const tags = ['MISSION BRIEFING', 'CANISTERS', 'FUEL GAUGE', 'TIMER & GOALS'];
                 const prefix = rmTutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
-                badge.textContent = '?? ' + prefix + ' ï CARD ' + rmCurrentFcCard + ' OF ' + RM_TOTAL_FC_CARDS + ' ï ' + tags[rmCurrentFcCard - 1];
+                badge.textContent = '?? ' + prefix + ' ÔøΩ CARD ' + rmCurrentFcCard + ' OF ' + RM_TOTAL_FC_CARDS + ' ÔøΩ ' + tags[rmCurrentFcCard - 1];
             }
 
             const prevBtn = document.getElementById('rmFcPrevBtn');
@@ -2370,9 +2370,9 @@
             if (nextBtn) {
                 if (rmCurrentFcCard === RM_TOTAL_FC_CARDS) {
                     if (rmTutOpenedFromGame) {
-                        nextBtn.innerHTML = '<span>? Return to Game</span>';
+                        nextBtn.innerHTML = '<span>üéÆ Return to Game</span>';
                     } else {
-                        nextBtn.innerHTML = '<span>?? Start Mission!</span>';
+                        nextBtn.innerHTML = '<span>üöÄ Start Mission!</span>';
                     }
                 } else {
                     nextBtn.innerHTML = '<span>Next</span> <i class="bi bi-arrow-right"></i>';

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+Ôªø@extends('layouts.app')
 @section('hide-nav', true)
 
 @section('content')
@@ -91,7 +91,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 .nebula-3 { width:250px; height:200px; background:radial-gradient(#be185d,transparent); bottom:30%; left:5%; animation:drift 15s ease-in-out infinite alternate; }
 @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(30px,20px) scale(1.12)} }
 
-/* All content above starfield ó nebulas must stay out of the flex flow */
+/* All content above starfield ÔøΩ nebulas must stay out of the flex flow */
 #gameWrapper > *:not(.nebula) { position: relative; z-index: 1; }
 #gameWrapper > .nebula { position: fixed; z-index: 0; }
 /* The tutorial is a true full-screen overlay (the rule above would otherwise make it relative) */
@@ -109,7 +109,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
     margin: 0 auto;
 }
 
-/* #gameScreen is shown via JS as display:flex ó force column + center */
+/* #gameScreen is shown via JS as display:flex ÔøΩ force column + center */
 #gameScreen {
     width: 100%;
     height: 100%;
@@ -991,7 +991,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           </div>
         </div>
         <p class="nw-tut-desc">
-          You are a Space Commander on a mission. Each round gives you a <strong style="color:#c4b5fd;">math word problem</strong> and four ships carrying different answers ó only one is right. Pick wisely!
+          You are a Space Commander on a mission. Each round gives you a <strong style="color:#c4b5fd;">math word problem</strong> and four ships carrying different answers ÔøΩ only one is right. Pick wisely!
         </p>
         <div class="nw-tut-grid">
           <div class="nw-tut-box">
@@ -1000,7 +1000,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           </div>
           <div class="nw-tut-box">
             <h5 style="color:#38bdf8;"><i class="bi bi-controller"></i> Simple Controls</h5>
-            <p>Tap (or click) any ship <strong style="color:#fff;">or</strong> press <kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">1</kbd>ñ<kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">4</kbd> on your keyboard.</p>
+            <p>Tap (or click) any ship <strong style="color:#fff;">or</strong> press <kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">1</kbd>ÔøΩ<kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">4</kbd> on your keyboard.</p>
           </div>
           <div class="nw-tut-box">
             <h5 style="color:#34d399;"><i class="bi bi-trophy-fill"></i> Goal</h5>
@@ -1028,13 +1028,13 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         <div class="nw-tut-example">
           <b>?? Example Mission:</b><br>
           "There are <b>3 spaceships</b>, each carrying <b>2 astronauts</b>. How many astronauts in total?"<br><br>
-          Step 1: Read the numbers ó 3 ships ◊ 2 astronauts<br>
-          Step 2: Solve it ó 3 ◊ 2 = <b>6</b><br>
+          Step 1: Read the numbers ÔøΩ 3 ships ÔøΩ 2 astronauts<br>
+          Step 2: Solve it ÔøΩ 3 ÔøΩ 2 = <b>6</b><br>
           Step 3: Find the ship with <b>6</b> and launch it! ??
         </div>
         <div class="nw-tut-callout">
           <i class="bi bi-lightbulb-fill" style="flex-shrink:0;"></i>
-          <span><strong>Tip:</strong> Solve the math first, then search for your answer ó don't just guess from the ship numbers!</span>
+          <span><strong>Tip:</strong> Solve the math first, then search for your answer ÔøΩ don't just guess from the ship numbers!</span>
         </div>
       </div>
 
@@ -1044,15 +1044,15 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           <div class="nw-tut-hero-icon" style="color:#34d399;">??</div>
           <div>
             <h3>Pick the Correct Ship</h3>
-            <p>Four ships appear below the mission ó only one is right.</p>
+            <p>Four ships appear below the mission ÔøΩ only one is right.</p>
           </div>
         </div>
         <p class="nw-tut-desc">Each ship has a number on it. Find the one that matches your answer and tap it (or press its number key).</p>
         <div class="demo-ships" style="margin-bottom:12px;">
-          <div class="demo-ship"><div class="demo-ship-icon">??</div><div class="demo-ship-num">4</div><div class="demo-ship-lbl">Key [1]</div></div>
-          <div class="demo-ship correct-ship"><div class="demo-ship-icon">??</div><div class="demo-ship-num">6</div><div class="demo-ship-lbl" style="color:#34d399;">? Correct!</div></div>
-          <div class="demo-ship"><div class="demo-ship-icon">???</div><div class="demo-ship-num">8</div><div class="demo-ship-lbl">Key [3]</div></div>
-          <div class="demo-ship"><div class="demo-ship-icon">??</div><div class="demo-ship-num">5</div><div class="demo-ship-lbl">Key [4]</div></div>
+          <div class="demo-ship"><div class="demo-ship-icon">üö¢</div><div class="demo-ship-num">4</div><div class="demo-ship-lbl">Key [1]</div></div>
+          <div class="demo-ship correct-ship"><div class="demo-ship-icon">üö¢</div><div class="demo-ship-num">6</div><div class="demo-ship-lbl" style="color:#34d399;">‚úÖ Correct!</div></div>
+          <div class="demo-ship"><div class="demo-ship-icon">‚õµ</div><div class="demo-ship-num">8</div><div class="demo-ship-lbl">Key [3]</div></div>
+          <div class="demo-ship"><div class="demo-ship-icon">üö¢</div><div class="demo-ship-num">5</div><div class="demo-ship-lbl">Key [4]</div></div>
         </div>
         <div class="nw-tut-grid">
           <div class="nw-tut-box" style="border-color:rgba(52,211,153,.25);">
@@ -1075,7 +1075,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
             <p>A progress bar at the top shows how much time is left.</p>
           </div>
         </div>
-        <p class="nw-tut-desc">Solve and answer before the bar runs out. The color changes as time gets low ó it's your warning signal!</p>
+        <p class="nw-tut-desc">Solve and answer before the bar runs out. The color changes as time gets low ÔøΩ it's your warning signal!</p>
         <div class="nw-timer-demo">
           <div class="nw-timer-row">
             <span>?? Plenty of time</span>
@@ -1092,7 +1092,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
         <div class="nw-tut-callout">
           <i class="bi bi-exclamation-triangle-fill" style="flex-shrink:0;"></i>
-          <span>If the timer reaches <strong>0</strong>, you automatically <strong>lose 1 life</strong> ó just like a wrong answer!</span>
+          <span>If the timer reaches <strong>0</strong>, you automatically <strong>lose 1 life</strong> ÔøΩ just like a wrong answer!</span>
         </div>
       </div>
 
@@ -1125,7 +1125,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
         <div class="nw-tut-callout">
           <i class="bi bi-rocket-takeoff-fill" style="flex-shrink:0;"></i>
-          <span>You're ready, Commander! A quick <strong>practice round</strong> is next ó launch the correct ship to prove it!</span>
+          <span>You're ready, Commander! A quick <strong>practice round</strong> is next ÔøΩ launch the correct ship to prove it!</span>
         </div>
       </div>
 
@@ -1219,14 +1219,14 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           <p style="font-size:.82rem; line-height:1.55;">
             "There are <strong>3 spaceships</strong>, each carrying <strong>2 astronauts</strong>. How many astronauts in total?"<br><br>
             ? Read the numbers &nbsp;?&nbsp; 3 ships, 2 astronauts each<br>
-            ? Solve it &nbsp;?&nbsp; 3 ◊ 2 = <strong style="color:#34d399;">6</strong><br>
+            ? Solve it &nbsp;?&nbsp; 3 ÔøΩ 2 = <strong style="color:#34d399;">6</strong><br>
             ? Find Ship 6 and launch it! ??
           </p>
         </div>
       </div>
       <div class="instr-callout">
         <i class="bi bi-lightbulb-fill" style="flex-shrink:0;margin-top:1px;"></i>
-        <span><strong>Tip:</strong> Solve the math <em>first</em> before looking at the ships ó don't guess from the numbers!</span>
+        <span><strong>Tip:</strong> Solve the math <em>first</em> before looking at the ships ÔøΩ don't guess from the numbers!</span>
       </div>
     </div>
 
@@ -1236,7 +1236,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         <div class="instr-hero-icon" style="color:#34d399;">??</div>
         <div>
           <h3>Pick a Ship &amp; Beat the Clock</h3>
-          <p>Four ships appear ó tap yours before time runs out!</p>
+          <p>Four ships appear ÔøΩ tap yours before time runs out!</p>
         </div>
       </div>
       <div class="instr-demo-ships">
@@ -1274,7 +1274,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
       <div class="instr-grid">
         <div class="instr-box" style="border-color:rgba(251,191,36,.25);">
           <h5 style="color:#fbbf24;"><i class="bi bi-keyboard-fill"></i> Keyboard &amp; Touch</h5>
-          <p>Tap a ship, or press <kbd>1</kbd>ñ<kbd>4</kbd> to select one. Press <kbd>P</kbd> or <kbd>Esc</kbd> to pause. Press <kbd>F</kbd> for fullscreen.</p>
+          <p>Tap a ship, or press <kbd>1</kbd>ÔøΩ<kbd>4</kbd> to select one. Press <kbd>P</kbd> or <kbd>Esc</kbd> to pause. Press <kbd>F</kbd> for fullscreen.</p>
         </div>
         <div class="instr-box" style="border-color:rgba(139,92,246,.25);">
           <h5 style="color:#a78bfa;"><i class="bi bi-pause-circle-fill"></i> Pause</h5>
@@ -1286,7 +1286,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
         <div class="instr-box" style="border-color:rgba(52,211,153,.25);">
           <h5 style="color:#34d399;"><i class="bi bi-star-fill"></i> Pro Tip</h5>
-          <p>Solve the math <em>before</em> reading ship answers ó it's faster and avoids confusion!</p>
+          <p>Solve the math <em>before</em> reading ship answers ÔøΩ it's faster and avoids confusion!</p>
         </div>
       </div>
     </div>
@@ -1326,7 +1326,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
         <div class="hud-center">
             <div class="level-badge">
-                <span>??</span>
+                <span>‚öîÔ∏è</span>
                 <span id="levelBadge">LVL {{ $progress->current_level }}</span>
             </div>
             <div class="hs-label">Best: <span id="highScore">{{ $progress->high_score }}</span></div>
@@ -1368,7 +1368,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         {{-- Problem --}}
         <div id="problemCard">
             <div id="problemEyebrow">Mission Briefing</div>
-            <div id="problemText">Initialising missionÖ</div>
+            <div id="problemText">Initialising missionÔøΩ</div>
         </div>
 
         {{-- Ships --}}
@@ -1389,7 +1389,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 
     {{-- Controls --}}
     <div id="controls">
-        <div class="hint-keys"><kbd>1-4</kbd> select &nbsp;∑&nbsp; <kbd>F</kbd> fullscreen &nbsp;∑&nbsp; <kbd>P</kbd> pause</div>
+        <div class="hint-keys"><kbd>1-4</kbd> select &nbsp;ÔøΩ&nbsp; <kbd>F</kbd> fullscreen &nbsp;ÔøΩ&nbsp; <kbd>P</kbd> pause</div>
         <button class="ctrl-btn btn-fs" id="fsBtn" onclick="toggleFullscreen()">? Fullscreen</button>
     </div>
 
@@ -1679,9 +1679,9 @@ const NAMES = ['Maya','Liam','Ava','Noah','Zoe','Ethan','Luna','Kai','Sofia','Di
 function generateWordProblem() {
     const g = gradeLevel, r = Math.random(), lvlBoost = Math.floor(currentLevel / 3);
     let op;
-    if      (g <= 4) op = r < 0.60 ? '+' : r < 0.90 ? '-' : '◊';
-    else if (g === 5) op = r < 0.25 ? '+' : r < 0.50 ? '-' : r < 0.75 ? '◊' : '˜';
-    else              op = r < 0.20 ? '+' : r < 0.40 ? '-' : r < 0.70 ? '◊' : '˜';
+    if      (g <= 4) op = r < 0.60 ? '+' : r < 0.90 ? '-' : 'ÔøΩ';
+    else if (g === 5) op = r < 0.25 ? '+' : r < 0.50 ? '-' : r < 0.75 ? 'ÔøΩ' : 'ÔøΩ';
+    else              op = r < 0.20 ? '+' : r < 0.40 ? '-' : r < 0.70 ? 'ÔøΩ' : 'ÔøΩ';
 
     const name1 = pick(NAMES);
     let name2 = pick(NAMES); while (name2 === name1) name2 = pick(NAMES);
@@ -1710,7 +1710,7 @@ function generateWordProblem() {
             `${name1} packed ${num1} snacks for the mission and ate ${num2} of them. How many snacks are left?`,
             `A fleet had ${num1} spaceships. ${num2} of them returned to base. How many are still out on patrol?`
         ]);
-    } else if (op === '◊') {
+    } else if (op === 'ÔøΩ') {
         if (g <= 4) { num1 = rand(2, 9); num2 = rand(2, 12 + lvlBoost); }
         else if (g === 5) { num1 = rand(2, 12); num2 = rand(2, 15 + lvlBoost); }
         else { num1 = rand(3, 15 + lvlBoost); num2 = rand(3, 15 + lvlBoost); }
@@ -1786,7 +1786,7 @@ function nextProblem() {
     const choices = generateChoices(currentProblem.answer);
     renderProblem(choices);
     startTimer();
-    // On phones the page scrolls ó bring the new problem back into view
+    // On phones the page scrolls ÔøΩ bring the new problem back into view
     const gw = document.getElementById('gameWrapper');
     if (gw && gw.scrollTop > 0) {
         try { gw.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { gw.scrollTop = 0; }
@@ -2018,7 +2018,7 @@ function toggleFullscreen() {
     }
 }
 
-// iPhone Safari has no Fullscreen API for pages ó hide the button (and the bar if it would be empty)
+// iPhone Safari has no Fullscreen API for pages ÔøΩ hide the button (and the bar if it would be empty)
 (function(){
     const de = document.documentElement;
     const supported = !!(de.requestFullscreen || de.webkitRequestFullscreen);

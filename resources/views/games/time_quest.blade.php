@@ -1541,7 +1541,7 @@
         <div class="stat time-mobile"><span class="label">Time</span><span class="val" id="uiTimeMobile">05:00</span></div>
         <div class="stat score-mobile"><span class="label">Score</span><span class="val" id="uiScoreMobile">0</span></div>
         <div class="stat streak-mobile"><span class="label">Streak</span><span class="val" id="uiStreakMobile">0</span></div>
-        <div class="stat round-mobile"><span class="label">Round</span><span class="val" id="uiRoundMobile">– / 10</span></div>
+        <div class="stat round-mobile"><span class="label">Round</span><span class="val" id="uiRoundMobile">ï¿½ / 10</span></div>
       </div>
       <div class="eduplay-game-nav">
         <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
@@ -1621,11 +1621,11 @@
         </div>
         <div class="quiz-stat round">
           <span class="quiz-stat-label">Round</span>
-          <span class="quiz-stat-val" id="uiRound">– / 10</span>
+          <span class="quiz-stat-val" id="uiRound">ï¿½ / 10</span>
         </div>
       </div>
       <div class="quiz-top">
-        <div class="q-label" id="qLabel">Get ready…</div>
+        <div class="q-label" id="qLabel">Get readyï¿½</div>
         <div class="pips" id="pips" aria-hidden="true"></div>
         <button type="button" class="hint-btn-quiz" id="hintBtn" onclick="useHint()" title="Use 20 coins to eliminate 2 wrong answers">
           <i class="bi bi-lightbulb-fill"></i>
@@ -1634,12 +1634,12 @@
         </button>
       </div>
       <div class="quiz-mid">
-        <div id="qText">Loading…</div>
+        <div id="qText">Loadingï¿½</div>
         <div id="options" role="group" aria-label="Answer choices"></div>
         <div id="feedback" role="status" aria-live="polite"></div>
         <button id="next" class="btn" type="button">Next round</button>
       </div>
-      <p class="hint">Press 1–4 to answer, Enter for next round.</p>
+      <p class="hint">Press 1ï¿½4 to answer, Enter for next round.</p>
     </aside>
   </main>
 </div>
@@ -1649,7 +1649,7 @@
   <div class="pause-card">
     <div style="font-size:3rem;margin-bottom:0.5rem;">?</div>
     <h2>Quest Paused</h2>
-    <p>The clock has stopped. Take a breather and resume when you’re ready to continue your time zone adventure!</p>
+    <p>The clock has stopped. Take a breather and resume when youï¿½re ready to continue your time zone adventure!</p>
     <button class="btn" style="width:100%;margin-bottom:10px;" onclick="togglePause()">? Resume Quest</button>
     <button class="btn ghost" style="width:100%;min-height:46px;font-size:0.92rem;" onclick="openTut(true)">
       <i class="bi bi-mortarboard-fill" style="margin-right:6px;"></i> ?? How to Play / Tutorial
@@ -1665,7 +1665,7 @@
 <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-label="Time Zone Quest Instructions">
   <div class="card tq-instr-card">
     <div style="margin-bottom:4px;">
-      <span class="tq-badge"><i class="bi bi-compass"></i> Grade 5 Math • Global Time Zones</span>
+      <span class="tq-badge"><i class="bi bi-compass"></i> Grade 5 Math ï¿½ Global Time Zones</span>
     </div>
     <h2 class="tq-instr-title">Time Zone Quest</h2>
     <p class="tq-instr-sub">
@@ -1679,7 +1679,7 @@
           <div class="tq-feat-title">Read the Clocks</div>
         </div>
         <p class="tq-feat-desc">
-          Compare Manila’s reference clock with the target city and its UTC offset to determine the exact destination time.
+          Compare Manilaï¿½s reference clock with the target city and its UTC offset to determine the exact destination time.
         </p>
       </div>
 
@@ -1707,9 +1707,9 @@
     <div class="tq-instr-footer">
       <div class="tq-stats-pills">
         <div class="tq-stat-pill">?? <b>5:00</b> Timer</div>
-        <div class="tq-stat-pill">?? <b>10</b> Rounds</div>
-        <div class="tq-stat-pill">?? <b>40+</b> Cities</div>
-        <div class="tq-stat-pill">? Level <b><span id="instrLevel">{{ $progress->current_level ?? 1 }}</span></b></div>
+        <div class="tq-stat-pill">ğŸ¯ <b>10</b> Rounds</div>
+        <div class="tq-stat-pill">ğŸŒ <b>40+</b> Cities</div>
+        <div class="tq-stat-pill">â­ Level <b><span id="instrLevel">{{ $progress->current_level ?? 1 }}</span></b></div>
       </div>
 
       <div class="tq-actions-row">
@@ -1754,7 +1754,7 @@
     <div id="tutStep1" class="tq-slide-body">
       <h2 class="tq-tut-slide-title" style="color:var(--cyan);">The Globe &amp; UTC Anchor</h2>
       <p class="tq-tut-slide-text">
-        The Earth rotates 360° every 24 hours. Global time zones are measured against <b>UTC (Coordinated Universal Time)</b> at 0° longitude in Greenwich, UK.
+        The Earth rotates 360ï¿½ every 24 hours. Global time zones are measured against <b>UTC (Coordinated Universal Time)</b> at 0ï¿½ longitude in Greenwich, UK.
       </p>
 
       <div class="tq-flow-card">
@@ -1772,7 +1772,7 @@
       </div>
 
       <div class="tq-takeaway-note">
-        ?? In Time Quest, Manila (UTC+8) is your anchor — every calculation starts from here!
+        ?? In Time Quest, Manila (UTC+8) is your anchor ï¿½ every calculation starts from here!
       </div>
 
       <div class="tq-tut-footer">
@@ -1907,7 +1907,7 @@
       <div class="tq-tips-grid">
         <div class="tq-tip-box">
           <div class="tq-tip-ico">??</div>
-          <div class="tq-tip-tit">Keyboard 1–4</div>
+          <div class="tq-tip-tit">Keyboard 1ï¿½4</div>
           <p class="tq-tip-txt">Press number keys to pick choices instantly without moving your cursor.</p>
         </div>
         <div class="tq-tip-box">
@@ -2002,7 +2002,7 @@ const CITIES = [
   {name:'Paris',        flag:'????', tz:'Europe/Paris',                   lon:2.35,   lat:48.86, tier:2},
   {name:'Berlin',       flag:'????', tz:'Europe/Berlin',                  lon:13.40,  lat:52.52, tier:2},
   {name:'Madrid',       flag:'????', tz:'Europe/Madrid',                  lon:-3.70,  lat:40.42, tier:2},
-  {name:'Reykjavík',    flag:'????', tz:'Atlantic/Reykjavik',             lon:-21.94, lat:64.15, tier:2},
+  {name:'Reykjavï¿½k',    flag:'????', tz:'Atlantic/Reykjavik',             lon:-21.94, lat:64.15, tier:2},
   {name:'New York',     flag:'????', tz:'America/New_York',               lon:-74.01, lat:40.71, tier:2},
   {name:'Chicago',      flag:'????', tz:'America/Chicago',                lon:-87.63, lat:41.88, tier:2},
   {name:'Los Angeles',  flag:'????', tz:'America/Los_Angeles',            lon:-118.24,lat:34.05, tier:2},
@@ -2011,7 +2011,7 @@ const CITIES = [
   {name:'Mexico City',  flag:'????', tz:'America/Mexico_City',            lon:-99.13, lat:19.43, tier:2},
   {name:'Anchorage',    flag:'????', tz:'America/Anchorage',              lon:-149.90,lat:61.22, tier:2},
   {name:'Honolulu',     flag:'????', tz:'Pacific/Honolulu',               lon:-157.86,lat:21.31, tier:2},
-  {name:'São Paulo',    flag:'????', tz:'America/Sao_Paulo',              lon:-46.63, lat:-23.55,tier:2},
+  {name:'Sï¿½o Paulo',    flag:'????', tz:'America/Sao_Paulo',              lon:-46.63, lat:-23.55,tier:2},
   {name:'Buenos Aires', flag:'????', tz:'America/Argentina/Buenos_Aires', lon:-58.38, lat:-34.60,tier:2},
   {name:'Lima',         flag:'????', tz:'America/Lima',                   lon:-77.04, lat:-12.05,tier:2},
   {name:'Santiago',     flag:'????', tz:'America/Santiago',               lon:-70.65, lat:-33.46,tier:2},
@@ -2019,7 +2019,7 @@ const CITIES = [
   {name:'Casablanca',   flag:'????', tz:'Africa/Casablanca',              lon:-7.58,  lat:33.57, tier:2},
   {name:'Riyadh',       flag:'????', tz:'Asia/Riyadh',                    lon:46.67,  lat:24.71, tier:2},
   {name:'Rome',         flag:'????', tz:'Europe/Rome',                    lon:12.49,  lat:41.90, tier:2},
-  {name:'Bogotá',       flag:'????', tz:'America/Bogota',                 lon:-74.07, lat:4.71,  tier:2},
+  {name:'Bogotï¿½',       flag:'????', tz:'America/Bogota',                 lon:-74.07, lat:4.71,  tier:2},
 
   {name:'Yangon',       flag:'????', tz:'Asia/Yangon',                    lon:96.16,  lat:16.87, tier:3},
   {name:'Kathmandu',    flag:'????', tz:'Asia/Kathmandu',                 lon:85.32,  lat:27.72, tier:3},
@@ -2042,7 +2042,7 @@ function partsIn(date, tz){
   return { weekday:o.weekday, hour:+o.hour, minute:o.minute, period:o.dayPeriod };
 }
 const fmtTime = p => `${p.hour}:${String(p.minute).padStart(2,'0')} ${p.period}`;
-const fmtFull = p => `${fmtTime(p)} · ${p.weekday}`;
+const fmtFull = p => `${fmtTime(p)} ï¿½ ${p.weekday}`;
 
 function offsetMinutes(date, tz){
   const dtf = new Intl.DateTimeFormat('en-US', {
@@ -2108,7 +2108,7 @@ const map = L.map('map', {
 
 L.maplibreGL({
   style: 'https://tiles.openfreemap.org/styles/dark',
-  attribution: '© <a href="https://openfreemap.org">OpenFreeMap</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  attribution: 'ï¿½ <a href="https://openfreemap.org">OpenFreeMap</a> ï¿½ ï¿½ <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
 const refLayer    = L.layerGroup().addTo(map);
@@ -2404,7 +2404,7 @@ function renderOptions(){
   const box = el('options');
   box.innerHTML = '';
   state.options.forEach((opt, i) => {
-    const [time, day] = opt.split(' · ');
+    const [time, day] = opt.split(' ï¿½ ');
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'option';

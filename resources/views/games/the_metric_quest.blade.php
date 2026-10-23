@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'The Metric Quest ó Math Learning Platform')
+@section('title', 'The Metric Quest ÔøΩ Math Learning Platform')
 @section('hide-nav', true)
 
 @section('content')
@@ -11,7 +11,7 @@
 
 <style>
   /* ==========================================================================
-     THE METRIC QUEST ó TIME TRAVELER'S MEASUREMENT ODYSSEY THEME
+     THE METRIC QUEST ÔøΩ TIME TRAVELER'S MEASUREMENT ODYSSEY THEME
      ========================================================================== */
   :root {
     --bg-dark: #070b19;
@@ -1386,7 +1386,7 @@
 
   /* ==========================================================================
      ADAPTIVE / MOBILE-FIRST OVERRIDES
-     Breakpoints: =991 tablet ∑ =767 phone ∑ =479 small phone ∑ landscape
+     Breakpoints: =991 tablet ÔøΩ =767 phone ÔøΩ =479 small phone ÔøΩ landscape
      ========================================================================== */
 
   /* Touch devices: no sticky hover lifts, keyboard-hint row hidden */
@@ -1703,7 +1703,7 @@
           <span class="quest-mode-tag" id="modeTag">
             <i class="bi bi-geo-alt-fill"></i> Measurement Mission
           </span>
-          <div class="question-text" id="questionText">Loading challengeÖ</div>
+          <div class="question-text" id="questionText">Loading challengeÔøΩ</div>
         </div>
 
         <!-- Hint Box (Revealed on Request) -->
@@ -1727,7 +1727,7 @@
 
         <div class="quick-keys-hint">
           <span>Shortcuts:</span>
-          <kbd>1</kbd>ñ<kbd>4</kbd> <span>Answer</span>
+          <kbd>1</kbd>ÔøΩ<kbd>4</kbd> <span>Answer</span>
           <kbd>H</kbd> <span>Hint</span>
           <kbd>P</kbd> <span>Pause</span>
         </div>
@@ -1826,7 +1826,7 @@
   <div class="tut-deck">
     <div class="tut-deck-header">
       <span class="tut-deck-tag" id="tutTag">
-        <i class="bi bi-journal-bookmark-fill"></i> Field Guide &amp; Instructions ï Card <span id="fcPageNum">1 / 5</span>
+        <i class="bi bi-journal-bookmark-fill"></i> Field Guide &amp; Instructions ÔøΩ Card <span id="fcPageNum">1 / 5</span>
       </span>
       <button type="button" class="btn-close-tut" onclick="closeTutorial()" title="Close Instructions" aria-label="Close instructions">&times;</button>
     </div>
@@ -1852,7 +1852,7 @@
             <p>Measure liquids and potions in liters (L) and milliliters (mL).</p>
           </div>
           <div class="fc-mini-card">
-            <h5>? Chrono Realm</h5>
+          <h5>üïê Chrono Realm</h5>
             <p>Navigate seconds, minutes, hours, days, weeks, months, and years.</p>
           </div>
         </div>
@@ -1861,7 +1861,7 @@
 
     <!-- CARD 2: The Golden Rule (Multiply vs Divide) -->
     <div class="fc-card" id="fcCard2">
-      <h3 class="fc-title">?? The Golden Metric Rule</h3>
+      <h3 class="fc-title">‚ö° The Golden Metric Rule</h3>
       <p class="fc-desc">
         How do you know whether to <b>multiply</b> or <b>divide</b>? Just look at the size of the units!
       </p>
@@ -1872,14 +1872,14 @@
               <b style="color:#ffffff;">BIG Unit ? SMALL Unit</b><br>
               <small style="color:#94a3b8;">e.g., Kilometers to Meters, or Hours to Minutes</small>
             </div>
-            <span class="rule-badge multiply"><i class="bi bi-x-lg"></i> MULTIPLY (◊)</span>
+            <span class="rule-badge multiply"><i class="bi bi-x-lg"></i> MULTIPLY (ÔøΩ)</span>
           </div>
           <div class="ladder-rule-row">
             <div>
               <b style="color:#ffffff;">SMALL Unit ? BIG Unit</b><br>
               <small style="color:#94a3b8;">e.g., Centimeters to Meters, or Grams to Kilograms</small>
             </div>
-            <span class="rule-badge divide"><i class="bi bi-slash-lg"></i> DIVIDE (˜)</span>
+            <span class="rule-badge divide"><i class="bi bi-slash-lg"></i> DIVIDE (ÔøΩ)</span>
           </div>
         </div>
       </div>
@@ -1899,17 +1899,17 @@
           <div class="fc-mini-card" style="border-color:rgba(56,189,248,0.3);">
             <h5 style="color:#38bdf8;">?? Length Chart</h5>
             <div style="font-family:var(--font-mono); font-size:0.8rem; line-height:1.8; color:#e2e8f0;">
-              <div>ï 1 km = 1,000 m</div>
-              <div>ï 1 m = 100 cm</div>
-              <div>ï 1 cm = 10 mm</div>
+              <div>ÔøΩ 1 km = 1,000 m</div>
+              <div>ÔøΩ 1 m = 100 cm</div>
+              <div>ÔøΩ 1 cm = 10 mm</div>
             </div>
           </div>
           <div class="fc-mini-card" style="border-color:rgba(16,185,129,0.3);">
             <h5 style="color:#34d399;">?? Mass Chart</h5>
             <div style="font-family:var(--font-mono); font-size:0.8rem; line-height:1.8; color:#e2e8f0;">
-              <div>ï 1 kg = 1,000 g</div>
-              <div>ï 1 g = 1,000 mg</div>
-              <div>ï 1 L = 1,000 mL (Capacity)</div>
+              <div>ÔøΩ 1 kg = 1,000 g</div>
+              <div>ÔøΩ 1 g = 1,000 mg</div>
+              <div>ÔøΩ 1 L = 1,000 mL (Capacity)</div>
             </div>
           </div>
         </div>
@@ -1921,7 +1921,7 @@
 
     <!-- CARD 4: Time Travel Chrono Chart -->
     <div class="fc-card" id="fcCard4">
-      <h3 class="fc-title">? Time Units &amp; Chrono Conversions</h3>
+      <h3 class="fc-title">üïê Time Units &amp; Chrono Conversions</h3>
       <p class="fc-desc">
         Time conversions use special clocks and calendars instead of base-10:
       </p>
@@ -1931,7 +1931,7 @@
           <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">?? 1 hr = 60 min</div>
           <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">?? 1 day = 24 hr</div>
           <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">?? 1 week = 7 days</div>
-          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">??? 1 month ò 4 weeks</div>
+          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">??? 1 month ÔøΩ 4 weeks</div>
           <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">?? 1 year = 12 months</div>
         </div>
       </div>
@@ -1953,7 +1953,7 @@
         </div>
         <div class="ladder-rule-row" style="margin-bottom:8px;">
           <div><b style="color:#38bdf8;">?? Hotkeys</b><br><small style="color:#94a3b8;">On a keyboard, press 1, 2, 3, or 4 to instantly select an answer. On a phone or tablet, just tap.</small></div>
-          <span style="color:#38bdf8; font-weight:800;">Keys 1ñ4</span>
+          <span style="color:#38bdf8; font-weight:800;">Keys 1ÔøΩ4</span>
         </div>
         <div class="ladder-rule-row">
           <div><b style="color:#a78bfa;">?? Metric Lab</b><br><small style="color:#94a3b8;">Click the Metric Lab button at any time to open the full reference table.</small></div>
@@ -1995,9 +1995,9 @@
     <!-- Realm Tabs -->
     <div class="lab-tabs">
       <button type="button" class="lab-tab-btn active" onclick="switchLabTab('length')">?? Length</button>
-      <button type="button" class="lab-tab-btn" onclick="switchLabTab('mass')">?? Mass</button>
-      <button type="button" class="lab-tab-btn" onclick="switchLabTab('cap')">?? Capacity</button>
-      <button type="button" class="lab-tab-btn" onclick="switchLabTab('time')">? Time</button>
+      <button type="button" class="lab-tab-btn" onclick="switchLabTab('mass')">‚öñÔ∏è Mass</button>
+      <button type="button" class="lab-tab-btn" onclick="switchLabTab('cap')">ü•§ Capacity</button>
+      <button type="button" class="lab-tab-btn" onclick="switchLabTab('time')">üïê Time</button>
     </div>
 
     <!-- Section 1: Length -->
@@ -2012,22 +2012,22 @@
         <div class="lab-rule-item"><span>1 Meter (m)</span><span>= 1,000 Millimeters (mm)</span></div>
         <div class="lab-rule-item"><span>1 Decimeter (dm)</span><span>= 10 Centimeters (cm)</span></div>
         <div class="lab-rule-item"><span>1 Centimeter (cm)</span><span>= 10 Millimeters (mm)</span></div>
-        <div class="lab-rule-item"><span>1 Millimeter (mm)</span><span>= 1,000 Micrometers (µm)</span></div>
-        <div class="lab-rule-item"><span>1 Micrometer (µm)</span><span>= 1,000 Nanometers (nm)</span></div>
+        <div class="lab-rule-item"><span>1 Millimeter (mm)</span><span>= 1,000 Micrometers (ÔøΩm)</span></div>
+        <div class="lab-rule-item"><span>1 Micrometer (ÔøΩm)</span><span>= 1,000 Nanometers (nm)</span></div>
       </div>
       <div class="lab-card">
         <h4><i class="bi bi-lightbulb-fill text-warning"></i> Real-World Intuition</h4>
         <div style="font-size:1.15rem; line-height:1.7; color:#cbd5e1;">
-          <div>ï <b>1 nm:</b> Width of a double-helix DNA strand</div>
-          <div>ï <b>1 µm:</b> Size of a single microscopic bacterium cell</div>
-          <div>ï <b>1 mm:</b> Thickness of a plastic credit card or ID card</div>
-          <div>ï <b>1 cm:</b> Width of your pinky fingernail</div>
-          <div>ï <b>1 dm:</b> Width of a standard adult hand</div>
-          <div>ï <b>1 m:</b> Height of a household kitchen counter top</div>
-          <div>ï <b>1 dam:</b> Length of a standard yellow school bus</div>
-          <div>ï <b>1 hm:</b> Length of a professional soccer field</div>
-          <div>ï <b>1 km:</b> A brisk 10 to 12 minute outdoor walk</div>
-          <div>ï <b>1 Mm (Megameter):</b> Flying distance from New York City to Detroit</div>
+          <div>ÔøΩ <b>1 nm:</b> Width of a double-helix DNA strand</div>
+          <div>ÔøΩ <b>1 ÔøΩm:</b> Size of a single microscopic bacterium cell</div>
+          <div>ÔøΩ <b>1 mm:</b> Thickness of a plastic credit card or ID card</div>
+          <div>ÔøΩ <b>1 cm:</b> Width of your pinky fingernail</div>
+          <div>ÔøΩ <b>1 dm:</b> Width of a standard adult hand</div>
+          <div>ÔøΩ <b>1 m:</b> Height of a household kitchen counter top</div>
+          <div>ÔøΩ <b>1 dam:</b> Length of a standard yellow school bus</div>
+          <div>ÔøΩ <b>1 hm:</b> Length of a professional soccer field</div>
+          <div>ÔøΩ <b>1 km:</b> A brisk 10 to 12 minute outdoor walk</div>
+          <div>ÔøΩ <b>1 Mm (Megameter):</b> Flying distance from New York City to Detroit</div>
         </div>
       </div>
     </div>
@@ -2045,21 +2045,21 @@
         <div class="lab-rule-item"><span>1 Gram (g)</span><span>= 10 Decigrams (dg)</span></div>
         <div class="lab-rule-item"><span>1 Gram (g)</span><span>= 100 Centigrams (cg)</span></div>
         <div class="lab-rule-item"><span>1 Gram (g)</span><span>= 1,000 Milligrams (mg)</span></div>
-        <div class="lab-rule-item"><span>1 Milligram (mg)</span><span>= 1,000 Micrograms (µg)</span></div>
+        <div class="lab-rule-item"><span>1 Milligram (mg)</span><span>= 1,000 Micrograms (ÔøΩg)</span></div>
       </div>
       <div class="lab-card">
         <h4><i class="bi bi-lightbulb-fill text-warning"></i> Real-World Intuition</h4>
         <div style="font-size:1.15rem; line-height:1.7; color:#cbd5e1;">
-          <div>ï <b>1 µg:</b> Weight of a tiny speck of dust floating in the air</div>
-          <div>ï <b>1 mg:</b> Weight of a small grain of sand on the beach</div>
-          <div>ï <b>1 dg:</b> Weight of a small bird feather</div>
-          <div>ï <b>1 g:</b> Weight of a standard metal paperclip</div>
-          <div>ï <b>1 dag:</b> Weight of a single fun-size chocolate bar</div>
-          <div>ï <b>1 hg:</b> Weight of a medium-sized apple</div>
-          <div>ï <b>1 kg:</b> Weight of a full 1-liter plastic water bottle</div>
-          <div>ï <b>1 q:</b> Weight of a large commercial sack of rice</div>
-          <div>ï <b>1 t:</b> Weight of a small compact passenger car</div>
-          <div>ï <b>1 kt (Kilotonne):</b> Structural mass of a massive cargo cruise ship</div>
+          <div>ÔøΩ <b>1 ÔøΩg:</b> Weight of a tiny speck of dust floating in the air</div>
+          <div>ÔøΩ <b>1 mg:</b> Weight of a small grain of sand on the beach</div>
+          <div>ÔøΩ <b>1 dg:</b> Weight of a small bird feather</div>
+          <div>ÔøΩ <b>1 g:</b> Weight of a standard metal paperclip</div>
+          <div>ÔøΩ <b>1 dag:</b> Weight of a single fun-size chocolate bar</div>
+          <div>ÔøΩ <b>1 hg:</b> Weight of a medium-sized apple</div>
+          <div>ÔøΩ <b>1 kg:</b> Weight of a full 1-liter plastic water bottle</div>
+          <div>ÔøΩ <b>1 q:</b> Weight of a large commercial sack of rice</div>
+          <div>ÔøΩ <b>1 t:</b> Weight of a small compact passenger car</div>
+          <div>ÔøΩ <b>1 kt (Kilotonne):</b> Structural mass of a massive cargo cruise ship</div>
         </div>
       </div>
     </div>
@@ -2077,21 +2077,21 @@
         <div class="lab-rule-item"><span>1 Liter (L)</span><span>= 1,000 Milliliters (mL)</span></div>
         <div class="lab-rule-item"><span>1 Deciliter (dL)</span><span>= 10 Centiliters (cL)</span></div>
         <div class="lab-rule-item"><span>1 Centiliter (cL)</span><span>= 10 Milliliters (mL)</span></div>
-        <div class="lab-rule-item"><span>1 Milliliter (mL)</span><span>= 1,000 Microliters (µL)</span></div>
+        <div class="lab-rule-item"><span>1 Milliliter (mL)</span><span>= 1,000 Microliters (ÔøΩL)</span></div>
       </div>
       <div class="lab-card">
         <h4><i class="bi bi-lightbulb-fill text-warning"></i> Real-World Intuition</h4>
         <div style="font-size:1.15rem; line-height:1.7; color:#cbd5e1;">
-          <div>ï <b>1 µL:</b> A tiny single laboratory fluid droplet</div>
-          <div>ï <b>1 mL:</b> About 20 drops of water inside a small medical syringe</div>
-          <div>ï <b>1 cL:</b> A small single sip of liquid from a cup</div>
-          <div>ï <b>1 dL:</b> Volume of about half a glass of juice</div>
-          <div>ï <b>1 L:</b> Size of a standard reusable sports water bottle</div>
-          <div>ï <b>1 daL:</b> Fluid volume of a standard large household mop bucket</div>
-          <div>ï <b>1 hL:</b> A large liquid storage barrel vat used in commercial breweries</div>
-          <div>ï <b>1 kL:</b> Size of a large residential rooftop water storage tank</div>
-          <div>ï <b>1 ML:</b> Volume of a small public neighborhood swimming pool</div>
-          <div>ï <b>1 GL (Gigaliter):</b> Volume of a massive municipal water reservoir lake</div>
+          <div>ÔøΩ <b>1 ÔøΩL:</b> A tiny single laboratory fluid droplet</div>
+          <div>ÔøΩ <b>1 mL:</b> About 20 drops of water inside a small medical syringe</div>
+          <div>ÔøΩ <b>1 cL:</b> A small single sip of liquid from a cup</div>
+          <div>ÔøΩ <b>1 dL:</b> Volume of about half a glass of juice</div>
+          <div>ÔøΩ <b>1 L:</b> Size of a standard reusable sports water bottle</div>
+          <div>ÔøΩ <b>1 daL:</b> Fluid volume of a standard large household mop bucket</div>
+          <div>ÔøΩ <b>1 hL:</b> A large liquid storage barrel vat used in commercial breweries</div>
+          <div>ÔøΩ <b>1 kL:</b> Size of a large residential rooftop water storage tank</div>
+          <div>ÔøΩ <b>1 ML:</b> Volume of a small public neighborhood swimming pool</div>
+          <div>ÔøΩ <b>1 GL (Gigaliter):</b> Volume of a massive municipal water reservoir lake</div>
         </div>
       </div>
     </div>
@@ -2104,7 +2104,7 @@
         <div class="lab-rule-item"><span>1 Century</span><span>= 100 Years</span></div>
         <div class="lab-rule-item"><span>1 Decade</span><span>= 10 Years</span></div>
         <div class="lab-rule-item"><span>1 Year</span><span>= 365 Days</span></div>
-        <div class="lab-rule-item"><span>1 Month</span><span>ò 30 Days</span></div>
+        <div class="lab-rule-item"><span>1 Month</span><span>ÔøΩ 30 Days</span></div>
         <div class="lab-rule-item"><span>1 Week</span><span>= 7 Days</span></div>
         <div class="lab-rule-item"><span>1 Day</span><span>= 24 Hours</span></div>
         <div class="lab-rule-item"><span>1 Hour</span><span>= 60 Minutes</span></div>
@@ -2114,16 +2114,16 @@
       <div class="lab-card">
         <h4><i class="bi bi-lightbulb-fill text-warning"></i> Real-World Intuition</h4>
         <div style="font-size:1.15rem; line-height:1.7; color:#cbd5e1;">
-          <div>ï <b>1 ms:</b> Speed of a high-speed camera shutter blink</div>
-          <div>ï <b>1 second:</b> Duration of a single resting human heartbeat</div>
-          <div>ï <b>1 minute:</b> Duration of a quick television commercial break</div>
-          <div>ï <b>1 hour:</b> Time span of a standard school class period</div>
-          <div>ï <b>1 day:</b> One full rotation of the Earth on its axis</div>
-          <div>ï <b>1 week:</b> Time span of a standard five-day school week plus a weekend</div>
-          <div>ï <b>1 month:</b> The time it takes for one full cycle of the moon's phases</div>
-          <div>ï <b>1 year:</b> Time it takes the Earth to make one full orbit around the Sun</div>
-          <div>ï <b>1 decade:</b> The time it takes for an elementary school child to grow into a teenager</div>
-          <div>ï <b>1 century:</b> The average lifetime lifespan of a very long-lived human being</div>
+          <div>ÔøΩ <b>1 ms:</b> Speed of a high-speed camera shutter blink</div>
+          <div>ÔøΩ <b>1 second:</b> Duration of a single resting human heartbeat</div>
+          <div>ÔøΩ <b>1 minute:</b> Duration of a quick television commercial break</div>
+          <div>ÔøΩ <b>1 hour:</b> Time span of a standard school class period</div>
+          <div>ÔøΩ <b>1 day:</b> One full rotation of the Earth on its axis</div>
+          <div>ÔøΩ <b>1 week:</b> Time span of a standard five-day school week plus a weekend</div>
+          <div>ÔøΩ <b>1 month:</b> The time it takes for one full cycle of the moon's phases</div>
+          <div>ÔøΩ <b>1 year:</b> Time it takes the Earth to make one full orbit around the Sun</div>
+          <div>ÔøΩ <b>1 decade:</b> The time it takes for an elementary school child to grow into a teenager</div>
+          <div>ÔøΩ <b>1 century:</b> The average lifetime lifespan of a very long-lived human being</div>
         </div>
       </div>
     </div>
@@ -2137,7 +2137,7 @@
     <div style="font-size:3.2rem; filter:drop-shadow(0 0 20px rgba(245,158,11,0.5));">??</div>
     <h2>Expedition Paused</h2>
     <p>Catch your breath! Ready to jump back into the measurement quest?</p>
-    <button type="button" class="resume-btn" onclick="togglePause()">? Resume Quest</button>
+    <button type="button" class="resume-btn" onclick="togglePause()">‚ñ∂Ô∏è Resume Quest</button>
     <div class="eduplay-game-nav" style="display:flex;gap:10px;width:100%;justify-content:center;margin-top:14px;">
       <a href="{{ route('student.map', 'the_metric_quest') }}" class="eduplay-nav-btn eduplay-btn-map" style="flex:1;justify-content:center;">
         <i class="bi bi-map-fill"></i> <span>Game Map</span>
@@ -2427,22 +2427,22 @@
       const n = randInt(2, 9);
       let q = isSit ? `A classroom banner is ${n} m long. How long is it in centimeters?` : `Convert ${n} m to centimeters.`;
       return buildQ(q, (n * 100) + ' cm', [(n * 10) + ' cm', (n * 1000) + ' cm', (n + 100) + ' cm'],
-        `Rule: 1 m = 100 cm. Since meters is a LARGER unit than centimeters, MULTIPLY by 100: ${n} ◊ 100 = ?`,
-        'length', { from: 'm', to: 'cm', text: '1 m = 100 cm (◊ 100)' }
+        `Rule: 1 m = 100 cm. Since meters is a LARGER unit than centimeters, MULTIPLY by 100: ${n} ÔøΩ 100 = ?`,
+        'length', { from: 'm', to: 'cm', text: '1 m = 100 cm (ÔøΩ 100)' }
       );
     } else if (diff === 2) { // cm -> m
       const n = randInt(2, 9);
       let q = isSit ? `A wooden plank is ${n * 100} cm long. How many meters is that?` : `Convert ${n * 100} cm to meters.`;
       return buildQ(q, n + ' m', [(n * 10) + ' m', (n * 100) + ' m', (n + 1) + ' m'],
-        `Rule: 100 cm = 1 m. Since centimeters is a SMALLER unit than meters, DIVIDE by 100: ${n * 100} ˜ 100 = ?`,
-        'length', { from: 'cm', to: 'm', text: '100 cm = 1 m (˜ 100)' }
+        `Rule: 100 cm = 1 m. Since centimeters is a SMALLER unit than meters, DIVIDE by 100: ${n * 100} ÔøΩ 100 = ?`,
+        'length', { from: 'cm', to: 'm', text: '100 cm = 1 m (ÔøΩ 100)' }
       );
     } else { // Mixed
       const m = randInt(1, 5), cm = randInt(5, 95);
       if (Math.random() < 0.5) {
         let q = isSit ? `A flagpole is ${m} m and ${cm} cm tall. What is its total height in centimeters?` : `Convert ${m} m and ${cm} cm to centimeters.`;
         return buildQ(q, (m * 100 + cm) + ' cm', [(m * 10 + cm) + ' cm', (m * 1000 + cm) + ' cm', (m + cm) + ' cm'],
-          `Step 1: Convert ${m} m to cm: ${m} ◊ 100 = ${m * 100} cm. Step 2: Add the extra ${cm} cm: ${m * 100} + ${cm} = ?`,
+          `Step 1: Convert ${m} m to cm: ${m} ÔøΩ 100 = ${m * 100} cm. Step 2: Add the extra ${cm} cm: ${m * 100} + ${cm} = ?`,
           'length', { from: 'm', to: 'cm', text: 'm & cm ? cm' }
         );
       } else {
@@ -2462,21 +2462,21 @@
       const n = randInt(2, 9);
       let q = isSit ? `An athlete ran ${n} km across the park. How many meters is that?` : `Convert ${n} km to meters.`;
       return buildQ(q, (n * 1000) + ' m', [(n * 100) + ' m', (n * 10) + ' m', (n + 1000) + ' m'],
-        `Rule: 1 km = 1,000 m. Kilo means thousand. MULTIPLY by 1,000: ${n} ◊ 1,000 = ?`,
-        'length', { from: 'km', to: 'm', text: '1 km = 1,000 m (◊ 1,000)' }
+        `Rule: 1 km = 1,000 m. Kilo means thousand. MULTIPLY by 1,000: ${n} ÔøΩ 1,000 = ?`,
+        'length', { from: 'km', to: 'm', text: '1 km = 1,000 m (ÔøΩ 1,000)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 9);
       let q = isSit ? `A drone flew ${n * 1000} m into the sky. How many kilometers is that?` : `Convert ${n * 1000} m to kilometers.`;
       return buildQ(q, n + ' km', [(n * 10) + ' km', (n * 100) + ' km', (n + 1) + ' km'],
-        `Rule: 1,000 m = 1 km. Converting meters to kilometers means DIVIDING by 1,000: ${n * 1000} ˜ 1,000 = ?`,
-        'length', { from: 'm', to: 'km', text: '1,000 m = 1 km (˜ 1,000)' }
+        `Rule: 1,000 m = 1 km. Converting meters to kilometers means DIVIDING by 1,000: ${n * 1000} ÔøΩ 1,000 = ?`,
+        'length', { from: 'm', to: 'km', text: '1,000 m = 1 km (ÔøΩ 1,000)' }
       );
     } else {
       const km = randInt(1, 5), m = randInt(50, 950);
       let q = isSit ? `A hiking trail is ${km} km and ${m} m long. What is the total distance in meters?` : `Convert ${km} km and ${m} m to meters.`;
       return buildQ(q, (km * 1000 + m) + ' m', [(km * 100 + m) + ' m', (km * 10 + m) + ' m', (m) + ' m'],
-        `Step 1: Convert ${km} km to meters: ${km} ◊ 1,000 = ${km * 1000} m. Step 2: Add ${m} m: ${km * 1000} + ${m} = ?`,
+        `Step 1: Convert ${km} km to meters: ${km} ÔøΩ 1,000 = ${km * 1000} m. Step 2: Add ${m} m: ${km * 1000} + ${m} = ?`,
         'length', { from: 'km', to: 'm', text: 'km & m ? m' }
       );
     }
@@ -2489,15 +2489,15 @@
       const n = randInt(2, 9);
       let q = isSit ? `A bag of flour weighs ${n} kg. What is its weight in grams?` : `Convert ${n} kg to grams.`;
       return buildQ(q, (n * 1000) + ' g', [(n * 100) + ' g', (n * 10) + ' g', (n + 1000) + ' g'],
-        `Rule: 1 kg = 1,000 g. Kilogram is larger than gram, so MULTIPLY by 1,000: ${n} ◊ 1,000 = ?`,
-        'mass', { from: 'kg', to: 'g', text: '1 kg = 1,000 g (◊ 1,000)' }
+        `Rule: 1 kg = 1,000 g. Kilogram is larger than gram, so MULTIPLY by 1,000: ${n} ÔøΩ 1,000 = ?`,
+        'mass', { from: 'kg', to: 'g', text: '1 kg = 1,000 g (ÔøΩ 1,000)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 9);
       let q = isSit ? `A cat weighs ${n * 1000} g. How many kilograms is that?` : `Convert ${n * 1000} g to kilograms.`;
       return buildQ(q, n + ' kg', [(n * 10) + ' kg', (n * 100) + ' kg', (n + 1) + ' kg'],
-        `Rule: 1,000 g = 1 kg. Converting grams to kilograms means DIVIDING by 1,000: ${n * 1000} ˜ 1,000 = ?`,
-        'mass', { from: 'g', to: 'kg', text: '1,000 g = 1 kg (˜ 1,000)' }
+        `Rule: 1,000 g = 1 kg. Converting grams to kilograms means DIVIDING by 1,000: ${n * 1000} ÔøΩ 1,000 = ?`,
+        'mass', { from: 'g', to: 'kg', text: '1,000 g = 1 kg (ÔøΩ 1,000)' }
       );
     } else {
       const kg = randInt(1, 5), g = randInt(50, 950);
@@ -2516,15 +2516,15 @@
       const n = randInt(2, 9);
       let q = isSit ? `A coin contains ${n} g of silver. How many milligrams is that?` : `Convert ${n} g to milligrams.`;
       return buildQ(q, (n * 1000) + ' mg', [(n * 100) + ' mg', (n * 10) + ' mg', (n + 1000) + ' mg'],
-        `Rule: 1 g = 1,000 mg. MULTIPLY by 1,000 to convert grams to milligrams: ${n} ◊ 1,000 = ?`,
-        'mass', { from: 'g', to: 'mg', text: '1 g = 1,000 mg (◊ 1,000)' }
+        `Rule: 1 g = 1,000 mg. MULTIPLY by 1,000 to convert grams to milligrams: ${n} ÔøΩ 1,000 = ?`,
+        'mass', { from: 'g', to: 'mg', text: '1 g = 1,000 mg (ÔøΩ 1,000)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 9);
       let q = isSit ? `A vitamin tablet contains ${n * 1000} mg of nutrients. How many grams is that?` : `Convert ${n * 1000} mg to grams.`;
       return buildQ(q, n + ' g', [(n * 10) + ' g', (n * 100) + ' g', (n + 1) + ' g'],
-        `Rule: 1,000 mg = 1 g. DIVIDE by 1,000 to convert milligrams to grams: ${n * 1000} ˜ 1,000 = ?`,
-        'mass', { from: 'mg', to: 'g', text: '1,000 mg = 1 g (˜ 1,000)' }
+        `Rule: 1,000 mg = 1 g. DIVIDE by 1,000 to convert milligrams to grams: ${n * 1000} ÔøΩ 1,000 = ?`,
+        'mass', { from: 'mg', to: 'g', text: '1,000 mg = 1 g (ÔøΩ 1,000)' }
       );
     } else {
       const g = randInt(1, 4), mg = randInt(50, 950);
@@ -2543,15 +2543,15 @@
       const n = randInt(2, 9);
       let q = isSit ? `A water cooler jug holds ${n} L. How many milliliters is that?` : `Convert ${n} L to milliliters.`;
       return buildQ(q, (n * 1000) + ' mL', [(n * 100) + ' mL', (n * 10) + ' mL', (n + 1000) + ' mL'],
-        `Rule: 1 L = 1,000 mL. Liter is bigger than milliliter, so MULTIPLY by 1,000: ${n} ◊ 1,000 = ?`,
-        'capacity', { from: 'L', to: 'mL', text: '1 L = 1,000 mL (◊ 1,000)' }
+        `Rule: 1 L = 1,000 mL. Liter is bigger than milliliter, so MULTIPLY by 1,000: ${n} ÔøΩ 1,000 = ?`,
+        'capacity', { from: 'L', to: 'mL', text: '1 L = 1,000 mL (ÔøΩ 1,000)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 9);
       let q = isSit ? `A carton contains ${n * 1000} mL of orange juice. How many liters is that?` : `Convert ${n * 1000} mL to liters.`;
       return buildQ(q, n + ' L', [(n * 10) + ' L', (n * 100) + ' L', (n + 1) + ' L'],
-        `Rule: 1,000 mL = 1 L. DIVIDE by 1,000 to convert milliliters to liters: ${n * 1000} ˜ 1,000 = ?`,
-        'capacity', { from: 'mL', to: 'L', text: '1,000 mL = 1 L (˜ 1,000)' }
+        `Rule: 1,000 mL = 1 L. DIVIDE by 1,000 to convert milliliters to liters: ${n * 1000} ÔøΩ 1,000 = ?`,
+        'capacity', { from: 'mL', to: 'L', text: '1,000 mL = 1 L (ÔøΩ 1,000)' }
       );
     } else {
       const l = randInt(1, 4), ml = randInt(50, 950);
@@ -2570,21 +2570,21 @@
       const n = randInt(2, 6);
       let q = isSit ? `A short animated clip lasts ${n} minutes. How many seconds is that?` : `Convert ${n} minutes to seconds.`;
       return buildQ(q, (n * 60) + ' s', [(n * 100) + ' s', (n * 10) + ' s', (n * 60 + 60) + ' s'],
-        `Rule: 1 minute = 60 seconds. MULTIPLY by 60: ${n} ◊ 60 = ?`,
-        'time', { from: 'min', to: 's', text: '1 min = 60 s (◊ 60)' }
+        `Rule: 1 minute = 60 seconds. MULTIPLY by 60: ${n} ÔøΩ 60 = ?`,
+        'time', { from: 'min', to: 's', text: '1 min = 60 s (ÔøΩ 60)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 6);
       let q = isSit ? `A sprint runner trained for ${n * 60} seconds. How many minutes is that?` : `Convert ${n * 60} seconds to minutes.`;
       return buildQ(q, n + ' min', [(n * 10) + ' min', (n * 100) + ' min', (n + 1) + ' min'],
-        `Rule: 60 seconds = 1 minute. DIVIDE by 60: ${n * 60} ˜ 60 = ?`,
-        'time', { from: 's', to: 'min', text: '60 s = 1 min (˜ 60)' }
+        `Rule: 60 seconds = 1 minute. DIVIDE by 60: ${n * 60} ÔøΩ 60 = ?`,
+        'time', { from: 's', to: 'min', text: '60 s = 1 min (ÔøΩ 60)' }
       );
     } else {
       const min = randInt(1, 3), s = randInt(10, 50);
       let q = isSit ? `A speech took ${min} min and ${s} s. How many total seconds was that?` : `Convert ${min} min and ${s} s to seconds.`;
       return buildQ(q, (min * 60 + s) + ' s', [(min * 100 + s) + ' s', (min * 10 + s) + ' s', (s) + ' s'],
-        `Multiply ${min} min ◊ 60 = ${min * 60} seconds. Then add ${s} seconds: ${min * 60} + ${s} = ?`,
+        `Multiply ${min} min ÔøΩ 60 = ${min * 60} seconds. Then add ${s} seconds: ${min * 60} + ${s} = ?`,
         'time', { from: 'min', to: 's', text: 'min & s ? s' }
       );
     }
@@ -2597,21 +2597,21 @@
       const n = randInt(2, 5);
       let q = isSit ? `A documentary film is ${n} hours long. How many minutes is the film?` : `Convert ${n} hours to minutes.`;
       return buildQ(q, (n * 60) + ' min', [(n * 100) + ' min', (n * 10) + ' min', (n * 60 + 60) + ' min'],
-        `Rule: 1 hour = 60 minutes. MULTIPLY by 60: ${n} ◊ 60 = ?`,
-        'time', { from: 'hr', to: 'min', text: '1 hr = 60 min (◊ 60)' }
+        `Rule: 1 hour = 60 minutes. MULTIPLY by 60: ${n} ÔøΩ 60 = ?`,
+        'time', { from: 'hr', to: 'min', text: '1 hr = 60 min (ÔøΩ 60)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 5);
       let q = isSit ? `A train journey took ${n * 60} minutes. How many hours did it take?` : `Convert ${n * 60} minutes to hours.`;
       return buildQ(q, n + ' hr', [(n * 10) + ' hr', (n * 100) + ' hr', (n + 1) + ' hr'],
-        `Rule: 60 minutes = 1 hour. DIVIDE by 60: ${n * 60} ˜ 60 = ?`,
-        'time', { from: 'min', to: 'hr', text: '60 min = 1 hr (˜ 60)' }
+        `Rule: 60 minutes = 1 hour. DIVIDE by 60: ${n * 60} ÔøΩ 60 = ?`,
+        'time', { from: 'min', to: 'hr', text: '60 min = 1 hr (ÔøΩ 60)' }
       );
     } else {
       const hr = randInt(1, 3), min = randInt(10, 50);
       let q = isSit ? `A concert lasted ${hr} hr and ${min} min. What was the total time in minutes?` : `Convert ${hr} hr and ${min} min to minutes.`;
       return buildQ(q, (hr * 60 + min) + ' min', [(hr * 100 + min) + ' min', (hr * 10 + min) + ' min', (min) + ' min'],
-        `Calculate ${hr} hr ◊ 60 = ${hr * 60} minutes. Then add ${min} minutes: ${hr * 60} + ${min} = ?`,
+        `Calculate ${hr} hr ÔøΩ 60 = ${hr * 60} minutes. Then add ${min} minutes: ${hr * 60} + ${min} = ?`,
         'time', { from: 'hr', to: 'min', text: 'hr & min ? min' }
       );
     }
@@ -2624,21 +2624,21 @@
       const n = randInt(2, 5);
       let q = isSit ? `A weekend festival lasts ${n} days. How many hours is the festival?` : `Convert ${n} days to hours.`;
       return buildQ(q, (n * 24) + ' hr', [(n * 12) + ' hr', (n * 10) + ' hr', (n * 24 + 24) + ' hr'],
-        `Rule: 1 day = 24 hours. MULTIPLY by 24: ${n} ◊ 24 = ?`,
-        'time', { from: 'days', to: 'hr', text: '1 day = 24 hr (◊ 24)' }
+        `Rule: 1 day = 24 hours. MULTIPLY by 24: ${n} ÔøΩ 24 = ?`,
+        'time', { from: 'days', to: 'hr', text: '1 day = 24 hr (ÔøΩ 24)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 5);
       let q = isSit ? `A science experiment took ${n * 24} hours to incubate. How many days is that?` : `Convert ${n * 24} hours to days.`;
       return buildQ(q, n + ' days', [(n * 12) + ' days', (n * 10) + ' days', (n + 1) + ' days'],
-        `Rule: 24 hours = 1 day. DIVIDE by 24: ${n * 24} ˜ 24 = ?`,
-        'time', { from: 'hr', to: 'days', text: '24 hr = 1 day (˜ 24)' }
+        `Rule: 24 hours = 1 day. DIVIDE by 24: ${n * 24} ÔøΩ 24 = ?`,
+        'time', { from: 'hr', to: 'days', text: '24 hr = 1 day (ÔøΩ 24)' }
       );
     } else {
       const d = randInt(1, 2), hr = randInt(4, 18);
       let q = isSit ? `A ferry voyage took ${d} days and ${hr} hours. What is the total travel time in hours?` : `Convert ${d} days and ${hr} hours to hours.`;
       return buildQ(q, (d * 24 + hr) + ' hr', [(d * 12 + hr) + ' hr', (d * 10 + hr) + ' hr', (hr) + ' hr'],
-        `First convert ${d} days to hours: ${d} ◊ 24 = ${d * 24} hr. Then add ${hr} hr: ${d * 24} + ${hr} = ?`,
+        `First convert ${d} days to hours: ${d} ÔøΩ 24 = ${d * 24} hr. Then add ${hr} hr: ${d * 24} + ${hr} = ?`,
         'time', { from: 'days', to: 'hr', text: 'days & hr ? hr' }
       );
     }
@@ -2651,21 +2651,21 @@
       const n = randInt(2, 6);
       let q = isSit ? `A summer music camp lasts ${n} weeks. How many days does the camp run?` : `Convert ${n} weeks to days.`;
       return buildQ(q, (n * 7) + ' days', [(n * 5) + ' days', (n * 10) + ' days', (n * 7 + 7) + ' days'],
-        `Rule: 1 week = 7 days. MULTIPLY by 7: ${n} ◊ 7 = ?`,
-        'time', { from: 'wks', to: 'days', text: '1 week = 7 days (◊ 7)' }
+        `Rule: 1 week = 7 days. MULTIPLY by 7: ${n} ÔøΩ 7 = ?`,
+        'time', { from: 'wks', to: 'days', text: '1 week = 7 days (ÔøΩ 7)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 6);
       let q = isSit ? `A lunar research cycle completed in ${n * 7} days. How many weeks is that?` : `Convert ${n * 7} days to weeks.`;
       return buildQ(q, n + ' weeks', [(n * 5) + ' weeks', (n * 10) + ' weeks', (n + 1) + ' weeks'],
-        `Rule: 7 days = 1 week. DIVIDE by 7: ${n * 7} ˜ 7 = ?`,
-        'time', { from: 'days', to: 'wks', text: '7 days = 1 week (˜ 7)' }
+        `Rule: 7 days = 1 week. DIVIDE by 7: ${n * 7} ÔøΩ 7 = ?`,
+        'time', { from: 'days', to: 'wks', text: '7 days = 1 week (ÔøΩ 7)' }
       );
     } else {
       const w = randInt(1, 3), d = randInt(1, 6);
       let q = isSit ? `A space shuttle quarantine lasts ${w} weeks and ${d} days. How many total days is that?` : `Convert ${w} weeks and ${d} days to days.`;
       return buildQ(q, (w * 7 + d) + ' days', [(w * 5 + d) + ' days', (w * 10 + d) + ' days', (d) + ' days'],
-        `Convert ${w} weeks to days: ${w} ◊ 7 = ${w * 7} days. Then add the extra ${d} days: ${w * 7} + ${d} = ?`,
+        `Convert ${w} weeks to days: ${w} ÔøΩ 7 = ${w * 7} days. Then add the extra ${d} days: ${w * 7} + ${d} = ?`,
         'time', { from: 'wks', to: 'days', text: 'wks & days ? days' }
       );
     }
@@ -2678,21 +2678,21 @@
       const n = randInt(2, 6);
       let q = isSit ? `A training course runs for ${n} months (using 1 month = 4 weeks). How many weeks is that?` : `Convert ${n} months to weeks (1 month = 4 weeks).`;
       return buildQ(q, (n * 4) + ' weeks', [(n * 5) + ' weeks', (n * 7) + ' weeks', (n * 4 + 4) + ' weeks'],
-        `Rule: 1 month = 4 weeks for these challenges. MULTIPLY by 4: ${n} ◊ 4 = ?`,
-        'time', { from: 'mo', to: 'wks', text: '1 month = 4 weeks (◊ 4)' }
+        `Rule: 1 month = 4 weeks for these challenges. MULTIPLY by 4: ${n} ÔøΩ 4 = ?`,
+        'time', { from: 'mo', to: 'wks', text: '1 month = 4 weeks (ÔøΩ 4)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 6);
       let q = isSit ? `A puppy is ${n * 4} weeks old. How many months is that? (1 month = 4 weeks)` : `Convert ${n * 4} weeks to months (1 month = 4 weeks).`;
       return buildQ(q, n + ' months', [(n * 5) + ' months', (n * 7) + ' months', (n + 1) + ' months'],
-        `Rule: 4 weeks = 1 month. DIVIDE by 4: ${n * 4} ˜ 4 = ?`,
-        'time', { from: 'wks', to: 'mo', text: '4 weeks = 1 month (˜ 4)' }
+        `Rule: 4 weeks = 1 month. DIVIDE by 4: ${n * 4} ÔøΩ 4 = ?`,
+        'time', { from: 'wks', to: 'mo', text: '4 weeks = 1 month (ÔøΩ 4)' }
       );
     } else {
       const mo = randInt(1, 3), w = randInt(1, 3);
       let q = isSit ? `An expedition takes ${mo} months and ${w} weeks. How many total weeks is that? (1 mo = 4 wks)` : `Convert ${mo} months and ${w} weeks to weeks.`;
       return buildQ(q, (mo * 4 + w) + ' weeks', [(mo * 5 + w) + ' weeks', (mo * 7 + w) + ' weeks', (w) + ' weeks'],
-        `Multiply ${mo} months ◊ 4 = ${mo * 4} weeks. Then add ${w} weeks: ${mo * 4} + ${w} = ?`,
+        `Multiply ${mo} months ÔøΩ 4 = ${mo * 4} weeks. Then add ${w} weeks: ${mo * 4} + ${w} = ?`,
         'time', { from: 'mo', to: 'wks', text: 'mo & wks ? wks' }
       );
     }
@@ -2705,21 +2705,21 @@
       const n = randInt(2, 5);
       let q = isSit ? `A young tiger has lived for ${n} years. How many months is that?` : `Convert ${n} years to months.`;
       return buildQ(q, (n * 12) + ' months', [(n * 10) + ' months', (n * 24) + ' months', (n * 12 + 12) + ' months'],
-        `Rule: 1 year = 12 months. MULTIPLY by 12: ${n} ◊ 12 = ?`,
-        'time', { from: 'yr', to: 'mo', text: '1 yr = 12 mo (◊ 12)' }
+        `Rule: 1 year = 12 months. MULTIPLY by 12: ${n} ÔøΩ 12 = ?`,
+        'time', { from: 'yr', to: 'mo', text: '1 yr = 12 mo (ÔøΩ 12)' }
       );
     } else if (diff === 2) {
       const n = randInt(2, 5);
       let q = isSit ? `A spacecraft orbited Mars for ${n * 12} months. How many years is that?` : `Convert ${n * 12} months to years.`;
       return buildQ(q, n + ' years', [(n * 10) + ' years', (n * 24) + ' years', (n + 1) + ' years'],
-        `Rule: 12 months = 1 year. DIVIDE by 12: ${n * 12} ˜ 12 = ?`,
-        'time', { from: 'mo', to: 'yr', text: '12 mo = 1 yr (˜ 12)' }
+        `Rule: 12 months = 1 year. DIVIDE by 12: ${n * 12} ÔøΩ 12 = ?`,
+        'time', { from: 'mo', to: 'yr', text: '12 mo = 1 yr (ÔøΩ 12)' }
       );
     } else {
       const y = randInt(1, 3), mo = randInt(1, 11);
       let q = isSit ? `A history museum artifact was restored over ${y} years and ${mo} months. How many months is that in total?` : `Convert ${y} years and ${mo} months to months.`;
       return buildQ(q, (y * 12 + mo) + ' months', [(y * 10 + mo) + ' months', (y * 24 + mo) + ' months', (mo) + ' months'],
-        `Multiply ${y} years ◊ 12 = ${y * 12} months. Then add ${mo} months: ${y * 12} + ${mo} = ?`,
+        `Multiply ${y} years ÔøΩ 12 = ${y * 12} months. Then add ${mo} months: ${y * 12} + ${mo} = ?`,
         'time', { from: 'yr', to: 'mo', text: 'yr & mo ? mo' }
       );
     }
@@ -2945,29 +2945,29 @@
       realmNameEl.textContent = 'Length Ladder:';
       stepsEl.innerHTML = `
         <span class="ladder-node ${q.ladderInfo.from === 'km' || q.ladderInfo.to === 'km' ? 'active-unit' : ''}">km</span>
-        <span class="ladder-op">◊ 1,000</span>
+        <span class="ladder-op">ÔøΩ 1,000</span>
         <span class="ladder-node ${q.ladderInfo.from === 'm' || q.ladderInfo.to === 'm' ? 'active-unit' : ''}">m</span>
-        <span class="ladder-op">◊ 100</span>
+        <span class="ladder-op">ÔøΩ 100</span>
         <span class="ladder-node ${q.ladderInfo.from === 'cm' || q.ladderInfo.to === 'cm' ? 'active-unit' : ''}">cm</span>
-        <span class="ladder-op">◊ 10</span>
+        <span class="ladder-op">ÔøΩ 10</span>
         <span class="ladder-node">mm</span>
       `;
-      tipEl.textContent = 'km ? m (◊ 1,000) ï m ? cm (◊ 100) ï cm ? mm (◊ 10)';
+      tipEl.textContent = 'km ? m (ÔøΩ 1,000) ÔøΩ m ? cm (ÔøΩ 100) ÔøΩ cm ? mm (ÔøΩ 10)';
     } else if (q.realm === 'mass') {
       realmNameEl.textContent = 'Mass Ladder:';
       stepsEl.innerHTML = `
         <span class="ladder-node ${q.ladderInfo.from === 'kg' || q.ladderInfo.to === 'kg' ? 'active-unit' : ''}">kg (Kilogram)</span>
-        <span class="ladder-op">◊ 1,000</span>
+        <span class="ladder-op">ÔøΩ 1,000</span>
         <span class="ladder-node ${q.ladderInfo.from === 'g' || q.ladderInfo.to === 'g' ? 'active-unit' : ''}">g (Gram)</span>
-        <span class="ladder-op">◊ 1,000</span>
+        <span class="ladder-op">ÔøΩ 1,000</span>
         <span class="ladder-node ${q.ladderInfo.from === 'mg' || q.ladderInfo.to === 'mg' ? 'active-unit' : ''}">mg (Milligram)</span>
       `;
-      tipEl.textContent = 'kg ? g (◊ 1,000) ï g ? mg (◊ 1,000)';
+      tipEl.textContent = 'kg ? g (ÔøΩ 1,000) ÔøΩ g ? mg (ÔøΩ 1,000)';
     } else if (q.realm === 'capacity') {
       realmNameEl.textContent = 'Capacity Ladder:';
       stepsEl.innerHTML = `
         <span class="ladder-node ${q.ladderInfo.from === 'L' || q.ladderInfo.to === 'L' ? 'active-unit' : ''}">L (Liter)</span>
-        <span class="ladder-op">◊ 1,000</span>
+        <span class="ladder-op">ÔøΩ 1,000</span>
         <span class="ladder-node ${q.ladderInfo.from === 'mL' || q.ladderInfo.to === 'mL' ? 'active-unit' : ''}">mL (Milliliter)</span>
       `;
       tipEl.textContent = '1 Liter = 1,000 Milliliters (Multiply by 1,000)';
@@ -2975,20 +2975,20 @@
       realmNameEl.textContent = 'Chrono Timeline:';
       stepsEl.innerHTML = `
         <span class="ladder-node">Year</span>
-        <span class="ladder-op">◊ 12</span>
+        <span class="ladder-op">ÔøΩ 12</span>
         <span class="ladder-node">Month</span>
-        <span class="ladder-op">◊ 4</span>
+        <span class="ladder-op">ÔøΩ 4</span>
         <span class="ladder-node">Week</span>
-        <span class="ladder-op">◊ 7</span>
+        <span class="ladder-op">ÔøΩ 7</span>
         <span class="ladder-node">Day</span>
-        <span class="ladder-op">◊ 24</span>
+        <span class="ladder-op">ÔøΩ 24</span>
         <span class="ladder-node">Hr</span>
-        <span class="ladder-op">◊ 60</span>
+        <span class="ladder-op">ÔøΩ 60</span>
         <span class="ladder-node">Min</span>
-        <span class="ladder-op">◊ 60</span>
+        <span class="ladder-op">ÔøΩ 60</span>
         <span class="ladder-node">Sec</span>
       `;
-      tipEl.textContent = '1 hr = 60 min ï 1 min = 60 s ï 1 day = 24 hr ï 1 week = 7 days';
+      tipEl.textContent = '1 hr = 60 min ÔøΩ 1 min = 60 s ÔøΩ 1 day = 24 hr ÔøΩ 1 week = 7 days';
     }
   }
 
@@ -3146,7 +3146,7 @@
     btn.disabled = true;
     btn.innerHTML = `<span>?</span> <span>Hint Revealed</span>`;
 
-    // On phones the hint appears above the answers ó make sure it's seen
+    // On phones the hint appears above the answers ÔøΩ make sure it's seen
     if (isSmallScreen()) hintBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
