@@ -321,6 +321,7 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
     <a href="{{ route('student.games') }}" class="npill"><i class="bi bi-joystick"></i>All Games</a>
     <a href="{{ route('student.learning-stats') }}" class="npill"><i class="bi bi-graph-up-arrow"></i>Learning Stats</a>
     <a href="{{ route('student.badges') }}" class="npill"><i class="bi bi-trophy"></i>My Badges</a>
+    <a href="{{ route('student.profile.show') }}" class="npill"><i class="bi bi-person-circle"></i>My Profile</a>
   </div>
 
   <div class="row g-4">
