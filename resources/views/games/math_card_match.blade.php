@@ -33,7 +33,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
 
 /* ============================================================
-   FLASH CARD SYSTEM � ALWAYS ON TOP
+   FLASH CARD SYSTEM — ALWAYS ON TOP
    ============================================================ */
 .fc-overlay {
     position: fixed !important;
@@ -438,7 +438,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     box-shadow:inset 0 0 0 2px rgba(196,181,253,.12),0 8px 28px rgba(0,0,0,.65);
 }
 .face-back::before{content:'';position:absolute;inset:5px;border-radius:8px;border:1.5px solid rgba(196,181,253,.2);pointer-events:none;}
-.face-back::after{content:"??";font-size:36px;position:relative;z-index:1;filter:drop-shadow(0 2px 10px rgba(0,0,0,.9));}
+.face-back::after{content:"\1F0CF";font-size:36px;position:relative;z-index:1;filter:drop-shadow(0 2px 10px rgba(0,0,0,.9));}
 .card:not(.matched):not(.locked):hover .face-back{border-color:rgba(196,181,253,.9);box-shadow:0 0 22px rgba(124,58,237,.7),inset 0 0 0 2px rgba(196,181,253,.2);}
 .face-front{transform:rotateY(180deg);flex-direction:column;gap:5px;}
 .card.type-problem .face-front{background:linear-gradient(160deg,#1e1058 0%,#130b3a 100%);border:2px solid rgba(139,92,246,.7);box-shadow:inset 0 1px 0 rgba(167,139,250,.2),0 8px 28px rgba(88,28,135,.6);}
@@ -668,45 +668,45 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                     <p class="fc-desc">Hidden on the board are <b>6 Word Problem cards (❓)</b> and <b>6 Answer cards (💡)</b>. Find all matching pairs!</p>
                     <div class="fc-row-2 fc-box">
                         <div class="fc-item">
-                            <div class="fc-item-ico">??</div>
+                            <div class="fc-item-ico">❓</div>
                             <div class="fc-item-lbl">Word Problem</div>
                             <div class="fc-item-sub">"Maya had 5 space rocks and found 3 more."</div>
                         </div>
                         <div class="fc-item">
-                            <div class="fc-item-ico">??</div>
+                            <div class="fc-item-ico">💡</div>
                             <div class="fc-item-lbl">Matching Answer</div>
                             <div class="fc-item-math" style="color:#2dd4bf;margin-top:6px;">8 Space Rocks</div>
                         </div>
                     </div>
                     <div class="fc-tip">
-                        ?? <b>Concept:</b> One card states the story problem, and the other shows the answer!
+                        💡 <b>Concept:</b> One card states the story problem, and the other shows the answer!
                     </div>
                 </div>
 
                 <!-- CARD 2: How to Flip & Match -->
                 <div id="fcSlide2" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#38bdf8;"><span>??</span> Flip Two Cards at a Time</h3>
+                    <h3 class="fc-title" style="color:#38bdf8;"><span>🔄</span> Flip Two Cards at a Time</h3>
                     <p class="fc-desc">Tap (or click) any card to flip it over, then tap a second card to look for its match!</p>
                     <div class="fc-row-2 fc-box">
                         <div class="fc-item">
-                            <div class="fc-item-ico">?</div>
+                            <div class="fc-item-ico">✅</div>
                             <div class="fc-item-lbl" style="color:#34d399;">Cards Match!</div>
                             <div class="fc-item-sub">They stay revealed, glow green, and you score <b>+10 points</b>!</div>
                         </div>
                         <div class="fc-item">
-                            <div class="fc-item-ico">?</div>
+                            <div class="fc-item-ico">❌</div>
                             <div class="fc-item-lbl" style="color:#f87171;">No Match</div>
                             <div class="fc-item-sub">Both cards flip back. <b>Remember</b> where they are!</div>
                         </div>
                     </div>
                     <div class="fc-tip">
-                        ?? <b>Memory Strategy:</b> Memorize the locations of cards you've already seen!
+                        🧠 <b>Memory Strategy:</b> Memorize the locations of cards you've already seen!
                     </div>
                 </div>
 
                 <!-- CARD 3: Speed & Few Tries = 3 Stars! -->
                 <div id="fcSlide3" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#fbbf24;"><span>?</span> Speed &amp; Fewer Tries = ???</h3>
+                    <h3 class="fc-title" style="color:#fbbf24;"><span>⏱️</span> Speed &amp; Fewer Tries = ⭐⭐⭐</h3>
                     <p class="fc-desc">Complete the board quickly with as few tries as possible to earn top honors:</p>
                     <div class="fc-box" style="text-align:center;border-color:rgba(251,191,36,0.35);">
                         <div style="font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:900;color:#fbbf24;margin-bottom:4px;">Star Goals</div>
@@ -717,28 +717,28 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                         </div>
                     </div>
                     <div class="fc-tip">
-                        ?? <b>Need a breather?</b> Tap <b>Pause</b> or press <b>P</b> anytime!
+                        ⏸️ <b>Need a breather?</b> Tap <b>Pause</b> or press <b>P</b> anytime!
                     </div>
                 </div>
 
                 <!-- CARD 4: Clear Board & Practice Option -->
                 <div id="fcSlide4" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#ec4899;"><span>??</span> Ready to Match!</h3>
+                    <h3 class="fc-title" style="color:#ec4899;"><span>🚀</span> Ready to Match!</h3>
                     <p class="fc-desc">Match all <b>6 pairs</b> to clear the level and advance! You can do a quick practice round or jump into the real game:</p>
                     <div class="fc-row-2 fc-box">
                         <button type="button" class="fc-item" onclick="startPracticeFromTut()" style="cursor:pointer;background:rgba(34,211,238,0.12);border-color:rgba(34,211,238,0.35);color:#fff;">
-                            <div class="fc-item-ico">??</div>
+                            <div class="fc-item-ico">🎮</div>
                             <div class="fc-item-lbl" style="color:#38bdf8;">Practice Round</div>
                             <div class="fc-item-sub">Try 2 pairs first</div>
                         </button>
                         <button type="button" class="fc-item" onclick="closeTut(true)" style="cursor:pointer;background:rgba(124,58,237,0.18);border-color:rgba(167,139,250,0.45);color:#fff;">
-                            <div class="fc-item-ico">??</div>
+                            <div class="fc-item-ico">🎯</div>
                             <div class="fc-item-lbl" style="color:#c4b5fd;">Real Game</div>
                             <div class="fc-item-sub">Start 6 pairs now</div>
                         </button>
                     </div>
                     <div class="fc-tip">
-                        ?? <b>Goal:</b> Find all 6 matches before time runs out!
+                        🎯 <b>Goal:</b> Find all 6 matches before time runs out!
                     </div>
                 </div>
 
@@ -814,7 +814,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                 <div class="hp"><span class="hl">Score</span><span class="hv gold"><span id="scoreVal">0</span></span></div>
                 <div class="hp"><span class="hl">Tries</span><span class="hv"><span id="triesVal">0</span></span></div>
                 <div class="hp">
-                    <span class="hl">Time <span id="starGoalHint" style="font-size:9px;color:rgba(251,191,36,.55);letter-spacing:0;">??? &lt;1:30</span></span>
+                    <span class="hl">Time <span id="starGoalHint" style="font-size:9px;color:rgba(251,191,36,.55);letter-spacing:0;">⭐⭐⭐ &lt;1:30</span></span>
                     <span class="hv rose" id="timeVal" style="font-variant-numeric:tabular-nums;">0:00</span>
                 </div>
                 <div class="eduplay-game-nav">
@@ -836,7 +836,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <!-- PAUSE OVERLAY -->
             <div class="pause-overlay" id="pauseOverlay">
                 <div class="pause-card">
-                    <div style="font-size:3rem;margin-bottom:0.5rem;">?</div>
+                    <div style="font-size:3rem;margin-bottom:0.5rem;">⏸</div>
                     <h2>Game Paused</h2>
                     <p>Take your time! The timer has been paused. Resume when you're ready to find more matches.</p>
                     <button class="mbtn mbtn-p" style="width:100%;padding:12px 28px;font-size:1.05rem;min-height:48px;" onclick="togglePause()">▶️ Resume Game</button>
@@ -850,7 +850,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <div id="endModal">
                 <div class="mbox">
                     <div class="m-left">
-                        <div class="m-ico" id="endIco">??</div>
+                        <div class="m-ico" id="endIco">🎉</div>
                         <div class="m-stars" id="endStars"></div>
                     </div>
                     <div class="m-mid">
@@ -879,8 +879,8 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 ------------------------------------------ -->
 <div id="readyOverlay">
     <div class="ready-box">
-        <div class="ready-ico">??</div>
-        <div class="ready-stars" id="readyStars">???</div>
+        <div class="ready-ico">&#x1F389;</div>
+        <div class="ready-stars" id="readyStars">⭐⭐⭐</div>
         <h2 class="ready-title">Trial Complete!</h2>
         <p class="ready-sub">You matched all pairs in the practice round.<br>You're ready for the real game!</p>
         <div class="ready-score-badge" id="readyScoreBadge">✅ Matched in <span id="readyTriesCount">0</span> tries</div>
@@ -987,9 +987,9 @@ function togglePause(){
             else                  timeValEl.style.color = '#f87171';
             const hint = document.getElementById('starGoalHint');
             if(hint){
-                if(seconds<=90)       hint.textContent = '??? <1:30';
-                else if(seconds<=150) hint.textContent = '?? <2:30';
-                else                  hint.textContent = '? 3:30+';
+                if(seconds<=90)       hint.textContent = '⭐⭐⭐ <1:30';
+                else if(seconds<=150) hint.textContent = '⭐⭐ <2:30';
+                else                  hint.textContent = '⭐ 3:30+';
             }
         },1000);
     }
@@ -1124,10 +1124,10 @@ window.closeTut = function(andStartGame = false){
 /* -------------------------------------------------------
    TRIAL GAME
 ------------------------------------------------------- */
-// Fixed simple trial pairs � no word problems so focus is on mechanics
+// Fixed simple trial pairs — no word problems so focus is on mechanics
 const TRIAL_DATA=[
     {pid:'t0',problem:'5 - 2 = ?',answer:'3'},
-    {pid:'t1',problem:'4 � 2 = ?',answer:'8'},
+    {pid:'t1',problem:'4 × 2 = ?',answer:'8'},
 ];
 
 let trialDeck=[],trialFlipped=[],trialMatched=0,trialTries=0,trialLock=false,trialHintRemoved=false;
@@ -1191,7 +1191,7 @@ function onTrialCardClick(idx,cardEl){
                 first.cd.matched=true;second.cd.matched=true;
                 first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
                 trialMatched++;updateTrialHUD();
-                spawnBurst('??',first.cardEl);spawnBurst('?',second.cardEl);
+                spawnBurst('✨',first.cardEl);spawnBurst('💫',second.cardEl);
                 trialFlipped=[];trialLock=false;
                 if(trialMatched>=TRIAL_PAIRS)setTimeout(()=>showReadyModal(),600);
             },380);
@@ -1219,7 +1219,7 @@ function updateTrialHUD(){
 ------------------------------------------------------- */
 function showReadyModal(){
     const stars=trialTries<=2?3:trialTries<=4?2:1;
-    document.getElementById('readyStars').textContent='?'.repeat(stars);
+    document.getElementById('readyStars').innerHTML='⭐'.repeat(stars);
     document.getElementById('readyTriesCount').textContent=trialTries;
     readyOverlay.classList.add('show');
 }
@@ -1368,7 +1368,7 @@ function onCardClick(idx,cardEl){
                 first.cd.matched=true;second.cd.matched=true;
                 first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
                 matchedCount++;score+=10;updateHUD();
-                spawnBurst('??',first.cardEl);spawnBurst('?',second.cardEl);
+                spawnBurst('✨',first.cardEl);spawnBurst('💫',second.cardEl);
                 flipped=[];lockBoard=false;
                 if(matchedCount>=WIN_PAIRS)setTimeout(()=>endGame(true),500);
             },380);
@@ -1408,9 +1408,9 @@ function startTimer(){
         else                  timeValEl.style.color='#f87171';  // 1-star zone
         // update star goal hint
         const hint=document.getElementById('starGoalHint');
-        if(seconds<=90)       hint.textContent='??? <1:30';
-        else if(seconds<=150) hint.textContent='?? <2:30';
-        else                  hint.textContent='? 3:30+';
+        if(seconds<=90)       hint.textContent='⭐⭐⭐ <1:30';
+        else if(seconds<=150) hint.textContent='⭐⭐ <2:30';
+        else                  hint.textContent='⭐ 3:30+';
     },1000);
 }
 
@@ -1429,17 +1429,17 @@ function endGame(won){
     // > 150s        ? 1 star   ? score 40
     const st = seconds <= 90 ? 3 : seconds <= 150 ? 2 : 1;
     const starScore = st === 3 ? 100 : st === 2 ? 70 : 40;
-    endStars.textContent='?'.repeat(st);
+    endStars.textContent='⭐'.repeat(st);
     if(won){
         if(currentLevel<MAX_LVL){
             currentLevel++;
             saveProgress(currentLevel, starScore);
-            endIco.textContent='??';endTitle.textContent='Level '+(currentLevel-1)+' Complete!';
+            endIco.textContent='🎉';endTitle.textContent='Level '+(currentLevel-1)+' Complete!';
             endMsg.textContent=
-                'Finished in '+fmtTime(seconds)+' with '+tries+' tries � '+
-                (st===3?'?? 3-star time!':st===2?'?? 2-star time!':'? Keep practising to beat 1:30!')+
+                'Finished in '+fmtTime(seconds)+' with '+tries+' tries • '+
+                (st===3?'🌟 3-star time!':st===2?'⭐ 2-star time!':'⭐ Keep practising to beat 1:30!')+
                 ' Advancing to Level '+currentLevel+'.';
-            modalBtn.textContent='? Play Level '+currentLevel;
+            modalBtn.textContent='▶️ Play Level '+currentLevel;
         }else{
             saveProgress(currentLevel, starScore);
             endIco.textContent='🎉';endTitle.textContent='You Won!';

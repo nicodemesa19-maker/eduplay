@@ -149,11 +149,13 @@ body{background:var(--bg);font-family:'Baloo 2',sans-serif;color:var(--text);ove
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:1.3rem;
+  font-size:1.8rem;
   color:#fff;
   flex-shrink:0;
   animation:icon-bob 3s ease-in-out infinite;
   box-shadow:0 4px 12px rgba(0,0,0,.3);
+  line-height:1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }
 
 @keyframes icon-bob{
@@ -308,20 +310,53 @@ body{background:var(--bg);font-family:'Baloo 2',sans-serif;color:var(--text);ove
       $cl      = $sp->current_level ?? 1;
       $hi      = $sp->avg_score ?? 0;
       $pct     = $hi > 0 ? round(($cl / $game->total_levels) * 100) : 0;
-      $isSnake = $game->name === 'math_card_match';
-      $isWars  = $game->name === 'number_wars';
-      $isRocket = $game->name === 'rocket_math';
-      $cls     = $isSnake ? 'snake' : ($isWars ? 'wars' : ($isRocket ? 'rocket' : ''));
-      $topCls  = $isSnake ? 'snake-top' : ($isWars ? 'wars-top' : ($isRocket ? 'rocket-top' : 'wars-top'));
-      $btnCls  = $isSnake ? 'snake-btn' : ($isWars ? 'wars-btn' : ($isRocket ? 'rocket-btn' : 'snake-btn'));
-      $bi      = $isSnake ? 'bi-card-text' : ($isWars ? 'bi-shield-shaded' : ($isRocket ? 'bi-rocket-takeoff' : 'bi-joystick'));
-      $col     = $isSnake ? '#B6FF3D' : ($isWars ? '#FF3DAE' : ($isRocket ? '#00E5FF' : '#00E5FF'));
+      
+      // Map game names to emojis and colors
+      $gameEmojis = [
+        'math_card_match' => '&#x1F0CF;',  // 🃏
+        'number_wars' => '&#x2694;&#xFE0F;',  // ⚔️
+        'rocket_math' => '&#x1F680;',  // 🚀
+        'factor_pond' => '&#x1F438;',  // 🐸
+        'time_quest' => '&#x1F30D;',  // 🌍
+        'mdas_maze' => '&#x1F3B2;',  // 🎲
+        'the_metric_quest' => '&#x1F4CF;',  // 📏
+        'geometry_grid' => '&#x1F4D0;'  // 📐
+      ];
+      
+      $gameColors = [
+        'math_card_match' => '#B6FF3D',
+        'number_wars' => '#FF3DAE',
+        'rocket_math' => '#00E5FF',
+        'factor_pond' => '#5EEAD4',
+        'time_quest' => '#FFD23D',
+        'mdas_maze' => '#B026FF',
+        'the_metric_quest' => '#FF9800',
+        'geometry_grid' => '#4CAF50'
+      ];
+      
+      $gameStyles = [
+        'math_card_match' => 'snake',
+        'number_wars' => 'wars',
+        'rocket_math' => 'rocket',
+        'factor_pond' => 'snake',
+        'time_quest' => 'wars',
+        'mdas_maze' => 'rocket',
+        'the_metric_quest' => 'snake',
+        'geometry_grid' => 'wars'
+      ];
+      
+      $emoji  = $gameEmojis[$game->name] ?? '🎮';
+      $col    = $gameColors[$game->name] ?? '#00E5FF';
+      $cls    = $gameStyles[$game->name] ?? 'snake';
+      $topCls = $cls . '-top';
+      $btnCls = $cls . '-btn';
     @endphp
     <div class="col-md-6">
       <div class="game-card {{ $cls }}">
         <div class="card-top {{ $topCls }}">
           <div class="d-flex align-items-start justify-content-between">
-            <div class="game-icon"><i class="bi {{ $bi }}"></i></div>
+            <div class="game-icon">{!! $emoji !!}</div>
+            {{-- Debug: {{ $game->name }} => {{ $emoji }} --}}
             <div class="lvl-badge">
               <i class="bi bi-layers"></i> Level {{ $cl }}
             </div>
