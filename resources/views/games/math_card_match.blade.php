@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 @section('hide-nav', true)
 
 @section('content')
@@ -33,7 +33,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
 
 /* ============================================================
-   FLASH CARD SYSTEM — ALWAYS ON TOP
+   FLASH CARD SYSTEM � ALWAYS ON TOP
    ============================================================ */
 .fc-overlay {
     position: fixed !important;
@@ -308,9 +308,9 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     box-shadow: 0 0 10px rgba(167, 139, 250, 0.7);
 }
 
-/* ─────────────────────────────────────────────
+/* ---------------------------------------------
    TRIAL SCREEN
-───────────────────────────────────────────── */
+--------------------------------------------- */
 #trialScreen{
     display:none;
     width:100%;max-width:760px;margin:auto;
@@ -341,7 +341,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 /* Hint pulse tooltip */
 .hint-pulse{position:relative;}
 .hint-pulse::after{
-    content:'👆 Flip me!';
+    content:'?? Flip me!';
     position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
     background:linear-gradient(135deg,#7c3aed,#4f46e5);
     color:#fff;font-size:11px;font-weight:800;white-space:nowrap;
@@ -356,7 +356,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     border:6px solid transparent;border-top-color:#4f46e5;
     pointer-events:none;
 }
-@media (hover:none){ .hint-pulse::after{content:'👆 Tap me!';} }
+@media (hover:none){ .hint-pulse::after{content:'?? Tap me!';} }
 @keyframes hintBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
 
 /* Trial progress bar */
@@ -368,9 +368,9 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .trial-skip-link{font-size:11px;color:rgba(167,139,250,.4);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;text-decoration:underline;text-underline-offset:3px;transition:color .15s;padding:10px 12px;}
 .trial-skip-link:hover{color:rgba(167,139,250,.75);}
 
-/* ─────────────────────────────────────────────
+/* ---------------------------------------------
    READY MODAL (overlay on trial screen)
-───────────────────────────────────────────── */
+--------------------------------------------- */
 #readyOverlay{
     display:none;
     position:fixed;inset:0;
@@ -403,9 +403,9 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .ready-btn-practice:hover{background:rgba(34,211,238,.18);color:#a5f3fc;}
 .ready-stars{font-size:28px;letter-spacing:6px;margin-bottom:8px;}
 
-/* ─────────────────────────────────────────────
+/* ---------------------------------------------
    GAME SCREEN
-───────────────────────────────────────────── */
+--------------------------------------------- */
 #gameScreen{display:none;width:100%;min-height:100%;margin:auto;flex-direction:column;align-items:center;justify-content:center;padding:8px 14px;}
 .gi{width:100%;max-width:840px;display:flex;flex-direction:column;gap:7px;}
 #hud{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;background:rgba(10,4,30,.8);border:1.5px solid rgba(139,92,246,.35);border-radius:16px;padding:9px 20px;backdrop-filter:blur(20px);}
@@ -438,7 +438,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     box-shadow:inset 0 0 0 2px rgba(196,181,253,.12),0 8px 28px rgba(0,0,0,.65);
 }
 .face-back::before{content:'';position:absolute;inset:5px;border-radius:8px;border:1.5px solid rgba(196,181,253,.2);pointer-events:none;}
-.face-back::after{content:"🃏";font-size:36px;position:relative;z-index:1;filter:drop-shadow(0 2px 10px rgba(0,0,0,.9));}
+.face-back::after{content:"??";font-size:36px;position:relative;z-index:1;filter:drop-shadow(0 2px 10px rgba(0,0,0,.9));}
 .card:not(.matched):not(.locked):hover .face-back{border-color:rgba(196,181,253,.9);box-shadow:0 0 22px rgba(124,58,237,.7),inset 0 0 0 2px rgba(196,181,253,.2);}
 .face-front{transform:rotateY(180deg);flex-direction:column;gap:5px;}
 .card.type-problem .face-front{background:linear-gradient(160deg,#1e1058 0%,#130b3a 100%);border:2px solid rgba(139,92,246,.7);box-shadow:inset 0 1px 0 rgba(167,139,250,.2),0 8px 28px rgba(88,28,135,.6);}
@@ -449,7 +449,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .card.type-answer .face-front .ftext{font-size:26px;font-weight:900;font-family:'Space Grotesk',sans-serif;background:linear-gradient(160deg,#ffffff 0%,#a5f3fc 50%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 14px rgba(34,211,238,.75)) drop-shadow(0 2px 6px rgba(0,0,0,.9));letter-spacing:.8px;animation:ansGlow 2.5s ease-in-out infinite alternate;}
 @keyframes ansGlow{from{filter:drop-shadow(0 0 10px rgba(34,211,238,.5)) drop-shadow(0 2px 6px rgba(0,0,0,.9))}to{filter:drop-shadow(0 0 20px rgba(34,211,238,.95)) drop-shadow(0 2px 6px rgba(0,0,0,.9))}}
 .card.matched .face-front{background:linear-gradient(160deg,#064e3b 0%,#022c22 100%) !important;border:2px solid rgba(52,211,153,.8) !important;box-shadow:0 0 28px rgba(16,185,129,.6),inset 0 1px 0 rgba(52,211,153,.25) !important;}
-.card.matched .face-front .ftype{content:'✅';}
+.card.matched .face-front .ftype{content:'?';}
 .card.matched .face-front .ftext{color:#a7f3d0 !important;text-shadow:0 0 10px rgba(52,211,153,.6) !important;}
 .card.wrong .face-front{background:linear-gradient(160deg,#4c0519 0%,#2d0311 100%) !important;border:2px solid rgba(248,113,133,.8) !important;animation:shk .4s ease;}
 @keyframes shk{0%,100%{transform:rotateY(180deg) translateX(0)}25%{transform:rotateY(180deg) translateX(-6px)}75%{transform:rotateY(180deg) translateX(6px)}}
@@ -521,7 +521,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     #gameScreen{padding:4px 0;}
     .gi{gap:8px;}
 
-    /* HUD → 4-column grid: level row on top, stats row, nav row */
+    /* HUD ? 4-column grid: level row on top, stats row, nav row */
     #hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 4px;padding:10px 8px;border-radius:14px;}
     #hud .hc{grid-column:1/-1;order:-1;flex-direction:row;justify-content:space-between;gap:8px;}
     #hud .eduplay-game-nav{grid-column:1/-1;}
@@ -616,7 +616,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     .hv{font-size:17px;}
 }
 
-/* Landscape phones: wide board (6 × 2), compact chrome */
+/* Landscape phones: wide board (6 � 2), compact chrome */
 @media (max-height:520px) and (orientation:landscape){
     #gameScreen{padding:2px 0;}
     .gi{max-width:none;gap:6px;}
@@ -644,9 +644,9 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     <div class="neb nb2"></div>
     <div class="neb nb3"></div>
 
-    <!-- ══════════════════════════════════════════
+    <!-- ------------------------------------------
          FLASH CARD INSTRUCTIONS & TUTORIAL DECK
-    ══════════════════════════════════════════ -->
+    ------------------------------------------ -->
     <div id="mcmTutOverlay" class="fc-overlay" role="dialog" aria-modal="true" aria-label="Math Card Match Instructions">
         <div class="fc-deck">
             <!-- Physical Stack Layers -->
@@ -656,7 +656,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <!-- Active Front Flash Card -->
             <div class="fc-card">
                 <div class="fc-top">
-                    <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 4</span>
+                    <span class="fc-badge" id="fcBadge">?? HOW TO PLAY � CARD 1 OF 4</span>
                     <button class="fc-quick-action-btn" id="fcQuickActionBtn" type="button" onclick="closeTut(true)" title="Skip to Play">
                         <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
                     </button>
@@ -664,81 +664,81 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
                 <!-- CARD 1: Word Problem & Answer Pairs -->
                 <div id="fcSlide1" class="fc-slide">
-                    <h3 class="fc-title"><span>🃏</span> Match Problems to Answers</h3>
-                    <p class="fc-desc">Hidden on the board are <b>6 Word Problem cards (📖)</b> and <b>6 Answer cards (💡)</b>. Find all matching pairs!</p>
+                    <h3 class="fc-title"><span>??</span> Match Problems to Answers</h3>
+                    <p class="fc-desc">Hidden on the board are <b>6 Word Problem cards (??)</b> and <b>6 Answer cards (??)</b>. Find all matching pairs!</p>
                     <div class="fc-row-2 fc-box">
                         <div class="fc-item">
-                            <div class="fc-item-ico">📖</div>
+                            <div class="fc-item-ico">??</div>
                             <div class="fc-item-lbl">Word Problem</div>
                             <div class="fc-item-sub">"Maya had 5 space rocks and found 3 more."</div>
                         </div>
                         <div class="fc-item">
-                            <div class="fc-item-ico">💡</div>
+                            <div class="fc-item-ico">??</div>
                             <div class="fc-item-lbl">Matching Answer</div>
                             <div class="fc-item-math" style="color:#2dd4bf;margin-top:6px;">8 Space Rocks</div>
                         </div>
                     </div>
                     <div class="fc-tip">
-                        💡 <b>Concept:</b> One card states the story problem, and the other shows the answer!
+                        ?? <b>Concept:</b> One card states the story problem, and the other shows the answer!
                     </div>
                 </div>
 
                 <!-- CARD 2: How to Flip & Match -->
                 <div id="fcSlide2" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#38bdf8;"><span>👆</span> Flip Two Cards at a Time</h3>
+                    <h3 class="fc-title" style="color:#38bdf8;"><span>??</span> Flip Two Cards at a Time</h3>
                     <p class="fc-desc">Tap (or click) any card to flip it over, then tap a second card to look for its match!</p>
                     <div class="fc-row-2 fc-box">
                         <div class="fc-item">
-                            <div class="fc-item-ico">✅</div>
+                            <div class="fc-item-ico">?</div>
                             <div class="fc-item-lbl" style="color:#34d399;">Cards Match!</div>
                             <div class="fc-item-sub">They stay revealed, glow green, and you score <b>+10 points</b>!</div>
                         </div>
                         <div class="fc-item">
-                            <div class="fc-item-ico">❌</div>
+                            <div class="fc-item-ico">?</div>
                             <div class="fc-item-lbl" style="color:#f87171;">No Match</div>
                             <div class="fc-item-sub">Both cards flip back. <b>Remember</b> where they are!</div>
                         </div>
                     </div>
                     <div class="fc-tip">
-                        💡 <b>Memory Strategy:</b> Memorize the locations of cards you've already seen!
+                        ?? <b>Memory Strategy:</b> Memorize the locations of cards you've already seen!
                     </div>
                 </div>
 
                 <!-- CARD 3: Speed & Few Tries = 3 Stars! -->
                 <div id="fcSlide3" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#fbbf24;"><span>⭐</span> Speed &amp; Fewer Tries = ⭐⭐⭐</h3>
+                    <h3 class="fc-title" style="color:#fbbf24;"><span>?</span> Speed &amp; Fewer Tries = ???</h3>
                     <p class="fc-desc">Complete the board quickly with as few tries as possible to earn top honors:</p>
                     <div class="fc-box" style="text-align:center;border-color:rgba(251,191,36,0.35);">
                         <div style="font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:900;color:#fbbf24;margin-bottom:4px;">Star Goals</div>
                         <div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:6px;font-size:0.8rem;font-weight:700;">
-                            <div>⭐⭐⭐ &lt; 1:30</div>
-                            <div>⭐⭐ &lt; 2:30</div>
-                            <div>⭐ 3:30+</div>
+                            <div>??? &lt; 1:30</div>
+                            <div>?? &lt; 2:30</div>
+                            <div>? 3:30+</div>
                         </div>
                     </div>
                     <div class="fc-tip">
-                        💡 <b>Need a breather?</b> Tap <b>Pause</b> or press <b>P</b> anytime!
+                        ?? <b>Need a breather?</b> Tap <b>Pause</b> or press <b>P</b> anytime!
                     </div>
                 </div>
 
                 <!-- CARD 4: Clear Board & Practice Option -->
                 <div id="fcSlide4" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#ec4899;"><span>🚀</span> Ready to Match!</h3>
+                    <h3 class="fc-title" style="color:#ec4899;"><span>??</span> Ready to Match!</h3>
                     <p class="fc-desc">Match all <b>6 pairs</b> to clear the level and advance! You can do a quick practice round or jump into the real game:</p>
                     <div class="fc-row-2 fc-box">
                         <button type="button" class="fc-item" onclick="startPracticeFromTut()" style="cursor:pointer;background:rgba(34,211,238,0.12);border-color:rgba(34,211,238,0.35);color:#fff;">
-                            <div class="fc-item-ico">🎮</div>
+                            <div class="fc-item-ico">??</div>
                             <div class="fc-item-lbl" style="color:#38bdf8;">Practice Round</div>
                             <div class="fc-item-sub">Try 2 pairs first</div>
                         </button>
                         <button type="button" class="fc-item" onclick="closeTut(true)" style="cursor:pointer;background:rgba(124,58,237,0.18);border-color:rgba(167,139,250,0.45);color:#fff;">
-                            <div class="fc-item-ico">🏆</div>
+                            <div class="fc-item-ico">??</div>
                             <div class="fc-item-lbl" style="color:#c4b5fd;">Real Game</div>
                             <div class="fc-item-sub">Start 6 pairs now</div>
                         </button>
                     </div>
                     <div class="fc-tip">
-                        💡 <b>Goal:</b> Find all 6 matches before time runs out!
+                        ?? <b>Goal:</b> Find all 6 matches before time runs out!
                     </div>
                 </div>
 
@@ -763,13 +763,13 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════
+    <!-- ------------------------------------------
          TRIAL SCREEN
-    ══════════════════════════════════════════ -->
+    ------------------------------------------ -->
     <div id="trialScreen">
-        <div class="trial-badge">🎮 Practice Round</div>
+        <div class="trial-badge">?? Practice Round</div>
         <h2 class="trial-title">Trial Game</h2>
-        <p class="trial-sub">Match the <strong>2 pairs</strong> below to practice.<br>Find a problem card 📖 and its answer 💡!</p>
+        <p class="trial-sub">Match the <strong>2 pairs</strong> below to practice.<br>Find a problem card ?? and its answer ??!</p>
 
         <div class="trial-hud">
             <div class="trial-hud-item">
@@ -797,9 +797,9 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     </div>
 
 
-    <!-- ══════════════════════════════════════════
+    <!-- ------------------------------------------
          GAME SCREEN
-    ══════════════════════════════════════════ -->
+    ------------------------------------------ -->
     <div id="gameScreen">
         <div class="gi">
             <div id="hud">
@@ -808,13 +808,13 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                     <span class="hv teal"><span id="matchedVal">0</span><span style="font-size:13px;color:rgba(255,255,255,.22)">/6</span></span>
                 </div>
                 <div class="hc">
-                    <div class="lvlbadge">🌌 <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
+                    <div class="lvlbadge">?? <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
                     <div style="font-size:9px;color:rgba(255,255,255,.25);font-weight:700;letter-spacing:1px;text-transform:uppercase;">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span></div>
                 </div>
                 <div class="hp"><span class="hl">Score</span><span class="hv gold"><span id="scoreVal">0</span></span></div>
                 <div class="hp"><span class="hl">Tries</span><span class="hv"><span id="triesVal">0</span></span></div>
                 <div class="hp">
-                    <span class="hl">Time <span id="starGoalHint" style="font-size:9px;color:rgba(251,191,36,.55);letter-spacing:0;">⭐⭐⭐ &lt;1:30</span></span>
+                    <span class="hl">Time <span id="starGoalHint" style="font-size:9px;color:rgba(251,191,36,.55);letter-spacing:0;">??? &lt;1:30</span></span>
                     <span class="hv rose" id="timeVal" style="font-variant-numeric:tabular-nums;">0:00</span>
                 </div>
                 <div class="eduplay-game-nav">
@@ -836,13 +836,13 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <!-- PAUSE OVERLAY -->
             <div class="pause-overlay" id="pauseOverlay">
                 <div class="pause-card">
-                    <div style="font-size:3rem;margin-bottom:0.5rem;">⏸</div>
+                    <div style="font-size:3rem;margin-bottom:0.5rem;">?</div>
                     <h2>Game Paused</h2>
                     <p>Take your time! The timer has been paused. Resume when you're ready to find more matches.</p>
-                    <button class="mbtn mbtn-p" style="width:100%;padding:12px 28px;font-size:1.05rem;min-height:48px;" onclick="togglePause()">▶ Resume Game</button>
+                    <button class="mbtn mbtn-p" style="width:100%;padding:12px 28px;font-size:1.05rem;min-height:48px;" onclick="togglePause()">? Resume Game</button>
                     <div class="eduplay-game-nav" style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
                         <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-                        <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+                        <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
                     </div>
                 </div>
             </div>
@@ -850,7 +850,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <div id="endModal">
                 <div class="mbox">
                     <div class="m-left">
-                        <div class="m-ico" id="endIco">🏆</div>
+                        <div class="m-ico" id="endIco">??</div>
                         <div class="m-stars" id="endStars"></div>
                     </div>
                     <div class="m-mid">
@@ -860,7 +860,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                     <div class="mbrow" style="display:flex;align-items:center;gap:10px;">
                         <button class="mbtn mbtn-p" id="modalBtn">Play Again</button>
                         <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-                        <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+                        <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
                     </div>
                 </div>
             </div>
@@ -874,19 +874,19 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
 </div>
 
-<!-- ══════════════════════════════════════════
+<!-- ------------------------------------------
      READY MODAL (outside #gw for z-index)
-══════════════════════════════════════════ -->
+------------------------------------------ -->
 <div id="readyOverlay">
     <div class="ready-box">
-        <div class="ready-ico">🎉</div>
-        <div class="ready-stars" id="readyStars">⭐⭐⭐</div>
+        <div class="ready-ico">??</div>
+        <div class="ready-stars" id="readyStars">???</div>
         <h2 class="ready-title">Trial Complete!</h2>
         <p class="ready-sub">You matched all pairs in the practice round.<br>You're ready for the real game!</p>
-        <div class="ready-score-badge" id="readyScoreBadge">🎯 Matched in <span id="readyTriesCount">0</span> tries</div>
+        <div class="ready-score-badge" id="readyScoreBadge">?? Matched in <span id="readyTriesCount">0</span> tries</div>
         <div class="ready-buttons">
-            <button class="ready-btn-start" id="readyStartBtn">▶ Start Real Game!</button>
-            <button class="ready-btn-practice" id="readyPracticeBtn">🔁 Practice Again</button>
+            <button class="ready-btn-start" id="readyStartBtn">? Start Real Game!</button>
+            <button class="ready-btn-practice" id="readyPracticeBtn">?? Practice Again</button>
         </div>
     </div>
 </div>
@@ -903,9 +903,9 @@ if(!document.querySelector('meta[name="viewport"]')){
     document.head.appendChild(m);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    CONSTANTS & BLADE DATA
-═══════════════════════════════════════════════════════ */
+------------------------------------------------------- */
 const CURR_LVL={{ $progress->current_level }};
 const GAME_ID={{ $game->id }};
 const GRADE={{ auth()->user()->grade_level ?? 4 }};
@@ -915,12 +915,12 @@ const WIN_PAIRS=6;
 const TRIAL_PAIRS=2;
 const TUTORIAL_KEY='mcm_tutorial_done';
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    DOM REFS
-═══════════════════════════════════════════════════════ */
-const tutorialScreen=document.getElementById('tutorialScreen'); // legacy (not in DOM) – guarded below
+------------------------------------------------------- */
+const tutorialScreen=document.getElementById('tutorialScreen'); // legacy (not in DOM) � guarded below
 const trialScreen=document.getElementById('trialScreen');
-const instrScreen=document.getElementById('instrScreen');       // legacy (not in DOM) – guarded below
+const instrScreen=document.getElementById('instrScreen');       // legacy (not in DOM) � guarded below
 const gameScreen=document.getElementById('gameScreen');
 const readyOverlay=document.getElementById('readyOverlay');
 
@@ -955,9 +955,9 @@ const trialPctEl=document.getElementById('trialPct');
 const gwEl=document.getElementById('gw');
 function scrollTop0(){ if(gwEl) gwEl.scrollTop=0; }
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    PAUSE CONTROLLER
-═══════════════════════════════════════════════════════ */
+------------------------------------------------------- */
 function togglePause(){
     if(!gameActive)return;
     isPaused = !isPaused;
@@ -987,9 +987,9 @@ function togglePause(){
             else                  timeValEl.style.color = '#f87171';
             const hint = document.getElementById('starGoalHint');
             if(hint){
-                if(seconds<=90)       hint.textContent = '⭐⭐⭐ <1:30';
-                else if(seconds<=150) hint.textContent = '⭐⭐ <2:30';
-                else                  hint.textContent = '⭐ 3:30+';
+                if(seconds<=90)       hint.textContent = '??? <1:30';
+                else if(seconds<=150) hint.textContent = '?? <2:30';
+                else                  hint.textContent = '? 3:30+';
             }
         },1000);
     }
@@ -1003,9 +1003,9 @@ document.addEventListener('visibilitychange',()=>{
     }
 });
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    FLASHCARD DECK CONTROLLER (Instructions & In-game Tutorial)
-═══════════════════════════════════════════════════════ */
+------------------------------------------------------- */
 let tutOpenedFromGame = false;
 let currentFcCard = 1;
 const TOTAL_FC_CARDS = 4;
@@ -1055,7 +1055,7 @@ window.goFlashCard = function(cardNum){
     if (badge){
         const tags = ['THE BOARD', 'HOW TO MATCH', 'STAR GOALS', 'READY TO PLAY'];
         const prefix = tutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
-        badge.textContent = '🃏 ' + prefix + ' • CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' • ' + tags[currentFcCard - 1];
+        badge.textContent = '?? ' + prefix + ' � CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' � ' + tags[currentFcCard - 1];
     }
 
     const prevBtn = document.getElementById('fcPrevBtn');
@@ -1067,9 +1067,9 @@ window.goFlashCard = function(cardNum){
     if (nextBtn){
         if (currentFcCard === TOTAL_FC_CARDS){
             if (tutOpenedFromGame){
-                nextBtn.innerHTML = '<span>▶ Return to Game</span>';
+                nextBtn.innerHTML = '<span>? Return to Game</span>';
             } else {
-                nextBtn.innerHTML = '<span>🚀 Start Matching!</span>';
+                nextBtn.innerHTML = '<span>?? Start Matching!</span>';
             }
         } else {
             nextBtn.innerHTML = '<span>Next</span> <i class="bi bi-arrow-right"></i>';
@@ -1121,13 +1121,13 @@ window.closeTut = function(andStartGame = false){
     },{passive:true});
 })();
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    TRIAL GAME
-═══════════════════════════════════════════════════════ */
-// Fixed simple trial pairs — no word problems so focus is on mechanics
+------------------------------------------------------- */
+// Fixed simple trial pairs � no word problems so focus is on mechanics
 const TRIAL_DATA=[
-    {pid:'t0',problem:'5 − 2 = ?',answer:'3'},
-    {pid:'t1',problem:'4 × 2 = ?',answer:'8'},
+    {pid:'t0',problem:'5 - 2 = ?',answer:'3'},
+    {pid:'t1',problem:'4 � 2 = ?',answer:'8'},
 ];
 
 let trialDeck=[],trialFlipped=[],trialMatched=0,trialTries=0,trialLock=false,trialHintRemoved=false;
@@ -1161,7 +1161,7 @@ function renderTrialBoard(){
         el.className='card type-'+cd.type;
         if(idx===0&&!trialHintRemoved)el.classList.add('hint-pulse');
         el.dataset.idx=idx;
-        const typeIcon=cd.type==='problem'?'📖':'💡';
+        const typeIcon=cd.type==='problem'?'??':'??';
         el.innerHTML='<div class="card-inner"><div class="face face-back"></div><div class="face face-front"><span class="ftype">'+typeIcon+'</span><span class="ftext">'+cd.label+'</span></div></div>';
         el.addEventListener('click',()=>onTrialCardClick(idx,el));
         trialBoardEl.appendChild(el);
@@ -1191,7 +1191,7 @@ function onTrialCardClick(idx,cardEl){
                 first.cd.matched=true;second.cd.matched=true;
                 first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
                 trialMatched++;updateTrialHUD();
-                spawnBurst('🎉',first.cardEl);spawnBurst('✨',second.cardEl);
+                spawnBurst('??',first.cardEl);spawnBurst('?',second.cardEl);
                 trialFlipped=[];trialLock=false;
                 if(trialMatched>=TRIAL_PAIRS)setTimeout(()=>showReadyModal(),600);
             },380);
@@ -1214,12 +1214,12 @@ function updateTrialHUD(){
     trialPctEl.textContent=pct+'%';
 }
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    READY MODAL
-═══════════════════════════════════════════════════════ */
+------------------------------------------------------- */
 function showReadyModal(){
     const stars=trialTries<=2?3:trialTries<=4?2:1;
-    document.getElementById('readyStars').textContent='⭐'.repeat(stars);
+    document.getElementById('readyStars').textContent='?'.repeat(stars);
     document.getElementById('readyTriesCount').textContent=trialTries;
     readyOverlay.classList.add('show');
 }
@@ -1246,9 +1246,9 @@ window.skipToRealGame=function(){
     initGame();
 };
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    MAIN GAME
-═══════════════════════════════════════════════════════ */
+------------------------------------------------------- */
 let currentLevel=CURR_LVL;
 let highScore={{ $progress->high_score ?? 0 }};
 let deck=[],flipped=[],matchedCount=0,tries=0,score=0,seconds=0,timerInt=null,lockBoard=false,gameActive=false,isPaused=false;
@@ -1344,7 +1344,7 @@ function renderBoard(){
         const el=document.createElement('div');
         el.className='card type-'+cd.type;
         el.dataset.idx=idx;
-        const typeIcon=cd.type==='problem'?'📖':'💡';
+        const typeIcon=cd.type==='problem'?'??':'??';
         el.innerHTML='<div class="card-inner"><div class="face face-back"></div><div class="face face-front"><span class="ftype">'+typeIcon+'</span><span class="ftext">'+cd.label+'</span></div></div>';
         el.addEventListener('click',()=>onCardClick(idx,el));
         boardEl.appendChild(el);
@@ -1368,7 +1368,7 @@ function onCardClick(idx,cardEl){
                 first.cd.matched=true;second.cd.matched=true;
                 first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
                 matchedCount++;score+=10;updateHUD();
-                spawnBurst('🎉',first.cardEl);spawnBurst('✨',second.cardEl);
+                spawnBurst('??',first.cardEl);spawnBurst('?',second.cardEl);
                 flipped=[];lockBoard=false;
                 if(matchedCount>=WIN_PAIRS)setTimeout(()=>endGame(true),500);
             },380);
@@ -1402,15 +1402,15 @@ function startTimer(){
     timerInt=setInterval(()=>{
         seconds++;
         timeValEl.textContent=fmtTime(seconds);
-        // colour urgency: green → amber → red
+        // colour urgency: green ? amber ? red
         if(seconds<=90)      timeValEl.style.color='#34d399';   // 3-star zone
         else if(seconds<=150) timeValEl.style.color='#fbbf24';  // 2-star zone
         else                  timeValEl.style.color='#f87171';  // 1-star zone
         // update star goal hint
         const hint=document.getElementById('starGoalHint');
-        if(seconds<=90)       hint.textContent='⭐⭐⭐ <1:30';
-        else if(seconds<=150) hint.textContent='⭐⭐ <2:30';
-        else                  hint.textContent='⭐ 3:30+';
+        if(seconds<=90)       hint.textContent='??? <1:30';
+        else if(seconds<=150) hint.textContent='?? <2:30';
+        else                  hint.textContent='? 3:30+';
     },1000);
 }
 
@@ -1423,33 +1423,33 @@ function spawnBurst(emoji,refEl){
 
 function endGame(won){
     clearInterval(timerInt);gameActive=false;
-    // ── Time-based star rating ──
-    // ≤ 90s  (1:30) → 3 stars  → score 100
-    // ≤ 150s (2:30) → 2 stars  → score 70
-    // > 150s        → 1 star   → score 40
+    // -- Time-based star rating --
+    // = 90s  (1:30) ? 3 stars  ? score 100
+    // = 150s (2:30) ? 2 stars  ? score 70
+    // > 150s        ? 1 star   ? score 40
     const st = seconds <= 90 ? 3 : seconds <= 150 ? 2 : 1;
     const starScore = st === 3 ? 100 : st === 2 ? 70 : 40;
-    endStars.textContent='⭐'.repeat(st);
+    endStars.textContent='?'.repeat(st);
     if(won){
         if(currentLevel<MAX_LVL){
             currentLevel++;
             saveProgress(currentLevel, starScore);
-            endIco.textContent='🏆';endTitle.textContent='Level '+(currentLevel-1)+' Complete!';
+            endIco.textContent='??';endTitle.textContent='Level '+(currentLevel-1)+' Complete!';
             endMsg.textContent=
-                'Finished in '+fmtTime(seconds)+' with '+tries+' tries — '+
-                (st===3?'🌟 3-star time!':st===2?'⭐⭐ 2-star time!':'⭐ Keep practising to beat 1:30!')+
+                'Finished in '+fmtTime(seconds)+' with '+tries+' tries � '+
+                (st===3?'?? 3-star time!':st===2?'?? 2-star time!':'? Keep practising to beat 1:30!')+
                 ' Advancing to Level '+currentLevel+'.';
-            modalBtn.textContent='▶ Play Level '+currentLevel;
+            modalBtn.textContent='? Play Level '+currentLevel;
         }else{
             saveProgress(currentLevel, starScore);
-            endIco.textContent='🎉';endTitle.textContent='You Won!';
+            endIco.textContent='??';endTitle.textContent='You Won!';
             endMsg.textContent='Champion! All '+MAX_LVL+' levels cleared in '+fmtTime(seconds)+'!';
-            modalBtn.textContent='🔄 Play Again';
+            modalBtn.textContent='?? Play Again';
         }
     }else{
-        endIco.textContent='🃏';endTitle.textContent='Good Try!';
+        endIco.textContent='??';endTitle.textContent='Good Try!';
         endMsg.textContent='You matched '+matchedCount+' / '+WIN_PAIRS+' pairs. Try again!';
-        modalBtn.textContent='🔄 Try Again';
+        modalBtn.textContent='?? Try Again';
     }
     endModal.classList.add('show');
     scrollTop0();
@@ -1479,11 +1479,11 @@ function initGame(){
     updateHUD();renderBoard();startTimer();
 }
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    FULLSCREEN & CONTROL BUTTONS
-═══════════════════════════════════════════════════════ */
+------------------------------------------------------- */
 if(fsBtn){
-    // iPhone Safari doesn't support the Fullscreen API on elements — hide the button there
+    // iPhone Safari doesn't support the Fullscreen API on elements � hide the button there
     const fsSupported = !!(gwEl && (gwEl.requestFullscreen || gwEl.webkitRequestFullscreen));
     if(!fsSupported){ fsBtn.style.display='none'; }
     fsBtn.addEventListener('click',()=>{
@@ -1508,14 +1508,14 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-/* ═══════════════════════════════════════════════════════
+/* -------------------------------------------------------
    ENTRY POINT
-═══════════════════════════════════════════════════════ */
+------------------------------------------------------- */
 (function init(){
     openTut(false);
 })();
 
-/* ═══ TUTORIAL REOPEN ═══ */
+/* --- TUTORIAL REOPEN --- */
 window.reopenTutorial = function(){
     readyOverlay.classList.remove('show');
     openTut(true);

@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 @section('hide-nav', true)
 
 @section('content')
@@ -7,7 +7,7 @@
 html, body { width: 100%; height: 100%; overflow: hidden; background: #08090f; -webkit-text-size-adjust: 100%; }
 button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
-/* ─── Starfield ───────────────────────────────────────────── */
+/* --- Starfield --------------------------------------------- */
 /* #gameWrapper is the scroll container so tall layouts (phones) can scroll.
    Its children use margin:auto to stay centered when there is spare room. */
 #gameWrapper {
@@ -91,13 +91,13 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 .nebula-3 { width:250px; height:200px; background:radial-gradient(#be185d,transparent); bottom:30%; left:5%; animation:drift 15s ease-in-out infinite alternate; }
 @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(30px,20px) scale(1.12)} }
 
-/* All content above starfield — nebulas must stay out of the flex flow */
+/* All content above starfield � nebulas must stay out of the flex flow */
 #gameWrapper > *:not(.nebula) { position: relative; z-index: 1; }
 #gameWrapper > .nebula { position: fixed; z-index: 0; }
 /* The tutorial is a true full-screen overlay (the rule above would otherwise make it relative) */
 #gameWrapper > #tutorialScreen { position: fixed; z-index: 10005; }
 
-/* ─── Game-area container ─────────────────────────────────── */
+/* --- Game-area container ----------------------------------- */
 #gameWrap {
     width: 100%;
     max-width: 1320px;
@@ -109,7 +109,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
     margin: 0 auto;
 }
 
-/* #gameScreen is shown via JS as display:flex — force column + center */
+/* #gameScreen is shown via JS as display:flex � force column + center */
 #gameScreen {
     width: 100%;
     height: 100%;
@@ -121,7 +121,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
     justify-content: center;
 }
 
-/* ─── HUD ─────────────────────────────────────────────────── */
+/* --- HUD --------------------------------------------------- */
 #hud {
     width: 100%;
     display: flex;
@@ -152,13 +152,13 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 }
 .hs-label { font-size: 14px; color: rgba(255,255,255,0.25); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
-/* ─── Progress bar ────────────────────────────────────────── */
+/* --- Progress bar ------------------------------------------ */
 #progressWrap { width: 100%; }
 #progressTrack { width:100%; height:8px; background:rgba(255,255,255,0.07); border-radius:99px; overflow:hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,.4); }
 #progressFill  { height:100%; background:linear-gradient(90deg,#7c3aed,#ef4444,#f97316); border-radius:99px; transition:width .5s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 0 10px rgba(239,68,68,0.5); }
 #progressMeta  { display:flex; justify-content:space-between; font-size:15px; color:rgba(255,255,255,0.28); margin-top:4px; }
 
-/* ─── Arena ───────────────────────────────────────────────── */
+/* --- Arena ------------------------------------------------- */
 #arenaWrap {
     position: relative;
     width: 100%;
@@ -189,7 +189,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
     padding: 28px 32px 32px;
 }
 
-/* ─── Timer ───────────────────────────────────────────────── */
+/* --- Timer ------------------------------------------------- */
 #timerWrap {
     display: flex; align-items: center; gap: 12px;
     margin-bottom: 20px;
@@ -204,7 +204,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 #timerNum { font-size: 22px; font-weight: 800; color: #fff; min-width: 40px; text-align: right; font-variant-numeric: tabular-nums; }
 #timerLabel { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.3); min-width: 44px; }
 
-/* ─── Problem card ────────────────────────────────────────── */
+/* --- Problem card ------------------------------------------ */
 #problemCard {
     background: linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(220,38,38,0.08) 100%);
     border: 1px solid rgba(139,92,246,0.25);
@@ -250,7 +250,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 #problemCard.flashIn { animation: problemFlash .45s cubic-bezier(.34,1.56,.64,1); }
 @keyframes problemFlash { 0%{opacity:0;transform:scale(.95) translateY(8px)} 100%{opacity:1;transform:scale(1) translateY(0)} }
 
-/* ─── Ship grid ───────────────────────────────────────────── */
+/* --- Ship grid --------------------------------------------- */
 #shipGrid {
     flex: 1;
     display: grid;
@@ -286,7 +286,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 }
 /* Exhaust flame at bottom */
 .ship::after {
-    content: '🔥';
+    content: '??';
     position: absolute;
     bottom: -24px;
     font-size: 24px;
@@ -372,13 +372,13 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
     60%    { transform: translateX(8px); }
 }
 
-/* ─── Flash overlay ───────────────────────────────────────── */
+/* --- Flash overlay ----------------------------------------- */
 #flashOverlay {
     position: absolute; inset: 0; pointer-events: none;
     opacity: 0; transition: opacity .12s; border-radius: 24px; z-index: 5;
 }
 
-/* ─── Controls bar ────────────────────────────────────────── */
+/* --- Controls bar ------------------------------------------ */
 #controls {
     width: 100%;
     display: flex; justify-content: space-between; align-items: center;
@@ -401,7 +401,7 @@ button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 .hint-keys { font-size: 15px; color: rgba(255,255,255,0.2); text-align: center; }
 kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:4px; padding:1px 5px; font-family:monospace; font-size:14px; color:rgba(255,255,255,0.5); }
 
-/* ─── Pause overlay ───────────────────────────────────────── */
+/* --- Pause overlay ----------------------------------------- */
 #pauseOverlay {
     display: none; position: absolute; inset: 0;
     background: rgba(5,5,15,0.82); backdrop-filter: blur(10px);
@@ -421,7 +421,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 }
 .resume-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(124,58,237,.6); }
 
-/* ─── Instruction screen ──────────────────────────────────── */
+/* --- Instruction screen ------------------------------------ */
 #instructionScreen {
     width: 100%; max-width: 760px; margin: auto;
     color: #fff;
@@ -558,7 +558,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 }
 .instr-skip-lnk:hover { color: rgba(167,139,250,.85); }
 
-/* ─── End modal ───────────────────────────────────────────── */
+/* --- End modal --------------------------------------------- */
 #endModal {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
@@ -586,7 +586,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 .modal-btn-secondary { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.12); }
 .modal-btn-secondary:hover { background:rgba(255,255,255,0.12); color:#fff; }
 
-/* ─── Tutorial System ─────────────────────────────────────── */
+/* --- Tutorial System --------------------------------------- */
 @keyframes tutFadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tutPopIn{from{transform:scale(0)}to{transform:scale(1)}}
 @keyframes tutFlt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -744,7 +744,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 /* trial ships */
 #nwTrialShipGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
 .trial-ship{position:relative;background:linear-gradient(160deg,rgba(88,28,135,.22),rgba(15,8,40,.7));border:1.5px solid rgba(139,92,246,.3);border-radius:18px;padding:18px 10px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:transform .18s cubic-bezier(.34,1.56,.64,1),border-color .18s,box-shadow .18s;overflow:hidden;}
-.trial-ship::after{content:'🔥';position:absolute;bottom:-20px;font-size:20px;opacity:0;transition:bottom .2s,opacity .2s;}
+.trial-ship::after{content:'??';position:absolute;bottom:-20px;font-size:20px;opacity:0;transition:bottom .2s,opacity .2s;}
 @media (hover:hover){
     .trial-ship:hover{transform:translateY(-5px);border-color:rgba(167,139,250,.7);box-shadow:0 10px 28px rgba(88,28,135,.4);}
     .trial-ship:hover::after{bottom:-4px;opacity:1;}
@@ -805,7 +805,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     }
     #gameWrap { gap: 10px; }
 
-    /* HUD → compact grid: Lives | Level | Score, then nav row */
+    /* HUD ? compact grid: Lives | Level | Score, then nav row */
     #hud {
         display: grid;
         grid-template-columns: 1fr auto 1fr;
@@ -882,7 +882,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     .instr-btn-prev, .instr-btn-next, .start-btn { min-height: 44px; }
     .instr-skip-lnk { padding: 10px 6px; }
 
-    /* Tutorial → full-screen sheet */
+    /* Tutorial ? full-screen sheet */
     #tutorialScreen { padding: 0; align-items: stretch; }
     .nw-tut-card {
         max-width: none; max-height: none; height: 100%; height: 100dvh;
@@ -955,7 +955,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 }
 </style>
 
-{{-- ══ GAME WRAPPER ══ --}}
+{{-- -- GAME WRAPPER -- --}}
 <div id="gameWrapper">
     <div class="nebula nebula-1"></div>
     <div class="nebula nebula-2"></div>
@@ -981,17 +981,17 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         <span class="nw-tut-slide-num" id="nwTutSlideNum">SLIDE 1 OF 5</span>
       </div>
 
-      {{-- ── Slide 0: Welcome ── --}}
+      {{-- -- Slide 0: Welcome -- --}}
       <div class="nw-tut-content" id="nwTutStep0">
         <div class="nw-tut-hero">
-          <div class="nw-tut-hero-icon" style="color:#a78bfa;">🌌</div>
+          <div class="nw-tut-hero-icon" style="color:#a78bfa;">??</div>
           <div>
             <h3>Welcome to Number Wars!</h3>
             <p>Solve space math problems and launch the correct ship to win!</p>
           </div>
         </div>
         <p class="nw-tut-desc">
-          You are a Space Commander on a mission. Each round gives you a <strong style="color:#c4b5fd;">math word problem</strong> and four ships carrying different answers — only one is right. Pick wisely!
+          You are a Space Commander on a mission. Each round gives you a <strong style="color:#c4b5fd;">math word problem</strong> and four ships carrying different answers � only one is right. Pick wisely!
         </p>
         <div class="nw-tut-grid">
           <div class="nw-tut-box">
@@ -1000,7 +1000,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           </div>
           <div class="nw-tut-box">
             <h5 style="color:#38bdf8;"><i class="bi bi-controller"></i> Simple Controls</h5>
-            <p>Tap (or click) any ship <strong style="color:#fff;">or</strong> press <kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">1</kbd>–<kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">4</kbd> on your keyboard.</p>
+            <p>Tap (or click) any ship <strong style="color:#fff;">or</strong> press <kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">1</kbd>�<kbd style="background:rgba(255,255,255,.12);border-radius:4px;padding:1px 5px;font-size:.75rem;">4</kbd> on your keyboard.</p>
           </div>
           <div class="nw-tut-box">
             <h5 style="color:#34d399;"><i class="bi bi-trophy-fill"></i> Goal</h5>
@@ -1013,10 +1013,10 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
       </div>
 
-      {{-- ── Slide 1: Read the Mission ── --}}
+      {{-- -- Slide 1: Read the Mission -- --}}
       <div class="nw-tut-content" id="nwTutStep1" style="display:none;">
         <div class="nw-tut-hero">
-          <div class="nw-tut-hero-icon" style="color:#38bdf8;">📡</div>
+          <div class="nw-tut-hero-icon" style="color:#38bdf8;">??</div>
           <div>
             <h3>Read the Mission Briefing</h3>
             <p>A space-themed math word problem appears every round.</p>
@@ -1026,33 +1026,33 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           Read the problem carefully and <strong style="color:#c4b5fd;">solve it in your head</strong> before looking at the ships. The problem tells you everything you need!
         </p>
         <div class="nw-tut-example">
-          <b>📝 Example Mission:</b><br>
+          <b>?? Example Mission:</b><br>
           "There are <b>3 spaceships</b>, each carrying <b>2 astronauts</b>. How many astronauts in total?"<br><br>
-          Step 1: Read the numbers — 3 ships × 2 astronauts<br>
-          Step 2: Solve it — 3 × 2 = <b>6</b><br>
-          Step 3: Find the ship with <b>6</b> and launch it! 🚀
+          Step 1: Read the numbers � 3 ships � 2 astronauts<br>
+          Step 2: Solve it � 3 � 2 = <b>6</b><br>
+          Step 3: Find the ship with <b>6</b> and launch it! ??
         </div>
         <div class="nw-tut-callout">
           <i class="bi bi-lightbulb-fill" style="flex-shrink:0;"></i>
-          <span><strong>Tip:</strong> Solve the math first, then search for your answer — don't just guess from the ship numbers!</span>
+          <span><strong>Tip:</strong> Solve the math first, then search for your answer � don't just guess from the ship numbers!</span>
         </div>
       </div>
 
-      {{-- ── Slide 2: Pick a Ship ── --}}
+      {{-- -- Slide 2: Pick a Ship -- --}}
       <div class="nw-tut-content" id="nwTutStep2" style="display:none;">
         <div class="nw-tut-hero">
-          <div class="nw-tut-hero-icon" style="color:#34d399;">🚀</div>
+          <div class="nw-tut-hero-icon" style="color:#34d399;">??</div>
           <div>
             <h3>Pick the Correct Ship</h3>
-            <p>Four ships appear below the mission — only one is right.</p>
+            <p>Four ships appear below the mission � only one is right.</p>
           </div>
         </div>
         <p class="nw-tut-desc">Each ship has a number on it. Find the one that matches your answer and tap it (or press its number key).</p>
         <div class="demo-ships" style="margin-bottom:12px;">
-          <div class="demo-ship"><div class="demo-ship-icon">🚀</div><div class="demo-ship-num">4</div><div class="demo-ship-lbl">Key [1]</div></div>
-          <div class="demo-ship correct-ship"><div class="demo-ship-icon">🛸</div><div class="demo-ship-num">6</div><div class="demo-ship-lbl" style="color:#34d399;">✅ Correct!</div></div>
-          <div class="demo-ship"><div class="demo-ship-icon">🛰️</div><div class="demo-ship-num">8</div><div class="demo-ship-lbl">Key [3]</div></div>
-          <div class="demo-ship"><div class="demo-ship-icon">🚀</div><div class="demo-ship-num">5</div><div class="demo-ship-lbl">Key [4]</div></div>
+          <div class="demo-ship"><div class="demo-ship-icon">??</div><div class="demo-ship-num">4</div><div class="demo-ship-lbl">Key [1]</div></div>
+          <div class="demo-ship correct-ship"><div class="demo-ship-icon">??</div><div class="demo-ship-num">6</div><div class="demo-ship-lbl" style="color:#34d399;">? Correct!</div></div>
+          <div class="demo-ship"><div class="demo-ship-icon">???</div><div class="demo-ship-num">8</div><div class="demo-ship-lbl">Key [3]</div></div>
+          <div class="demo-ship"><div class="demo-ship-icon">??</div><div class="demo-ship-num">5</div><div class="demo-ship-lbl">Key [4]</div></div>
         </div>
         <div class="nw-tut-grid">
           <div class="nw-tut-box" style="border-color:rgba(52,211,153,.25);">
@@ -1061,45 +1061,45 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           </div>
           <div class="nw-tut-box" style="border-color:rgba(248,113,113,.25);">
             <h5 style="color:#f87171;"><i class="bi bi-x-circle-fill"></i> Wrong Ship</h5>
-            <p>Shakes <b style="color:#f87171;">red</b> and you lose <b style="color:#fff;">1 life ❤️</b>. The correct ship is revealed.</p>
+            <p>Shakes <b style="color:#f87171;">red</b> and you lose <b style="color:#fff;">1 life ??</b>. The correct ship is revealed.</p>
           </div>
         </div>
       </div>
 
-      {{-- ── Slide 3: Timer ── --}}
+      {{-- -- Slide 3: Timer -- --}}
       <div class="nw-tut-content" id="nwTutStep3" style="display:none;">
         <div class="nw-tut-hero">
-          <div class="nw-tut-hero-icon" style="color:#f59e0b;">⏱️</div>
+          <div class="nw-tut-hero-icon" style="color:#f59e0b;">??</div>
           <div>
             <h3>Beat the 60-Second Timer</h3>
             <p>A progress bar at the top shows how much time is left.</p>
           </div>
         </div>
-        <p class="nw-tut-desc">Solve and answer before the bar runs out. The color changes as time gets low — it's your warning signal!</p>
+        <p class="nw-tut-desc">Solve and answer before the bar runs out. The color changes as time gets low � it's your warning signal!</p>
         <div class="nw-timer-demo">
           <div class="nw-timer-row">
-            <span>🟢 Plenty of time</span>
+            <span>?? Plenty of time</span>
             <div class="nw-timer-bar" style="background:linear-gradient(90deg,#38bdf8,#06b6d4);width:85%;"></div>
           </div>
           <div class="nw-timer-row">
-            <span>🟡 Getting close</span>
+            <span>?? Getting close</span>
             <div class="nw-timer-bar" style="background:linear-gradient(90deg,#f59e0b,#d97706);width:45%;"></div>
           </div>
           <div class="nw-timer-row">
-            <span>🔴 Hurry! (&lt;10s)</span>
+            <span>?? Hurry! (&lt;10s)</span>
             <div class="nw-timer-bar" style="background:linear-gradient(90deg,#ef4444,#dc2626);width:15%;"></div>
           </div>
         </div>
         <div class="nw-tut-callout">
           <i class="bi bi-exclamation-triangle-fill" style="flex-shrink:0;"></i>
-          <span>If the timer reaches <strong>0</strong>, you automatically <strong>lose 1 life</strong> — just like a wrong answer!</span>
+          <span>If the timer reaches <strong>0</strong>, you automatically <strong>lose 1 life</strong> � just like a wrong answer!</span>
         </div>
       </div>
 
-      {{-- ── Slide 4: Lives & Score ── --}}
+      {{-- -- Slide 4: Lives & Score -- --}}
       <div class="nw-tut-content" id="nwTutStep4" style="display:none;">
         <div class="nw-tut-hero">
-          <div class="nw-tut-hero-icon" style="color:#f87171;">❤️</div>
+          <div class="nw-tut-hero-icon" style="color:#f87171;">??</div>
           <div>
             <h3>Lives &amp; Scoring</h3>
             <p>Manage your lives and rack up 10 points to win the level.</p>
@@ -1125,7 +1125,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
         <div class="nw-tut-callout">
           <i class="bi bi-rocket-takeoff-fill" style="flex-shrink:0;"></i>
-          <span>You're ready, Commander! A quick <strong>practice round</strong> is next — launch the correct ship to prove it!</span>
+          <span>You're ready, Commander! A quick <strong>practice round</strong> is next � launch the correct ship to prove it!</span>
         </div>
       </div>
 
@@ -1140,11 +1140,11 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 
       {{-- Actions --}}
       <div class="nw-tut-actions">
-        <button type="button" class="nw-tut-skip" onclick="nwSkipTutorial()">Skip to Game ⏩</button>
+        <button type="button" class="nw-tut-skip" onclick="nwSkipTutorial()">Skip to Game ?</button>
         <div class="nw-tut-btn-group">
-          <button type="button" class="nw-tut-prev" id="nwTutBack" onclick="nwTutNav(-1)" disabled>← Back</button>
-          <button type="button" class="nw-tut-next" id="nwTutNext" onclick="nwTutNav(1)">Continue →</button>
-          <button type="button" class="nw-tut-start" id="nwTutStart" onclick="nwShowTrialScreen()">Start Practice! 🚀</button>
+          <button type="button" class="nw-tut-prev" id="nwTutBack" onclick="nwTutNav(-1)" disabled>? Back</button>
+          <button type="button" class="nw-tut-next" id="nwTutNext" onclick="nwTutNav(1)">Continue ?</button>
+          <button type="button" class="nw-tut-start" id="nwTutStart" onclick="nwShowTrialScreen()">Start Practice! ??</button>
         </div>
       </div>
 
@@ -1154,7 +1154,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 
 {{-- TRIAL SCREEN --}}
 <div id="nwTrialScreen">
-    <div class="trial-badge-nw">🎮 Practice Round</div>
+    <div class="trial-badge-nw">?? Practice Round</div>
     <h2 class="trial-title-nw">Trial Mission</h2>
     <p class="trial-sub-nw">Read the problem below and tap the ship with the correct answer!</p>
     <div class="trial-prob-card">
@@ -1175,10 +1175,10 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
       <span class="instr-slide-counter" id="instrSlideCounter">SLIDE 1 OF 4</span>
     </div>
 
-    {{-- ── Slide 0: Welcome ── --}}
+    {{-- -- Slide 0: Welcome -- --}}
     <div class="instr-slide-body" id="instrSlide0">
       <div class="instr-hero">
-        <div class="instr-hero-icon" style="color:#a78bfa;">🌌</div>
+        <div class="instr-hero-icon" style="color:#a78bfa;">??</div>
         <div>
           <h3>Welcome, Space Commander!</h3>
           <p>A quick briefing before your mission begins.</p>
@@ -1204,10 +1204,10 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
       </div>
     </div>
 
-    {{-- ── Slide 1: Read & Solve ── --}}
+    {{-- -- Slide 1: Read & Solve -- --}}
     <div class="instr-slide-body" id="instrSlide1" style="display:none;">
       <div class="instr-hero">
-        <div class="instr-hero-icon" style="color:#38bdf8;">📡</div>
+        <div class="instr-hero-icon" style="color:#38bdf8;">??</div>
         <div>
           <h3>Read the Mission Briefing</h3>
           <p>Every round starts with a space-themed math word problem.</p>
@@ -1218,37 +1218,37 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
           <h5 style="color:#38bdf8;"><i class="bi bi-chat-quote-fill"></i> Example Mission</h5>
           <p style="font-size:.82rem; line-height:1.55;">
             "There are <strong>3 spaceships</strong>, each carrying <strong>2 astronauts</strong>. How many astronauts in total?"<br><br>
-            ➊ Read the numbers &nbsp;→&nbsp; 3 ships, 2 astronauts each<br>
-            ➋ Solve it &nbsp;→&nbsp; 3 × 2 = <strong style="color:#34d399;">6</strong><br>
-            ➌ Find Ship 6 and launch it! 🚀
+            ? Read the numbers &nbsp;?&nbsp; 3 ships, 2 astronauts each<br>
+            ? Solve it &nbsp;?&nbsp; 3 � 2 = <strong style="color:#34d399;">6</strong><br>
+            ? Find Ship 6 and launch it! ??
           </p>
         </div>
       </div>
       <div class="instr-callout">
         <i class="bi bi-lightbulb-fill" style="flex-shrink:0;margin-top:1px;"></i>
-        <span><strong>Tip:</strong> Solve the math <em>first</em> before looking at the ships — don't guess from the numbers!</span>
+        <span><strong>Tip:</strong> Solve the math <em>first</em> before looking at the ships � don't guess from the numbers!</span>
       </div>
     </div>
 
-    {{-- ── Slide 2: Ships & Timer ── --}}
+    {{-- -- Slide 2: Ships & Timer -- --}}
     <div class="instr-slide-body" id="instrSlide2" style="display:none;">
       <div class="instr-hero">
-        <div class="instr-hero-icon" style="color:#34d399;">🚀</div>
+        <div class="instr-hero-icon" style="color:#34d399;">??</div>
         <div>
           <h3>Pick a Ship &amp; Beat the Clock</h3>
-          <p>Four ships appear — tap yours before time runs out!</p>
+          <p>Four ships appear � tap yours before time runs out!</p>
         </div>
       </div>
       <div class="instr-demo-ships">
-        <div class="instr-demo-ship"><span>🚀</span><div class="num">4</div><div class="lbl">Key [1]</div></div>
-        <div class="instr-demo-ship ok"><span>🛸</span><div class="num">6</div><div class="lbl" style="color:#34d399;">✅ Correct</div></div>
-        <div class="instr-demo-ship"><span>🛰️</span><div class="num">8</div><div class="lbl">Key [3]</div></div>
-        <div class="instr-demo-ship"><span>🚀</span><div class="num">5</div><div class="lbl">Key [4]</div></div>
+        <div class="instr-demo-ship"><span>??</span><div class="num">4</div><div class="lbl">Key [1]</div></div>
+        <div class="instr-demo-ship ok"><span>??</span><div class="num">6</div><div class="lbl" style="color:#34d399;">? Correct</div></div>
+        <div class="instr-demo-ship"><span>???</span><div class="num">8</div><div class="lbl">Key [3]</div></div>
+        <div class="instr-demo-ship"><span>??</span><div class="num">5</div><div class="lbl">Key [4]</div></div>
       </div>
       <div class="instr-timer-demo">
-        <div class="instr-timer-row"><span>🟢 Plenty of time</span><div class="instr-timer-bar" style="background:linear-gradient(90deg,#38bdf8,#06b6d4);width:85%;"></div></div>
-        <div class="instr-timer-row"><span>🟡 Getting close</span><div class="instr-timer-bar" style="background:linear-gradient(90deg,#f59e0b,#d97706);width:45%;"></div></div>
-        <div class="instr-timer-row"><span>🔴 Hurry! (&lt;10s)</span><div class="instr-timer-bar" style="background:linear-gradient(90deg,#ef4444,#dc2626);width:15%;"></div></div>
+        <div class="instr-timer-row"><span>?? Plenty of time</span><div class="instr-timer-bar" style="background:linear-gradient(90deg,#38bdf8,#06b6d4);width:85%;"></div></div>
+        <div class="instr-timer-row"><span>?? Getting close</span><div class="instr-timer-bar" style="background:linear-gradient(90deg,#f59e0b,#d97706);width:45%;"></div></div>
+        <div class="instr-timer-row"><span>?? Hurry! (&lt;10s)</span><div class="instr-timer-bar" style="background:linear-gradient(90deg,#ef4444,#dc2626);width:15%;"></div></div>
       </div>
       <div class="instr-grid" style="margin-top:10px;">
         <div class="instr-box" style="border-color:rgba(52,211,153,.25);">
@@ -1257,15 +1257,15 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
         <div class="instr-box" style="border-color:rgba(248,113,113,.25);">
           <h5 style="color:#f87171;"><i class="bi bi-x-circle-fill"></i> Wrong Ship</h5>
-          <p>Shakes red. You <strong>lose 1 life ❤️</strong>. Answer is revealed.</p>
+          <p>Shakes red. You <strong>lose 1 life ??</strong>. Answer is revealed.</p>
         </div>
       </div>
     </div>
 
-    {{-- ── Slide 3: Controls ── --}}
+    {{-- -- Slide 3: Controls -- --}}
     <div class="instr-slide-body" id="instrSlide3" style="display:none;">
       <div class="instr-hero">
-        <div class="instr-hero-icon" style="color:#fbbf24;">⌨️</div>
+        <div class="instr-hero-icon" style="color:#fbbf24;">??</div>
         <div>
           <h3>Controls &amp; Quick Tips</h3>
           <p>Everything you need to play like a pro.</p>
@@ -1274,7 +1274,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
       <div class="instr-grid">
         <div class="instr-box" style="border-color:rgba(251,191,36,.25);">
           <h5 style="color:#fbbf24;"><i class="bi bi-keyboard-fill"></i> Keyboard &amp; Touch</h5>
-          <p>Tap a ship, or press <kbd>1</kbd>–<kbd>4</kbd> to select one. Press <kbd>P</kbd> or <kbd>Esc</kbd> to pause. Press <kbd>F</kbd> for fullscreen.</p>
+          <p>Tap a ship, or press <kbd>1</kbd>�<kbd>4</kbd> to select one. Press <kbd>P</kbd> or <kbd>Esc</kbd> to pause. Press <kbd>F</kbd> for fullscreen.</p>
         </div>
         <div class="instr-box" style="border-color:rgba(139,92,246,.25);">
           <h5 style="color:#a78bfa;"><i class="bi bi-pause-circle-fill"></i> Pause</h5>
@@ -1286,7 +1286,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         </div>
         <div class="instr-box" style="border-color:rgba(52,211,153,.25);">
           <h5 style="color:#34d399;"><i class="bi bi-star-fill"></i> Pro Tip</h5>
-          <p>Solve the math <em>before</em> reading ship answers — it's faster and avoids confusion!</p>
+          <p>Solve the math <em>before</em> reading ship answers � it's faster and avoids confusion!</p>
         </div>
       </div>
     </div>
@@ -1301,10 +1301,10 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 
     {{-- Actions --}}
     <div class="instr-actions">
-      <button type="button" class="instr-skip-lnk" onclick="startGame()">Skip &amp; Play ⏩</button>
+      <button type="button" class="instr-skip-lnk" onclick="startGame()">Skip &amp; Play ?</button>
       <div class="instr-btn-group">
-        <button type="button" class="instr-btn-prev" id="instrPrevBtn" onclick="instrNav(-1)" disabled>← Back</button>
-        <button type="button" class="instr-btn-next" id="instrNextBtn" onclick="instrNav(1)">Continue →</button>
+        <button type="button" class="instr-btn-prev" id="instrPrevBtn" onclick="instrNav(-1)" disabled>? Back</button>
+        <button type="button" class="instr-btn-next" id="instrNextBtn" onclick="instrNav(1)">Continue ?</button>
         <button type="button" class="start-btn" id="instrStartBtn" onclick="startGame()">
           <i class="bi bi-rocket-takeoff-fill"></i> Launch Mission
         </button>
@@ -1322,11 +1322,11 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     <div id="hud">
         <div class="hud-pill">
             <span class="hud-label">Lives</span>
-            <span class="hud-val red" id="lives">❤️❤️❤️</span>
+            <span class="hud-val red" id="lives">??????</span>
         </div>
         <div class="hud-center">
             <div class="level-badge">
-                <span>🌌</span>
+                <span>??</span>
                 <span id="levelBadge">LVL {{ $progress->current_level }}</span>
             </div>
             <div class="hs-label">Best: <span id="highScore">{{ $progress->high_score }}</span></div>
@@ -1360,7 +1360,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         {{-- Timer --}}
         <div id="timerWrap">
             <span id="timerLabel">Time</span>
-            <span id="timerIcon">⏱️</span>
+            <span id="timerIcon">??</span>
             <div id="timerTrack"><div id="timerFill"></div></div>
             <span id="timerNum">60s</span>
         </div>
@@ -1368,7 +1368,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
         {{-- Problem --}}
         <div id="problemCard">
             <div id="problemEyebrow">Mission Briefing</div>
-            <div id="problemText">Initialising mission…</div>
+            <div id="problemText">Initialising mission�</div>
         </div>
 
         {{-- Ships --}}
@@ -1376,21 +1376,21 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
 
         {{-- Pause overlay --}}
         <div id="pauseOverlay">
-            <div style="font-size:60px;margin-bottom:10px;filter:drop-shadow(0 0 20px rgba(167,139,250,.8));">⏸</div>
+            <div style="font-size:60px;margin-bottom:10px;filter:drop-shadow(0 0 20px rgba(167,139,250,.8));">?</div>
             <h2>Mission Paused</h2>
             <p>Press <kbd style="background:rgba(255,255,255,0.15);border-radius:5px;padding:2px 8px;">P</kbd> or tap Resume to continue</p>
-            <button class="resume-btn" onclick="togglePause()">▶ Resume Mission</button>
+            <button class="resume-btn" onclick="togglePause()">? Resume Mission</button>
             <div class="eduplay-game-nav" style="margin-top:14px;display:flex;gap:10px;justify-content:center;">
                 <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-                <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+                <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
             </div>
         </div>
     </div>
 
     {{-- Controls --}}
     <div id="controls">
-        <div class="hint-keys"><kbd>1-4</kbd> select &nbsp;·&nbsp; <kbd>F</kbd> fullscreen &nbsp;·&nbsp; <kbd>P</kbd> pause</div>
-        <button class="ctrl-btn btn-fs" id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+        <div class="hint-keys"><kbd>1-4</kbd> select &nbsp;�&nbsp; <kbd>F</kbd> fullscreen &nbsp;�&nbsp; <kbd>P</kbd> pause</div>
+        <button class="ctrl-btn btn-fs" id="fsBtn" onclick="toggleFullscreen()">? Fullscreen</button>
     </div>
 
 </div>{{-- end gameWrap --}}
@@ -1410,7 +1410,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
             <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map">
                 <i class="bi bi-map-fill"></i> <span>Game Map</span>
             </a>
-            <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit">
+            <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit">
                 <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
             </a>
         </div>
@@ -1447,7 +1447,7 @@ const NW_TOTAL_STEPS=5;
 const NW_SLIDE_LABELS=['NUMBER WARS BRIEFING','STEP 1 OF 4','STEP 2 OF 4','STEP 3 OF 4','STEP 4 OF 4'];
 const NW_TRIAL_PROBLEM={text:'There are 3 spaceships, each carrying 2 astronauts. How many astronauts in total?',answer:6};
 const NW_TRIAL_CHOICES=[6,4,8,5];
-const NW_SHIP_ICONS=['🚀','🛸','🛰️','🚀'];
+const NW_SHIP_ICONS=['??','??','???','??'];
 let nwTrialAnswering=false;
 
 function nwRenderTutSlide(idx){
@@ -1510,7 +1510,7 @@ function nwSkipTutorial(){
     },{passive:true});
 })();
 
-/* ── Instruction screen slide logic ─────────────────────────────────────── */
+/* -- Instruction screen slide logic --------------------------------------- */
 const INSTR_TOTAL = 4;
 let instrSlide = 0;
 
@@ -1613,12 +1613,12 @@ function nwShowReadyModal(){
     overlay.style.cssText='display:flex;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center;padding:16px;overflow-y:auto;animation:tutFadeUp .3s ease;';
     overlay.innerHTML=`
         <div class="nw-ready-box">
-            <div class="nw-ready-ico">🎉</div>
-            <div class="nw-ready-stars">⭐⭐⭐</div>
+            <div class="nw-ready-ico">??</div>
+            <div class="nw-ready-stars">???</div>
             <h2 class="nw-ready-title">Trial Complete!</h2>
             <p class="nw-ready-sub">You launched the correct ship!<br>Ready for the real mission?</p>
-            <button class="nw-ready-start" onclick="nwStartRealGame()">🚀 Launch Real Mission!</button>
-            <button class="nw-ready-practice" onclick="nwPracticeAgain(this.closest('.nwReadyOverlay'))">🔁 Practice Again</button>
+            <button class="nw-ready-start" onclick="nwStartRealGame()">?? Launch Real Mission!</button>
+            <button class="nw-ready-practice" onclick="nwPracticeAgain(this.closest('.nwReadyOverlay'))">?? Practice Again</button>
         </div>`;
     document.body.appendChild(overlay);
 }
@@ -1643,7 +1643,7 @@ function nwSkipToRealGame(){
 
 function nwShuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-// ── Entry point ──────────────────────────────────────────────────────────────
+// -- Entry point --------------------------------------------------------------
 (function nwInit(){
     if(!localStorage.getItem(NW_TUTORIAL_KEY)){
         document.getElementById('tutorialScreen').style.display='';
@@ -1660,7 +1660,7 @@ const gameId       = {{ $game->id }};
 const gradeLevel   = {{ auth()->user()->grade_level ?? 4 }};
 const WIN_POINTS   = 10;
 const MAX_LEVEL    = {{ $game->total_levels }};
-const HEARTS       = ['❤️❤️❤️','❤️❤️🖤','❤️🖤🖤','🖤🖤🖤'];
+const HEARTS       = ['??????','??????','??????','??????'];
 const QUESTION_TIME = 60; // seconds per problem
 
 let timeLeft = QUESTION_TIME;
@@ -1668,20 +1668,20 @@ let timerInterval = null;
 let currentProblem = null;
 let answering = false;
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// -- Helpers -------------------------------------------------------------------
 function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function pick(arr) { return arr[rand(0, arr.length - 1)]; }
 function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rand(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
 const NAMES = ['Maya','Liam','Ava','Noah','Zoe','Ethan','Luna','Kai','Sofia','Diego','Mia','Owen'];
 
-// ── Word problem generation ──────────────────────────────────────────────────
+// -- Word problem generation --------------------------------------------------
 function generateWordProblem() {
     const g = gradeLevel, r = Math.random(), lvlBoost = Math.floor(currentLevel / 3);
     let op;
-    if      (g <= 4) op = r < 0.60 ? '+' : r < 0.90 ? '-' : '×';
-    else if (g === 5) op = r < 0.25 ? '+' : r < 0.50 ? '-' : r < 0.75 ? '×' : '÷';
-    else              op = r < 0.20 ? '+' : r < 0.40 ? '-' : r < 0.70 ? '×' : '÷';
+    if      (g <= 4) op = r < 0.60 ? '+' : r < 0.90 ? '-' : '�';
+    else if (g === 5) op = r < 0.25 ? '+' : r < 0.50 ? '-' : r < 0.75 ? '�' : '�';
+    else              op = r < 0.20 ? '+' : r < 0.40 ? '-' : r < 0.70 ? '�' : '�';
 
     const name1 = pick(NAMES);
     let name2 = pick(NAMES); while (name2 === name1) name2 = pick(NAMES);
@@ -1710,7 +1710,7 @@ function generateWordProblem() {
             `${name1} packed ${num1} snacks for the mission and ate ${num2} of them. How many snacks are left?`,
             `A fleet had ${num1} spaceships. ${num2} of them returned to base. How many are still out on patrol?`
         ]);
-    } else if (op === '×') {
+    } else if (op === '�') {
         if (g <= 4) { num1 = rand(2, 9); num2 = rand(2, 12 + lvlBoost); }
         else if (g === 5) { num1 = rand(2, 12); num2 = rand(2, 15 + lvlBoost); }
         else { num1 = rand(3, 15 + lvlBoost); num2 = rand(3, 15 + lvlBoost); }
@@ -1752,7 +1752,7 @@ function generateChoices(answer) {
     return choices;
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+// -- Init ----------------------------------------------------------------------
 function startGame() {
     document.getElementById('instructionScreen').style.display = 'none';
     document.getElementById('gameScreen').style.display = 'flex';
@@ -1767,7 +1767,7 @@ function initGame() {
     nextProblem();
 }
 
-// ── HUD ───────────────────────────────────────────────────────────────────────
+// -- HUD -----------------------------------------------------------------------
 function updateHUD() {
     document.getElementById('lives').textContent   = HEARTS[Math.max(0, 3 - lives)];
     document.getElementById('score').textContent   = correctCount;
@@ -1778,7 +1778,7 @@ function updateHUD() {
     document.getElementById('progressPct').textContent   = pct + '%';
 }
 
-// ── Problem flow ──────────────────────────────────────────────────────────────
+// -- Problem flow --------------------------------------------------------------
 function nextProblem() {
     if (!gameRunning) return;
     answering = false;
@@ -1786,7 +1786,7 @@ function nextProblem() {
     const choices = generateChoices(currentProblem.answer);
     renderProblem(choices);
     startTimer();
-    // On phones the page scrolls — bring the new problem back into view
+    // On phones the page scrolls � bring the new problem back into view
     const gw = document.getElementById('gameWrapper');
     if (gw && gw.scrollTop > 0) {
         try { gw.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { gw.scrollTop = 0; }
@@ -1867,7 +1867,7 @@ function updateTimerUI() {
     else fill.style.background = 'linear-gradient(90deg,#2dd4bf,#38bdf8)';
 }
 
-// ── Answering ─────────────────────────────────────────────────────────────────
+// -- Answering -----------------------------------------------------------------
 function selectShip(shipNum, value) {
     if (!gameRunning || isPaused || answering) return;
     answering = true;
@@ -1928,7 +1928,7 @@ function flashOverlay(color) {
     setTimeout(() => { el.style.opacity = '0'; }, 180);
 }
 
-// ── Pause ─────────────────────────────────────────────────────────────────────
+// -- Pause ---------------------------------------------------------------------
 function togglePause() {
     if (!gameRunning) return;
     isPaused = !isPaused;
@@ -1957,7 +1957,7 @@ document.addEventListener('visibilitychange', () => {
 });
 
 
-// ── End ───────────────────────────────────────────────────────────────────────
+// -- End -----------------------------------------------------------------------
 function endGame(won) {
     gameRunning = false;
     clearInterval(timerInterval);
@@ -1972,17 +1972,17 @@ function endGame(won) {
 
     const btn = document.getElementById('modalActionBtn');
     if (won) {
-        document.getElementById('endIcon').textContent    = currentLevel > MAX_LEVEL ? '🎉' : '🏆';
+        document.getElementById('endIcon').textContent    = currentLevel > MAX_LEVEL ? '??' : '??';
         document.getElementById('endTitle').textContent   = currentLevel > MAX_LEVEL ? 'All Levels Complete!' : `Level ${currentLevel - 1} Complete!`;
         document.getElementById('endMessage').textContent = currentLevel > MAX_LEVEL
             ? `Incredible! You finished all ${MAX_LEVEL} levels!`
             : `Outstanding! All missions solved! Advancing to Level ${currentLevel}!`;
-        btn.textContent = currentLevel > MAX_LEVEL ? 'Play Again' : `▶ Start Level ${currentLevel}`;
+        btn.textContent = currentLevel > MAX_LEVEL ? 'Play Again' : `? Start Level ${currentLevel}`;
     } else {
-        document.getElementById('endIcon').textContent    = '💀';
+        document.getElementById('endIcon').textContent    = '??';
         document.getElementById('endTitle').textContent   = 'Game Over';
         document.getElementById('endMessage').textContent = `You solved ${correctCount} / ${WIN_POINTS}. Give it another shot!`;
-        btn.textContent = '🔄 Try Again';
+        btn.textContent = '?? Try Again';
     }
 
     document.getElementById('endModal').classList.add('show');
@@ -2007,7 +2007,7 @@ function saveProgress(levelToSave, won) {
     });
 }
 
-// ── Fullscreen ────────────────────────────────────────────────────────────────
+// -- Fullscreen ----------------------------------------------------------------
 function toggleFullscreen() {
     if (!document.fullscreenElement) {
         const de = document.documentElement;
@@ -2018,7 +2018,7 @@ function toggleFullscreen() {
     }
 }
 
-// iPhone Safari has no Fullscreen API for pages — hide the button (and the bar if it would be empty)
+// iPhone Safari has no Fullscreen API for pages � hide the button (and the bar if it would be empty)
 (function(){
     const de = document.documentElement;
     const supported = !!(de.requestFullscreen || de.webkitRequestFullscreen);
@@ -2053,7 +2053,7 @@ document.addEventListener('fullscreenchange', () => {
     }
 });
 
-// ── Keys ──────────────────────────────────────────────────────────────────────
+// -- Keys ----------------------------------------------------------------------
 document.addEventListener('keydown', e => {
     if (!gameRunning) return;
     if (['1','2','3','4'].includes(e.key) && !isPaused && !answering) {
@@ -2065,7 +2065,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'p' || e.key === 'P' || e.key === 'Escape') togglePause();
 });
 
-// ── Tutorial Reopen ───────────────────────────────────────────────────────────
+// -- Tutorial Reopen -----------------------------------------------------------
 function nwReopenTutorial() {
     // Reset to step 0
     nwRenderTutSlide(0);

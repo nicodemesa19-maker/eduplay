@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 @section('hide-nav', true)
 @section('content')
 
@@ -720,8 +720,8 @@
   .option.correct::after,.option.wrong::after{
     position:absolute;top:10px;right:14px;font-weight:800;font-size:1.4rem;
   }
-  .option.correct::after{content:"✓";color:var(--lime);filter:drop-shadow(0 0 8px rgba(182,255,61,.8))}
-  .option.wrong::after{content:"✗";color:var(--pink);filter:drop-shadow(0 0 8px rgba(255,61,174,.8))}
+  .option.correct::after{content:"?";color:var(--lime);filter:drop-shadow(0 0 8px rgba(182,255,61,.8))}
+  .option.wrong::after{content:"?";color:var(--pink);filter:drop-shadow(0 0 8px rgba(255,61,174,.8))}
 
   .pop-anim{animation:popUp .4s ease-out}
   @keyframes popUp{0%{transform:scale(1)}50%{transform:scale(1.3);color:var(--cyan)}100%{transform:scale(1)}}
@@ -1531,7 +1531,7 @@
 <div class="wrap">
   <header class="tq-head">
     <div class="tq-title">
-      <h1>🌏 Time Zone Quest <span class="sub">Manila vs. the world</span></h1>
+      <h1>?? Time Zone Quest <span class="sub">Manila vs. the world</span></h1>
     </div>
     <div class="tq-head-right">
       <div class="stats" role="group" aria-label="Game stats">
@@ -1541,7 +1541,7 @@
         <div class="stat time-mobile"><span class="label">Time</span><span class="val" id="uiTimeMobile">05:00</span></div>
         <div class="stat score-mobile"><span class="label">Score</span><span class="val" id="uiScoreMobile">0</span></div>
         <div class="stat streak-mobile"><span class="label">Streak</span><span class="val" id="uiStreakMobile">0</span></div>
-        <div class="stat round-mobile"><span class="label">Round</span><span class="val" id="uiRoundMobile">– / 10</span></div>
+        <div class="stat round-mobile"><span class="label">Round</span><span class="val" id="uiRoundMobile">� / 10</span></div>
       </div>
       <div class="eduplay-game-nav">
         <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
@@ -1621,25 +1621,25 @@
         </div>
         <div class="quiz-stat round">
           <span class="quiz-stat-label">Round</span>
-          <span class="quiz-stat-val" id="uiRound">– / 10</span>
+          <span class="quiz-stat-val" id="uiRound">� / 10</span>
         </div>
       </div>
       <div class="quiz-top">
-        <div class="q-label" id="qLabel">Get ready…</div>
+        <div class="q-label" id="qLabel">Get ready�</div>
         <div class="pips" id="pips" aria-hidden="true"></div>
         <button type="button" class="hint-btn-quiz" id="hintBtn" onclick="useHint()" title="Use 20 coins to eliminate 2 wrong answers">
           <i class="bi bi-lightbulb-fill"></i>
           <span>Hint</span>
-          <span class="hint-cost">(20🪙)</span>
+          <span class="hint-cost">(20??)</span>
         </button>
       </div>
       <div class="quiz-mid">
-        <div id="qText">Loading…</div>
+        <div id="qText">Loading�</div>
         <div id="options" role="group" aria-label="Answer choices"></div>
         <div id="feedback" role="status" aria-live="polite"></div>
         <button id="next" class="btn" type="button">Next round</button>
       </div>
-      <p class="hint">Press 1–4 to answer, Enter for next round.</p>
+      <p class="hint">Press 1�4 to answer, Enter for next round.</p>
     </aside>
   </main>
 </div>
@@ -1647,16 +1647,16 @@
 <!-- Pause overlay -->
 <div class="pause-overlay" id="pauseOverlay">
   <div class="pause-card">
-    <div style="font-size:3rem;margin-bottom:0.5rem;">⏸</div>
+    <div style="font-size:3rem;margin-bottom:0.5rem;">?</div>
     <h2>Quest Paused</h2>
-    <p>The clock has stopped. Take a breather and resume when you’re ready to continue your time zone adventure!</p>
-    <button class="btn" style="width:100%;margin-bottom:10px;" onclick="togglePause()">▶ Resume Quest</button>
+    <p>The clock has stopped. Take a breather and resume when you�re ready to continue your time zone adventure!</p>
+    <button class="btn" style="width:100%;margin-bottom:10px;" onclick="togglePause()">? Resume Quest</button>
     <button class="btn ghost" style="width:100%;min-height:46px;font-size:0.92rem;" onclick="openTut(true)">
-      <i class="bi bi-mortarboard-fill" style="margin-right:6px;"></i> 📚 How to Play / Tutorial
+      <i class="bi bi-mortarboard-fill" style="margin-right:6px;"></i> ?? How to Play / Tutorial
     </button>
     <div class="eduplay-game-nav" style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
       <a href="{{ route('student.map', 'time_quest') }}" class="eduplay-nav-btn eduplay-btn-map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+      <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
     </div>
   </div>
 </div>
@@ -1665,37 +1665,37 @@
 <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-label="Time Zone Quest Instructions">
   <div class="card tq-instr-card">
     <div style="margin-bottom:4px;">
-      <span class="tq-badge"><i class="bi bi-compass"></i> Grade 5 Math • Global Time Zones</span>
+      <span class="tq-badge"><i class="bi bi-compass"></i> Grade 5 Math � Global Time Zones</span>
     </div>
     <h2 class="tq-instr-title">Time Zone Quest</h2>
     <p class="tq-instr-sub">
-      Navigate international flight paths from 🇵🇭 <b>Manila (UTC+8)</b>! Calculate world times across 40+ international cities using standard UTC offsets.
+      Navigate international flight paths from ???? <b>Manila (UTC+8)</b>! Calculate world times across 40+ international cities using standard UTC offsets.
     </p>
 
     <div class="tq-features-grid">
       <div class="tq-feat-card blue">
         <div class="tq-feat-head">
-          <div class="tq-feat-icon">🧭</div>
+          <div class="tq-feat-icon">??</div>
           <div class="tq-feat-title">Read the Clocks</div>
         </div>
         <p class="tq-feat-desc">
-          Compare Manila’s reference clock with the target city and its UTC offset to determine the exact destination time.
+          Compare Manila�s reference clock with the target city and its UTC offset to determine the exact destination time.
         </p>
       </div>
 
       <div class="tq-feat-card gold">
         <div class="tq-feat-head">
-          <div class="tq-feat-icon">🌅</div>
-          <div class="tq-feat-title">East (+) vs West (−)</div>
+          <div class="tq-feat-icon">??</div>
+          <div class="tq-feat-title">East (+) vs West (-)</div>
         </div>
         <p class="tq-feat-desc">
-          Cities <b>East</b> greet sunrise earlier ➔ <b>ADD (+) hours</b>. Cities <b>West</b> see sunset later ➔ <b>SUBTRACT (−) hours</b>.
+          Cities <b>East</b> greet sunrise earlier ? <b>ADD (+) hours</b>. Cities <b>West</b> see sunset later ? <b>SUBTRACT (-) hours</b>.
         </p>
       </div>
 
       <div class="tq-feat-card green">
         <div class="tq-feat-head">
-          <div class="tq-feat-icon">🏆</div>
+          <div class="tq-feat-icon">??</div>
           <div class="tq-feat-title">Goal &amp; Level Up</div>
         </div>
         <p class="tq-feat-desc">
@@ -1706,10 +1706,10 @@
 
     <div class="tq-instr-footer">
       <div class="tq-stats-pills">
-        <div class="tq-stat-pill">⏱️ <b>5:00</b> Timer</div>
-        <div class="tq-stat-pill">🎯 <b>10</b> Rounds</div>
-        <div class="tq-stat-pill">🌍 <b>40+</b> Cities</div>
-        <div class="tq-stat-pill">⭐ Level <b><span id="instrLevel">{{ $progress->current_level ?? 1 }}</span></b></div>
+        <div class="tq-stat-pill">?? <b>5:00</b> Timer</div>
+        <div class="tq-stat-pill">?? <b>10</b> Rounds</div>
+        <div class="tq-stat-pill">?? <b>40+</b> Cities</div>
+        <div class="tq-stat-pill">? Level <b><span id="instrLevel">{{ $progress->current_level ?? 1 }}</span></b></div>
       </div>
 
       <div class="tq-actions-row">
@@ -1717,7 +1717,7 @@
           <i class="bi bi-mortarboard-fill" style="margin-right:8px;"></i> How to Play &amp; Tutorial
         </button>
         <button id="startBtn" class="btn go" type="button" style="min-height:50px;font-size:1.05rem;padding:0 30px;">
-          🚀 Start Mission
+          ?? Start Mission
         </button>
       </div>
     </div>
@@ -1740,7 +1740,7 @@
         <span class="tq-num">2</span> <span>Going East (+)</span>
       </button>
       <button class="tq-step-tab" type="button" onclick="nextTut(3)">
-        <span class="tq-num">3</span> <span>Going West (−)</span>
+        <span class="tq-num">3</span> <span>Going West (-)</span>
       </button>
       <button class="tq-step-tab" type="button" onclick="nextTut(4)">
         <span class="tq-num">4</span> <span>Crossing Midnight</span>
@@ -1754,31 +1754,31 @@
     <div id="tutStep1" class="tq-slide-body">
       <h2 class="tq-tut-slide-title" style="color:var(--cyan);">The Globe &amp; UTC Anchor</h2>
       <p class="tq-tut-slide-text">
-        The Earth rotates 360° every 24 hours. Global time zones are measured against <b>UTC (Coordinated Universal Time)</b> at 0° longitude in Greenwich, UK.
+        The Earth rotates 360� every 24 hours. Global time zones are measured against <b>UTC (Coordinated Universal Time)</b> at 0� longitude in Greenwich, UK.
       </p>
 
       <div class="tq-flow-card">
         <div class="tq-flow-step">
-          <span class="tq-flow-flag">🇬🇧</span>
+          <span class="tq-flow-flag">????</span>
           <span class="tq-flow-city">UTC Anchor</span>
           <span class="tq-flow-offset">UTC 0:00</span>
         </div>
-        <div class="tq-flow-arrow">➔ +8 Hours Ahead ➔</div>
+        <div class="tq-flow-arrow">? +8 Hours Ahead ?</div>
         <div class="tq-flow-step highlight">
-          <span class="tq-flow-flag">🇵🇭</span>
+          <span class="tq-flow-flag">????</span>
           <span class="tq-flow-city">Home Base: Manila</span>
           <span class="tq-flow-offset" style="color:var(--gold);">UTC +8:00</span>
         </div>
       </div>
 
       <div class="tq-takeaway-note">
-        💡 In Time Quest, Manila (UTC+8) is your anchor — every calculation starts from here!
+        ?? In Time Quest, Manila (UTC+8) is your anchor � every calculation starts from here!
       </div>
 
       <div class="tq-tut-footer">
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut()">Skip Tutorial</button>
         <div class="btn-row">
-          <button class="btn" type="button" onclick="nextTut(2)">Next: Going East →</button>
+          <button class="btn" type="button" onclick="nextTut(2)">Next: Going East ?</button>
         </div>
       </div>
     </div>
@@ -1792,53 +1792,53 @@
 
       <div class="tq-compare-hero east">
         <div class="tq-ch-city">
-          <div class="tq-ch-flag">🇵🇭</div>
+          <div class="tq-ch-flag">????</div>
           <div class="tq-ch-name">Manila (UTC+8)</div>
           <div class="tq-ch-time">2:00 PM</div>
         </div>
         <div class="tq-ch-mid">
           <span class="tq-ch-badge east">+1 Hour Ahead</span>
-          <span class="tq-ch-math">9 − 8 = +1h</span>
+          <span class="tq-ch-math">9 - 8 = +1h</span>
         </div>
         <div class="tq-ch-city">
-          <div class="tq-ch-flag">🇯🇵</div>
+          <div class="tq-ch-flag">????</div>
           <div class="tq-ch-name">Tokyo (UTC+9)</div>
           <div class="tq-ch-time gold">3:00 PM</div>
         </div>
       </div>
 
       <div class="tq-takeaway-note">
-        💡 When it's 2:00 PM in Manila, simply add 1 hour: it is <b>3:00 PM</b> in Tokyo!
+        ?? When it's 2:00 PM in Manila, simply add 1 hour: it is <b>3:00 PM</b> in Tokyo!
       </div>
 
       <div class="tq-tut-footer">
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut()">Skip Tutorial</button>
         <div class="btn-row">
-          <button class="btn ghost back" type="button" onclick="nextTut(1)">← Back</button>
-          <button class="btn" type="button" onclick="nextTut(3)">Next: Going West →</button>
+          <button class="btn ghost back" type="button" onclick="nextTut(1)">? Back</button>
+          <button class="btn" type="button" onclick="nextTut(3)">Next: Going West ?</button>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 3 -->
     <div id="tutStep3" class="tq-slide-body hidden">
-      <h2 class="tq-tut-slide-title" style="color:var(--rose-soft);">Going West = SUBTRACT Hours (−)</h2>
+      <h2 class="tq-tut-slide-title" style="color:var(--rose-soft);">Going West = SUBTRACT Hours (-)</h2>
       <p class="tq-tut-slide-text">
         Cities west of Manila experience sunrise and sunset later. They are <b style="color:var(--rose-soft);">behind</b> us in time!
       </p>
 
       <div class="tq-compare-hero west">
         <div class="tq-ch-city">
-          <div class="tq-ch-flag">🇵🇭</div>
+          <div class="tq-ch-flag">????</div>
           <div class="tq-ch-name">Manila (UTC+8)</div>
           <div class="tq-ch-time">8:00 PM</div>
         </div>
         <div class="tq-ch-mid">
-          <span class="tq-ch-badge west">−8 Hours Behind</span>
-          <span class="tq-ch-math">0 − 8 = −8h</span>
+          <span class="tq-ch-badge west">-8 Hours Behind</span>
+          <span class="tq-ch-math">0 - 8 = -8h</span>
         </div>
         <div class="tq-ch-city">
-          <div class="tq-ch-flag">🇬🇧</div>
+          <div class="tq-ch-flag">????</div>
           <div class="tq-ch-name">London (UTC+0)</div>
           <div class="tq-ch-time rose">12:00 PM</div>
           <div class="tq-ch-day" style="color:var(--rose-soft);">Noon</div>
@@ -1846,14 +1846,14 @@
       </div>
 
       <div class="tq-takeaway-note">
-        💡 When it's 8:00 PM in Manila, subtract 8 hours: it is <b>12:00 PM (noon)</b> in London!
+        ?? When it's 8:00 PM in Manila, subtract 8 hours: it is <b>12:00 PM (noon)</b> in London!
       </div>
 
       <div class="tq-tut-footer">
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut()">Skip Tutorial</button>
         <div class="btn-row">
-          <button class="btn ghost back" type="button" onclick="nextTut(2)">← Back</button>
-          <button class="btn" type="button" onclick="nextTut(4)">Next: Crossing Midnight →</button>
+          <button class="btn ghost back" type="button" onclick="nextTut(2)">? Back</button>
+          <button class="btn" type="button" onclick="nextTut(4)">Next: Crossing Midnight ?</button>
         </div>
       </div>
     </div>
@@ -1867,32 +1867,32 @@
 
       <div class="tq-compare-hero night">
         <div class="tq-ch-city">
-          <div class="tq-ch-flag">🇵🇭</div>
+          <div class="tq-ch-flag">????</div>
           <div class="tq-ch-name">Manila</div>
           <div class="tq-ch-time">10:00 AM</div>
           <div class="tq-ch-day" style="color:var(--gold);">Tuesday</div>
         </div>
         <div class="tq-ch-mid">
-          <span class="tq-ch-badge night">−13 Hours</span>
-          <span class="tq-ch-math">−5 − (+8) = −13h</span>
+          <span class="tq-ch-badge night">-13 Hours</span>
+          <span class="tq-ch-math">-5 - (+8) = -13h</span>
         </div>
         <div class="tq-ch-city">
-          <div class="tq-ch-flag">🇺🇸</div>
-          <div class="tq-ch-name">New York (UTC−5)</div>
+          <div class="tq-ch-flag">????</div>
+          <div class="tq-ch-name">New York (UTC-5)</div>
           <div class="tq-ch-time mint">9:00 PM</div>
           <div class="tq-ch-day alert">Monday (Yesterday!)</div>
         </div>
       </div>
 
       <div class="tq-takeaway-note">
-        ⚠️ Pro Tip: Always double-check the weekday shown on the 4 answer choices!
+        ?? Pro Tip: Always double-check the weekday shown on the 4 answer choices!
       </div>
 
       <div class="tq-tut-footer">
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut()">Skip Tutorial</button>
         <div class="btn-row">
-          <button class="btn ghost back" type="button" onclick="nextTut(3)">← Back</button>
-          <button class="btn" type="button" onclick="nextTut(5)">Next: Half-Hours &amp; Tips →</button>
+          <button class="btn ghost back" type="button" onclick="nextTut(3)">? Back</button>
+          <button class="btn" type="button" onclick="nextTut(5)">Next: Half-Hours &amp; Tips ?</button>
         </div>
       </div>
     </div>
@@ -1906,31 +1906,31 @@
 
       <div class="tq-tips-grid">
         <div class="tq-tip-box">
-          <div class="tq-tip-ico">⌨️</div>
-          <div class="tq-tip-tit">Keyboard 1–4</div>
+          <div class="tq-tip-ico">??</div>
+          <div class="tq-tip-tit">Keyboard 1�4</div>
           <p class="tq-tip-txt">Press number keys to pick choices instantly without moving your cursor.</p>
         </div>
         <div class="tq-tip-box">
-          <div class="tq-tip-ico">⏩</div>
+          <div class="tq-tip-ico">?</div>
           <div class="tq-tip-tit">Enter or Space</div>
           <p class="tq-tip-txt">Quickly advance to the next round after reviewing your calculation.</p>
         </div>
         <div class="tq-tip-box">
-          <div class="tq-tip-ico">🔥</div>
+          <div class="tq-tip-ico">??</div>
           <div class="tq-tip-tit">Streaks Bonus</div>
           <p class="tq-tip-txt">Consecutive correct answers earn <b>+25 bonus points</b> each time!</p>
         </div>
       </div>
 
       <div class="tq-takeaway-note" style="border-color:rgba(45,220,130,0.35);background:rgba(45,220,130,0.08);">
-        🎯 Target: Score <b>8 out of 10</b> correct answers to unlock the next level!
+        ?? Target: Score <b>8 out of 10</b> correct answers to unlock the next level!
       </div>
 
       <div class="tq-tut-footer">
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut(false)">Close Tutorial</button>
         <div class="btn-row">
-          <button class="btn ghost back" type="button" onclick="nextTut(4)">← Back</button>
-          <button class="btn go" id="tutStartMissionBtn" type="button" onclick="closeTut(true)">🚀 Start Mission!</button>
+          <button class="btn ghost back" type="button" onclick="nextTut(4)">? Back</button>
+          <button class="btn go" id="tutStartMissionBtn" type="button" onclick="closeTut(true)">?? Start Mission!</button>
         </div>
       </div>
     </div>
@@ -1978,54 +1978,54 @@ function toggleMobileMenu() {
    CITY DATA
    ============================================================ */
 const CITIES = [
-  {name:'Manila',       flag:'🇵🇭', tz:'Asia/Manila',                    lon:120.98, lat:14.60, ref:true},
-  {name:'Tokyo',        flag:'🇯🇵', tz:'Asia/Tokyo',                     lon:139.69, lat:35.69, tier:1},
-  {name:'Seoul',        flag:'🇰🇷', tz:'Asia/Seoul',                     lon:126.98, lat:37.57, tier:1},
-  {name:'Beijing',      flag:'🇨🇳', tz:'Asia/Shanghai',                  lon:116.41, lat:39.90, tier:1},
-  {name:'Hong Kong',    flag:'🇭🇰', tz:'Asia/Hong_Kong',                 lon:114.17, lat:22.32, tier:1},
-  {name:'Singapore',    flag:'🇸🇬', tz:'Asia/Singapore',                 lon:103.82, lat:1.35,  tier:1},
-  {name:'Bangkok',      flag:'🇹🇭', tz:'Asia/Bangkok',                   lon:100.50, lat:13.76, tier:1},
-  {name:'Jakarta',      flag:'🇮🇩', tz:'Asia/Jakarta',                   lon:106.85, lat:-6.21, tier:1},
-  {name:'Sydney',       flag:'🇦🇺', tz:'Australia/Sydney',               lon:151.21, lat:-33.87,tier:1},
-  {name:'Perth',        flag:'🇦🇺', tz:'Australia/Perth',                lon:115.86, lat:-31.95,tier:1},
-  {name:'Auckland',     flag:'🇳🇿', tz:'Pacific/Auckland',               lon:174.76, lat:-36.85,tier:1},
+  {name:'Manila',       flag:'????', tz:'Asia/Manila',                    lon:120.98, lat:14.60, ref:true},
+  {name:'Tokyo',        flag:'????', tz:'Asia/Tokyo',                     lon:139.69, lat:35.69, tier:1},
+  {name:'Seoul',        flag:'????', tz:'Asia/Seoul',                     lon:126.98, lat:37.57, tier:1},
+  {name:'Beijing',      flag:'????', tz:'Asia/Shanghai',                  lon:116.41, lat:39.90, tier:1},
+  {name:'Hong Kong',    flag:'????', tz:'Asia/Hong_Kong',                 lon:114.17, lat:22.32, tier:1},
+  {name:'Singapore',    flag:'????', tz:'Asia/Singapore',                 lon:103.82, lat:1.35,  tier:1},
+  {name:'Bangkok',      flag:'????', tz:'Asia/Bangkok',                   lon:100.50, lat:13.76, tier:1},
+  {name:'Jakarta',      flag:'????', tz:'Asia/Jakarta',                   lon:106.85, lat:-6.21, tier:1},
+  {name:'Sydney',       flag:'????', tz:'Australia/Sydney',               lon:151.21, lat:-33.87,tier:1},
+  {name:'Perth',        flag:'????', tz:'Australia/Perth',                lon:115.86, lat:-31.95,tier:1},
+  {name:'Auckland',     flag:'????', tz:'Pacific/Auckland',               lon:174.76, lat:-36.85,tier:1},
 
-  {name:'Dhaka',        flag:'🇧🇩', tz:'Asia/Dhaka',                     lon:90.41,  lat:23.81, tier:2},
-  {name:'Dubai',        flag:'🇦🇪', tz:'Asia/Dubai',                     lon:55.27,  lat:25.20, tier:2},
-  {name:'Moscow',       flag:'🇷🇺', tz:'Europe/Moscow',                  lon:37.62,  lat:55.76, tier:2},
-  {name:'Istanbul',     flag:'🇹🇷', tz:'Europe/Istanbul',                lon:28.98,  lat:41.01, tier:2},
-  {name:'Cairo',        flag:'🇪🇬', tz:'Africa/Cairo',                   lon:31.24,  lat:30.04, tier:2},
-  {name:'Nairobi',      flag:'🇰🇪', tz:'Africa/Nairobi',                 lon:36.82,  lat:-1.29, tier:2},
-  {name:'Cape Town',    flag:'🇿🇦', tz:'Africa/Johannesburg',            lon:18.42,  lat:-33.92,tier:2},
-  {name:'Lagos',        flag:'🇳🇬', tz:'Africa/Lagos',                   lon:3.38,   lat:6.52,  tier:2},
-  {name:'London',       flag:'🇬🇧', tz:'Europe/London',                  lon:-0.13,  lat:51.51, tier:2},
-  {name:'Paris',        flag:'🇫🇷', tz:'Europe/Paris',                   lon:2.35,   lat:48.86, tier:2},
-  {name:'Berlin',       flag:'🇩🇪', tz:'Europe/Berlin',                  lon:13.40,  lat:52.52, tier:2},
-  {name:'Madrid',       flag:'🇪🇸', tz:'Europe/Madrid',                  lon:-3.70,  lat:40.42, tier:2},
-  {name:'Reykjavík',    flag:'🇮🇸', tz:'Atlantic/Reykjavik',             lon:-21.94, lat:64.15, tier:2},
-  {name:'New York',     flag:'🇺🇸', tz:'America/New_York',               lon:-74.01, lat:40.71, tier:2},
-  {name:'Chicago',      flag:'🇺🇸', tz:'America/Chicago',                lon:-87.63, lat:41.88, tier:2},
-  {name:'Los Angeles',  flag:'🇺🇸', tz:'America/Los_Angeles',            lon:-118.24,lat:34.05, tier:2},
-  {name:'Vancouver',    flag:'🇨🇦', tz:'America/Vancouver',              lon:-123.12,lat:49.28, tier:2},
-  {name:'Toronto',      flag:'🇨🇦', tz:'America/Toronto',                lon:-79.38, lat:43.65, tier:2},
-  {name:'Mexico City',  flag:'🇲🇽', tz:'America/Mexico_City',            lon:-99.13, lat:19.43, tier:2},
-  {name:'Anchorage',    flag:'🇺🇸', tz:'America/Anchorage',              lon:-149.90,lat:61.22, tier:2},
-  {name:'Honolulu',     flag:'🇺🇸', tz:'Pacific/Honolulu',               lon:-157.86,lat:21.31, tier:2},
-  {name:'São Paulo',    flag:'🇧🇷', tz:'America/Sao_Paulo',              lon:-46.63, lat:-23.55,tier:2},
-  {name:'Buenos Aires', flag:'🇦🇷', tz:'America/Argentina/Buenos_Aires', lon:-58.38, lat:-34.60,tier:2},
-  {name:'Lima',         flag:'🇵🇪', tz:'America/Lima',                   lon:-77.04, lat:-12.05,tier:2},
-  {name:'Santiago',     flag:'🇨🇱', tz:'America/Santiago',               lon:-70.65, lat:-33.46,tier:2},
+  {name:'Dhaka',        flag:'????', tz:'Asia/Dhaka',                     lon:90.41,  lat:23.81, tier:2},
+  {name:'Dubai',        flag:'????', tz:'Asia/Dubai',                     lon:55.27,  lat:25.20, tier:2},
+  {name:'Moscow',       flag:'????', tz:'Europe/Moscow',                  lon:37.62,  lat:55.76, tier:2},
+  {name:'Istanbul',     flag:'????', tz:'Europe/Istanbul',                lon:28.98,  lat:41.01, tier:2},
+  {name:'Cairo',        flag:'????', tz:'Africa/Cairo',                   lon:31.24,  lat:30.04, tier:2},
+  {name:'Nairobi',      flag:'????', tz:'Africa/Nairobi',                 lon:36.82,  lat:-1.29, tier:2},
+  {name:'Cape Town',    flag:'????', tz:'Africa/Johannesburg',            lon:18.42,  lat:-33.92,tier:2},
+  {name:'Lagos',        flag:'????', tz:'Africa/Lagos',                   lon:3.38,   lat:6.52,  tier:2},
+  {name:'London',       flag:'????', tz:'Europe/London',                  lon:-0.13,  lat:51.51, tier:2},
+  {name:'Paris',        flag:'????', tz:'Europe/Paris',                   lon:2.35,   lat:48.86, tier:2},
+  {name:'Berlin',       flag:'????', tz:'Europe/Berlin',                  lon:13.40,  lat:52.52, tier:2},
+  {name:'Madrid',       flag:'????', tz:'Europe/Madrid',                  lon:-3.70,  lat:40.42, tier:2},
+  {name:'Reykjav�k',    flag:'????', tz:'Atlantic/Reykjavik',             lon:-21.94, lat:64.15, tier:2},
+  {name:'New York',     flag:'????', tz:'America/New_York',               lon:-74.01, lat:40.71, tier:2},
+  {name:'Chicago',      flag:'????', tz:'America/Chicago',                lon:-87.63, lat:41.88, tier:2},
+  {name:'Los Angeles',  flag:'????', tz:'America/Los_Angeles',            lon:-118.24,lat:34.05, tier:2},
+  {name:'Vancouver',    flag:'????', tz:'America/Vancouver',              lon:-123.12,lat:49.28, tier:2},
+  {name:'Toronto',      flag:'????', tz:'America/Toronto',                lon:-79.38, lat:43.65, tier:2},
+  {name:'Mexico City',  flag:'????', tz:'America/Mexico_City',            lon:-99.13, lat:19.43, tier:2},
+  {name:'Anchorage',    flag:'????', tz:'America/Anchorage',              lon:-149.90,lat:61.22, tier:2},
+  {name:'Honolulu',     flag:'????', tz:'Pacific/Honolulu',               lon:-157.86,lat:21.31, tier:2},
+  {name:'S�o Paulo',    flag:'????', tz:'America/Sao_Paulo',              lon:-46.63, lat:-23.55,tier:2},
+  {name:'Buenos Aires', flag:'????', tz:'America/Argentina/Buenos_Aires', lon:-58.38, lat:-34.60,tier:2},
+  {name:'Lima',         flag:'????', tz:'America/Lima',                   lon:-77.04, lat:-12.05,tier:2},
+  {name:'Santiago',     flag:'????', tz:'America/Santiago',               lon:-70.65, lat:-33.46,tier:2},
 
-  {name:'Casablanca',   flag:'🇲🇦', tz:'Africa/Casablanca',              lon:-7.58,  lat:33.57, tier:2},
-  {name:'Riyadh',       flag:'🇸🇦', tz:'Asia/Riyadh',                    lon:46.67,  lat:24.71, tier:2},
-  {name:'Rome',         flag:'🇮🇹', tz:'Europe/Rome',                    lon:12.49,  lat:41.90, tier:2},
-  {name:'Bogotá',       flag:'🇨🇴', tz:'America/Bogota',                 lon:-74.07, lat:4.71,  tier:2},
+  {name:'Casablanca',   flag:'????', tz:'Africa/Casablanca',              lon:-7.58,  lat:33.57, tier:2},
+  {name:'Riyadh',       flag:'????', tz:'Asia/Riyadh',                    lon:46.67,  lat:24.71, tier:2},
+  {name:'Rome',         flag:'????', tz:'Europe/Rome',                    lon:12.49,  lat:41.90, tier:2},
+  {name:'Bogot�',       flag:'????', tz:'America/Bogota',                 lon:-74.07, lat:4.71,  tier:2},
 
-  {name:'Yangon',       flag:'🇲🇲', tz:'Asia/Yangon',                    lon:96.16,  lat:16.87, tier:3},
-  {name:'Kathmandu',    flag:'🇳🇵', tz:'Asia/Kathmandu',                 lon:85.32,  lat:27.72, tier:3},
-  {name:'New Delhi',    flag:'🇮🇳', tz:'Asia/Kolkata',                   lon:77.21,  lat:28.61, tier:3},
-  {name:'Mumbai',       flag:'🇮🇳', tz:'Asia/Kolkata',                   lon:72.87,  lat:19.07, tier:3},
-  {name:'Tehran',       flag:'🇮🇷', tz:'Asia/Tehran',                    lon:51.39,  lat:35.69, tier:3}
+  {name:'Yangon',       flag:'????', tz:'Asia/Yangon',                    lon:96.16,  lat:16.87, tier:3},
+  {name:'Kathmandu',    flag:'????', tz:'Asia/Kathmandu',                 lon:85.32,  lat:27.72, tier:3},
+  {name:'New Delhi',    flag:'????', tz:'Asia/Kolkata',                   lon:77.21,  lat:28.61, tier:3},
+  {name:'Mumbai',       flag:'????', tz:'Asia/Kolkata',                   lon:72.87,  lat:19.07, tier:3},
+  {name:'Tehran',       flag:'????', tz:'Asia/Tehran',                    lon:51.39,  lat:35.69, tier:3}
 ];
 const MANILA = CITIES[0];
 const TARGETS = CITIES.filter(c => !c.ref);
@@ -2042,7 +2042,7 @@ function partsIn(date, tz){
   return { weekday:o.weekday, hour:+o.hour, minute:o.minute, period:o.dayPeriod };
 }
 const fmtTime = p => `${p.hour}:${String(p.minute).padStart(2,'0')} ${p.period}`;
-const fmtFull = p => `${fmtTime(p)} · ${p.weekday}`;
+const fmtFull = p => `${fmtTime(p)} � ${p.weekday}`;
 
 function offsetMinutes(date, tz){
   const dtf = new Intl.DateTimeFormat('en-US', {
@@ -2055,7 +2055,7 @@ function offsetMinutes(date, tz){
   return Math.round((asUTC - date.getTime()) / 60000);
 }
 function offsetLabel(mins){
-  const sign = mins < 0 ? '−' : '+';
+  const sign = mins < 0 ? '-' : '+';
   const a = Math.abs(mins);
   const h = Math.floor(a/60), m = a % 60;
   return `UTC${sign}${h}${m ? ':' + String(m).padStart(2,'0') : ''}`;
@@ -2068,7 +2068,7 @@ function fmtDur(m){
 }
 function fmtShort(m){
   if (m === 0) return '0h';
-  const sign = m < 0 ? '−' : '+';
+  const sign = m < 0 ? '-' : '+';
   const a = Math.abs(m), h = Math.floor(a/60), mm = a % 60;
   return sign + (h ? h + 'h' : '') + (mm ? (h ? ' ' : '') + mm + 'm' : '');
 }
@@ -2108,7 +2108,7 @@ const map = L.map('map', {
 
 L.maplibreGL({
   style: 'https://tiles.openfreemap.org/styles/dark',
-  attribution: '© <a href="https://openfreemap.org">OpenFreeMap</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  attribution: '� <a href="https://openfreemap.org">OpenFreeMap</a> � � <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
 const refLayer    = L.layerGroup().addTo(map);
@@ -2161,7 +2161,7 @@ function drawManila(){
   }).addTo(manilaLayer);
 
   const targetIsEast = state.target ? state.target.lon > MANILA.lon : false;
-  labelMarker(MANILA.lat, MANILA.lon, '🇵🇭 Manila', 'manila', targetIsEast ? 'left' : 'right', 1001).addTo(manilaLayer);
+  labelMarker(MANILA.lat, MANILA.lon, '???? Manila', 'manila', targetIsEast ? 'left' : 'right', 1001).addTo(manilaLayer);
 }
 drawManila();
 
@@ -2404,7 +2404,7 @@ function renderOptions(){
   const box = el('options');
   box.innerHTML = '';
   state.options.forEach((opt, i) => {
-    const [time, day] = opt.split(' · ');
+    const [time, day] = opt.split(' � ');
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'option';
@@ -2485,7 +2485,7 @@ function answer(selected, btn){
     const dayNote = known.weekday !== ans.weekday
       ? (shift > 0 ? ' The clock passes midnight, so the day moves forward.' : ' You cross midnight backwards, so it is the previous day.')
       : '';
-    how = `${fmtTime(known)} ${shift > 0 ? '+' : '−'} ${fmtDur(Math.abs(shift))} = <b>${fmtFull(ans)}</b>.${dayNote}`;
+    how = `${fmtTime(known)} ${shift > 0 ? '+' : '-'} ${fmtDur(Math.abs(shift))} = <b>${fmtFull(ans)}</b>.${dayNote}`;
   }
 
   const fb = el('feedback');
@@ -2547,7 +2547,7 @@ function useHint() {
   const fb = el('feedback');
   fb.innerHTML = `
     <span class="verdict" style="color:var(--gold);text-shadow:0 0 10px rgba(255,217,61,0.5);">
-      💡 Hint Used! (-20🪙)
+      ?? Hint Used! (-20??)
     </span>
     <div class="expl">
       Two wrong answers have been eliminated. Choose from the remaining two options!
@@ -2578,11 +2578,11 @@ function endGame(isTimeout = false){
       _token: '{{ csrf_token() }}'
   });
 
-  let rank = '🌱 Time Traveler in Training';
-  if (pct >= 85) rank = '🏆 Grandmaster of Greenwich';
-  else if (pct >= 65) rank = '🌟 Seasoned Navigator';
-  else if (pct >= 40) rank = '🧭 Junior Explorer';
-  else if (pct >= 20) rank = '🗺️ Curious Wanderer';
+  let rank = '?? Time Traveler in Training';
+  if (pct >= 85) rank = '?? Grandmaster of Greenwich';
+  else if (pct >= 65) rank = '?? Seasoned Navigator';
+  else if (pct >= 40) rank = '?? Junior Explorer';
+  else if (pct >= 20) rank = '??? Curious Wanderer';
 
   const levelNote = isWin
     ? `<div class="level-note up">Level up! Level ${levelToSave} unlocked.</div>`
@@ -2596,7 +2596,7 @@ function endGame(isTimeout = false){
   if (resOverlay) {
     resOverlay.innerHTML = `
       <div class="card tq-instr-card">
-        <div class="big">${isTimeout ? '⏱️' : isWin ? (pct >= 85 ? '🎉' : '🏆') : '🌏'}</div>
+        <div class="big">${isTimeout ? '??' : isWin ? (pct >= 85 ? '??' : '??') : '??'}</div>
         ${timeoutMsg}
         <div class="final-label">Final score</div>
         <div class="final-score">${state.score}</div>
@@ -2609,11 +2609,11 @@ function endGame(isTimeout = false){
         <div class="stack">
           <button id="againBtn" class="btn" type="button">Play again</button>
           <button id="resTutBtn" class="btn ghost" type="button" onclick="openTut(false)" style="min-height:46px;font-size:0.92rem;">
-            <i class="bi bi-mortarboard-fill" style="margin-right:6px;"></i> 📚 Review Tutorial
+            <i class="bi bi-mortarboard-fill" style="margin-right:6px;"></i> ?? Review Tutorial
           </button>
           <div class="eduplay-game-nav" style="width:100%;display:flex;gap:10px;margin-top:6px;">
             <a href="{{ route('student.map', 'time_quest') }}" class="eduplay-nav-btn eduplay-btn-map" style="flex:1;"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-            <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1;"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
+            <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1;"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
           </div>
         </div>
       </div>`;
@@ -2800,14 +2800,14 @@ window.openTut = function(fromGame = false) {
       state.timerInt = null;
     }
     const skipBtns = document.querySelectorAll('.tq-tut-skip-btn');
-    skipBtns.forEach(btn => btn.textContent = '← Return to Game');
+    skipBtns.forEach(btn => btn.textContent = '? Return to Game');
     const startMissionBtn = el('tutStartMissionBtn');
-    if (startMissionBtn) startMissionBtn.textContent = '▶ Return to Game';
+    if (startMissionBtn) startMissionBtn.textContent = '? Return to Game';
   } else {
     const skipBtns = document.querySelectorAll('.tq-tut-skip-btn');
-    skipBtns.forEach(btn => btn.textContent = '← Back to Instructions');
+    skipBtns.forEach(btn => btn.textContent = '? Back to Instructions');
     const startMissionBtn = el('tutStartMissionBtn');
-    if (startMissionBtn) startMissionBtn.textContent = '🚀 Start Mission!';
+    if (startMissionBtn) startMissionBtn.textContent = '?? Start Mission!';
   }
 
   el('overlay').classList.add('hidden');

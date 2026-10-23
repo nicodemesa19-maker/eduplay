@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 @section('hide-nav', true)
 @section('content')
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -6,7 +6,7 @@
 
 <style>
   /* ==========================================================================
-     MDAS MAZE — BALANCED CYBER ARCADE (30 Tiles, adaptive 6x5 / 3x10 grid)
+     MDAS MAZE � BALANCED CYBER ARCADE (30 Tiles, adaptive 6x5 / 3x10 grid)
      ========================================================================== */
   :root {
     --bg-dark: #070b19;
@@ -44,7 +44,7 @@
     overflow-x: hidden;
   }
 
-  /* ── FLOATING MATH SYMBOLS LAYER ── */
+  /* -- FLOATING MATH SYMBOLS LAYER -- */
   #sym-layer {
     position: fixed; inset: 0;
     pointer-events: none; z-index: 0; overflow: hidden;
@@ -80,7 +80,7 @@
     z-index: 0;
   }
 
-  /* ── APPLICATION CONTAINER ── */
+  /* -- APPLICATION CONTAINER -- */
   .app-container {
     position: relative;
     z-index: 1;
@@ -360,7 +360,7 @@
     box-shadow: 0 6px 20px rgba(168, 85, 247, 0.45);
   }
 
-  /* ── 30-TILE MAZE GRID (columns are set by JS: 6 on desktop, 3 on phones) ── */
+  /* -- 30-TILE MAZE GRID (columns are set by JS: 6 on desktop, 3 on phones) -- */
   .maze-grid {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -651,7 +651,7 @@
     box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
   }
 
-  /* ── 3D CYBER DICE ── */
+  /* -- 3D CYBER DICE -- */
   .dice-panel { text-align: center; }
   .dice-stage {
     width: 96px;
@@ -1453,7 +1453,7 @@
   }
 </style>
 
-<!-- ── FLOATING MATH SYMBOLS LAYER ── -->
+<!-- -- FLOATING MATH SYMBOLS LAYER -- -->
 <div id="sym-layer" aria-hidden="true"></div>
 
 <div class="cyber-grid-bg"></div>
@@ -1466,7 +1466,7 @@
         <i class="bi bi-star-fill"></i> Level {{ $progress->current_level ?? 1 }} of 10
       </div>
       <div class="coins-pill" id="coinsPill" title="Your Coins Bank">
-        🪙 <span id="coinDisplay">50</span> Coins
+        ?? <span id="coinDisplay">50</span> Coins
       </div>
       <div class="title-group">
         <h1>MDAS Maze</h1>
@@ -1500,13 +1500,13 @@
       <i class="bi bi-diagram-3-fill text-warning"></i> MDAS Order:
     </div>
     <div class="ribbon-steps">
-      <div class="ribbon-step p1"><i class="bi bi-1-circle-fill"></i> Multiply (×)</div>
+      <div class="ribbon-step p1"><i class="bi bi-1-circle-fill"></i> Multiply (�)</div>
       <span class="ribbon-arrow">&amp;</span>
-      <div class="ribbon-step p2"><i class="bi bi-1-circle-fill"></i> Divide (÷)</div>
-      <span class="ribbon-arrow">➔ <small>Left to Right</small> ➔</span>
+      <div class="ribbon-step p2"><i class="bi bi-1-circle-fill"></i> Divide (�)</div>
+      <span class="ribbon-arrow">? <small>Left to Right</small> ?</span>
       <div class="ribbon-step p3"><i class="bi bi-2-circle-fill"></i> Add (+)</div>
       <span class="ribbon-arrow">&amp;</span>
-      <div class="ribbon-step p4"><i class="bi bi-2-circle-fill"></i> Subtract (−)</div>
+      <div class="ribbon-step p4"><i class="bi bi-2-circle-fill"></i> Subtract (-)</div>
     </div>
     <div class="ribbon-tip">
       <i class="bi bi-lightbulb-fill text-warning"></i> <span>Multiply &amp; Divide BEFORE you Add &amp; Subtract!</span>
@@ -1519,10 +1519,10 @@
     <section class="board-panel" aria-label="MDAS Maze Board">
       <div class="board-toolbar">
         <div class="path-key">
-          <span><i style="background:var(--coral)"></i> × +</span>
-          <span><i style="background:var(--sky)"></i> ÷ −</span>
-          <span><i style="background:var(--mint)"></i> × ÷</span>
-          <span><i style="background:var(--violet)"></i> ★ MDAS</span>
+          <span><i style="background:var(--coral)"></i> � +</span>
+          <span><i style="background:var(--sky)"></i> � -</span>
+          <span><i style="background:var(--mint)"></i> � �</span>
+          <span><i style="background:var(--violet)"></i> ? MDAS</span>
         </div>
         <button class="mdas-rules-btn" id="boardRulesBtn" type="button" title="View MDAS Rules &amp; How to Play">
           <i class="bi bi-book-half"></i> <span>MDAS Rules</span>
@@ -1544,15 +1544,15 @@
         <div class="player-card">
           @php
             $charAvatars = [
-              'nova' => '⭐',
-              'quantum' => '⚡',
-              'vortex' => '🌀',
-              'titan' => '🛡️',
-              'circuit' => '💡',
-              'cryptos' => '🔐',
-              'apex' => '🏆'
+              'nova' => '?',
+              'quantum' => '?',
+              'vortex' => '??',
+              'titan' => '???',
+              'circuit' => '??',
+              'cryptos' => '??',
+              'apex' => '??'
             ];
-            $avatarEmoji = $charAvatars[auth()->user()->character_avatar ?? ''] ?? '🚀';
+            $avatarEmoji = $charAvatars[auth()->user()->character_avatar ?? ''] ?? '??';
           @endphp
           <div class="player-avatar" id="avatarDisplay">{{ $avatarEmoji }}</div>
           <div class="player-details">
@@ -1568,7 +1568,7 @@
           </div>
           <div class="stat-box">
             <div class="stat-label">Streak</div>
-            <div class="stat-value streak" id="streakDisplay">🔥 0x</div>
+            <div class="stat-value streak" id="streakDisplay">?? 0x</div>
           </div>
         </div>
 
@@ -1624,7 +1624,7 @@
       </div>
     </div>
 
-    <div class="expr-box" id="exprBox" aria-live="polite">—</div>
+    <div class="expr-box" id="exprBox" aria-live="polite">�</div>
 
     <div class="challenge-rule-strip">
       Rule: <b>Multiplication &amp; Division</b> first (Left to Right), then <b>Addition &amp; Subtraction</b>!
@@ -1633,10 +1633,10 @@
     <!-- COIN HINT BAR -->
     <div class="coin-hint-bar" id="coinHintBar">
       <div class="coin-hint-info">
-        Need help? <span>Spend 5 🪙</span> for a <b>How to Solve It</b> hint!
+        Need help? <span>Spend 5 ??</span> for a <b>How to Solve It</b> hint!
       </div>
       <button type="button" class="btn-coin-hint" id="btnCoinHint" onclick="useCoinHint()">
-        🪙 Hint (5 🪙)
+        ?? Hint (5 ??)
       </button>
     </div>
 
@@ -1670,7 +1670,7 @@
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
         <button type="button" class="key-btn clear" onclick="pressKey('clear')">Clear</button>
-        <button type="button" class="key-btn del" onclick="pressKey('backspace')">⌫ Delete</button>
+        <button type="button" class="key-btn del" onclick="pressKey('backspace')">? Delete</button>
       </div>
     </form>
 
@@ -1690,7 +1690,7 @@
 
     <div class="fc-card">
       <div class="fc-top">
-        <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 5</span>
+        <span class="fc-badge" id="fcBadge">?? HOW TO PLAY � CARD 1 OF 5</span>
         <button class="fc-quick-action-btn" id="fcQuickActionBtn" type="button" onclick="closeTut(true)" title="Skip to Play">
           <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
         </button>
@@ -1698,107 +1698,107 @@
 
       <!-- CARD 1 -->
       <div id="fcSlide1" class="fc-slide">
-        <h3 class="fc-title" style="color:#38bdf8;"><span>🎲</span> Welcome to MDAS Maze!</h3>
+        <h3 class="fc-title" style="color:#38bdf8;"><span>??</span> Welcome to MDAS Maze!</h3>
         <p class="fc-desc">Roll the 3D dice, navigate the 30-tile cyber maze trail, and solve Order of Operations challenges to reach the golden Finish Portal!</p>
         <div class="fc-row-2 fc-box">
           <div class="fc-item">
-            <div class="fc-item-ico">🎲</div>
+            <div class="fc-item-ico">??</div>
             <div class="fc-item-lbl">Roll &amp; Move</div>
-            <div class="fc-item-sub">Roll 1–6 and watch your token hop cell-by-cell forward!</div>
+            <div class="fc-item-sub">Roll 1�6 and watch your token hop cell-by-cell forward!</div>
           </div>
           <div class="fc-item">
-            <div class="fc-item-ico">⚡</div>
+            <div class="fc-item-ico">?</div>
             <div class="fc-item-lbl">Solve Challenges</div>
             <div class="fc-item-sub">Land on colored tiles and solve expressions strictly using MDAS!</div>
           </div>
         </div>
         <div class="fc-tip">
-          💡 <b>Keyboard Tip:</b> You can press the <b>Spacebar</b> anytime to roll the dice and move!
+          ?? <b>Keyboard Tip:</b> You can press the <b>Spacebar</b> anytime to roll the dice and move!
         </div>
       </div>
 
       <!-- CARD 2 -->
       <div id="fcSlide2" class="fc-slide hidden">
-        <h3 class="fc-title" style="color:#c084fc;"><span>🧠</span> The MDAS Golden Rule</h3>
+        <h3 class="fc-title" style="color:#c084fc;"><span>??</span> The MDAS Golden Rule</h3>
         <p class="fc-desc">In mathematics, operations must follow a strict priority sequence:</p>
         <div class="fc-box" style="border-color:rgba(168, 85, 247, 0.4);">
           <div style="display:flex; flex-direction:column; gap:8px;">
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
               <span class="fc-item-badge good" style="font-size:1.0rem; padding:4px 10px;">Priority 1</span>
-              <span style="font-weight:800; color:#fb7185;">Multiply (×)</span> &amp; <span style="font-weight:800; color:#38bdf8;">Divide (÷)</span>
+              <span style="font-weight:800; color:#fb7185;">Multiply (�)</span> &amp; <span style="font-weight:800; color:#38bdf8;">Divide (�)</span>
               <span style="color:#94a3b8; font-size:0.8rem;">(Solve from Left to Right!)</span>
             </div>
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
               <span class="fc-item-badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; font-size:1.0rem; padding:4px 10px;">Priority 2</span>
-              <span style="font-weight:800; color:#34d399;">Add (+)</span> &amp; <span style="font-weight:800; color:#fbbf24;">Subtract (−)</span>
+              <span style="font-weight:800; color:#34d399;">Add (+)</span> &amp; <span style="font-weight:800; color:#fbbf24;">Subtract (-)</span>
               <span style="color:#94a3b8; font-size:0.8rem;">(Solve from Left to Right!)</span>
             </div>
           </div>
         </div>
         <div class="fc-tip">
-          💡 <b>Remember:</b> Always calculate Multiplication and Division <b>BEFORE</b> you touch Addition and Subtraction!
+          ?? <b>Remember:</b> Always calculate Multiplication and Division <b>BEFORE</b> you touch Addition and Subtraction!
         </div>
       </div>
 
       <!-- CARD 3 -->
       <div id="fcSlide3" class="fc-slide hidden">
-        <h3 class="fc-title" style="color:#34d399;"><span>🔍</span> Step-by-Step Walkthrough</h3>
-        <p class="fc-desc">Let's walk through an example expression: <b style="color:#fff;">10 − 2 × 4 + 3</b></p>
+        <h3 class="fc-title" style="color:#34d399;"><span>??</span> Step-by-Step Walkthrough</h3>
+        <p class="fc-desc">Let's walk through an example expression: <b style="color:#fff;">10 - 2 � 4 + 3</b></p>
         <div class="fc-box" style="font-size:0.88rem; line-height:1.6;">
-          <div><b style="color:#fb7185;">Step 1 (Multiply first):</b> <code>2 × 4 = 8</code> ➔ The problem is now <code>10 − 8 + 3</code></div>
-          <div><b style="color:#34d399;">Step 2 (Left-to-Right Add/Sub):</b> <code>10 − 8 = 2</code></div>
-          <div><b style="color:#fbbf24;">Step 3 (Final addition):</b> <code>2 + 3 = 5</code> ➔ <b>Correct Answer is 5!</b></div>
+          <div><b style="color:#fb7185;">Step 1 (Multiply first):</b> <code>2 � 4 = 8</code> ? The problem is now <code>10 - 8 + 3</code></div>
+          <div><b style="color:#34d399;">Step 2 (Left-to-Right Add/Sub):</b> <code>10 - 8 = 2</code></div>
+          <div><b style="color:#fbbf24;">Step 3 (Final addition):</b> <code>2 + 3 = 5</code> ? <b>Correct Answer is 5!</b></div>
         </div>
         <div class="fc-tip" style="background:rgba(244,63,94,0.12); border-color:#f43f5e; color:#fecdd3;">
-          ⚠️ <b>Common Trap:</b> If you mistakenly did <code>10 − 2 = 8</code> first, you would get <code>8 × 4 = 32 + 3 = 35</code>, which is <b>INCORRECT</b>!
+          ?? <b>Common Trap:</b> If you mistakenly did <code>10 - 2 = 8</code> first, you would get <code>8 � 4 = 32 + 3 = 35</code>, which is <b>INCORRECT</b>!
         </div>
       </div>
 
       <!-- CARD 4 -->
       <div id="fcSlide4" class="fc-slide hidden">
-        <h3 class="fc-title" style="color:#fbbf24;"><span>🪙</span> Coin Hints — How to Solve It!</h3>
-        <p class="fc-desc">Stuck on a tricky problem? Spend <b>5 🪙 Coins</b> to get instant guidance!</p>
+        <h3 class="fc-title" style="color:#fbbf24;"><span>??</span> Coin Hints � How to Solve It!</h3>
+        <p class="fc-desc">Stuck on a tricky problem? Spend <b>5 ?? Coins</b> to get instant guidance!</p>
         <div class="fc-row-2 fc-box">
           <div class="fc-item">
-            <div class="fc-item-ico">💡</div>
+            <div class="fc-item-ico">??</div>
             <div class="fc-item-lbl">Never Gives the Answer</div>
             <div class="fc-item-sub">It explains <b>which operation to do first</b> and simplifies step 1!</div>
           </div>
           <div class="fc-item">
-            <div class="fc-item-ico">🪙</div>
+            <div class="fc-item-ico">??</div>
             <div class="fc-item-lbl">Earn Coins Easily</div>
             <div class="fc-item-sub">Earn coins for correct answers, streak combos, and clearing levels!</div>
           </div>
         </div>
         <div class="fc-tip">
-          💡 You start with <b>50 Coins</b>! Use them wisely when facing complex multi-operation tiles.
+          ?? You start with <b>50 Coins</b>! Use them wisely when facing complex multi-operation tiles.
         </div>
       </div>
 
       <!-- CARD 5 -->
       <div id="fcSlide5" class="fc-slide hidden">
-        <h3 class="fc-title" style="color:#f43f5e;"><span>🏆</span> Zones, Scoring &amp; Controls</h3>
+        <h3 class="fc-title" style="color:#f43f5e;"><span>??</span> Zones, Scoring &amp; Controls</h3>
         <p class="fc-desc">Master the 30 board tiles and clear all 10 stages:</p>
         <div class="fc-row-2 fc-box">
           <div class="fc-item">
-            <div class="fc-item-lbl" style="color:#fb7185;">🔴 Red Tile: (×) (+)</div>
+            <div class="fc-item-lbl" style="color:#fb7185;">?? Red Tile: (�) (+)</div>
             <div class="fc-item-sub">Multiply before Adding (+10 pts)</div>
           </div>
           <div class="fc-item">
-            <div class="fc-item-lbl" style="color:#38bdf8;">🔵 Blue Tile: (÷) (−)</div>
+            <div class="fc-item-lbl" style="color:#38bdf8;">?? Blue Tile: (�) (-)</div>
             <div class="fc-item-sub">Divide before Subtracting (+10 pts)</div>
           </div>
           <div class="fc-item">
-            <div class="fc-item-lbl" style="color:#34d399;">🟢 Green: (×) (÷)</div>
+            <div class="fc-item-lbl" style="color:#34d399;">?? Green: (�) (�)</div>
             <div class="fc-item-sub">Equal priority! Left-to-right!</div>
           </div>
           <div class="fc-item">
-            <div class="fc-item-lbl" style="color:#c084fc;">🟣 Gold: All Four</div>
+            <div class="fc-item-lbl" style="color:#c084fc;">?? Gold: All Four</div>
             <div class="fc-item-sub">Master challenge (+20 pts &amp; bonus coins!)</div>
           </div>
         </div>
         <div class="fc-tip">
-          💡 <b>Keyboard Shortcuts:</b> <b>Space</b> to Roll • <b>Enter</b> to Submit • <b>P / Esc</b> to Pause • <b>M</b> to Mute.
+          ?? <b>Keyboard Shortcuts:</b> <b>Space</b> to Roll � <b>Enter</b> to Submit � <b>P / Esc</b> to Pause � <b>M</b> to Mute.
         </div>
       </div>
 
@@ -1834,7 +1834,7 @@
       <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" style="flex:1;justify-content:center;">
         <i class="bi bi-map-fill"></i> <span>Game Map</span>
       </a>
-      <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1;justify-content:center;">
+      <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1;justify-content:center;">
         <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
       </a>
     </div>
@@ -1869,9 +1869,9 @@
 
   const ZONES = ["red", "blue", "green", "gold"];
   const ZONE_CONFIG = {
-    red:   { label: "× +", name: "Multiplication & Addition" },
-    blue:  { label: "÷ −", name: "Division & Subtraction" },
-    green: { label: "× ÷", name: "Multiplication & Division" },
+    red:   { label: "� +", name: "Multiplication & Addition" },
+    blue:  { label: "� -", name: "Division & Subtraction" },
+    green: { label: "� �", name: "Multiplication & Division" },
     gold:  { label: "MDAS", name: "MDAS Master Challenge" }
   };
 
@@ -1884,10 +1884,10 @@
      ========================================================================== */
   (function initFloatingMathSigns(){
     const syms = [
-      '÷','×','+','−','=','MDAS','( )','12 ÷ 3 = 4','7 × 8 = 56','4 × 5 = 20',
-      '15 − 5 = 10','9 + 6 = 15','24 ÷ 6 = 4','36 ÷ 9 = 4','6 × 7 = 42','8 + 12 = 20',
-      'π','∑','√','²','³','%','±','3 × 3 = 9','8 ÷ 2 = 4','10 + 5 = 15','20 − 8 = 12',
-      'a² + b² = c²','x² − 4 = 0','lim x→0','≠','≈','≤','≥','∆','∫'
+      '�','�','+','-','=','MDAS','( )','12 � 3 = 4','7 � 8 = 56','4 � 5 = 20',
+      '15 - 5 = 10','9 + 6 = 15','24 � 6 = 4','36 � 9 = 4','6 � 7 = 42','8 + 12 = 20',
+      'p','?','v','�','�','%','�','3 � 3 = 9','8 � 2 = 4','10 + 5 = 15','20 - 8 = 12',
+      'a� + b� = c�','x� - 4 = 0','lim x?0','?','�','=','=','?','?'
     ];
     const colors = ['#818cf8','#60a5fa','#34d399','#fbbf24','#f87171','#a78bfa','#38bdf8','#ec4899','#c084fc'];
     const layer = document.getElementById('sym-layer');
@@ -2056,19 +2056,19 @@
           const p1 = (a * b) / c;
           const ans = p1 + d - e;
           if (ans > 0 && Number.isInteger(ans) && ans < 300) {
-            const exprDisplay = `${a} × ${b} ÷ ${c} + ${d} − ${e}`;
+            const exprDisplay = `${a} � ${b} � ${c} + ${d} - ${e}`;
             return {
               expr: exprDisplay,
               answer: ans,
               zone: type,
-              firstOp: `${a} × ${b}`,
+              firstOp: `${a} � ${b}`,
               firstOpResult: a * b,
               howToSolve: `
-                <div><b>1️⃣ Priority 1 (Left to Right):</b> Multiplication and Division share top priority. Solve from left to right!</div>
-                <div style="margin-top:4px;">👉 Multiply first: <b>${a} × ${b} = ${a * b}</b></div>
-                <div>👉 Next, divide by ${c}: <b>${a * b} ÷ ${c} = ${p1}</b></div>
-                <div style="margin-top:4px;"><b>2️⃣ Priority 2 (Add &amp; Subtract):</b> The expression is now <code>${p1} + ${d} − ${e}</code>.</div>
-                <div>👉 Calculate <b>${p1} + ${d}</b>, then subtract <b>${e}</b> to find your final answer!</div>
+                <div><b>1?? Priority 1 (Left to Right):</b> Multiplication and Division share top priority. Solve from left to right!</div>
+                <div style="margin-top:4px;">?? Multiply first: <b>${a} � ${b} = ${a * b}</b></div>
+                <div>?? Next, divide by ${c}: <b>${a * b} � ${c} = ${p1}</b></div>
+                <div style="margin-top:4px;"><b>2?? Priority 2 (Add &amp; Subtract):</b> The expression is now <code>${p1} + ${d} - ${e}</code>.</div>
+                <div>?? Calculate <b>${p1} + ${d}</b>, then subtract <b>${e}</b> to find your final answer!</div>
               `
             };
           }
@@ -2084,19 +2084,19 @@
           const divVal = d / e;
           const ans = a + multVal - divVal;
           if (ans > 0 && Number.isInteger(ans) && ans < 300) {
-            const exprDisplay = `${a} + ${b} × ${c} − ${d} ÷ ${e}`;
+            const exprDisplay = `${a} + ${b} � ${c} - ${d} � ${e}`;
             return {
               expr: exprDisplay,
               answer: ans,
               zone: type,
-              firstOp: `${b} × ${c} & ${d} ÷ ${e}`,
+              firstOp: `${b} � ${c} & ${d} � ${e}`,
               firstOpResult: multVal,
               howToSolve: `
-                <div><b>1️⃣ Priority 1 (Multiply &amp; Divide):</b> Solve × and ÷ before + and −!</div>
-                <div style="margin-top:4px;">👉 Calculate <b>${b} × ${c} = ${multVal}</b></div>
-                <div>👉 Calculate <b>${d} ÷ ${e} = ${divVal}</b></div>
-                <div style="margin-top:4px;"><b>2️⃣ Priority 2 (Add &amp; Subtract):</b> The problem simplifies to <code>${a} + ${multVal} − ${divVal}</code>.</div>
-                <div>👉 Now add and subtract from left to right to get your answer!</div>
+                <div><b>1?? Priority 1 (Multiply &amp; Divide):</b> Solve � and � before + and -!</div>
+                <div style="margin-top:4px;">?? Calculate <b>${b} � ${c} = ${multVal}</b></div>
+                <div>?? Calculate <b>${d} � ${e} = ${divVal}</b></div>
+                <div style="margin-top:4px;"><b>2?? Priority 2 (Add &amp; Subtract):</b> The problem simplifies to <code>${a} + ${multVal} - ${divVal}</code>.</div>
+                <div>?? Now add and subtract from left to right to get your answer!</div>
               `
             };
           }
@@ -2111,18 +2111,18 @@
 
           const ans = a - p1 + e;
           if (ans > 0 && Number.isInteger(ans) && ans < 300) {
-            const exprDisplay = `${a} − ${b} × ${c} ÷ ${d} + ${e}`;
+            const exprDisplay = `${a} - ${b} � ${c} � ${d} + ${e}`;
             return {
               expr: exprDisplay,
               answer: ans,
               zone: type,
-              firstOp: `${b} × ${c}`,
+              firstOp: `${b} � ${c}`,
               firstOpResult: b * c,
               howToSolve: `
-                <div><b>1️⃣ Priority 1:</b> Do multiplication and division first!</div>
-                <div style="margin-top:4px;">👉 Multiply: <b>${b} × ${c} = ${b * c}</b></div>
-                <div>👉 Divide by ${d}: <b>${b * c} ÷ ${d} = ${p1}</b></div>
-                <div style="margin-top:4px;"><b>2️⃣ Priority 2:</b> Now solve <code>${a} − ${p1} + ${e}</code> from left to right!</div>
+                <div><b>1?? Priority 1:</b> Do multiplication and division first!</div>
+                <div style="margin-top:4px;">?? Multiply: <b>${b} � ${c} = ${b * c}</b></div>
+                <div>?? Divide by ${d}: <b>${b * c} � ${d} = ${p1}</b></div>
+                <div style="margin-top:4px;"><b>2?? Priority 2:</b> Now solve <code>${a} - ${p1} + ${e}</code> from left to right!</div>
               `
             };
           }
@@ -2137,15 +2137,15 @@
           const ans = a * b + c;
           if (ans < 250) {
             return {
-              expr: `${a} × ${b} + ${c}`,
+              expr: `${a} � ${b} + ${c}`,
               answer: ans,
               zone: type,
-              firstOp: `${a} × ${b}`,
+              firstOp: `${a} � ${b}`,
               firstOpResult: a * b,
               howToSolve: `
-                <div><b>1️⃣ MDAS Rule:</b> Multiplication comes BEFORE Addition!</div>
-                <div style="margin-top:4px;">👉 Calculate <b>${a} × ${b} = ${a * b}</b> first.</div>
-                <div style="margin-top:4px;">👉 Then add ${c}: <b>${a * b} + ${c} = ?</b></div>
+                <div><b>1?? MDAS Rule:</b> Multiplication comes BEFORE Addition!</div>
+                <div style="margin-top:4px;">?? Calculate <b>${a} � ${b} = ${a * b}</b> first.</div>
+                <div style="margin-top:4px;">?? Then add ${c}: <b>${a * b} + ${c} = ?</b></div>
               `
             };
           }
@@ -2153,16 +2153,16 @@
           const ans = a + b * c;
           if (ans < 250) {
             return {
-              expr: `${a} + ${b} × ${c}`,
+              expr: `${a} + ${b} � ${c}`,
               answer: ans,
               zone: type,
-              firstOp: `${b} × ${c}`,
+              firstOp: `${b} � ${c}`,
               firstOpResult: b * c,
               howToSolve: `
-                <div><b>1️⃣ MDAS Rule:</b> Multiplication has higher priority than Addition!</div>
-                <div style="margin-top:4px;">👉 Do NOT add ${a} + ${b} first!</div>
-                <div>👉 Instead, solve <b>${b} × ${c} = ${b * c}</b> first.</div>
-                <div style="margin-top:4px;">👉 Finally, calculate <b>${a} + ${b * c} = ?</b></div>
+                <div><b>1?? MDAS Rule:</b> Multiplication has higher priority than Addition!</div>
+                <div style="margin-top:4px;">?? Do NOT add ${a} + ${b} first!</div>
+                <div>?? Instead, solve <b>${b} � ${c} = ${b * c}</b> first.</div>
+                <div style="margin-top:4px;">?? Finally, calculate <b>${a} + ${b * c} = ?</b></div>
               `
             };
           }
@@ -2179,15 +2179,15 @@
           const ans = divVal - d;
           if (ans > 0) {
             return {
-              expr: `${b} ÷ ${c} − ${d}`,
+              expr: `${b} � ${c} - ${d}`,
               answer: ans,
               zone: type,
-              firstOp: `${b} ÷ ${c}`,
+              firstOp: `${b} � ${c}`,
               firstOpResult: divVal,
               howToSolve: `
-                <div><b>1️⃣ MDAS Rule:</b> Division comes BEFORE Subtraction!</div>
-                <div style="margin-top:4px;">👉 Divide first: <b>${b} ÷ ${c} = ${divVal}</b>.</div>
-                <div style="margin-top:4px;">👉 Then subtract ${d}: <b>${divVal} − ${d} = ?</b></div>
+                <div><b>1?? MDAS Rule:</b> Division comes BEFORE Subtraction!</div>
+                <div style="margin-top:4px;">?? Divide first: <b>${b} � ${c} = ${divVal}</b>.</div>
+                <div style="margin-top:4px;">?? Then subtract ${d}: <b>${divVal} - ${d} = ?</b></div>
               `
             };
           }
@@ -2197,16 +2197,16 @@
           const ans = a - divVal;
           if (ans > 0) {
             return {
-              expr: `${a} − ${b} ÷ ${c}`,
+              expr: `${a} - ${b} � ${c}`,
               answer: ans,
               zone: type,
-              firstOp: `${b} ÷ ${c}`,
+              firstOp: `${b} � ${c}`,
               firstOpResult: divVal,
               howToSolve: `
-                <div><b>1️⃣ MDAS Rule:</b> Division has higher priority than Subtraction!</div>
-                <div style="margin-top:4px;">👉 Do NOT calculate ${a} − ${b} first!</div>
-                <div>👉 First, divide: <b>${b} ÷ ${c} = ${divVal}</b>.</div>
-                <div style="margin-top:4px;">👉 Now calculate: <b>${a} − ${divVal} = ?</b></div>
+                <div><b>1?? MDAS Rule:</b> Division has higher priority than Subtraction!</div>
+                <div style="margin-top:4px;">?? Do NOT calculate ${a} - ${b} first!</div>
+                <div>?? First, divide: <b>${b} � ${c} = ${divVal}</b>.</div>
+                <div style="margin-top:4px;">?? Now calculate: <b>${a} - ${divVal} = ?</b></div>
               `
             };
           }
@@ -2221,16 +2221,16 @@
           const ans = (a * b) / c;
           if (ans > 0 && Number.isInteger(ans) && ans < 150) {
             return {
-              expr: `${a} × ${b} ÷ ${c}`,
+              expr: `${a} � ${b} � ${c}`,
               answer: ans,
               zone: type,
-              firstOp: `${a} × ${b}`,
+              firstOp: `${a} � ${b}`,
               firstOpResult: a * b,
               howToSolve: `
-                <div><b>1️⃣ MDAS Rule:</b> Multiplication and Division have EQUAL priority!</div>
-                <div style="margin-top:4px;">👉 When both appear, solve strictly from <b>LEFT to RIGHT</b>.</div>
-                <div style="margin-top:4px;">👉 Leftmost operation is: <b>${a} × ${b} = ${a * b}</b>.</div>
-                <div>👉 Finally, divide: <b>${a * b} ÷ ${c} = ?</b></div>
+                <div><b>1?? MDAS Rule:</b> Multiplication and Division have EQUAL priority!</div>
+                <div style="margin-top:4px;">?? When both appear, solve strictly from <b>LEFT to RIGHT</b>.</div>
+                <div style="margin-top:4px;">?? Leftmost operation is: <b>${a} � ${b} = ${a * b}</b>.</div>
+                <div>?? Finally, divide: <b>${a * b} � ${c} = ?</b></div>
               `
             };
           }
@@ -2243,16 +2243,16 @@
           const ans = divVal * c;
           if (ans > 0 && Number.isInteger(ans) && ans < 150) {
             return {
-              expr: `${a} ÷ ${b} × ${c}`,
+              expr: `${a} � ${b} � ${c}`,
               answer: ans,
               zone: type,
-              firstOp: `${a} ÷ ${b}`,
+              firstOp: `${a} � ${b}`,
               firstOpResult: divVal,
               howToSolve: `
-                <div><b>1️⃣ MDAS Rule:</b> Division and Multiplication have EQUAL priority!</div>
-                <div style="margin-top:4px;">👉 Solve strictly from <b>LEFT to RIGHT</b>.</div>
-                <div style="margin-top:4px;">👉 Leftmost operation is Division: <b>${a} ÷ ${b} = ${divVal}</b>.</div>
-                <div>👉 Now multiply: <b>${divVal} × ${c} = ?</b></div>
+                <div><b>1?? MDAS Rule:</b> Division and Multiplication have EQUAL priority!</div>
+                <div style="margin-top:4px;">?? Solve strictly from <b>LEFT to RIGHT</b>.</div>
+                <div style="margin-top:4px;">?? Leftmost operation is Division: <b>${a} � ${b} = ${divVal}</b>.</div>
+                <div>?? Now multiply: <b>${divVal} � ${c} = ?</b></div>
               `
             };
           }
@@ -2332,11 +2332,11 @@
         label.innerHTML = "<i class='bi bi-cup-hot-fill'></i> REST";
         sub.textContent = "Safe Spot";
       } else if (type2 === "gold") {
-        label.innerHTML = "★ MDAS";
+        label.innerHTML = "? MDAS";
         sub.textContent = "Master";
       } else {
         label.textContent = ZONE_CONFIG[type2].label;
-        sub.textContent = type2 === "red" ? "× and +" : (type2 === "blue" ? "÷ and −" : "× and ÷");
+        sub.textContent = type2 === "red" ? "� and +" : (type2 === "blue" ? "� and -" : "� and �");
       }
       cell.appendChild(label);
       cell.appendChild(sub);
@@ -2378,7 +2378,7 @@
     var tok = document.createElement("span");
     tok.className = "token";
     tok.id = "playerToken";
-    tok.textContent = player.avatar || "🚀";
+    tok.textContent = player.avatar || "??";
     well.appendChild(tok);
   }
 
@@ -2390,7 +2390,7 @@
     var tok = document.createElement("span");
     tok.className = "token" + (hop ? " hop" : "");
     tok.id = "playerToken";
-    tok.textContent = player.avatar || "🚀";
+    tok.textContent = player.avatar || "??";
     well.appendChild(tok);
     highlightActiveTile(index);
     if (hop) soundHop();
@@ -2406,7 +2406,7 @@
 
   function updateStatsUI() {
     scoreDisplay.textContent = player.score + " pts";
-    streakDisplay.textContent = "🔥 " + player.streak + "x";
+    streakDisplay.textContent = "?? " + player.streak + "x";
 
     var pct = Math.round((player.position / (BOARD_SIZE - 1)) * 100);
     progressBar.style.width = pct + "%";
@@ -2440,10 +2440,10 @@
     initAudio();
     busy = true;
     rollBtn.disabled = true;
-    statusHint.textContent = "Rolling the 3D dice…";
+    statusHint.textContent = "Rolling the 3D dice�";
 
     rollDie(function(value){
-      statusHint.textContent = "You rolled a " + value + "! Advancing…";
+      statusHint.textContent = "You rolled a " + value + "! Advancing�";
       stepPlayer(value);
     });
   }
@@ -2485,7 +2485,7 @@
 
     var type = boardTiles[player.position];
     if (type === "neutral") {
-      statusHint.textContent = "☕ Safe Rest Tile! Take a breath and roll again.";
+      statusHint.textContent = "? Safe Rest Tile! Take a breath and roll again.";
       busy = false;
       setTimeout(function(){ rollBtn.disabled = false; }, 800);
       return;
@@ -2513,10 +2513,10 @@
     hintRevealContent.innerHTML = "";
 
     var formattedExpr = currentChallenge.expr
-      .replace(/×/g, '<span class="op-m">×</span>')
-      .replace(/÷/g, '<span class="op-d">÷</span>')
+      .replace(/�/g, '<span class="op-m">�</span>')
+      .replace(/�/g, '<span class="op-d">�</span>')
       .replace(/\+/g, '<span class="op-a">+</span>')
-      .replace(/−/g, '<span class="op-s">−</span>');
+      .replace(/-/g, '<span class="op-s">-</span>');
 
     exprBox.innerHTML = formattedExpr;
 
@@ -2524,7 +2524,7 @@
       challengeBadge.innerHTML = '<i class="bi bi-star-fill text-warning"></i> MDAS Master Challenge';
       challengeBadge.style.color = '#c084fc';
       challengeBadge.style.borderColor = 'rgba(192, 132, 252, 0.4)';
-      challengePointsTag.textContent = '+20 pts + Bonus 🪙';
+      challengePointsTag.textContent = '+20 pts + Bonus ??';
     } else {
       challengeBadge.innerHTML = '<i class="bi bi-lightning-charge-fill"></i> ' + ZONE_CONFIG[type].name;
       challengeBadge.style.color = '#38bdf8';
@@ -2553,7 +2553,7 @@
     if (!currentChallenge || hintRevealed) return;
     if (player.coins < 5) {
       feedback.className = "challenge-feedback bad";
-      feedback.textContent = "⚠️ Not enough coins! You need 5 🪙 for a hint.";
+      feedback.textContent = "?? Not enough coins! You need 5 ?? for a hint.";
       return;
     }
 
@@ -2564,7 +2564,7 @@
     hintRevealBox.classList.add("active");
 
     feedback.className = "challenge-feedback";
-    feedback.innerHTML = "💡 <b>Hint Unlocked:</b> Follow the prioritized step shown above, then calculate your answer!";
+    feedback.innerHTML = "?? <b>Hint Unlocked:</b> Follow the prioritized step shown above, then calculate your answer!";
   };
 
   /* Keypad Interaction */
@@ -2615,8 +2615,8 @@
 
       feedback.className = "challenge-feedback good";
       feedback.innerHTML = `
-        🎉 <b>Correct! Amazing job!</b><br>
-        <span>+${earnedPoints} pts &bull; +${earnedCoins} 🪙 Coins earned!</span>
+        ?? <b>Correct! Amazing job!</b><br>
+        <span>+${earnedPoints} pts &bull; +${earnedCoins} ?? Coins earned!</span>
       `;
 
       setTimeout(function(){
@@ -2631,7 +2631,7 @@
 
       feedback.className = "challenge-feedback bad";
       feedback.innerHTML = `
-        ❌ <b>Not quite! The correct answer was ${currentChallenge.answer}.</b>
+        ? <b>Not quite! The correct answer was ${currentChallenge.answer}.</b>
         <div class="step-breakdown">
           <div><b>Here is how to solve it with MDAS:</b></div>
           ${currentChallenge.howToSolve}
@@ -2706,7 +2706,7 @@
     }
 
     var badge = document.getElementById("fcBadge");
-    if (badge) badge.textContent = "🃏 HOW TO PLAY • CARD " + num + " OF " + TUT_TOTAL;
+    if (badge) badge.textContent = "?? HOW TO PLAY � CARD " + num + " OF " + TUT_TOTAL;
 
     var dots = document.querySelectorAll(".fc-dot");
     dots.forEach((dot, idx) => {
@@ -2728,7 +2728,7 @@
   document.getElementById("tutorialBtn").addEventListener("click", function(){ openTut(true); });
   document.getElementById("boardRulesBtn").addEventListener("click", function(){ openTut(true); });
 
-  // Always show instructions when the game loads — every visit
+  // Always show instructions when the game loads � every visit
   setTimeout(function(){ openTut(false); }, 300);
 
   /* ==========================================================================
@@ -2845,24 +2845,24 @@
     if (CURRENT_LEVEL < MAX_LEVELS) {
       nextLvlMsg = `<p style="color:#34d399; font-weight:800; font-size:1.05rem;">Level ${CURRENT_LEVEL} Completed! Advancing to Level ${CURRENT_LEVEL + 1}.</p>`;
     } else {
-      nextLvlMsg = `<p style="color:#fbbf24; font-weight:800; font-size:1.05rem;">🎉 Incredible! You've conquered all ${MAX_LEVELS} levels of MDAS Maze!</p>`;
+      nextLvlMsg = `<p style="color:#fbbf24; font-weight:800; font-size:1.05rem;">?? Incredible! You've conquered all ${MAX_LEVELS} levels of MDAS Maze!</p>`;
       btnText = "Play Again";
     }
 
     card.innerHTML = `
-      <div class="trophy">🏆</div>
+      <div class="trophy">??</div>
       <h2>Maze Conquered!</h2>
       ${nextLvlMsg}
       <div class="final-score">Final Score: ${player.score} pts</div>
       <div style="background:rgba(245,158,11,0.15); border:1.5px solid rgba(245,158,11,0.4); border-radius:14px; padding:10px; margin-bottom:20px; font-weight:800; color:#fbbf24; font-size:1.05rem;">
-        🪙 +${coinsEarned} Coins Earned! Total: ${player.coins} 🪙
+        ?? +${coinsEarned} Coins Earned! Total: ${player.coins} ??
       </div>
       <button class="play-again" id="playAgainBtn">${btnText}</button>
       <div class="eduplay-game-nav" style="display:flex; gap:10px; width:100%; justify-content:center; margin-top:14px;">
         <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" style="flex:1; justify-content:center;">
           <i class="bi bi-map-fill"></i> <span>Game Map</span>
         </a>
-        <a href="{{ route('student.myProgress') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1; justify-content:center;">
+        <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" style="flex:1; justify-content:center;">
           <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
         </a>
       </div>
