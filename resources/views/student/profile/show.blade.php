@@ -133,6 +133,8 @@ h1,h2,h3{font-family:'Bungee',sans-serif;}
   <div class="profile-card text-center">
     @if($user->avatar_upload_path)
       <img src="{{ $user->getAvatarUrl() }}" alt="Avatar" class="profile-avatar mx-auto">
+    @elseif($user->avatar_character && str_starts_with($user->avatar_character, 'avatar'))
+      <img src="{{ $user->getAvatarUrl() }}" alt="Avatar" class="profile-avatar mx-auto">
     @else
       <div class="profile-emoji mx-auto">
         {{ $user->avatar_character ? $user->getCharacterEmoji() : '🧑‍🎓' }}
@@ -148,11 +150,14 @@ h1,h2,h3{font-family:'Bungee',sans-serif;}
       </p>
     @endif
     
-    @if($user->display_badge)
-      <div class="mt-3">
-        <span style="background:rgba(182,255,61,.15);border:2px solid var(--lime);padding:8px 20px;border-radius:20px;color:var(--lime);font-weight:700;">
-          🏆 {{ $user->display_badge }}
-        </span>
+    @if($user->display_badge && is_array($user->display_badge) && count($user->display_badge) > 0)
+      <div class="mt-3" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        @foreach($user->badges()->whereIn('id', $user->display_badge)->get() as $badge)
+          <span style="background:rgba(182,255,61,.15);border:2px solid var(--lime);padding:8px 20px;border-radius:20px;color:var(--lime);font-weight:700;display:inline-flex;align-items:center;gap:8px;">
+            <span style="font-size:1.5rem;">{{ $badge->badge_icon }}</span>
+            <span>{{ $badge->badge_name }}</span>
+          </span>
+        @endforeach
       </div>
     @endif
   </div>

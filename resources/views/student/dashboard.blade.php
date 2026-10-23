@@ -7,23 +7,12 @@
 
 /*
   ============================================================
-  DESIGN NOTE FOR THE DEV TEAM
+  DESIGN NOTE
   ------------------------------------------------------------
-  Theme: "Retro Arcade" — deep cabinet-navy background, neon
-  cyan/magenta/lime accents, glowing high-score displays,
-  scanline texture. Deliberately different mood from the
-  previous "sunny sticker" pass: less pastel/soft, more
-  game-cabinet/marquee, still built for grades 4-6.
-
-  Headings: Bungee (poster/arcade marquee feel).
-  Body: Baloo 2 (rounded, still very readable for kids).
-  Numeric displays (scores etc): Space Mono, for that
-  LED-scoreboard look.
-
-  Same two data-driven components as before:
-    1. "My Learning Stats"  -> expects $learningStats
-    2. Anonymized Scoreboard -> expects $scoreboard
-  Fallbacks via `??` keep the page safe with no data wired up.
+  Theme: "Retro Arcade" — deep cabinet-navy, neon cyan/magenta/
+  lime accents, glowing high-score displays, scanline texture.
+  Headings: Bungee. Body: Baloo 2. Numbers: Space Mono.
+  Fully mobile-adaptive as of this revision.
   ============================================================
 */
 
@@ -55,7 +44,6 @@
   --glow-lime:0 0 22px rgba(182,255,61,.3);
 }
 
-/* light "arcade daylight" mode — same structure, lighter cabinet plastic look */
 [data-bs-theme="light"]{
   --bg:#EEF1FB;
   --bg2:#E4E9FB;
@@ -75,74 +63,201 @@
 }
 
 *{box-sizing:border-box;}
-body{background:var(--bg);font-family:'Baloo 2',sans-serif;color:var(--text);overflow-x:hidden;transition:background .3s,color .3s;
-  background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.015) 0 2px,transparent 2px 4px);}
+html{-webkit-text-size-adjust:100%;}
+body{
+  background:var(--bg);font-family:'Baloo 2',sans-serif;color:var(--text);
+  overflow-x:hidden;transition:background .3s,color .3s;
+  background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.015) 0 2px,transparent 2px 4px);
+  -webkit-tap-highlight-color:transparent;
+}
 [data-bs-theme="light"] body{background-image:none;}
 h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
 .mono{font-family:'Space Mono',monospace;}
 
-/* floating pixels */
+/* ─── floating pixels ─── */
 #math-float{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.math-symbol{position:absolute;font-family:'Space Mono',monospace;font-weight:700;
-  opacity:.18;animation:floatUp linear infinite;}
-@keyframes floatUp{0%{transform:translateY(110vh);opacity:0;}10%{opacity:.25;}
-  90%{opacity:.25;}100%{transform:translateY(-15vh);opacity:0;}}
+.math-symbol{
+  position:absolute;font-family:'Space Mono',monospace;font-weight:700;
+  opacity:.18;animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  0%{transform:translateY(110vh);opacity:0;}
+  10%{opacity:.25;}
+  90%{opacity:.25;}
+  100%{transform:translateY(-15vh);opacity:0;}
+}
 
-/* hero — arcade marquee */
+/* ─── HERO ─── */
 .hero{
-  background:radial-gradient(circle at 20% 20%,rgba(176,38,255,.18),transparent 55%),
-             radial-gradient(circle at 85% 30%,rgba(0,229,255,.16),transparent 55%),
-             var(--bg2);
-  border-bottom:3px solid var(--cyan); padding:38px 0 32px;
-  position:relative; overflow:hidden; z-index:1;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(176,38,255,.18),transparent 55%),
+    radial-gradient(circle at 85% 30%,rgba(0,229,255,.16),transparent 55%),
+    var(--bg2);
+  border-bottom:3px solid var(--cyan);
+  padding:clamp(22px,4vw,38px) 0 clamp(20px,3.5vw,32px);
+  position:relative;overflow:hidden;z-index:1;
   box-shadow:0 4px 0 rgba(0,229,255,.15);
 }
-[data-bs-theme="light"] .hero{background:linear-gradient(135deg,#E9E4FF,#E0F7FF);border-bottom-color:#7C3AED;box-shadow:0 4px 0 rgba(124,58,237,.15);}
+[data-bs-theme="light"] .hero{
+  background:linear-gradient(135deg,#E9E4FF,#E0F7FF);
+  border-bottom-color:#7C3AED;
+  box-shadow:0 4px 0 rgba(124,58,237,.15);
+}
 
-.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(0,229,255,.1);
-  border:2px solid var(--cyan);border-radius:8px;padding:5px 14px;
-  font-family:'Space Mono',monospace;font-size:0.85rem;font-weight:700;color:var(--cyan);
-  letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;animation:blink 1.6s steps(1) infinite;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(0,229,255,.1);
+  border:2px solid var(--cyan);border-radius:8px;
+  padding:4px 12px;
+  font-family:'Space Mono',monospace;
+  font-size:clamp(.7rem,1.6vw,.85rem);font-weight:700;color:var(--cyan);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;
+  animation:blink 1.6s steps(1) infinite;
+}
 @keyframes blink{0%,60%,100%{opacity:1;}80%{opacity:.4;}}
 [data-bs-theme="light"] .hero-tag{color:#7C3AED;border-color:#7C3AED;background:rgba(124,58,237,.08);}
 
-.hero-name{font-family:'Bungee',sans-serif;font-size:2.4rem;color:var(--text2);line-height:1.2;
-  text-shadow:0 0 18px rgba(0,229,255,.4),3px 3px 0 rgba(255,61,174,.35);}
+/* ─── Hero Avatar ─── */
+.hero-avatar{
+  width:clamp(80px,15vw,120px);
+  height:clamp(80px,15vw,120px);
+  border-radius:16px;
+  border:3px solid var(--cyan);
+  overflow:hidden;
+  flex-shrink:0;
+  box-shadow:var(--glow-cyan);
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+}
+
+.hero-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.hero-avatar-emoji{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:clamp(3rem,8vw,5rem);
+}
+
+[data-bs-theme="light"] .hero-avatar{
+  border-color:#7C3AED;
+  box-shadow:0 4px 14px rgba(124,58,237,.3);
+}
+
+.hero-name{
+  font-family:'Bungee',sans-serif;
+  font-size:clamp(1.55rem,4.5vw,2.4rem);
+  color:var(--text2);line-height:1.2;
+  text-shadow:0 0 18px rgba(0,229,255,.4),3px 3px 0 rgba(255,61,174,.35);
+  word-break:break-word;
+}
 .hero-name span{color:var(--lime);text-shadow:0 0 18px rgba(182,255,61,.5);}
 [data-bs-theme="light"] .hero-name{text-shadow:none;}
 [data-bs-theme="light"] .hero-name span{color:#7C3AED;text-shadow:none;}
 
-.eq-ticker{display:inline-block;background:rgba(0,0,0,.3);border:2px solid var(--lime);
-  border-radius:8px;padding:6px 16px;margin-top:12px;font-family:'Space Mono',monospace;
-  font-size:1.05rem;color:var(--lime);font-weight:700;transition:opacity .3s;box-shadow:var(--glow-lime);}
+.hero-greeting{
+  font-size:clamp(.9rem,2vw,1.05rem);
+  color:var(--muted);margin-top:6px;font-weight:700;
+}
+
+.eq-ticker{
+  display:inline-block;
+  background:rgba(0,0,0,.3);
+  border:2px solid var(--lime);border-radius:8px;
+  padding:5px 14px;margin-top:12px;
+  font-family:'Space Mono',monospace;
+  font-size:clamp(.85rem,2vw,1.05rem);
+  color:var(--lime);font-weight:700;
+  transition:opacity .3s;box-shadow:var(--glow-lime);
+  max-width:100%;word-break:break-word;
+}
 [data-bs-theme="light"] .eq-ticker{background:#fff;color:#059669;border-color:#059669;box-shadow:none;}
 
-/* stat chips — LED scoreboard style */
-.stat-chip{background:rgba(0,0,0,.35);border:2px solid var(--cyan);border-radius:12px;
-  padding:14px 20px;text-align:center;transition:transform .2s,box-shadow .2s;
-  box-shadow:0 0 12px rgba(0,229,255,.35), 0 0 24px rgba(0,229,255,.15), inset 0 0 12px rgba(0,229,255,.06);}
+/* ─── Stat chips (LED scoreboard) ─── */
+.stat-chip{
+  background:rgba(0,0,0,.35);
+  border:2px solid var(--cyan);border-radius:12px;
+  padding:clamp(8px,1.6vw,14px) clamp(10px,2vw,20px);
+  text-align:center;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 0 12px rgba(0,229,255,.35),0 0 24px rgba(0,229,255,.15),inset 0 0 12px rgba(0,229,255,.06);
+  min-width:0;
+}
 [data-bs-theme="light"] .stat-chip{background:#fff;}
-.stat-chip:hover{transform:translateY(-3px);box-shadow:0 0 22px rgba(0,229,255,.7), 0 0 44px rgba(0,229,255,.3), inset 0 0 18px rgba(0,229,255,.1);border-color:var(--cyan);}
-.stat-chip .v{font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;color:var(--cyan);line-height:1;text-shadow:0 0 14px rgba(0,229,255,.9), 0 0 28px rgba(0,229,255,.4);}
+.stat-chip:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 22px rgba(0,229,255,.7),0 0 44px rgba(0,229,255,.3),inset 0 0 18px rgba(0,229,255,.1);
+  border-color:var(--cyan);
+}
+.stat-chip .v{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(1.15rem,3vw,2rem);
+  font-weight:700;color:var(--cyan);line-height:1;
+  text-shadow:0 0 14px rgba(0,229,255,.9),0 0 28px rgba(0,229,255,.4);
+  font-variant-numeric:tabular-nums;
+}
 [data-bs-theme="light"] .stat-chip .v{color:#7C3AED;}
-.stat-chip .l{font-size:0.78rem;font-weight:700;color:var(--muted);margin-top:5px;letter-spacing:.5px;text-transform:uppercase;}
+.stat-chip .l{
+  font-size:clamp(.6rem,1.3vw,.78rem);
+  font-weight:700;color:var(--muted);margin-top:4px;
+  letter-spacing:.5px;text-transform:uppercase;
+}
 
-/* nav pills */
-.nav-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
-.npill{background:var(--card-bg);border:2px solid var(--card-border);border-radius:10px;
-  padding:10px 18px;font-size:1rem;font-weight:700;color:var(--text);text-decoration:none;
-  display:flex;align-items:center;gap:8px;transition:all .2s;}
-.npill:hover{border-color:var(--pink);color:var(--pink);box-shadow:var(--glow-pink);transform:translateY(-2px);}
+/* ─── Nav pills ─── */
+.nav-row{
+  display:flex;gap:10px;
+  margin-bottom:28px;
+  /* On mobile, become a horizontal scroll strip */
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:6px;
+  margin-left:-4px;margin-right:-4px;
+  padding-left:4px;padding-right:4px;
+}
+.nav-row::-webkit-scrollbar{display:none;}
+.npill{
+  background:var(--card-bg);
+  border:2px solid var(--card-border);
+  border-radius:10px;
+  padding:9px 16px;
+  font-size:clamp(.85rem,1.8vw,1rem);
+  font-weight:700;color:var(--text);text-decoration:none;
+  display:flex;align-items:center;gap:8px;
+  transition:all .2s;
+  flex-shrink:0;
+  white-space:nowrap;
+  touch-action:manipulation;
+}
+.npill:hover{
+  border-color:var(--pink);color:var(--pink);
+  box-shadow:var(--glow-pink);transform:translateY(-2px);
+}
 [data-bs-theme="light"] .npill:hover{color:#C2185B;box-shadow:none;}
 
-/* section head */
-.sec-head{font-size:1.15rem;font-weight:700;color:var(--text2);font-family:'Bungee',sans-serif;
-  display:flex;align-items:center;gap:10px;margin-bottom:18px;letter-spacing:.5px;}
+/* ─── Section head ─── */
+.sec-head{
+  font-size:clamp(.95rem,2.2vw,1.15rem);
+  font-weight:700;color:var(--text2);
+  font-family:'Bungee',sans-serif;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:18px;letter-spacing:.5px;
+  flex-wrap:wrap;
+}
 .sec-head i{color:var(--cyan);}
 [data-bs-theme="light"] .sec-head i{color:#7C3AED;}
-.sec-head::after{content:'';flex:1;height:2px;background:var(--sec-line);}
+.sec-head::after{
+  content:'';flex:1;height:2px;background:var(--sec-line);min-width:20px;
+}
 
-/* ── LEARNING STATS WIDGET ── */
+/* ─── LEARNING STATS widget ─── */
 @php
   $learningStats = $learningStats ?? [];
   $peakDay   = $learningStats['peak_day'] ?? null;
@@ -151,28 +266,53 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
   $skillList = $learningStats['skills'] ?? [];
 @endphp
 
-.stat-card{background:var(--card-bg);border:2px solid var(--card-border);border-radius:14px;
-  padding:20px;height:100%;transition:transform .2s,box-shadow .2s;}
+.stat-card{
+  background:var(--card-bg);
+  border:2px solid var(--card-border);
+  border-radius:14px;
+  padding:clamp(14px,2.2vw,20px);
+  height:100%;
+  transition:transform .2s,box-shadow .2s;
+}
 .stat-card:hover{transform:translateY(-3px);}
-.stat-card .badge-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;
-  justify-content:center;font-size:1.3rem;color:#0E0F26;margin-bottom:12px;}
-.stat-card .headline{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--text2);margin-bottom:4px;}
-.stat-card .sub{font-size:0.9rem;color:var(--muted);}
+.stat-card .badge-icon{
+  width:clamp(36px,6vw,44px);height:clamp(36px,6vw,44px);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(1rem,2.4vw,1.3rem);color:#0E0F26;margin-bottom:12px;
+}
+.stat-card .headline{
+  font-family:'Baloo 2',sans-serif;
+  font-size:clamp(.95rem,2.2vw,1.15rem);
+  font-weight:800;color:var(--text2);margin-bottom:4px;
+}
+.stat-card .sub{font-size:clamp(.8rem,1.8vw,.9rem);color:var(--muted);}
 
-.streak-dots{display:flex;gap:6px;margin-top:12px;}
-.streak-dot{width:15px;height:15px;border-radius:3px;background:var(--card-border);}
+.streak-dots{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+.streak-dot{
+  width:15px;height:15px;border-radius:3px;
+  background:var(--card-border);
+}
 .streak-dot.on{background:var(--lime);box-shadow:0 0 8px rgba(182,255,61,.6);}
 
 .skill-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .skill-row:last-child{margin-bottom:0;}
-.skill-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-size:0.95rem;color:#0E0F26;flex-shrink:0;}
+.skill-icon{
+  width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;color:#0E0F26;flex-shrink:0;
+}
 .skill-bar-track{flex:1;height:10px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden;}
 [data-bs-theme="light"] .skill-bar-track{background:rgba(0,0,0,.06);}
 .skill-bar-fill{height:100%;border-radius:4px;transition:width 1.1s cubic-bezier(.4,0,.2,1) .2s;width:0;}
-.skill-pct{font-family:'Space Mono',monospace;font-size:0.82rem;font-weight:700;color:var(--muted);min-width:36px;text-align:right;}
+.skill-pct{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(.72rem,1.6vw,.82rem);
+  font-weight:700;color:var(--muted);
+  min-width:36px;text-align:right;
+}
 
-/* ── ANONYMIZED SCOREBOARD ── */
+/* ─── SCOREBOARD ─── */
 @php
   $scoreboard = $scoreboard ?? [];
   $sbTop      = $scoreboard['top'] ?? null;
@@ -182,103 +322,321 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
   $sbMax      = max([$sbTop ?? 0, $sbAvg ?? 0, $sbYou, 1]);
 @endphp
 
-.board-card{background:var(--card-bg);border:2px solid var(--card-border);border-radius:14px;padding:22px;}
-.board-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.board-card{
+  background:var(--card-bg);
+  border:2px solid var(--card-border);
+  border-radius:14px;
+  padding:clamp(16px,2.6vw,22px);
+}
+.board-row{
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
 .board-row:last-child{margin-bottom:0;}
-.board-label{width:132px;flex-shrink:0;font-size:0.85rem;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:6px;}
-.board-track{flex:1;height:24px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;position:relative;}
+.board-label{
+  width:clamp(90px,15vw,132px);
+  flex-shrink:0;
+  font-size:clamp(.72rem,1.6vw,.85rem);
+  font-weight:700;color:var(--muted);
+  display:flex;align-items:center;gap:6px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.board-track{
+  flex:1;height:clamp(20px,3vw,24px);
+  border-radius:6px;
+  background:rgba(255,255,255,.06);
+  overflow:hidden;position:relative;min-width:0;
+}
 [data-bs-theme="light"] .board-track{background:rgba(0,0,0,.06);}
-.board-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;
-  padding-right:10px;color:#0E0F26;font-weight:700;font-family:'Space Mono',monospace;font-size:0.82rem;width:0;
-  transition:width 1.2s cubic-bezier(.4,0,.2,1) .25s;white-space:nowrap;}
+.board-fill{
+  height:100%;border-radius:6px;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:8px;color:#0E0F26;font-weight:700;
+  font-family:'Space Mono',monospace;
+  font-size:clamp(.7rem,1.5vw,.82rem);
+  width:0;
+  transition:width 1.2s cubic-bezier(.4,0,.2,1) .25s;
+  white-space:nowrap;overflow:hidden;
+}
 .board-row.you .board-track{box-shadow:0 0 0 2px var(--purple);}
 .board-row.you .board-label{color:var(--purple);}
 [data-bs-theme="light"] .board-row.you .board-label{color:#7C3AED;}
 
-/* progress rings */
-.prog-game-card{background:var(--card-bg);border:2px solid var(--card-border);border-radius:16px;padding:22px;
-  transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;overflow:hidden;}
-.prog-game-card:hover{transform:translateY(-4px);border-color:var(--cyan);box-shadow:var(--glow-cyan);}
+/* ─── Progress ring cards ─── */
+.prog-game-card{
+  background:var(--card-bg);
+  border:2px solid var(--card-border);
+  border-radius:16px;
+  padding:clamp(14px,2.4vw,22px);
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+  position:relative;overflow:hidden;height:100%;
+}
+.prog-game-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--cyan);box-shadow:var(--glow-cyan);
+}
 [data-bs-theme="light"] .prog-game-card:hover{box-shadow:none;border-color:#7C3AED;}
 
 .ring-wrap{position:relative;width:100px;height:100px;flex-shrink:0;}
 .ring-wrap svg{transform:rotate(-90deg);}
 .ring-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:9;}
 [data-bs-theme="light"] .ring-bg{stroke:rgba(0,0,0,.06);}
-.ring-fill{fill:none;stroke-width:9;stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:283;
-  transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1) .3s;}
-.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.ring-pct{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--text2);line-height:1;}
-.ring-lbl{font-size:0.72rem;color:var(--muted);margin-top:2px;font-weight:700;text-transform:uppercase;}
+.ring-fill{
+  fill:none;stroke-width:9;stroke-linecap:round;
+  stroke-dasharray:283;stroke-dashoffset:283;
+  transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1) .3s;
+}
+.ring-center{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.ring-pct{
+  font-family:'Space Mono',monospace;
+  font-size:1.4rem;font-weight:700;color:var(--text2);line-height:1;
+}
+.ring-lbl{
+  font-size:.72rem;color:var(--muted);margin-top:2px;
+  font-weight:700;text-transform:uppercase;
+}
 
-.game-icon-anim{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.1);
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;flex-shrink:0;
-  animation:icon-bob 3s ease-in-out infinite;}
+.game-icon-anim{
+  width:38px;height:38px;border-radius:9px;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:#fff;flex-shrink:0;
+  animation:icon-bob 3s ease-in-out infinite;
+}
 @keyframes icon-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 .score-val{color:inherit;font-family:'Space Mono',monospace;}
 
-/* game nav — arcade cabinet cards */
-.game-nav-card{border-radius:16px;overflow:hidden;border:2px solid var(--card-border);background:var(--card-bg);
-  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .25s;text-decoration:none;display:block;}
+/* ─── Game nav (arcade cabinets) ─── */
+.game-nav-card{
+  border-radius:16px;overflow:hidden;
+  border:2px solid var(--card-border);background:var(--card-bg);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .25s;
+  text-decoration:none;display:block;
+}
 .game-nav-card:hover{transform:translateY(-6px) scale(1.01);}
 .game-nav-card.cab1:hover{box-shadow:0 0 0 2px var(--cab1-c),0 16px 36px rgba(13,148,136,.25);border-color:var(--cab1-c);}
 .game-nav-card.cab2:hover{box-shadow:0 0 0 2px var(--cab2-c),0 16px 36px rgba(194,24,91,.25);border-color:var(--cab2-c);}
 .game-nav-top{padding:20px 20px 16px;position:relative;overflow:hidden;}
-.game-nav-top::after{content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(180deg,rgba(0,0,0,.08) 0 2px,transparent 2px 4px);pointer-events:none;}
+.game-nav-top::after{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(180deg,rgba(0,0,0,.08) 0 2px,transparent 2px 4px);
+  pointer-events:none;
+}
 .cab1-top{background:linear-gradient(135deg,var(--cab1-a),var(--cab1-b),var(--cab1-c));}
 .cab2-top{background:linear-gradient(135deg,var(--cab2-a),var(--cab2-b),var(--cab2-c));}
-.play-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:4px 12px;
-  font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;color:#fff;text-transform:uppercase;}
+.play-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.4);
+  border-radius:6px;padding:4px 12px;
+  font-family:'Space Mono',monospace;
+  font-size:.78rem;font-weight:700;color:#fff;text-transform:uppercase;
+}
 
-/* side card */
-.side-card{background:var(--card-bg);border:2px solid var(--card-border);border-radius:14px;padding:20px;margin-bottom:14px;font-size:1rem;}
+/* ─── Side card ─── */
+.side-card{
+  background:var(--card-bg);
+  border:2px solid var(--card-border);
+  border-radius:14px;
+  padding:clamp(14px,2.2vw,20px);
+  margin-bottom:14px;
+  font-size:clamp(.9rem,1.9vw,1rem);
+}
 
-.char-frame{width:58px;height:58px;border-radius:12px;background:linear-gradient(135deg,rgba(176,38,255,.2),rgba(0,229,255,.15));
-  border:2px solid var(--purple);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.char-frame{
+  width:58px;height:58px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(176,38,255,.2),rgba(0,229,255,.15));
+  border:2px solid var(--purple);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
+}
 
-/* math clock — arcade challenge machine */
+/* ─── Math clock (Quick Challenge) ─── */
 .math-clock{
   background:rgba(0,0,0,.3);
-  border:2px solid var(--purple);
-  border-radius:12px;padding:18px;text-align:center;
-  box-shadow:0 0 14px rgba(138,92,255,.5), 0 0 30px rgba(138,92,255,.2), inset 0 0 20px rgba(138,92,255,.07);
+  border:2px solid var(--purple);border-radius:12px;
+  padding:clamp(12px,2.4vw,18px);
+  text-align:center;
+  box-shadow:0 0 14px rgba(138,92,255,.5),0 0 30px rgba(138,92,255,.2),inset 0 0 20px rgba(138,92,255,.07);
   animation:clockGlow 2.8s ease-in-out infinite;
 }
 @keyframes clockGlow{
-  0%,100%{ box-shadow:0 0 14px rgba(138,92,255,.5),0 0 30px rgba(138,92,255,.2),inset 0 0 20px rgba(138,92,255,.07); border-color:var(--purple); }
-  40%    { box-shadow:0 0 22px rgba(138,92,255,.85),0 0 50px rgba(138,92,255,.4),inset 0 0 30px rgba(138,92,255,.15); border-color:#c084fc; }
-  70%    { box-shadow:0 0 10px rgba(138,92,255,.3),0 0 18px rgba(138,92,255,.1),inset 0 0 10px rgba(138,92,255,.04); border-color:rgba(138,92,255,.6); }
+  0%,100%{box-shadow:0 0 14px rgba(138,92,255,.5),0 0 30px rgba(138,92,255,.2),inset 0 0 20px rgba(138,92,255,.07);border-color:var(--purple);}
+  40%{box-shadow:0 0 22px rgba(138,92,255,.85),0 0 50px rgba(138,92,255,.4),inset 0 0 30px rgba(138,92,255,.15);border-color:#c084fc;}
+  70%{box-shadow:0 0 10px rgba(138,92,255,.3),0 0 18px rgba(138,92,255,.1),inset 0 0 10px rgba(138,92,255,.04);border-color:rgba(138,92,255,.6);}
 }
 @keyframes cardPulse{
-  0%,100%{ box-shadow:0 0 18px rgba(138,92,255,.25),0 0 40px rgba(138,92,255,.1); border-color:rgba(138,92,255,.5); }
-  50%    { box-shadow:0 0 28px rgba(138,92,255,.5),0 0 60px rgba(138,92,255,.2); border-color:rgba(138,92,255,.85); }
+  0%,100%{box-shadow:0 0 18px rgba(138,92,255,.25),0 0 40px rgba(138,92,255,.1);border-color:rgba(138,92,255,.5);}
+  50%{box-shadow:0 0 28px rgba(138,92,255,.5),0 0 60px rgba(138,92,255,.2);border-color:rgba(138,92,255,.85);}
 }
 [data-bs-theme="light"] .math-clock{background:#F9F5FF;animation:none;box-shadow:none;border-color:rgba(124,58,237,.3);}
 .clock-q{
-  font-family:'Space Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--purple);
-  animation:q-pop .35s ease, qFlicker 5s steps(1) infinite;
-  text-shadow:0 0 12px rgba(138,92,255,.9), 0 0 28px rgba(138,92,255,.5);
+  font-family:'Space Mono',monospace;
+  font-size:clamp(1.3rem,3.4vw,1.8rem);
+  font-weight:700;color:var(--purple);
+  animation:q-pop .35s ease,qFlicker 5s steps(1) infinite;
+  text-shadow:0 0 12px rgba(138,92,255,.9),0 0 28px rgba(138,92,255,.5);
+  word-break:break-word;line-height:1.2;
 }
 @keyframes qFlicker{
-  0%,89%,91%,94%,100%{ opacity:1; text-shadow:0 0 12px rgba(138,92,255,.9),0 0 28px rgba(138,92,255,.5); }
-  90%    { opacity:.25; text-shadow:none; }
-  92%,93%{ opacity:.65; text-shadow:0 0 6px rgba(138,92,255,.5); }
+  0%,89%,91%,94%,100%{opacity:1;text-shadow:0 0 12px rgba(138,92,255,.9),0 0 28px rgba(138,92,255,.5);}
+  90%{opacity:.25;text-shadow:none;}
+  92%,93%{opacity:.65;text-shadow:0 0 6px rgba(138,92,255,.5);}
 }
 [data-bs-theme="light"] .clock-q{color:#7C3AED;animation:q-pop .35s ease;text-shadow:none;}
 @keyframes q-pop{from{opacity:0;transform:scale(.9);}to{opacity:1;transform:scale(1);}}
-.ans-btn{background:var(--ans-bg);border:2px solid var(--ans-border);border-radius:8px;
-  padding:6px 14px;font-family:'Space Mono',monospace;font-size:0.95rem;font-weight:700;color:var(--ans-color);cursor:pointer;transition:all .15s;}
+
+.ans-btn{
+  background:var(--ans-bg);
+  border:2px solid var(--ans-border);
+  border-radius:8px;
+  padding:8px 14px;
+  font-family:'Space Mono',monospace;
+  font-size:clamp(.85rem,2vw,.95rem);
+  font-weight:700;color:var(--ans-color);
+  cursor:pointer;transition:all .15s;
+  min-height:44px;
+  min-width:52px;
+  touch-action:manipulation;
+  flex:0 0 auto;
+}
 .ans-btn:hover{background:var(--purple);border-color:var(--purple);color:#fff;}
 .ans-btn.correct{background:var(--lime);border-color:var(--lime);color:#0E0F26;}
 .ans-btn.wrong{background:var(--pink);border-color:var(--pink);color:#fff;}
 
-/* tip */
-.tip{display:flex;align-items:flex-start;gap:10px;font-size:0.95rem;color:var(--muted);margin-bottom:10px;}
+/* ─── Tips ─── */
+.tip{display:flex;align-items:flex-start;gap:10px;font-size:clamp(.85rem,1.8vw,.95rem);color:var(--muted);margin-bottom:10px;}
 .tip:last-child{margin-bottom:0;}
 .tip i{color:var(--cyan);flex-shrink:0;margin-top:2px;}
 [data-bs-theme="light"] .tip i{color:#7C3AED;}
+
+/* ============================================================
+   MOBILE ADAPTIVE LAYER
+   ============================================================ */
+
+/* ─── Phones (≤575px) ─── */
+@media (max-width: 575.98px) {
+  .hero{padding:22px 0 20px;}
+  .hero-name{font-size:1.55rem;}
+  
+  /* Avatar adjustments for mobile */
+  .hero-avatar{
+    width:70px;
+    height:70px;
+    border-width:2px;
+  }
+  .hero-avatar-emoji{
+    font-size:2.5rem;
+  }
+  
+  /* Stack avatar and text vertically on very small screens */
+  @media (max-width: 400px) {
+    .hero > .container-lg > .d-flex > .d-flex.align-items-center {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 12px !important;
+    }
+  }
+  .hero-greeting{font-size:.9rem;}
+
+  /* Stats become a tidy 2×2 grid */
+  .hero-stats{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+    width:100%;
+  }
+  .stat-chip{padding:8px 10px;}
+  .stat-chip .v{font-size:1.15rem;}
+
+  /* Section padding tightens */
+  .container-lg.px-4{padding-left:14px !important;padding-right:14px !important;}
+  .pt-4{padding-top:1rem !important;}
+
+  /* Leaderboard labels collapse to icons-only feel */
+  .board-label{
+    width:auto;
+    min-width:0;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    font-size:.7rem;
+    line-height:1.15;
+    white-space:normal;
+    flex-shrink:0;
+    flex-basis:78px;
+  }
+  .board-label i{font-size:.9rem;}
+  .board-row{gap:8px;}
+  .board-track{height:22px;}
+  .board-fill{font-size:.72rem;padding-right:6px;}
+
+  /* Progress cards: ring shrinks, layout tightens */
+  .ring-wrap{width:78px;height:78px;}
+  .ring-wrap svg{width:78px;height:78px;}
+  .ring-pct{font-size:1.05rem;}
+  .ring-lbl{font-size:.6rem;}
+  .game-icon-anim{width:32px;height:32px;font-size:.95rem;}
+  .prog-game-card .d-flex.align-items-center.gap-4{gap:12px !important;}
+
+  /* Quick Challenge answers: 2-col grid for clean taps */
+  #clock-answers{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+  }
+  .ans-btn{width:100%;min-height:44px;}
+
+  /* Grade badge size */
+  .side-card .mono[style*="2.6rem"]{font-size:2rem !important;}
+}
+
+/* ─── Tablets (576–991px) ─── */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .hero-name{font-size:2rem;}
+  .stat-chip{padding:12px 16px;}
+  .hero-stats{
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:10px !important;
+    width:100%;
+  }
+  .board-label{width:110px;}
+  .ring-wrap{width:90px;height:90px;}
+  .ring-wrap svg{width:90px;height:90px;}
+}
+
+/* ─── Small tablets landscape / big phones ─── */
+@media (max-width: 767.98px) {
+  .nav-row{margin-bottom:20px;}
+  .sec-head{font-size:1rem;margin-bottom:14px;}
+  .board-card{padding:14px;}
+  .side-card{margin-bottom:12px;}
+
+  /* Quick Challenge card: full width, centered */
+  .math-clock{padding:14px;}
+}
+
+/* ─── Very small phones (≤360px) ─── */
+@media (max-width: 360px) {
+  .hero-name{font-size:1.3rem;}
+  .stat-chip .v{font-size:1rem;}
+  .stat-chip .l{font-size:.55rem;}
+  .npill{padding:7px 12px;font-size:.82rem;}
+  .ring-wrap{width:70px;height:70px;}
+  .ring-wrap svg{width:70px;height:70px;}
+  .ring-pct{font-size:.95rem;}
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .math-symbol,
+  .hero-tag,
+  .math-clock,
+  .game-icon-anim,
+  .clock-q{animation:none !important;}
+  .ring-fill,.board-fill,.skill-bar-fill{transition:none !important;}
+}
 </style>
 
 <div id="math-float" aria-hidden="true"></div>
@@ -289,14 +647,28 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
 <div class="hero">
   <div class="container-lg px-4">
     <div class="d-flex align-items-start justify-content-between flex-wrap gap-4">
-      <div>
-        <div class="hero-tag">● Player One Ready</div>
-        <h1 class="hero-name">Hi, <span>{{ Auth::user()->name }}</span></h1>
-        <p style="font-size:1.05rem;color:var(--muted);margin-top:6px;font-weight:700;">
-          Press start on today's math quest.
-          @if(Auth::user()->grade_level) &nbsp;·&nbsp; Grade {{ Auth::user()->grade_level }} @endif
-        </p>
-        <div class="eq-ticker" id="eq-ticker">a² + b² = c²</div>
+      <div class="d-flex align-items-center gap-3">
+        {{-- Profile Avatar --}}
+        <div class="hero-avatar">
+          @if(Auth::user()->avatar_upload_path)
+            <img src="{{ Auth::user()->getAvatarUrl() }}" alt="Avatar">
+          @elseif(Auth::user()->avatar_character && str_starts_with(Auth::user()->avatar_character, 'avatar'))
+            <img src="{{ Auth::user()->getAvatarUrl() }}" alt="Avatar">
+          @else
+            <div class="hero-avatar-emoji">{{ Auth::user()->avatar_character ? Auth::user()->getCharacterEmoji() : '🧑‍🎓' }}</div>
+          @endif
+        </div>
+        
+        {{-- Greeting Text --}}
+        <div>
+          <div class="hero-tag">● Player One Ready</div>
+          <h1 class="hero-name">Hi, <span>{{ Auth::user()->name }}</span></h1>
+          <p class="hero-greeting">
+            Press start on today's math quest.
+            @if(Auth::user()->grade_level) &nbsp;·&nbsp; Grade {{ Auth::user()->grade_level }} @endif
+          </p>
+          <div class="eq-ticker" id="eq-ticker">a² + b² = c²</div>
+        </div>
       </div>
       @php
         $totalScore   = $progress->map(fn($p) => $p->avg_score)->filter(fn($s) => $s > 0)->avg() ?? 0;
@@ -304,7 +676,7 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
         $totalLevels  = $progress->sum('current_level') - $progress->count();
         $maxedGames   = $progress->where('current_level', 15)->count();
       @endphp
-      <div class="d-flex gap-3 flex-wrap">
+      <div class="hero-stats d-flex gap-3 flex-wrap">
         <div class="stat-chip"><div class="v" id="sc-score">0</div><div class="l">Score</div></div>
         <div class="stat-chip"><div class="v" id="sc-levels">0</div><div class="l">Levels</div></div>
         <div class="stat-chip"><div class="v" id="sc-maxed">0</div><div class="l">Maxed</div></div>
@@ -334,14 +706,14 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
         <form method="POST" action="{{ route('student.enroll-classroom') }}" class="d-flex flex-column gap-2">
           @csrf
           <input type="text" name="class_code" placeholder="Enter your class code" class="form-control" required>
-          <button type="submit" class="btn fw-bold" style="background:var(--lime);color:#0E0F26;border-radius:10px;border:none;">Join Classroom</button>
+          <button type="submit" class="btn fw-bold" style="background:var(--lime);color:#0E0F26;border-radius:10px;border:none;min-height:44px;">Join Classroom</button>
         </form>
         @if(session('success'))
           <div class="alert alert-success mt-3 mb-0">{{ session('success') }}</div>
         @endif
       </div>
 
-      {{-- ── CLASS LEADERBOARD (moved up, replaces Learning Stats) ── --}}
+      {{-- ── CLASS LEADERBOARD ── --}}
       <div class="sec-head"><i class="bi bi-bar-chart-steps"></i> Class Leaderboard</div>
       <div class="board-card mb-5">
         @if(is_null($sbTop) && is_null($sbAvg))
@@ -368,7 +740,7 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
       @if($progress->isEmpty())
       <div class="side-card text-center py-4 mb-4">
         <i class="bi bi-bar-chart-line d-block mb-2" style="font-size:2.5rem;color:var(--muted2);"></i>
-        <p style="color:var(--muted);font-size:1.05rem;">Play a game to start tracking your progress!</p>
+        <p style="color:var(--muted);font-size:1.05rem;margin-bottom:0;">Play a game to start tracking your progress!</p>
       </div>
       @else
       <div class="row g-3 mb-4">
@@ -386,7 +758,7 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
           <div class="prog-game-card">
             <div class="d-flex align-items-center gap-4">
               <div class="ring-wrap">
-                <svg width="100" height="100" viewBox="0 0 110 110">
+                <svg width="100%" height="100%" viewBox="0 0 110 110">
                   <circle class="ring-bg" cx="55" cy="55" r="45"/>
                   <circle class="ring-fill" cx="55" cy="55" r="45"
                           stroke="{{ $col }}"
@@ -395,16 +767,16 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
                 </svg>
                 <div class="ring-center"><span class="ring-pct">{{ $pct }}%</span><span class="ring-lbl">Done</span></div>
               </div>
-              <div class="flex-grow-1">
+              <div class="flex-grow-1 min-w-0">
                 <div class="d-flex align-items-center gap-2 mb-1">
                   <div class="game-icon-anim" style="background:{{ $col }}33;color:{{ $col }};animation-delay:{{ $loop->index * .4 }}s;"><i class="bi {{ $bi }}"></i></div>
-                  <p class="fw-bold mb-0" style="font-size:1.05rem;color:var(--text2);">{{ $p->game->display_name }}</p>
+                  <p class="fw-bold mb-0" style="font-size:clamp(.9rem,2vw,1.05rem);color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ $p->game->display_name }}</p>
                 </div>
-                <p style="font-size:0.9rem;color:var(--muted);margin-bottom:8px;"><i class="bi bi-layers me-1"></i>Level {{ $p->current_level }} / {{ $total }}</p>
-                <p class="score-val fw-bold mb-2" style="font-size:1.45rem;color:{{ $col }};">
-                  {{ number_format($p->avg_score, 1) }} <span style="font-size:0.85rem;color:var(--muted);font-weight:400;">avg pts</span>
+                <p style="font-size:clamp(.78rem,1.7vw,.9rem);color:var(--muted);margin-bottom:8px;"><i class="bi bi-layers me-1"></i>Level {{ $p->current_level }} / {{ $total }}</p>
+                <p class="score-val fw-bold mb-2" style="font-size:clamp(1.15rem,2.6vw,1.45rem);color:{{ $col }};">
+                  {{ number_format($p->avg_score, 1) }} <span style="font-size:.78rem;color:var(--muted);font-weight:400;">avg pts</span>
                 </p>
-                <a href="{{ route('student.map', $p->game->name) }}" class="btn btn-sm fw-bold text-white" style="border-radius:8px;background:{{ $col }};font-size:0.9rem;padding:8px 20px;">
+                <a href="{{ route('student.map', $p->game->name) }}" class="btn btn-sm fw-bold text-white" style="border-radius:8px;background:{{ $col }};font-size:clamp(.82rem,1.8vw,.9rem);padding:8px 20px;min-height:40px;">
                   <i class="bi bi-play-fill me-1"></i>Continue
                 </a>
               </div>
@@ -443,23 +815,23 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
       {{-- ── STREAK CARD ── --}}
       <div class="side-card" style="text-align:center;">
         <div class="badge-icon" style="background:var(--yellow);width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#0E0F26;margin:0 auto 14px;"><i class="bi bi-fire"></i></div>
-        <div style="font-family:'Bungee',sans-serif;font-size:1.45rem;color:var(--text2);margin-bottom:6px;">
+        <div style="font-family:'Bungee',sans-serif;font-size:clamp(1.15rem,3vw,1.45rem);color:var(--text2);margin-bottom:6px;">
           {{ $streak > 0 ? "$streak-Day Streak!" : 'No streak yet!' }}
         </div>
-        <div style="font-size:1rem;color:var(--muted);margin-bottom:14px;">
+        <div style="font-size:clamp(.88rem,1.9vw,1rem);color:var(--muted);margin-bottom:14px;">
           Keep the fire burning.
         </div>
-        <div class="streak-dots" style="display:flex;gap:8px;margin-top:4px;justify-content:center;">
+        <div class="streak-dots" style="display:flex;gap:8px;margin-top:4px;justify-content:center;flex-wrap:wrap;">
           @foreach($streakMap as $d)<span class="streak-dot {{ $d ? 'on' : '' }}" style="width:18px;height:18px;border-radius:4px;"></span>@endforeach
         </div>
       </div>
 
-      {{-- ── QUICK CHALLENGE (always visible, just for fun) ── --}}
+      {{-- ── QUICK CHALLENGE ── --}}
       <div class="side-card" style="border-color:rgba(138,92,255,.5);box-shadow:0 0 18px rgba(138,92,255,.25),0 0 40px rgba(138,92,255,.1);animation:cardPulse 3.5s ease-in-out infinite;">
-        <div class="sec-head" style="margin-bottom:12px;color:var(--violet);text-shadow:0 0 10px rgba(138,92,255,.7);"><i class="bi bi-lightning-charge-fill"></i> Quick Challenge</div>
+        <div class="sec-head" style="margin-bottom:12px;color:var(--purple);text-shadow:0 0 10px rgba(138,92,255,.7);"><i class="bi bi-lightning-charge-fill"></i> Quick Challenge</div>
         <div class="math-clock">
           <div class="clock-q" id="clock-prob">—</div>
-          <div style="font-size:0.9rem;color:var(--muted);margin:4px 0 8px;font-weight:700;">⏱ <span id="clock-sec">8</span>s left</div>
+          <div style="font-size:clamp(.82rem,1.8vw,.9rem);color:var(--muted);margin:4px 0 8px;font-weight:700;">⏱ <span id="clock-sec">8</span>s left</div>
           <div id="clock-answers" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;"></div>
           <p style="font-size:0.8rem;color:var(--muted2);margin-top:10px;margin-bottom:0;">Just for fun — no scores saved!</p>
         </div>
@@ -481,10 +853,14 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 (function(){
+  // Reduce floating symbols on mobile for perf
+  const isSmall = window.matchMedia('(max-width: 767px)').matches;
+  const COUNT = isSmall ? 16 : 40;
+
   const syms=['0','1','+','×','#','?','★','▲'];
   const wrap=document.getElementById('math-float');
   const colors=['#00E5FF','#FF3DAE','#B6FF3D','#FFD23D','#B026FF'];
-  for(let i=0;i<40;i++){
+  for(let i=0;i<COUNT;i++){
     const el=document.createElement('div');
     el.className='math-symbol';
     el.textContent=syms[Math.floor(Math.random()*syms.length)];
@@ -500,6 +876,7 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
 (function(){
   const eqs=['a² + b² = c²','E = mc²','F = ma','A = πr²','2 + 2 = 4','5 × 5 = 25','½ + ½ = 1'];
   let i=0; const el=document.getElementById('eq-ticker');
+  if(!el) return;
   el.style.transition='opacity .3s';
   setInterval(()=>{ el.style.opacity='0'; setTimeout(()=>{ el.textContent=eqs[i++%eqs.length]; el.style.opacity='1'; },300); },2800);
 })();
@@ -525,6 +902,8 @@ setTimeout(()=>{
   const probEl=document.getElementById('clock-prob');
   const ansEl=document.getElementById('clock-answers');
   const secEl=document.getElementById('clock-sec');
+  if(!probEl || !ansEl || !secEl) return;
+
   let ans, timer, secs=8;
   function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
   function next(){
@@ -543,6 +922,7 @@ setTimeout(()=>{
     ansEl.innerHTML='';
     arr.forEach(v=>{
       const btn=document.createElement('button');
+      btn.type='button';
       btn.className='ans-btn'; btn.textContent=v;
       btn.onclick=()=>{
         if(v===ans){btn.classList.add('correct');clearInterval(timer);setTimeout(next,700);}

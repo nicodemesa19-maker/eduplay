@@ -62,6 +62,8 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
   padding:24px;
   margin-bottom:24px;
   box-shadow:0 8px 24px rgba(0,0,0,.3);
+  position:relative;
+  z-index:1;
 }
 
 .profile-card h3{
@@ -85,6 +87,42 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
   border-radius:8px;
   padding:10px 14px;
   font-size:0.95rem;
+  position:relative;
+}
+
+.form-select{
+  position:relative;
+  z-index:10;
+}
+
+.form-select:focus{
+  z-index:999;
+}
+
+/* Fix dropdown menu visibility */
+.form-select option{
+  background:var(--bg2);
+  color:var(--text);
+  padding:8px 12px;
+}
+
+[data-bs-theme="light"] .form-select option{
+  background:#ffffff;
+  color:var(--text);
+}
+
+/* Ensure dropdown has proper backdrop */
+.form-select{
+  cursor:pointer;
+}
+
+.form-select::-ms-expand{
+  display:none;
+}
+
+.profile-card:has(.form-select:focus){
+  z-index:100;
+  overflow:visible;
 }
 
 .form-control:focus, .form-select:focus{
@@ -225,6 +263,71 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
   cursor:not-allowed;
 }
 
+/* Badge selector */
+.badge-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+
+.badge-item{
+  position:relative;
+}
+
+.badge-checkbox{
+  position:absolute;
+  opacity:0;
+}
+
+.badge-label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  background:var(--card-bg);
+  border:2px solid var(--border);
+  border-radius:12px;
+  cursor:pointer;
+  transition:all .2s;
+  min-height:80px;
+}
+
+.badge-icon{
+  font-size:2.5rem;
+  flex-shrink:0;
+}
+
+.badge-info{
+  flex:1;
+  text-align:left;
+}
+
+.badge-name{
+  font-size:0.95rem;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:4px;
+}
+
+.badge-type{
+  font-size:0.8rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+
+.badge-checkbox:checked + .badge-label{
+  background:rgba(255,61,174,.18);
+  border-color:var(--pink);
+  box-shadow:0 0 22px rgba(255,61,174,.35);
+}
+
+.badge-checkbox:disabled + .badge-label{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
 /* Avatar selector */
 .avatar-selector{
   display:flex;
@@ -304,6 +407,7 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
 @media(max-width:768px){
   .hero-title{font-size:1.8rem;}
   .hobby-grid{grid-template-columns:repeat(auto-fill, minmax(110px,1fr));}
+  .badge-grid{grid-template-columns:1fr;}
   .avatar-box{width:60px;height:60px;font-size:2rem;}
 }
 </style>
@@ -316,15 +420,15 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
         <h1 class="hero-title">✏️ Edit Profile</h1>
         <p class="hero-sub">Customize your EduPlay experience!</p>
       </div>
-      <a href="{{ route('student.dashboard') }}" class="btn btn-neon">
-        <i class="bi bi-arrow-left"></i> Back to Dashboard
+      <a href="{{ route('student.profile.show') }}" class="btn btn-neon">
+        <i class="bi bi-arrow-left"></i> Back to My Profile
       </a>
     </div>
   </div>
 </div>
 
 <!-- Main Content -->
-<div class="container py-5">
+<div class="container py-5" style="position:relative;">
   
   <!-- Success/Error Messages -->
   @if(session('success'))
@@ -556,11 +660,39 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
     <!-- Badge Display -->
     <div class="profile-card">
       <h3>🏆 Badge Display</h3>
-      <label class="form-label">Show this badge on your profile</label>
-      <input type="text" name="display_badge" class="form-control" 
-             value="{{ old('display_badge', $user->display_badge) }}" 
-             placeholder="e.g. Math Wizard, Speed Champion" maxlength="100">
-      <small class="text-muted">Choose your proudest achievement!</small>
+      <p style="color:var(--muted);margin-bottom:16px;">Select up to 3 badges to showcase on your profile</p>
+      
+      @if($earnedBadges->count() > 0)
+        <div class="badge-grid" id="badgeGrid">
+          @php
+            $displayBadges = old('display_badge', $user->display_badge ?? []);
+          @endphp
+          
+          @foreach($earnedBadges as $badge)
+            <div class="badge-item">
+              <input type="checkbox" name="display_badge[]" value="{{ $badge->id }}" 
+                     id="badge_{{ $badge->id }}" class="badge-checkbox"
+                     {{ in_array($badge->id, $displayBadges) ? 'checked' : '' }}>
+              <label for="badge_{{ $badge->id }}" class="badge-label">
+                <div class="badge-icon">{{ $badge->badge_icon }}</div>
+                <div class="badge-info">
+                  <div class="badge-name">{{ $badge->badge_name }}</div>
+                  <div class="badge-type">{{ ucfirst($badge->badge_type) }}</div>
+                </div>
+              </label>
+            </div>
+          @endforeach
+        </div>
+        <small class="text-muted d-block mt-3">
+          <span id="badgeCount">{{ count($displayBadges) }}</span>/3 badges selected
+        </small>
+      @else
+        <div style="text-align:center;padding:40px 20px;color:var(--muted);">
+          <div style="font-size:3rem;margin-bottom:12px;">🎯</div>
+          <p style="margin:0;font-size:1rem;">You haven't earned any badges yet!</p>
+          <p style="margin:8px 0 0;font-size:0.9rem;">Play games and complete challenges to earn badges.</p>
+        </div>
+      @endif
     </div>
 
     <!-- Save Button -->
@@ -592,21 +724,27 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
         <div class="avatar-selector">
           @php
             $avatars = [
-              'math_wizard' => '🧙‍♂️',
-              'number_ninja' => '🥷',
-              'fraction_fighter' => '⚔️',
-              'algebra_ace' => '🎯',
-              'geometry_genius' => '🤖',
-              'student_hero' => '🦸',
+              'avatar1' => 'Avatar 1',
+              'avatar2' => 'Avatar 2',
+              'avatar3' => 'Avatar 3',
+              'avatar4' => 'Avatar 4',
+              'avatar5' => 'Avatar 5',
+              'avatar6' => 'Avatar 6',
+              'avatar7' => 'Avatar 7',
+              'avatar8' => 'Avatar 8',
             ];
           @endphp
           
-          @foreach($avatars as $key => $emoji)
+          @foreach($avatars as $key => $name)
             <div class="avatar-option">
               <input type="radio" name="avatar_preset" value="{{ $key }}" 
                      id="avatar_{{ $key }}" class="avatar-radio"
                      {{ $user->avatar_character == $key ? 'checked' : '' }}>
-              <label for="avatar_{{ $key }}" class="avatar-box">{{ $emoji }}</label>
+              <label for="avatar_{{ $key }}" class="avatar-box">
+                <img src="{{ asset('images/avatars/' . $key . '.png') }}" 
+                     alt="{{ $name }}" 
+                     style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+              </label>
             </div>
           @endforeach
         </div>
@@ -679,6 +817,24 @@ document.getElementById('musicSlider').addEventListener('input', function() {
   document.getElementById('musicValue').textContent = this.value;
 });
 
+// Fix dropdown z-index on focus
+const allSelects = document.querySelectorAll('.form-select');
+allSelects.forEach(select => {
+  select.addEventListener('focus', function() {
+    const parentCard = this.closest('.profile-card');
+    if (parentCard) {
+      parentCard.style.zIndex = '999';
+    }
+  });
+  
+  select.addEventListener('blur', function() {
+    const parentCard = this.closest('.profile-card');
+    if (parentCard) {
+      parentCard.style.zIndex = '1';
+    }
+  });
+});
+
 // Hobby limit (max 5)
 const hobbyCheckboxes = document.querySelectorAll('.hobby-checkbox');
 const hobbyCount = document.getElementById('hobbyCount');
@@ -701,6 +857,31 @@ hobbyCheckboxes.forEach(box => {
   box.addEventListener('change', updateHobbyLimit);
 });
 updateHobbyLimit();
+
+// Badge limit (max 3)
+const badgeCheckboxes = document.querySelectorAll('.badge-checkbox');
+const badgeCount = document.getElementById('badgeCount');
+
+function updateBadgeLimit() {
+  const checked = document.querySelectorAll('.badge-checkbox:checked').length;
+  if (badgeCount) {
+    badgeCount.textContent = checked;
+  }
+  
+  // Disable unchecked boxes if 3 selected
+  badgeCheckboxes.forEach(box => {
+    if (!box.checked && checked >= 3) {
+      box.disabled = true;
+    } else {
+      box.disabled = false;
+    }
+  });
+}
+
+badgeCheckboxes.forEach(box => {
+  box.addEventListener('change', updateBadgeLimit);
+});
+updateBadgeLimit();
 
 // Avatar type toggle
 document.getElementById('avatarType').addEventListener('change', function() {

@@ -78,6 +78,7 @@ class User extends Authenticatable
         'streak_alerts' => 'boolean',
         'last_username_change' => 'datetime',
         'profile_updated_at' => 'datetime',
+        'display_badge' => 'array',
     ];
 
     // ========== RELATIONSHIPS ==========
@@ -152,6 +153,22 @@ class User extends Authenticatable
     public function unreadNotificationsCount(): int
     {
         return $this->notifications()->unread()->count();
+    }
+
+    /**
+     * Get student's earned badges.
+     */
+    public function badges()
+    {
+        return $this->hasMany(StudentBadge::class, 'student_id');
+    }
+
+    /**
+     * Get student's earned badges count.
+     */
+    public function badgesCount(): int
+    {
+        return $this->badges()->count();
     }
 
     // ========== HELPER METHODS ==========
@@ -253,7 +270,12 @@ class User extends Authenticatable
             return asset('storage/' . $this->avatar_upload_path);
         }
 
-        // Return preset character emoji/icon
+        // Return preset character image path
+        if ($this->avatar_character && str_starts_with($this->avatar_character, 'avatar')) {
+            return asset('images/avatars/' . $this->avatar_character . '.png');
+        }
+
+        // Return old emoji character or default
         return $this->avatar_character ?? $this->character_avatar ?? '🧑‍🎓';
     }
 }

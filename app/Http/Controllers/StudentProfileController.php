@@ -76,11 +76,15 @@ class StudentProfileController extends Controller
     {
         $user = Auth::user();
         
+        // Get student's earned badges
+        $earnedBadges = $user->badges()->orderBy('earned_at', 'desc')->get();
+        
         return view('student.profile.edit', [
             'user' => $user,
             'mathTopics' => self::MATH_TOPICS,
             'hobbies' => self::HOBBIES,
             'gameModes' => self::GAME_MODES,
+            'earnedBadges' => $earnedBadges,
         ]);
     }
 
@@ -103,14 +107,15 @@ class StudentProfileController extends Controller
             'music_volume' => ['nullable', 'integer', 'min:0', 'max:100'],
             'practice_reminders' => ['boolean'],
             'streak_alerts' => ['boolean'],
-            'display_badge' => ['nullable', 'string', 'max:100'],
+            'display_badge' => ['nullable', 'array', 'max:3'],
+            'display_badge.*' => ['integer', 'exists:student_badges,id'],
         ]);
 
         // Track changes for audit log
         $changes = [];
         foreach ($validated as $field => $value) {
-            if ($field === 'hobbies') {
-                $oldValue = $user->hobbies ?? [];
+            if (in_array($field, ['hobbies', 'display_badge'])) {
+                $oldValue = $user->$field ?? [];
                 $newValue = $value ?? [];
                 if (json_encode($oldValue) !== json_encode($newValue)) {
                     $changes[$field] = [
