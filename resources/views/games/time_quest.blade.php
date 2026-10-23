@@ -120,7 +120,7 @@
   }
 
   .stats{
-    display:grid;grid-template-columns:repeat(6,minmax(64px,auto));gap:8px;
+    display:grid;grid-template-columns:repeat(2,minmax(80px,auto));gap:10px;
   }
   .stat{
     background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(182,255,61,.08));
@@ -268,6 +268,79 @@
     text-shadow:0 0 10px rgba(0,229,255,.5);
   }
   .pips{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;flex:1;max-width:240px}
+  
+  /* Quiz panel stats */
+  .quiz-stats {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,229,255,.2);
+  }
+  .quiz-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg,rgba(0,229,255,.08),rgba(182,255,61,.05));
+    border: 1.5px solid var(--cyan);
+    border-radius: 12px;
+    min-width: 90px;
+    position: relative;
+    transition: all .25s;
+  }
+  .quiz-stat::before {
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--lime));
+    opacity:0;
+    transition:opacity .25s;
+  }
+  .quiz-stat:hover::before {
+    opacity:1;
+  }
+  .quiz-stat-label {
+    font-size: .75rem;
+    color: var(--ink-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .quiz-stat-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  .quiz-stat.time .quiz-stat-val {
+    color: var(--cyan);
+    text-shadow: 0 0 8px rgba(0,229,255,.5);
+  }
+  .quiz-stat.score .quiz-stat-val {
+    color: var(--lime);
+    text-shadow: 0 0 8px rgba(182,255,61,.5);
+  }
+  .quiz-stat.streak {
+    border-color: var(--gold);
+    background: linear-gradient(135deg,rgba(255,217,61,.12),rgba(255,217,61,.05));
+  }
+  .quiz-stat.streak .quiz-stat-val {
+    color: var(--gold);
+    text-shadow: 0 0 8px rgba(255,217,61,.5);
+  }
+  .quiz-stat.round {
+    border-color: var(--pink);
+    background: linear-gradient(135deg,rgba(255,61,174,.12),rgba(255,61,174,.05));
+  }
+  .quiz-stat.round .quiz-stat-val {
+    color: var(--pink);
+    text-shadow: 0 0 8px rgba(255,61,174,.5);
+  }
   
   /* Hint button in quiz panel */
   .hint-btn-quiz {
@@ -971,15 +1044,15 @@
       width: 100%;
     }
 
-    /* Stats: compact 6-up row */
+    /* Stats: compact 2-up row */
     .stats {
       width: 100%;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 4px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
     }
-    .stat { padding: 5px 4px; border-radius: 10px; }
-    .stat .label { font-size: .62rem; }
-    .stat .val { font-size: .9rem; }
+    .stat { padding: 6px 8px; border-radius: 10px; }
+    .stat .label { font-size: .65rem; }
+    .stat .val { font-size: .95rem; }
 
     /* Nav: 4 equal-width buttons */
     .tq .eduplay-game-nav {
@@ -1023,6 +1096,19 @@
 
     /* Quiz panel */
     .quiz-panel { padding: 16px 16px 20px; border-radius: 16px; }
+    .quiz-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+    }
+    .quiz-stat {
+      min-width: 0;
+      padding: 8px 12px;
+    }
+    .quiz-stat-label { font-size: .7rem; }
+    .quiz-stat-val { font-size: 1.1rem; }
     .quiz-top { margin-bottom: 14px; flex-wrap: wrap; }
     .hint-btn-quiz { 
       order: 3; 
@@ -1084,6 +1170,18 @@
         max(10px,env(safe-area-inset-left));
     }
     .quiz-panel { padding: 12px 12px 16px; border-radius: 14px; }
+    .quiz-stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+    }
+    .quiz-stat {
+      padding: 6px 8px;
+      min-width: 0;
+    }
+    .quiz-stat-label { font-size: .65rem; }
+    .quiz-stat-val { font-size: 1rem; }
     .quiz-top { gap: 8px; margin-bottom: 10px; }
     .q-label { font-size: .82rem; }
     .pips { max-width: 150px; gap: 3px; }
@@ -1182,10 +1280,13 @@
   }
 
   @media (max-width: 400px) {
-    .stats { gap: 3px; }
-    .stat { padding: 4px 2px; }
-    .stat .label { font-size: .55rem; }
-    .stat .val { font-size: .78rem; }
+    .stats { gap: 4px; }
+    .stat { padding: 5px 6px; }
+    .stat .label { font-size: .6rem; }
+    .stat .val { font-size: .85rem; }
+    .quiz-stat { padding: 5px 6px; }
+    .quiz-stat-label { font-size: .6rem; }
+    .quiz-stat-val { font-size: .9rem; }
     .tq .eduplay-nav-btn { font-size: .66rem; }
     .tq .eduplay-nav-btn i { font-size: .92rem; }
     .c-city { font-size: .82rem; }
@@ -1218,10 +1319,6 @@
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
       <div class="stats" role="group" aria-label="Game stats">
         <div class="stat level"><span class="label">Level</span><span class="val" id="uiLevel">1</span></div>
-        <div class="stat"><span class="label">Time</span><span class="val" id="uiTime">05:00</span></div>
-        <div class="stat"><span class="label">Round</span><span class="val" id="uiRound">– / 10</span></div>
-        <div class="stat"><span class="label">Score</span><span class="val" id="uiScore">0</span></div>
-        <div class="stat streak"><span class="label">Streak</span><span class="val" id="uiStreak">0</span></div>
         <div class="stat coins"><span class="label">Coins</span><span class="val" id="uiCoins">50</span></div>
       </div>
       <div class="eduplay-game-nav">
@@ -1252,6 +1349,24 @@
     </div>
 
     <aside class="quiz-panel" aria-label="Quiz">
+      <div class="quiz-stats">
+        <div class="quiz-stat time">
+          <span class="quiz-stat-label">Time</span>
+          <span class="quiz-stat-val" id="uiTime">05:00</span>
+        </div>
+        <div class="quiz-stat score">
+          <span class="quiz-stat-label">Score</span>
+          <span class="quiz-stat-val" id="uiScore">0</span>
+        </div>
+        <div class="quiz-stat streak">
+          <span class="quiz-stat-label">Streak</span>
+          <span class="quiz-stat-val" id="uiStreak">0</span>
+        </div>
+        <div class="quiz-stat round">
+          <span class="quiz-stat-label">Round</span>
+          <span class="quiz-stat-val" id="uiRound">– / 10</span>
+        </div>
+      </div>
       <div class="quiz-top">
         <div class="q-label" id="qLabel">Get ready…</div>
         <div class="pips" id="pips" aria-hidden="true"></div>
