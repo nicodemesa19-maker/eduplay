@@ -82,7 +82,7 @@ class TeacherStudentProfileController extends Controller
         $oldUsername = $student->username;
         $student->username = $student->original_username;
         $student->username_changes_count = 0; // Reset counter
-        $student->last_username_change = now();
+        $student->last_username_change = \Illuminate\Support\Carbon::now();
         $student->save();
 
         // Log the reversion
@@ -165,7 +165,7 @@ class TeacherStudentProfileController extends Controller
         $oldUsername = $student->username;
         $student->username = $validated['username'];
         $student->username_changes_count = 0; // Reset counter on teacher edit
-        $student->last_username_change = now();
+        $student->last_username_change = \Illuminate\Support\Carbon::now();
         $student->save();
 
         // Log the change

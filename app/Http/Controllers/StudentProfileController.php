@@ -130,7 +130,7 @@ class StudentProfileController extends Controller
 
         // Update user profile
         $user->update($validated);
-        $user->profile_updated_at = now();
+        $user->profile_updated_at = \Illuminate\Support\Carbon::now();
         $user->save();
 
         // Log changes
@@ -186,7 +186,7 @@ class StudentProfileController extends Controller
         }
 
         $user->username = $newUsername;
-        $user->last_username_change = now();
+        $user->last_username_change = \Illuminate\Support\Carbon::now();
         $user->save();
 
         // Log the change
