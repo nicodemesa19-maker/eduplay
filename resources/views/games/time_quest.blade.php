@@ -1216,9 +1216,9 @@
       text-shadow: 0 0 8px rgba(255,61,174,.5);
     }
     
-    /* Hide quiz panel stats on mobile */
+    /* Hide quiz panel stats on mobile - all stats are in header */
     .quiz-stats {
-      display: none;
+      display: none !important;
     }
 
     /* Nav: hide desktop buttons, show burger */
