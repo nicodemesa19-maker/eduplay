@@ -106,8 +106,8 @@ h1,h2,h3{font-family:'Bungee',sans-serif;}
         <h1 class="hero-title">🕒 Change History</h1>
         <p class="hero-sub">Track all your profile updates</p>
       </div>
-      <a href="{{ route('student.profile.edit') }}" class="btn btn-neon">
-        <i class="bi bi-arrow-left"></i> Back to Profile
+      <a href="{{ route('student.profile.show') }}" class="btn btn-neon">
+        <i class="bi bi-arrow-left"></i> Back to My Profile
       </a>
     </div>
   </div>
@@ -159,8 +159,8 @@ h1,h2,h3{font-family:'Bungee',sans-serif;}
       <div style="font-size:4rem;margin-bottom:20px;">📝</div>
       <h3 style="color:var(--muted);">No Changes Yet</h3>
       <p style="color:var(--muted);">Your profile change history will appear here.</p>
-      <a href="{{ route('student.profile.edit') }}" class="btn btn-neon mt-3">
-        Edit Profile
+      <a href="{{ route('student.profile.show') }}" class="btn btn-neon mt-3">
+        View My Profile
       </a>
     </div>
   @endif
