@@ -21,6 +21,23 @@ Route::get('/network-info', function () {
     return view('network-info', ['ipv4' => $ipv4, 'port' => $port, 'url' => $url]);
 });
 
+// TEMPORARY: Debug Supabase config
+Route::get('/debug-supabase', function () {
+    $url = env('SUPABASE_STORAGE_URL');
+    $key = env('SUPABASE_SERVICE_KEY');
+    $bucket = env('SUPABASE_STORAGE_BUCKET');
+    
+    return response()->json([
+        'url_set' => !empty($url),
+        'url_value' => $url,
+        'key_set' => !empty($key),
+        'key_length' => strlen($key ?? ''),
+        'key_starts_with' => substr($key ?? '', 0, 30),
+        'key_ends_with' => substr($key ?? '', -20),
+        'bucket' => $bucket,
+    ]);
+});
+
 // Guest welcome page
 Route::get('/', function () {
     if (auth()->check()) {
