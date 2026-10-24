@@ -263,11 +263,14 @@ class User extends Authenticatable
 
     /**
      * Get the avatar URL (either uploaded or preset character).
+     * Includes cache-busting timestamp for uploaded avatars to prevent browser caching issues.
      */
     public function getAvatarUrl(): string
     {
         if ($this->avatar_upload_path) {
-            return asset('storage/' . $this->avatar_upload_path);
+            // Add cache-busting timestamp to prevent browser from showing old cached image
+            $timestamp = $this->updated_at ? $this->updated_at->timestamp : time();
+            return asset('storage/' . $this->avatar_upload_path . '?v=' . $timestamp);
         }
 
         // Return preset character image path
