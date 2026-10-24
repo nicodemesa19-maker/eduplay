@@ -16,6 +16,15 @@ class SupabaseStorageService
         $this->supabaseUrl = env('SUPABASE_STORAGE_URL');
         $this->supabaseKey = env('SUPABASE_SERVICE_KEY');
         $this->bucket = env('SUPABASE_STORAGE_BUCKET', 'avatars');
+        
+        // Debug logging (remove after fixing)
+        \Log::info('SupabaseStorageService initialized', [
+            'url_set' => !empty($this->supabaseUrl),
+            'key_set' => !empty($this->supabaseKey),
+            'key_length' => strlen($this->supabaseKey ?? ''),
+            'key_starts_with' => substr($this->supabaseKey ?? '', 0, 20) . '...',
+            'bucket' => $this->bucket,
+        ]);
     }
 
     /**
