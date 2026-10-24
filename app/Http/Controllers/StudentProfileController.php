@@ -7,6 +7,7 @@ use App\Models\TeacherNotification;
 use App\Models\User;
 use App\Rules\ProfanityFilterRule;
 use App\Rules\UsernameRateLimitRule;
+use App\Services\SupabaseStorageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -253,7 +254,7 @@ class StudentProfileController extends Controller
     /**
      * Update avatar (upload custom or select preset)
      */
-    public function updateAvatar(Request $request)
+    public function updateAvatar(Request $request, SupabaseStorageService $supabaseStorage)
     {
         $user = Auth::user();
         
@@ -272,22 +273,48 @@ class StudentProfileController extends Controller
             
             // Delete old uploaded avatar if exists
             if ($oldAvatarUpload) {
-                Storage::disk('public')->delete($oldAvatarUpload);
+                // Delete from Supabase if configured, otherwise local storage
+                if ($supabaseStorage->isConfigured() && str_starts_with($oldAvatarUpload, 'http')) {
+                    $path = basename(parse_url($oldAvatarUpload, PHP_URL_PATH));
+                    $supabaseStorage->delete($path);
+                } else {
+                    Storage::disk('public')->delete($oldAvatarUpload);
+                }
                 $user->avatar_upload_path = null;
             }
         } else {
             // Upload custom avatar
             if ($request->hasFile('avatar_upload')) {
-                // Delete old uploaded avatar if exists
-                if ($oldAvatarUpload) {
-                    Storage::disk('public')->delete($oldAvatarUpload);
-                }
-
                 $file = $request->file('avatar_upload');
                 $filename = 'avatar_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('avatars', $filename, 'public');
                 
-                $user->avatar_upload_path = $path;
+                // Try Supabase Storage first, fallback to local storage
+                if ($supabaseStorage->isConfigured()) {
+                    // Delete old uploaded avatar from Supabase if exists
+                    if ($oldAvatarUpload && str_starts_with($oldAvatarUpload, 'http')) {
+                        $oldPath = basename(parse_url($oldAvatarUpload, PHP_URL_PATH));
+                        $supabaseStorage->delete($oldPath);
+                    }
+                    
+                    // Upload to Supabase
+                    $result = $supabaseStorage->upload($file, $filename);
+                    
+                    if ($result['success']) {
+                        $user->avatar_upload_path = $result['url'];
+                    } else {
+                        return redirect()->route('student.profile.edit')
+                            ->with('error', '❌ Failed to upload avatar: ' . $result['error']);
+                    }
+                } else {
+                    // Fallback to local storage
+                    if ($oldAvatarUpload && !str_starts_with($oldAvatarUpload, 'http')) {
+                        Storage::disk('public')->delete($oldAvatarUpload);
+                    }
+                    
+                    $path = $file->storeAs('avatars', $filename, 'public');
+                    $user->avatar_upload_path = $path;
+                }
+                
                 $user->avatar_character = null; // Clear preset when uploading
             }
         }

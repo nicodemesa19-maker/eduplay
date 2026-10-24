@@ -268,7 +268,13 @@ class User extends Authenticatable
     public function getAvatarUrl(): string
     {
         if ($this->avatar_upload_path) {
-            // Add cache-busting timestamp to prevent browser from showing old cached image
+            // If it's already a full URL (from Supabase), return as-is with cache buster
+            if (str_starts_with($this->avatar_upload_path, 'http')) {
+                $timestamp = $this->updated_at ? $this->updated_at->timestamp : time();
+                return $this->avatar_upload_path . '?v=' . $timestamp;
+            }
+            
+            // Otherwise it's a local path, add cache-busting timestamp
             $timestamp = $this->updated_at ? $this->updated_at->timestamp : time();
             return asset('storage/' . $this->avatar_upload_path . '?v=' . $timestamp);
         }
