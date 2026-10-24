@@ -258,81 +258,120 @@ class StudentProfileController extends Controller
     {
         $user = Auth::user();
         
-        $validated = $request->validate([
-            'avatar_type' => ['required', 'in:preset,upload'],
-            'avatar_preset' => ['required_if:avatar_type,preset', 'nullable', 'string', 'max:100'],
-            'avatar_upload' => ['required_if:avatar_type,upload', 'nullable', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'], // 2MB max
-        ]);
+        try {
+            $validated = $request->validate([
+                'avatar_type' => ['required', 'in:preset,upload'],
+                'avatar_preset' => ['required_if:avatar_type,preset', 'nullable', 'string', 'max:100'],
+                'avatar_upload' => ['required_if:avatar_type,upload', 'nullable', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'], // 2MB max
+            ]);
 
-        $oldAvatar = $user->avatar_character;
-        $oldAvatarUpload = $user->avatar_upload_path;
+            $oldAvatar = $user->avatar_character;
+            $oldAvatarUpload = $user->avatar_upload_path;
 
-        if ($validated['avatar_type'] === 'preset') {
-            // Using preset avatar
-            $user->avatar_character = $validated['avatar_preset'];
-            
-            // Delete old uploaded avatar if exists
-            if ($oldAvatarUpload) {
-                // Delete from Supabase if configured, otherwise local storage
-                if ($supabaseStorage->isConfigured() && str_starts_with($oldAvatarUpload, 'http')) {
-                    $path = basename(parse_url($oldAvatarUpload, PHP_URL_PATH));
-                    $supabaseStorage->delete($path);
-                } else {
-                    Storage::disk('public')->delete($oldAvatarUpload);
-                }
-                $user->avatar_upload_path = null;
-            }
-        } else {
-            // Upload custom avatar
-            if ($request->hasFile('avatar_upload')) {
-                $file = $request->file('avatar_upload');
-                $filename = 'avatar_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            if ($validated['avatar_type'] === 'preset') {
+                // Using preset avatar
+                $user->avatar_character = $validated['avatar_preset'];
                 
-                // Try Supabase Storage first, fallback to local storage
-                if ($supabaseStorage->isConfigured()) {
-                    // Delete old uploaded avatar from Supabase if exists
-                    if ($oldAvatarUpload && str_starts_with($oldAvatarUpload, 'http')) {
-                        $oldPath = basename(parse_url($oldAvatarUpload, PHP_URL_PATH));
-                        $supabaseStorage->delete($oldPath);
-                    }
-                    
-                    // Upload to Supabase
-                    $result = $supabaseStorage->upload($file, $filename);
-                    
-                    if ($result['success']) {
-                        $user->avatar_upload_path = $result['url'];
-                    } else {
-                        return redirect()->route('student.profile.edit')
-                            ->with('error', '❌ Failed to upload avatar: ' . $result['error']);
-                    }
-                } else {
-                    // Fallback to local storage
-                    if ($oldAvatarUpload && !str_starts_with($oldAvatarUpload, 'http')) {
+                // Delete old uploaded avatar if exists
+                if ($oldAvatarUpload) {
+                    // Delete from Supabase if configured, otherwise local storage
+                    if ($supabaseStorage->isConfigured() && str_starts_with($oldAvatarUpload, 'http')) {
+                        $path = basename(parse_url($oldAvatarUpload, PHP_URL_PATH));
+                        $supabaseStorage->delete($path);
+                    } else if (!str_starts_with($oldAvatarUpload, 'http')) {
                         Storage::disk('public')->delete($oldAvatarUpload);
                     }
-                    
-                    $path = $file->storeAs('avatars', $filename, 'public');
-                    $user->avatar_upload_path = $path;
+                    $user->avatar_upload_path = null;
                 }
-                
-                $user->avatar_character = null; // Clear preset when uploading
+            } else {
+                // Upload custom avatar
+                if ($request->hasFile('avatar_upload')) {
+                    $file = $request->file('avatar_upload');
+                    
+                    // Verify file is valid
+                    if (!$file->isValid()) {
+                        return redirect()->route('student.profile.edit')
+                            ->with('error', '❌ File upload failed. Please try again.');
+                    }
+                    
+                    $filename = 'avatar_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+                    
+                    // Try Supabase Storage first, fallback to local storage
+                    if ($supabaseStorage->isConfigured()) {
+                        // Delete old uploaded avatar from Supabase if exists
+                        if ($oldAvatarUpload && str_starts_with($oldAvatarUpload, 'http')) {
+                            $oldPath = basename(parse_url($oldAvatarUpload, PHP_URL_PATH));
+                            $supabaseStorage->delete($oldPath);
+                        }
+                        
+                        // Upload to Supabase
+                        $result = $supabaseStorage->upload($file, $filename);
+                        
+                        if ($result['success']) {
+                            $user->avatar_upload_path = $result['url'];
+                        } else {
+                            return redirect()->route('student.profile.edit')
+                                ->with('error', '❌ Failed to upload avatar: ' . $result['error']);
+                        }
+                    } else {
+                        // Fallback to local storage
+                        // Delete old uploaded avatar if exists
+                        if ($oldAvatarUpload && !str_starts_with($oldAvatarUpload, 'http')) {
+                            Storage::disk('public')->delete($oldAvatarUpload);
+                        }
+                        
+                        // Ensure avatars directory exists
+                        Storage::disk('public')->makeDirectory('avatars');
+                        
+                        // Store the file
+                        $path = $file->storeAs('avatars', $filename, 'public');
+                        
+                        if (!$path) {
+                            \Log::error('Failed to store avatar file', [
+                                'user_id' => $user->id,
+                                'filename' => $filename,
+                            ]);
+                            return redirect()->route('student.profile.edit')
+                                ->with('error', '❌ Failed to save avatar file. Please check server permissions.');
+                        }
+                        
+                        $user->avatar_upload_path = $path;
+                        
+                        \Log::info('Avatar uploaded successfully', [
+                            'user_id' => $user->id,
+                            'path' => $path,
+                        ]);
+                    }
+                    
+                    $user->avatar_character = null; // Clear preset when uploading
+                }
             }
+
+            $user->save();
+
+            // Log the change
+            ProfileChangeLog::create([
+                'user_id' => $user->id,
+                'field_name' => 'avatar',
+                'old_value' => $oldAvatar ?? $oldAvatarUpload ?? 'none',
+                'new_value' => $user->avatar_character ?? $user->avatar_upload_path ?? 'none',
+                'changed_by_role' => 'student',
+                'changed_by_user_id' => $user->id,
+            ]);
+
+            return redirect()->route('student.profile.edit')
+                ->with('success', '🎨 Avatar updated successfully!');
+                
+        } catch (\Exception $e) {
+            \Log::error('Avatar update failed', [
+                'user_id' => $user->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            
+            return redirect()->route('student.profile.edit')
+                ->with('error', '❌ Avatar update failed: ' . $e->getMessage());
         }
-
-        $user->save();
-
-        // Log the change
-        ProfileChangeLog::create([
-            'user_id' => $user->id,
-            'field_name' => 'avatar',
-            'old_value' => $oldAvatar ?? $oldAvatarUpload ?? 'none',
-            'new_value' => $user->avatar_character ?? $user->avatar_upload_path ?? 'none',
-            'changed_by_role' => 'student',
-            'changed_by_user_id' => $user->id,
-        ]);
-
-        return redirect()->route('student.profile.edit')
-            ->with('success', '🎨 Avatar updated successfully!');
     }
 
     /**
