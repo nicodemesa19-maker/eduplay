@@ -23,29 +23,50 @@ class SupabaseStorageService
      */
     public function upload(UploadedFile $file, string $path): array
     {
-        $url = "{$this->supabaseUrl}/storage/v1/object/{$this->bucket}/{$path}";
-        
-        $response = Http::withHeaders([
-            'Authorization' => "Bearer {$this->supabaseKey}",
-            'Content-Type' => $file->getMimeType(),
-        ])->attach(
-            'file',
-            file_get_contents($file->getRealPath()),
-            $file->getClientOriginalName()
-        )->post($url);
+        try {
+            $url = "{$this->supabaseUrl}/storage/v1/object/{$this->bucket}/{$path}";
+            
+            // Read file contents
+            $fileContents = file_get_contents($file->getRealPath());
+            
+            // Upload to Supabase Storage
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer {$this->supabaseKey}",
+                'Content-Type' => $file->getMimeType(),
+            ])->withBody($fileContents, $file->getMimeType())
+            ->post($url);
 
-        if ($response->successful()) {
+            if ($response->successful()) {
+                return [
+                    'success' => true,
+                    'path' => $path,
+                    'url' => $this->getPublicUrl($path),
+                ];
+            }
+
+            // Get detailed error from response
+            $error = $response->json()['message'] ?? $response->json()['error'] ?? 'Upload failed';
+            \Log::error('Supabase upload failed', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+                'url' => $url,
+            ]);
+
             return [
-                'success' => true,
+                'success' => false,
+                'error' => $error . ' (Status: ' . $response->status() . ')',
+            ];
+        } catch (\Exception $e) {
+            \Log::error('Supabase upload exception', [
+                'error' => $e->getMessage(),
                 'path' => $path,
-                'url' => $this->getPublicUrl($path),
+            ]);
+            
+            return [
+                'success' => false,
+                'error' => 'Upload exception: ' . $e->getMessage(),
             ];
         }
-
-        return [
-            'success' => false,
-            'error' => $response->json()['message'] ?? 'Upload failed',
-        ];
     }
 
     /**
