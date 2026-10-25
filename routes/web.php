@@ -79,6 +79,34 @@ Route::get('/test-faculty-upload', function () {
     }
 });
 
+// TEMPORARY: Delete unverified teacher for testing
+Route::get('/delete-unverified-teacher/{email}', function ($email) {
+    $user = \App\Models\User::where('email', $email)
+        ->where('role', 'teacher')
+        ->whereNull('email_verified_at')
+        ->first();
+    
+    if ($user) {
+        $user->delete();
+        // Also delete the OTP token
+        \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+            ->where('email', $email)
+            ->delete();
+            
+        return response()->json([
+            'success' => true,
+            'message' => 'Unverified teacher account deleted successfully',
+            'email' => $email,
+        ]);
+    }
+    
+    return response()->json([
+        'success' => false,
+        'message' => 'No unverified teacher found with that email',
+        'email' => $email,
+    ], 404);
+});
+
 // Guest welcome page
 Route::get('/', function () {
     if (auth()->check()) {
