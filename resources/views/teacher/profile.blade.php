@@ -665,7 +665,7 @@ async function uploadAvatar(input) {
   formData.append('_token', document.querySelector('input[name="_token"]').value);
   
   try {
-    const response = await fetch('{{ route("teacher.profile.avatar.upload") }}', {
+    const response = await fetch('{{ route("teacher.avatar.upload") }}', {
       method: 'POST',
       body: formData,
     });
