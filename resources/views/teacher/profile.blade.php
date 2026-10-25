@@ -166,6 +166,9 @@
   color: var(--err);
   margin-left: 2px;
 }
+.password-wrapper {
+  position: relative;
+}
 .form-input {
   width: 100%;
   appearance: none;
@@ -179,6 +182,9 @@
   outline: none;
   transition: border-color .12s, box-shadow .12s;
   font-family: inherit;
+}
+.password-wrapper .form-input {
+  padding-right: 42px;
 }
 .form-input:hover {
   border-color: var(--ink-3);
@@ -207,6 +213,24 @@ textarea.form-input {
   resize: vertical;
   min-height: 80px;
   font-family: inherit;
+}
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 16px;
+  line-height: 1;
+  transition: color .15s;
+  z-index: 10;
+}
+.toggle-password:hover {
+  color: var(--accent);
 }
 
 /* Upload Button */
@@ -504,6 +528,93 @@ textarea.form-input {
       </div>
     </div>
 
+    <!-- Password Update Section -->
+    <div class="profile-card">
+      <h3 class="profile-card-title">Change Password</h3>
+      
+      <div style="background: rgba(216,163,60,.1); border: 1px solid rgba(216,163,60,.25); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px;">
+        <p style="color: var(--ink-2); font-size: 13px; margin: 0;">
+          <i class="bi bi-shield-lock" style="margin-right: 6px; color: var(--warn);"></i>
+          <strong>Security Notice:</strong> Use a strong password with at least 8 characters. Your password is encrypted and secure.
+        </p>
+      </div>
+
+      <form id="passwordForm">
+        @csrf
+        
+        <div class="form-group">
+          <label class="form-label">
+            Current Password <span class="required">*</span>
+          </label>
+          <div class="password-wrapper">
+            <input 
+              type="password" 
+              name="current_password" 
+              id="currentPasswordInput"
+              class="form-input" 
+              placeholder="Enter your current password"
+              required
+              autocomplete="current-password"
+            >
+            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('currentPasswordInput', this)">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+          <span class="form-error" id="currentPasswordError"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            New Password <span class="required">*</span>
+          </label>
+          <div class="password-wrapper">
+            <input 
+              type="password" 
+              name="new_password" 
+              id="newPasswordInput"
+              class="form-input" 
+              placeholder="Enter new password (min. 8 characters)"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            >
+            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPasswordInput', this)">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+          <span class="form-hint">Minimum 8 characters</span>
+          <span class="form-error" id="newPasswordError"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            Confirm New Password <span class="required">*</span>
+          </label>
+          <div class="password-wrapper">
+            <input 
+              type="password" 
+              name="new_password_confirmation" 
+              id="newPasswordConfirmInput"
+              class="form-input" 
+              placeholder="Re-enter new password"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            >
+            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPasswordConfirmInput', this)">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+          <span class="form-error" id="newPasswordConfirmError"></span>
+        </div>
+
+        <button type="submit" class="btn-primary" id="passwordBtn">
+          <i class="bi bi-shield-check"></i>
+          Update Password
+        </button>
+      </form>
+    </div>
+
     <!-- Read-only Section -->
     <div class="profile-card">
       <h3 class="profile-card-title">Account Information (Read-only)</h3>
@@ -555,6 +666,22 @@ textarea.form-input {
 </div>
 
 <script>
+// Toggle password visibility
+function togglePasswordVisibility(inputId, button) {
+  const input = document.getElementById(inputId);
+  const icon = button.querySelector('i');
+  
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.classList.remove('bi-eye');
+    icon.classList.add('bi-eye-slash');
+  } else {
+    input.type = 'password';
+    icon.classList.remove('bi-eye-slash');
+    icon.classList.add('bi-eye');
+  }
+}
+
 // Real-time preview updates
 const displayNameInput = document.getElementById('displayNameInput');
 const pronounsInput = document.getElementById('pronounsInput');
@@ -688,6 +815,64 @@ async function uploadAvatar(input) {
     input.value = '';
   }
 }
+
+// Password form submission
+document.getElementById('passwordForm')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const passwordBtn = document.getElementById('passwordBtn');
+  passwordBtn.disabled = true;
+  passwordBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Updating...';
+  
+  // Clear previous errors
+  document.querySelectorAll('#passwordForm .form-error').forEach(el => el.textContent = '');
+  
+  const formData = new FormData(e.target);
+  const data = {};
+  for (const [key, value] of formData.entries()) {
+    if (key !== '_token') {
+      data[key] = value;
+    }
+  }
+  
+  try {
+    const response = await fetch('{{ route("teacher.password.update") }}', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('#passwordForm input[name="_token"]').value,
+      },
+      body: JSON.stringify(data),
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok) {
+      showAlert('success', result.message || 'Password updated successfully!');
+      // Clear form
+      e.target.reset();
+    } else {
+      if (result.errors) {
+        // Validation errors
+        Object.keys(result.errors).forEach(field => {
+          const errorEl = document.getElementById(field.replace(/_/g, '') + 'Error');
+          if (errorEl) {
+            errorEl.textContent = result.errors[field][0];
+          }
+        });
+        showAlert('error', result.message || 'Please fix the errors below');
+      } else {
+        showAlert('error', result.message || 'Failed to update password');
+      }
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    showAlert('error', 'An error occurred. Please try again.');
+  } finally {
+    passwordBtn.disabled = false;
+    passwordBtn.innerHTML = '<i class="bi bi-shield-check"></i> Update Password';
+  }
+});
 
 // Alert helper
 function showAlert(type, message) {

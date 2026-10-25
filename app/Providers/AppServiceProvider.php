@@ -28,11 +28,13 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Register Brevo mailer transport using DSN
-        Mail::extend('brevo', function () {
-            return \Illuminate\Mail\MailManager::createSymfonyTransport([
-                'transport' => 'brevo+api://'.config('services.brevo.key').'@default'
-            ]);
+        // Register Brevo mailer transport
+        Mail::extend('brevo', function ($config) {
+            $transport = new \Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoApiTransport(
+                config('services.brevo.key')
+            );
+            
+            return new \Illuminate\Mail\Transport\Transport($transport);
         });
     }
 }

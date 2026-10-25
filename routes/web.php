@@ -196,6 +196,7 @@ Route::prefix('teacher')->middleware(['auth', 'teacher'])->name('teacher.')->gro
     Route::patch('/profile', [\App\Http\Controllers\TeacherProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/avatar', [\App\Http\Controllers\TeacherProfileController::class, 'uploadAvatar'])->name('avatar.upload');
     Route::post('/avatar/preset', [\App\Http\Controllers\TeacherProfileController::class, 'setPresetAvatar'])->name('avatar.preset');
+    Route::patch('/password', [\App\Http\Controllers\TeacherProfileController::class, 'updatePassword'])->name('password.update');
 });
 
 // Student Routes

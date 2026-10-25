@@ -252,4 +252,50 @@ class TeacherProfileController extends Controller
             ],
         ]);
     }
+
+    /**
+     * PATCH /api/teacher/password
+     * Update teacher password with current password verification
+     * 
+     * SECURITY: 
+     * - Requires current password verification
+     * - Min 8 characters for new password
+     * - Must confirm new password
+     */
+    public function updatePassword(Request $request)
+    {
+        $teacher = Auth::user();
+
+        // Ensure user is a teacher
+        if ($teacher->role !== 'teacher') {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        // Validate password fields
+        $validated = $request->validate([
+            'current_password' => ['required', 'string'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        // Verify current password
+        if (!\Hash::check($validated['current_password'], $teacher->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Current password is incorrect',
+                'errors' => [
+                    'current_password' => ['The current password is incorrect.'],
+                ],
+            ], 422);
+        }
+
+        // Update password
+        $teacher->update([
+            'password' => \Hash::make($validated['new_password']),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Password updated successfully',
+        ]);
+    }
 }

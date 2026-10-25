@@ -298,6 +298,35 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
   flex-shrink:0;
 }
 
+/* Password toggle */
+.password-wrapper{
+  position:relative;
+}
+
+.password-wrapper .form-control{
+  padding-right:42px;
+}
+
+.toggle-password{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  color:var(--muted);
+  cursor:pointer;
+  padding:4px;
+  font-size:18px;
+  line-height:1;
+  transition:color .15s;
+  z-index:10;
+}
+
+.toggle-password:hover{
+  color:var(--cyan);
+}
+
 .badge-info{
   flex:1;
   text-align:left;
@@ -779,18 +808,33 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
       
       <div class="mb-3">
         <label class="form-label">Current Password</label>
-        <input type="password" name="current_password" class="form-control" required>
+        <div class="password-wrapper">
+          <input type="password" name="current_password" id="currentPassword" class="form-control" required>
+          <button type="button" class="toggle-password" onclick="togglePasswordVisibility('currentPassword', this)">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
       </div>
 
       <div class="mb-3">
         <label class="form-label">New Password</label>
-        <input type="password" name="password" class="form-control" required minlength="6">
+        <div class="password-wrapper">
+          <input type="password" name="password" id="newPassword" class="form-control" required minlength="6">
+          <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPassword', this)">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
         <small class="text-muted">At least 6 characters</small>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Confirm New Password</label>
-        <input type="password" name="password_confirmation" class="form-control" required>
+        <div class="password-wrapper">
+          <input type="password" name="password_confirmation" id="confirmPassword" class="form-control" required>
+          <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirmPassword', this)">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
       </div>
 
       <button type="submit" class="btn btn-neon">
@@ -809,6 +853,22 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
 </div>
 
 <script>
+// Toggle password visibility
+function togglePasswordVisibility(inputId, button) {
+  const input = document.getElementById(inputId);
+  const icon = button.querySelector('i');
+  
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.classList.remove('bi-eye');
+    icon.classList.add('bi-eye-slash');
+  } else {
+    input.type = 'password';
+    icon.classList.remove('bi-eye-slash');
+    icon.classList.add('bi-eye');
+  }
+}
+
 // Volume sliders
 document.getElementById('soundSlider').addEventListener('input', function() {
   document.getElementById('soundValue').textContent = this.value;
