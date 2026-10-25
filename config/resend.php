@@ -12,4 +12,15 @@ return [
     */
 
     'api_key' => env('RESEND_API_KEY'),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Resend Routes
+    |--------------------------------------------------------------------------
+    |
+    | Disable routes as we don't need webhook handling
+    |
+    */
+    
+    'routes' => false,
 ];
