@@ -209,37 +209,6 @@ textarea.form-input {
   font-family: inherit;
 }
 
-/* Avatar Grid */
-.avatar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-  gap: 10px;
-  margin: 12px 0;
-}
-.avatar-option {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid var(--line);
-  cursor: pointer;
-  transition: all .15s;
-  overflow: hidden;
-}
-.avatar-option:hover {
-  border-color: var(--accent);
-  transform: scale(1.05);
-}
-.avatar-option.selected {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-wash);
-}
-.avatar-option img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 /* Upload Button */
 .upload-btn {
   position: relative;
@@ -413,7 +382,7 @@ textarea.form-input {
     <div class="profile-preview">
       <div class="profile-avatar" id="previewAvatar">
         @if($teacher->avatar_url)
-          <img src="{{ Storage::url($teacher->avatar_url) }}" alt="Avatar">
+          <img src="{{ Storage::url($teacher->avatar_url) }}" alt="Profile Picture">
         @else
           <div class="profile-avatar-placeholder">
             <i class="bi bi-person-circle"></i>
@@ -494,29 +463,21 @@ textarea.form-input {
       </form>
     </div>
 
-    <!-- Avatar Upload Section -->
+    <!-- Profile Picture Upload Section -->
     <div class="profile-card">
-      <h3 class="profile-card-title">Avatar</h3>
+      <h3 class="profile-card-title">Profile Picture</h3>
       
-      <p style="color: var(--ink-2); font-size: 13px; margin-bottom: 16px;">
-        Choose a preset avatar or upload your own
-      </p>
-
-      <!-- Preset Avatars -->
-      <div class="avatar-grid" id="avatarGrid">
-        @foreach(['avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png', 'avatar6.png', 'avatar7.png', 'avatar8.png'] as $preset)
-          <div class="avatar-option {{ $teacher->avatar_url === 'images/avatars/'.$preset ? 'selected' : '' }}" 
-               data-preset="{{ $preset }}"
-               onclick="selectPresetAvatar('{{ $preset }}')">
-            <img src="{{ asset('images/avatars/'.$preset) }}" alt="Avatar {{ $loop->iteration }}">
-          </div>
-        @endforeach
+      <div style="background: rgba(91,124,250,.1); border: 1px solid rgba(91,124,250,.25); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px;">
+        <p style="color: var(--ink-2); font-size: 13px; margin: 0;">
+          <i class="bi bi-info-circle" style="margin-right: 6px; color: var(--accent);"></i>
+          <strong>Please choose a decent, professional photo.</strong> This picture will be visible to students and should represent you appropriately as an educator.
+        </p>
       </div>
 
-      <div style="margin-top: 16px;">
+      <div>
         <label class="upload-btn">
           <i class="bi bi-cloud-upload"></i>
-          Upload Custom Avatar
+          Upload Profile Picture
           <input 
             type="file" 
             id="avatarUpload" 
@@ -525,7 +486,7 @@ textarea.form-input {
           >
         </label>
         <span class="form-hint" style="display: block; margin-top: 8px;">
-          JPG or PNG, max 1MB
+          JPG or PNG format, maximum 1MB file size
         </span>
         <span class="form-error" id="avatarError"></span>
       </div>
@@ -658,42 +619,7 @@ document.getElementById('profileForm')?.addEventListener('submit', async (e) => 
   }
 });
 
-// Preset avatar selection
-async function selectPresetAvatar(preset) {
-  try {
-    const response = await fetch('{{ route("teacher.profile.avatar.preset") }}', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-      },
-      body: JSON.stringify({ preset }),
-    });
-    
-    const result = await response.json();
-    
-    if (response.ok) {
-      // Update preview
-      const previewAvatar = document.getElementById('previewAvatar');
-      previewAvatar.innerHTML = `<img src="/images/avatars/${preset}" alt="Avatar">`;
-      
-      // Update selection state
-      document.querySelectorAll('.avatar-option').forEach(el => {
-        el.classList.remove('selected');
-      });
-      event.target.closest('.avatar-option').classList.add('selected');
-      
-      showAlert('success', 'Avatar updated successfully!');
-    } else {
-      showAlert('error', result.error || 'Failed to update avatar');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    showAlert('error', 'An error occurred. Please try again.');
-  }
-}
-
-// Avatar upload
+// Profile Picture upload
 async function uploadAvatar(input) {
   const file = input.files[0];
   if (!file) return;
@@ -727,16 +653,11 @@ async function uploadAvatar(input) {
     if (response.ok) {
       // Update preview
       const previewAvatar = document.getElementById('previewAvatar');
-      previewAvatar.innerHTML = `<img src="${result.data.avatar_full_url}" alt="Avatar">`;
+      previewAvatar.innerHTML = `<img src="${result.data.avatar_full_url}" alt="Profile Picture">`;
       
-      // Clear preset selection
-      document.querySelectorAll('.avatar-option').forEach(el => {
-        el.classList.remove('selected');
-      });
-      
-      showAlert('success', 'Avatar uploaded successfully!');
+      showAlert('success', 'Profile picture uploaded successfully!');
     } else {
-      showAlert('error', result.errors?.avatar?.[0] || result.error || 'Failed to upload avatar');
+      showAlert('error', result.errors?.avatar?.[0] || result.error || 'Failed to upload profile picture');
     }
   } catch (error) {
     console.error('Error:', error);
