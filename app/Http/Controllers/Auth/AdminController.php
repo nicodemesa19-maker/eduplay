@@ -88,9 +88,11 @@ class AdminController extends Controller
     {
         $teacher = User::findOrFail($id);
 
-        if (!$teacher->email_verified_at) {
-            return redirect()->back()->withErrors(['email' => 'This teacher must verify their email before approval.']);
-        }
+        // TEMPORARILY DISABLED: Email verification requirement
+        // TODO: Configure mail settings on Render and re-enable this check
+        // if (!$teacher->email_verified_at) {
+        //     return redirect()->back()->withErrors(['email' => 'This teacher must verify their email before approval.']);
+        // }
 
         $teacher->is_approved = true;
         $teacher->approved_at = now(); // Set approval timestamp
