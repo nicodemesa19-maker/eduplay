@@ -227,7 +227,6 @@ button{-webkit-tap-highlight-color:transparent;}
     line-height: 1.35;
 }
 .fc-tip b { color: #5eead4; }
-/* Card 5 shows keyboard tips on desktop and touch tips on touch devices */
 .fc-tip.touch-tip { display: none; }
 @media (hover: none) and (pointer: coarse) {
     .fc-tip.kbd-tip { display: none; }
@@ -678,8 +677,6 @@ button{-webkit-tap-highlight-color:transparent;}
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-
-/* Tablets / small laptops: tighten the HUD */
 @media (max-width: 900px) {
     #hud { padding: 8px 12px; gap: 8px; }
     .hv.rose { font-size: 17px; }
@@ -688,11 +685,7 @@ button{-webkit-tap-highlight-color:transparent;}
     .mission-txt { font-size: 17px; }
 }
 
-/* -- PHONES (and landscape phones): scrollable page, 2-row HUD,
-      bigger tap targets, fixed bottom "Cast Net" bar -- */
 @media (max-width: 680px), (max-height: 560px) and (pointer: coarse) {
-
-    /* The page container scrolls instead of clipping content */
     #gw {
         display: block;
         overflow-y: auto;
@@ -708,7 +701,6 @@ button{-webkit-tap-highlight-color:transparent;}
     }
     .gi { gap: 8px; }
 
-    /* HUD: row 1 = lives + level/score, row 2 = icon-only buttons */
     #hud {
         flex-wrap: wrap;
         padding: 8px 12px;
@@ -730,7 +722,7 @@ button{-webkit-tap-highlight-color:transparent;}
         font-size: 17px;
     }
     #hud .eduplay-nav-btn span { display: none; }
-    .eduplay-btn-fs { display: none !important; }   /* fullscreen is unreliable on phones */
+    .eduplay-btn-fs { display: none !important; }
     .hl { font-size: 11px; letter-spacing: 1.5px; }
     .hv.rose { font-size: 16px; letter-spacing: 1px; }
     .lvlbadge { font-size: 13px; padding: 3px 12px; }
@@ -740,7 +732,6 @@ button{-webkit-tap-highlight-color:transparent;}
     #pmeta { font-size: 12px; margin-top: 3px; }
     #ptrack { height: 9px; }
 
-    /* Mission + Cast Net become a fixed bottom action bar (always reachable) */
     #mission {
         position: fixed;
         left: 0; right: 0; bottom: 0;
@@ -755,7 +746,6 @@ button{-webkit-tap-highlight-color:transparent;}
     .mission-txt { font-size: 15px; line-height: 1.2; }
     #castBtn { padding: 14px 18px; font-size: 16px; border-radius: 13px; }
 
-    /* Pond: fills the remaining screen height; smaller fish and scenery */
     #pond {
         height: min(58vh, 440px);
         height: clamp(300px, calc(100dvh - 310px), 560px);
@@ -771,7 +761,6 @@ button{-webkit-tap-highlight-color:transparent;}
     .pond-decor .rocks { height: 44px; }
     .reed { width: 5px; }
 
-    /* Pause card + end banner */
     .pause-card { padding: 24px 18px; }
     .pause-card .eduplay-game-nav { flex-wrap: wrap; }
     .pause-card .eduplay-nav-btn { flex: 1; justify-content: center; padding: 9px 10px; font-size: 14px; }
@@ -782,7 +771,6 @@ button{-webkit-tap-highlight-color:transparent;}
     .bnr-btns .bbtn { flex: 1 1 100%; justify-content: center; padding: 12px 14px; font-size: .9rem; }
     .bnr-btns .eduplay-nav-btn { flex: 1; justify-content: center; font-size: 14px; }
 
-    /* Wrong answer modal scrolls on short screens */
     #wrongOverlay { padding: 12px; align-items: flex-start; }
     .wrong-box { padding: 18px 16px 14px; border-radius: 20px; }
     .wrong-ico { font-size: 36px; }
@@ -790,7 +778,6 @@ button{-webkit-tap-highlight-color:transparent;}
     .wr-line { font-size: 13px; }
     .wrong-continue { padding: 13px 20px; font-size: 16px; }
 
-    /* Flash-card tutorial: scrollable, compact, single column */
     .overlay, .fc-overlay {
         height: 100dvh !important;
         padding: 10px !important;
@@ -822,7 +809,6 @@ button{-webkit-tap-highlight-color:transparent;}
     .demo-fish { width: 54px; height: 54px; font-size: 21px; }
 }
 
-/* Very small phones */
 @media (max-width: 380px) {
     .hv.rose { font-size: 14px; }
     .mission-txt { font-size: 14px; }
@@ -835,25 +821,19 @@ button{-webkit-tap-highlight-color:transparent;}
 <div id="gw">
   <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
 
-  <!-- ============================================================
-       GAME SCREEN
-       ============================================================ -->
   <div id="gameScreen">
     <div class="gi">
       <div id="hud">
-        <!-- Left: Lives -->
         <div class="hp">
           <span class="hl">Lives</span>
           <span class="hv rose" id="livesVal">&#x2764;&#xFE0F;&#x2764;&#xFE0F;&#x2764;&#xFE0F;&#x2764;&#xFE0F;&#x2764;&#xFE0F;</span>
         </div>
 
-        <!-- Center: Level & Score Info -->
         <div class="hc">
           <div class="lvlbadge">🌊 <span id="lvlBadge">LVL {{ $progress->current_level }}</span></div>
           <div class="hs-sub">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span> <span class="score-pill-chip">⭐ Score: <span id="scoreVal">0</span>/10</span></div>
         </div>
 
-        <!-- Action & Navigation Buttons -->
         <div class="eduplay-game-nav">
           <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
             <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
@@ -873,13 +853,11 @@ button{-webkit-tap-highlight-color:transparent;}
         </div>
       </div>
 
-      <!-- Catch Progress Bar -->
       <div>
         <div id="ptrack"><div id="pfill"></div></div>
         <div id="pmeta"><span id="plabel">0 / 10 catches</span><span id="ppct">0%</span></div>
       </div>
 
-      <!-- PAUSE OVERLAY -->
       <div class="pause-overlay" id="pauseOverlay">
         <div class="pause-card">
           <div style="font-size:2.8rem;margin-bottom:0.4rem;">⏸️</div>
@@ -894,7 +872,6 @@ button{-webkit-tap-highlight-color:transparent;}
         </div>
       </div>
 
-      <!-- WIN / GAME OVER BANNER -->
       <div id="endBanner">
         <div class="bnr-box">
           <div class="bnr-left"><div class="bnr-ico" id="bnrIco">🏆</div><div class="bnr-stars" id="bnrStars"></div></div>
@@ -907,7 +884,6 @@ button{-webkit-tap-highlight-color:transparent;}
         </div>
       </div>
 
-      <!-- MISSION & CAST NET BAR (fixed bottom bar on phones) -->
       <div id="mission">
         <div class="mission-info">
           <div class="mission-tag" id="missionMode">🎯 Factors Mission</div>
@@ -916,14 +892,10 @@ button{-webkit-tap-highlight-color:transparent;}
         <button id="castBtn">🪝 Cast Net!</button>
       </div>
 
-      <!-- POND CANVAS -->
       <div id="pond"></div>
     </div>
   </div>
 
-  <!-- ============================================================
-       FLASH CARD DECK MODAL (Instructions & In-Game Tutorial)
-       ============================================================ -->
   <div id="overlay" class="fc-overlay" role="dialog" aria-modal="true" aria-label="Factor Pond Flash Cards">
     <div class="fc-deck">
       <div class="fc-deck-stack-1"></div>
@@ -937,7 +909,6 @@ button{-webkit-tap-highlight-color:transparent;}
           </button>
         </div>
 
-        <!-- CARD 1 -->
         <div id="fcSlide1" class="fc-slide">
           <h3 class="fc-title" style="color:#5eead4;"><span>🎯</span> Look Before You Fish!</h3>
           <p class="fc-desc">Read the mission banner before tapping fish. You will hunt for either <b>Factors</b> or <b>Multiples</b>:</p>
@@ -960,7 +931,6 @@ button{-webkit-tap-highlight-color:transparent;}
           </div>
         </div>
 
-        <!-- CARD 2 -->
         <div id="fcSlide2" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#22d3ee;"><span>🔢</span> What is a Factor?</h3>
           <p class="fc-desc">A factor divides the target number with <b>0 remainder</b>. If there is a remainder, it is NOT a factor!</p>
@@ -983,7 +953,6 @@ button{-webkit-tap-highlight-color:transparent;}
           </div>
         </div>
 
-        <!-- CARD 3 -->
         <div id="fcSlide3" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#fbbf24;"><span>✖️</span> What is a Multiple?</h3>
           <p class="fc-desc">Multiples come from your times table or skip-counting! Multiply the target by 1, 2, 3, 4, 5 and so on.</p>
@@ -997,7 +966,6 @@ button{-webkit-tap-highlight-color:transparent;}
           </div>
         </div>
 
-        <!-- CARD 4 -->
         <div id="fcSlide4" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#34d399;"><span>🐟</span> Tap Fish &amp; Cast Net</h3>
           <p class="fc-desc">Tap fish to pick them. Selected fish glow with a bright <b style="color:#fbbf24;">golden ring ✨</b>:</p>
@@ -1011,7 +979,6 @@ button{-webkit-tap-highlight-color:transparent;}
           </div>
         </div>
 
-        <!-- CARD 5 -->
         <div id="fcSlide5" class="fc-slide hidden">
           <h3 class="fc-title" style="color:#f43f5e;"><span>❤️</span> 5 Lives &amp; 10 to Win</h3>
           <p class="fc-desc">Keep your hearts safe and fill your net to clear the level!</p>
@@ -1035,7 +1002,6 @@ button{-webkit-tap-highlight-color:transparent;}
           </div>
         </div>
 
-        <!-- Footer Navigation -->
         <div class="fc-footer">
           <button class="fc-nav-btn" id="fcPrevBtn" type="button" onclick="stepFlashCard(-1)">
             <i class="bi bi-arrow-left"></i> Prev
@@ -1058,7 +1024,6 @@ button{-webkit-tap-highlight-color:transparent;}
   </div>
 </div>
 
-<!-- WRONG ANSWER MODAL -->
 <div id="wrongOverlay">
   <div class="wrong-box">
     <div class="wrong-ico">🤔</div>
@@ -1066,7 +1031,7 @@ button{-webkit-tap-highlight-color:transparent;}
     <p class="wrong-sub">Here's what went wrong with your cast…</p>
     <div class="wrong-reason" id="wrongReason"></div>
     <div class="wrong-progress"><div class="wrong-progress-bar" id="wrongProgress"></div></div>
-    <button class="wrong-continue" id="wrongContinueBtn">Got it — Continue ➔
+    <button class="wrong-continue" id="wrongContinueBtn">Got it — Continue ➔</button>
   </div>
 </div>
 
@@ -1082,7 +1047,6 @@ const CSRF='{{ csrf_token() }}';
 const MAX_LIVES=5,WIN_POINTS=10;
 const WRONG_MODAL_MS=5000;
 
-/* Same breakpoint as the mobile CSS block */
 const mobileMQ = window.matchMedia('(max-width: 680px), (max-height: 560px) and (pointer: coarse)');
 function isMobile(){ return mobileMQ.matches; }
 
@@ -1247,7 +1211,6 @@ function createDecorFishEl(paletteIdx){
     return div;
 }
 
-/* --- POND DECOR --- */
 function buildPondDecorHTML(){
     const defs = `
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1335,13 +1298,11 @@ function setupPondDecor(container){
     container.insertBefore(decor, container.firstChild);
 }
 
-/* --- FISH ENGINE (adaptive to pond size / phone) --- */
 let fishList = [];
 let fishRAF = null;
 let lastFrameT = 0;
 const pondBounds = { w: 1280, h: 480 };
 
-/* Padding that keeps a fish fully inside the pond (smaller fish on phones) */
 function padX(){ return isMobile() ? 50 : 65; }
 function padY(){ return isMobile() ? 44 : 60; }
 
@@ -1362,7 +1323,6 @@ function getFishBounds(container){
 }
 
 function computeSpawnPositions(count, bw, bh){
-    // Narrow ponds get fewer columns so fish don't spawn on top of each other
     const maxCols = bw < 520 ? 3 : 5;
     const cols = Math.min(maxCols, Math.ceil(count / 2));
     const rows = Math.ceil(count / cols);
@@ -1388,7 +1348,6 @@ function computeSpawnPositions(count, bw, bh){
 function registerFish(el, container, opts){
     opts = opts || {};
     const bounds = getFishBounds(container);
-    // Slightly slower on phones so fish are easier to tap in a narrow pond
     const speedMul = isMobile() ? 0.78 : 1;
     const cruiseSpeed = (opts.speed || (24 + Math.random() * 18)) * speedMul;
     const initialDir  = Math.random() < 0.5 ? 1 : -1;
@@ -1538,7 +1497,9 @@ function spawnSplashText(text, x, y){
     setTimeout(() => s.remove(), 800);
 }
 
-/* --- MISSION BUILDER --- */
+/* ============================================================
+   MISSION ENGINE
+   ============================================================ */
 let targetNumber = 12;
 let currentMissionMode = 'factors';
 let correctSet = new Set();
@@ -1555,31 +1516,47 @@ let wrongTimer = null;
 let lastMissionTarget = null;
 let lastMissionMode = null;
 
+/* ============================================================
+   EXPANDED TARGET POOLS — many more distinct missions per grade
+   ============================================================ */
 const FACTOR_TARGETS = {
-    4: [6, 8, 10, 12, 14, 15, 16, 18, 20, 24],
-    5: [12, 16, 18, 20, 24, 28, 30, 32, 36, 40, 42, 48],
-    6: [24, 30, 36, 40, 42, 48, 54, 56, 60, 64, 72, 80, 84, 90]
+    4: [6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36],
+    5: [12, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40, 42, 44, 45, 48, 49, 50, 54, 56, 60, 63, 64],
+    6: [24, 27, 30, 32, 35, 36, 40, 42, 45, 48, 50, 54, 56, 60, 63, 64, 66, 70, 72, 78, 80, 84, 88, 90, 96, 100, 108]
 };
 const MULTIPLE_TARGETS = {
-    4: [2, 3, 4, 5, 6],
-    5: [3, 4, 5, 6, 7, 8, 9],
-    6: [4, 6, 7, 8, 9, 11, 12, 13, 14, 15]
+    4: [2, 3, 4, 5, 6, 7, 8, 9],
+    5: [3, 4, 5, 6, 7, 8, 9, 11, 12, 13],
+    6: [4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18]
 };
 
-function buildMission(mode, boost){
+/* Full-cycle tracking: a mission may not repeat until every mission
+   in the current grade/boost tier has been played at least once. */
+let recentMissionKeys = [];
+
+function missionKey(m){ return m.mode + '|' + m.target; }
+
+/* Build a single mission. `forcedTarget` bypasses random target selection
+   so we can drive selection from the anti-repeat logic above. */
+function buildMission(mode, boost, forcedTarget){
     const effGrade = Math.min(6, Math.max(4, GRADE_NUM + (boost ? 1 : 0)));
     const MIN_TOTAL_FISH = 10;
+    const MAX_TOTAL_FISH = 13;
+    const MAX_FACTORS = 10;
+
     if (mode === 'factors'){
         const pool = FACTOR_TARGETS[effGrade] || FACTOR_TARGETS[4];
-        const target = pool[rand(0, pool.length - 1)];
+        const target = forcedTarget !== undefined ? forcedTarget : pool[rand(0, pool.length - 1)];
         const allF = getFactors(target);
-        if (allF.length < 2) return null;
-        const correctCount = Math.min(allF.length, rand(3, Math.min(5, allF.length)));
-        const correct = shuffle(allF).slice(0, Math.max(2, correctCount));
+        if (allF.length < 2 || allF.length > MAX_FACTORS) return null;
+
+        // Educational correctness: include ALL factors as correct answers.
+        const correct = allF.slice();
         const distractors = [];
         let attempts = 0;
         const maxDist = Math.max(target + 16, 36);
-        while ((correct.length + distractors.length) < MIN_TOTAL_FISH && attempts < 300){
+        const targetTotal = Math.min(MAX_TOTAL_FISH, Math.max(MIN_TOTAL_FISH, correct.length + 4));
+        while ((correct.length + distractors.length) < targetTotal && attempts < 400){
             attempts++;
             const d = rand(2, maxDist);
             if (!allF.includes(d) && !distractors.includes(d)) distractors.push(d);
@@ -1587,22 +1564,20 @@ function buildMission(mode, boost){
         return { mode: 'factors', target, correctSet: new Set(correct), nums: correct.concat(distractors) };
     } else {
         const pool = MULTIPLE_TARGETS[effGrade] || MULTIPLE_TARGETS[4];
-        const target = pool[rand(0, pool.length - 1)];
-        const multCount = rand(3, 4);
+        const target = forcedTarget !== undefined ? forcedTarget : pool[rand(0, pool.length - 1)];
+        const multCount = rand(3, 5);
         const correct = [];
-        for (let i = 0; i < multCount; i++){
-            let m;
-            let att = 0;
-            do {
-                att++;
-                m = target * rand(1, 10);
-            } while (correct.includes(m) && att < 50);
+        let multAttempts = 0;
+        while (correct.length < multCount && multAttempts < 100){
+            multAttempts++;
+            const m = target * rand(1, 10);
             if (!correct.includes(m)) correct.push(m);
         }
         const distractors = [];
         let attempts = 0;
         const maxDist = target * 10 + 12;
-        while ((correct.length + distractors.length) < MIN_TOTAL_FISH && attempts < 300){
+        const targetTotal = Math.max(MIN_TOTAL_FISH, correct.length + rand(3, 5));
+        while ((correct.length + distractors.length) < targetTotal && attempts < 400){
             attempts++;
             const d = rand(target + 1, maxDist);
             if (d % target !== 0 && !distractors.includes(d)) distractors.push(d);
@@ -1614,22 +1589,91 @@ function buildMission(mode, boost){
 function generateMission(){
     selected.clear();
     correctSet.clear();
+
     const boost = (currentLevel - 1) >= 4;
+    const effGrade = Math.min(6, Math.max(4, GRADE_NUM + (boost ? 1 : 0)));
+
+    const fPool = FACTOR_TARGETS[effGrade] || FACTOR_TARGETS[4];
+    const mPool = MULTIPLE_TARGETS[effGrade] || MULTIPLE_TARGETS[4];
+
+    // Filter factor targets that would produce a mission with too many/few factors
+    const validFactorTargets = fPool.filter(t => {
+        const c = getFactors(t).length;
+        return c >= 2 && c <= 10;
+    });
+    const validMultipleTargets = mPool.slice();
+
+    // Prune stale keys so grade/boost changes don't starve the new pool
+    const validKeySet = new Set();
+    validFactorTargets.forEach(t => validKeySet.add('factors|' + t));
+    validMultipleTargets.forEach(t => validKeySet.add('multiples|' + t));
+    recentMissionKeys = recentMissionKeys.filter(k => validKeySet.has(k));
+
+    // Determine which targets remain unseen in this cycle
+    let unseenF = validFactorTargets.filter(t => !recentMissionKeys.includes('factors|' + t));
+    let unseenM = validMultipleTargets.filter(t => !recentMissionKeys.includes('multiples|' + t));
+
+    // If every mission has been played, reset the cycle
+    if (unseenF.length === 0 && unseenM.length === 0){
+        recentMissionKeys = [];
+        unseenF = validFactorTargets.slice();
+        unseenM = validMultipleTargets.slice();
+    }
+
     let mission = null;
-    for (let attempts = 0; attempts < 10; attempts++){
-        const mode = Math.random() < 0.5 ? 'factors' : 'multiples';
-        const m = buildMission(mode, boost);
+
+    // Preferred path: pick from unseen missions, biased to alternate modes
+    for (let attempt = 0; attempt < 40; attempt++){
+        let mode;
+        if (lastMissionMode && Math.random() < 0.65){
+            mode = lastMissionMode === 'factors' ? 'multiples' : 'factors';
+        } else {
+            mode = Math.random() < 0.5 ? 'factors' : 'multiples';
+        }
+        if (mode === 'factors' && unseenF.length === 0) mode = 'multiples';
+        if (mode === 'multiples' && unseenM.length === 0) mode = 'factors';
+
+        const pool = mode === 'factors' ? unseenF : unseenM;
+        if (pool.length === 0) continue;
+
+        const target = pool[rand(0, pool.length - 1)];
+        const m = buildMission(mode, boost, target);
         if (!m) continue;
-        if (m.mode === lastMissionMode && m.target === lastMissionTarget) continue;
         mission = m;
         break;
     }
-    if (!mission) mission = buildMission(Math.random() < 0.5 ? 'factors' : 'multiples', boost);
+
+    // Fallback: if the preferred cycle was exhausted for other reasons,
+    // do one full reset and try once more (never repeating the last mission).
+    if (!mission){
+        recentMissionKeys = [];
+        for (let attempt = 0; attempt < 60; attempt++){
+            const useFactors = Math.random() < 0.5;
+            const pool = useFactors ? validFactorTargets : validMultipleTargets;
+            if (pool.length === 0) continue;
+            const target = pool[rand(0, pool.length - 1)];
+            const m = buildMission(useFactors ? 'factors' : 'multiples', boost, target);
+            if (!m) continue;
+            if (lastMissionMode && m.mode === lastMissionMode && m.target === lastMissionTarget) continue;
+            mission = m;
+            break;
+        }
+    }
+
+    // Absolute last-resort fallback
+    if (!mission){
+        mission = buildMission('factors', boost) || buildMission('multiples', boost);
+    }
+    if (!mission) return;
+
+    recentMissionKeys.push(missionKey(mission));
+
     lastMissionMode = mission.mode;
     lastMissionTarget = mission.target;
     targetNumber = mission.target;
     currentMissionMode = mission.mode;
     mission.correctSet.forEach(v => correctSet.add(v));
+
     if (mission.mode === 'factors'){
         missionMode.textContent = '🎯 Factors Mission';
         missionText.textContent = 'Catch every FACTOR of ' + targetNumber;
@@ -1653,7 +1697,6 @@ function renderPond(nums){
         pondEl.appendChild(el);
         registerFish(el, pondEl, { spawn: spawns[i] });
     });
-    // Subtle background decor fish (just one on phones)
     const decorCount = isMobile() ? 1 : 2;
     for (let i = 0; i < decorCount; i++){
         const el = createDecorFishEl(rand(0, PAL.length - 1));
@@ -1736,7 +1779,6 @@ function castNet(){
     });
     const isPerfect = (wrongPicks.length === 0 && missed.length === 0);
     const rect = pondEl.getBoundingClientRect();
-    // Keep the splash text on-screen (pond may be partly scrolled off on phones)
     const cx = rect.left + rect.width / 2;
     const cy = Math.max(80, Math.min(window.innerHeight - 140, rect.top + rect.height / 2));
     if (isPerfect){
@@ -1792,7 +1834,6 @@ function endGame(won){
         bnrPlayBtn.textContent = '🔄 Try Again';
     }
     endBanner.classList.add('show');
-    // On phones the banner sits above the pond; make sure it's in view
     if (isMobile()){
         const gw = document.getElementById('gw');
         if (gw) gw.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1850,7 +1891,6 @@ bnrPlayBtn.addEventListener('click', () => {
 
 castBtn.addEventListener('click', castNet);
 
-/* Fullscreen Helper (button is hidden on phones) */
 window.toggleFullscreen = function(){
     const w = document.getElementById('gw') || document.documentElement;
     if (!document.fullscreenElement) {
@@ -1871,7 +1911,6 @@ document.addEventListener('fullscreenchange', () => {
     setTimeout(refreshBounds, 200);
 });
 
-/* Pause Controller */
 window.togglePause = function(){
     if (!gameOn) return;
     if (overlay && !overlay.classList.contains('hidden')) return;
@@ -1911,9 +1950,6 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-/* ============================================================
-   FLASHCARD DECK CONTROLLER (Instructions & In-game Tutorial)
-   ============================================================ */
 let tutOpenedFromGame = false;
 let currentFcCard = 1;
 const TOTAL_FC_CARDS = 5;

@@ -25,11 +25,9 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Faster taps, no double-tap zoom on interactive game elements */
         button, a, .canister, .rm-trial-can, .rm-fc-dot { touch-action: manipulation; }
         .canister, .rm-trial-can { -webkit-user-select: none; user-select: none; }
 
-        /* ANIMATED STARS */
         .stars {
             position: fixed;
             top: 0;
@@ -109,7 +107,6 @@
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
         }
 
-        /* PROBLEM SECTION */
         .problem-section {
             background: linear-gradient(135deg, rgba(100, 181, 246, 0.15) 0%, rgba(66, 165, 245, 0.1) 100%);
             border-radius: 1rem;
@@ -149,7 +146,6 @@
             font-style: italic;
         }
 
-        /* ===== ROCKET ANIMATION CONTAINER (LOTTIE) ===== */
         .rocket-animation-container {
             position: relative;
             display: flex;
@@ -168,7 +164,6 @@
             transform-origin: center center;
         }
 
-        /* The old SVG rocket is hidden but kept as a fallback */
         .rocket-container {
             display: none;
         }
@@ -234,7 +229,6 @@
             50% { opacity: 0.9; transform: scaleY(1.7); }
         }
 
-        /* GAUGE */
         .gauge-box {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 1rem;
@@ -295,7 +289,6 @@
             text-align: center;
         }
 
-        /* CANISTERS */
         .panel-card {
             background: rgba(26, 40, 70, 0.5);
             border-radius: 1rem;
@@ -352,7 +345,6 @@
 
         .canister.used { opacity: 0.3; cursor: not-allowed; }
 
-        /* MESSAGE AREA */
         .message-area {
             background: rgba(100, 181, 246, 0.1);
             border-radius: 1rem;
@@ -360,7 +352,6 @@
             font-weight: 600;
         }
 
-        /* WARNING */
         .warning-box {
             background: rgba(255, 68, 68, 0.2);
             border: 2px solid #ff4444;
@@ -375,7 +366,6 @@
             50% { opacity: 0.6; }
         }
 
-        /* --- Premium Space Modal Styles --------------------------- */
         .modal-backdrop.show {
             background-color: rgba(2, 6, 23, 0.78);
             backdrop-filter: blur(10px);
@@ -525,7 +515,6 @@
             border: 2px solid rgba(100, 181, 246, 0.3);
         }
 
-        /* PAUSE */
         .btn-pause-rocket {
             background: rgba(56, 189, 248, 0.15);
             border: 2px solid rgba(56, 189, 248, 0.4);
@@ -579,16 +568,12 @@
         }
         .btn-resume:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(56,189,248,0.55); }
 
-        /* --- Tutorial Overlay System --------------------------- */
         @keyframes rmFadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
         @keyframes rmFlt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
         @keyframes rmPopIn{from{transform:scale(0)}to{transform:scale(1)}}
         #rmTutOverlay{display:none;position:fixed;inset:0;background:rgba(10,20,50,.92);backdrop-filter:blur(10px);z-index:3000;align-items:center;justify-content:center;padding:16px;}
         #rmTutOverlay.show{display:flex;animation:rmFadeUp .4s ease;}
 
-/* ============================================================
-   ROCKET MATH FLASH CARD SYSTEM — ALWAYS ON TOP
-   ============================================================ */
 #rmTutOverlay.fc-overlay {
     position: fixed !important;
     inset: 0 !important;
@@ -859,7 +844,6 @@
         .rm-step-body p{font-size:15px;color:rgba(220,235,255,.8);line-height:1.6;}
         .rm-step-body strong{color:#e8f0ff;font-weight:800;}
         .rm-step-hl{display:inline-flex;align-items:center;gap:4px;background:rgba(100,181,246,.2);border-radius:6px;padding:1px 8px;font-weight:700;color:#64b5f6;}
-        /* Rocket Skin Button & Filters */
         .btn-skin {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.22), rgba(56, 189, 248, 0.22));
             border: 1.5px solid rgba(168, 85, 247, 0.5);
@@ -882,7 +866,6 @@
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.45);
         }
 
-        /* Coin Hint Button */
         .btn-hint-coin {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #ffffff !important;
@@ -912,18 +895,15 @@
             cursor: default;
         }
 
-        /* demo gauge */
         .demo-gauge-wrap{display:flex;gap:12px;align-items:center;justify-content:center;margin:10px 0;}
         .demo-gauge{width:28px;height:70px;background:rgba(0,0,0,.3);border-radius:8px;border:2px solid #4a5a8a;position:relative;overflow:hidden;}
         .demo-gauge-fill{position:absolute;bottom:0;left:0;right:0;border-radius:6px;transition:height .3s;}
         .demo-gauge-fill.low{height:35%;background:linear-gradient(to top,#42a5f5,#64b5f6);}
         .demo-gauge-fill.full{height:100%;background:linear-gradient(to top,#4caf50,#8bc34a);}
         .demo-gauge-fill.over{height:100%;background:linear-gradient(to top,#ff4444,#ff6b6b);}
-        /* demo canister */
         .demo-canisters{display:flex;gap:8px;justify-content:center;margin:8px 0;}
         .demo-can{background:rgba(100,181,246,.18);border:2px solid #4a5a8a;border-radius:8px;padding:8px 12px;font-size:14px;font-weight:700;color:#64b5f6;transition:all .2s;}
         .demo-can.attached{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-color:#4caf50;}
-        /* dots */
         .rm-dots{display:flex;gap:8px;justify-content:center;margin:14px 0 12px;}
         .rm-dot{width:9px;height:9px;border-radius:50%;background:rgba(100,181,246,.2);border:1.5px solid rgba(100,181,246,.3);transition:all .25s;cursor:pointer;}
         .rm-dot.active{background:#64b5f6;border-color:#64b5f6;transform:scale(1.25);box-shadow:0 0 8px rgba(100,181,246,.5);}
@@ -936,14 +916,12 @@
         .rm-tut-skip{font-size:11.5px;color:rgba(100,181,246,.4);cursor:pointer;text-decoration:underline;text-underline-offset:3px;background:none;border:none;transition:color .15s;}
         .rm-tut-skip:hover{color:rgba(100,181,246,.8);}
 
-        /* Trial overlay */
         #rmTrialOverlay{display:none;position:fixed;inset:0;background:rgba(10,20,50,.92);backdrop-filter:blur(10px);z-index:3000;align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
         #rmTrialOverlay.show{display:flex;animation:rmFadeUp .4s ease;}
         .rm-trial-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2.5px solid rgba(100,181,246,.4);border-radius:24px;padding:34px 34px 28px;width:100%;max-width:720px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);margin:auto;}
         .rm-trial-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(100,181,246,.14);border:1.5px solid rgba(100,181,246,.35);border-radius:99px;padding:5px 16px;font-size:11px;font-weight:800;color:#64b5f6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
         .rm-trial-title{font-size:1.2rem;font-weight:900;color:#64b5f6;margin-bottom:3px;}
         .rm-trial-sub{font-size:12.5px;color:rgba(200,220,255,.5);margin-bottom:14px;line-height:1.5;}
-        /* trial gauge + canisters */
         .rm-trial-layout{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px;}
         .rm-trial-gauge-col{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
         .rm-trial-gauge{width:36px;height:120px;background:rgba(0,0,0,.35);border-radius:10px;border:2px solid #4a5a8a;position:relative;overflow:hidden;}
@@ -961,7 +939,6 @@
         .rm-trial-skip{font-size:11px;color:rgba(100,181,246,.4);cursor:pointer;background:none;border:none;text-decoration:underline;text-underline-offset:3px;transition:color .15s;padding:8px;}
         .rm-trial-skip:hover{color:rgba(100,181,246,.75);}
 
-        /* Ready modal */
         #rmReadyOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:3100;align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
         #rmReadyOverlay.show{display:flex;animation:rmFadeUp .3s ease;}
         .rm-ready-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2.5px solid rgba(100,181,246,.5);border-radius:24px;padding:34px 28px;text-align:center;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:rmPopIn .45s cubic-bezier(.34,1.56,.64,1);color:#e8f0ff;margin:auto;}
@@ -974,12 +951,6 @@
         .rm-ready-practice{background:rgba(100,181,246,.1);color:#64b5f6;border:1.5px solid rgba(100,181,246,.3);padding:10px 22px;border-radius:11px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;display:block;width:100%;}
         .rm-ready-practice:hover{background:rgba(100,181,246,.18);color:#90caf9;}
 
-        /* =====================================================================
-           ADAPTIVE / MOBILE-FIRST OVERRIDES
-           Breakpoints: ≤991 tablet — ≤767 phone — ≤575 small phone — landscape
-           ===================================================================== */
-
-        /* Touch devices: remove sticky hover lifts, give bigger tap feedback */
         @media (hover: none) {
             .canister:hover:not(.used),
             .btn-new-round:hover,
@@ -995,61 +966,35 @@
             .btn-hint-coin:active, .rm-fc-nav-btn:active, .btn-resume:active { transform: scale(0.96); }
         }
 
-        /* ---------- Tablet (≤ 991px) ---------- */
         @media (max-width: 991.98px) {
             .game-container { margin: 1rem auto; }
             .rocket-animation-container { width: 190px; height: 190px; }
             .gauge-box { height: 160px; }
         }
 
-        /* ---------- Phone (≤ 767px) ---------- */
         @media (max-width: 767.98px) {
             body { background-attachment: scroll; }
-
             .game-container {
                 margin: 0 auto;
                 padding-top: calc(8px + var(--safe-top));
                 padding-bottom: calc(12px + var(--safe-bottom));
             }
-            .game-card {
-                border-width: 2px;
-                border-radius: 1.1rem;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            }
+            .game-card { border-width: 2px; border-radius: 1.1rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
             .title-section { padding: 0.75rem !important; border-radius: 1rem 1rem 0 0; }
             .game-card .p-4 { padding: 0.75rem !important; }
             .game-card .p-4.pt-0 { padding-top: 0 !important; }
             .title-text { font-size: 1.35rem; text-align: center; }
-
-            /* Header: title on top, badges in a compact wrapping row */
             .title-section .col-md-7 { justify-content: center !important; gap: 6px !important; }
             .score-badge { padding: 0.3rem 0.6rem; font-size: 0.8rem; border-radius: 0.6rem; }
-
-            /* Nav buttons: horizontal row of icon-only buttons */
-            .title-section .eduplay-game-nav {
-                display: flex;
-                width: 100%;
-                gap: 6px;
-                justify-content: center;
-                margin: 4px 0 0 !important;
-            }
-            .title-section .eduplay-game-nav .eduplay-nav-btn {
-                flex: 1 1 0;
-                justify-content: center;
-                padding: 8px 6px;
-                min-height: 40px;
-            }
+            .title-section .eduplay-game-nav { display: flex; width: 100%; gap: 6px; justify-content: center; margin: 4px 0 0 !important; }
+            .title-section .eduplay-game-nav .eduplay-nav-btn { flex: 1 1 0; justify-content: center; padding: 8px 6px; min-height: 40px; }
             .title-section .eduplay-game-nav .eduplay-nav-btn span { display: none; }
-
-            /* Mission briefing */
             .problem-section { padding: 0.85rem !important; border-width: 1.5px; }
             .problem-label { font-size: 0.8rem; margin-bottom: 0.4rem !important; }
             .problem-text { font-size: 1rem; line-height: 1.55; margin-bottom: 0.6rem !important; }
             .problem-highlight { padding: 0.1rem 0.35rem; }
             .target-hint .d-flex { justify-content: center !important; }
             .btn-hint-coin { width: 100%; justify-content: center; font-size: 0.92rem; min-height: 44px; }
-
-            /* Rocket + gauge stack vertically & centre */
             .panel-card { border-width: 1.5px; }
             .panel-card.p-4 { padding: 0.75rem !important; }
             .panel-card .row.align-items-center { flex-direction: column; text-align: center; margin-bottom: 0.5rem !important; }
@@ -1060,20 +1005,9 @@
             .gauge-text { font-size: 1.05rem; }
             .gauge-label { font-size: 0.85rem; }
             .warning-box { font-size: 0.85rem; padding: 0.5rem !important; }
-
-            /* Canisters: 4 per row is too tight, keep 2 per row but large tap targets */
             #canisterGrid { --bs-gutter-x: 0.5rem; --bs-gutter-y: 0.5rem; }
-            .canister {
-                padding: 0.9rem 0.4rem;
-                font-size: 1.15rem;
-                min-height: 56px;
-                border-width: 2px;
-                border-radius: 0.85rem;
-            }
-
+            .canister { padding: 0.9rem 0.4rem; font-size: 1.15rem; min-height: 56px; border-width: 2px; border-radius: 0.85rem; }
             .message-area { font-size: 0.9rem; padding: 0.6rem !important; border-radius: 0.8rem; }
-
-            /* Results modal: bottom-sheet style */
             #gameModal .modal-dialog { margin: 0.75rem; max-width: none; }
             .space-modal-content { border-radius: 1.2rem !important; }
             .modal-icon-badge { width: 60px; height: 60px; }
@@ -1083,15 +1017,11 @@
             #gameModal .modal-footer { flex-direction: column; align-items: stretch !important; }
             #gameModal .modal-footer > * { width: 100%; justify-content: center; margin: 0; }
             .modal-btn-primary { padding: 0.8rem 1rem; font-size: 1rem; min-height: 48px; }
-
-            /* Pause card */
             .pause-card { padding: 1.5rem 1.25rem; border-width: 2px; }
             .pause-card h2 { font-size: 1.6rem; }
             .pause-card kbd { display: none; }
             .pause-card p { font-size: 0.85rem; }
             .btn-resume { width: 100%; min-height: 48px; }
-
-            /* Flash-card tutorial deck */
             #rmTutOverlay.fc-overlay { padding: 10px !important; align-items: flex-start !important; padding-top: calc(10px + var(--safe-top)) !important; padding-bottom: calc(10px + var(--safe-bottom)) !important; }
             .rm-fc-deck-stack-1, .rm-fc-deck-stack-2 { display: none; }
             .rm-fc-card { padding: 20px 14px 16px; border-radius: 20px; }
@@ -1111,8 +1041,6 @@
             .rm-fc-nav-btn { padding: 10px 12px; min-height: 44px; font-size: 0.8rem; }
             .rm-fc-dot { width: 7px; height: 7px; }
             .rm-fc-dot.active { width: 16px; }
-
-            /* Trial + ready overlays */
             #rmTrialOverlay { align-items: flex-start; padding-top: calc(12px + var(--safe-top)); padding-bottom: calc(12px + var(--safe-bottom)); }
             .rm-trial-box { padding: 20px 14px 16px; border-radius: 20px; }
             .rm-trial-layout { flex-direction: column; align-items: center; gap: 10px; }
@@ -1125,7 +1053,6 @@
             .rm-ready-start, .rm-ready-practice { min-height: 48px; }
         }
 
-        /* ---------- Small phones (≤ 575px) ---------- */
         @media (max-width: 575.98px) {
             .title-text { font-size: 1.2rem; }
             .score-badge { font-size: 0.74rem; padding: 0.28rem 0.5rem; }
@@ -1135,7 +1062,6 @@
             .rm-fc-badge { font-size: 0.62rem; }
         }
 
-        /* ---------- Landscape phones (short viewport): side-by-side layout ---------- */
         @media (max-height: 500px) and (orientation: landscape) {
             .game-container { margin: 0 auto; }
             .rocket-animation-container { width: 110px; height: 110px; }
@@ -1148,7 +1074,6 @@
             .modal-icon-badge { display: none; }
         }
 
-        /* Respect reduced-motion preferences (also saves battery on phones) */
         @media (prefers-reduced-motion: reduce) {
             .star, .canister.attached, .gauge-fill.overweight, .gauge-fill.success,
             .warning-box, .modal-icon-badge, .modal-top-bar { animation: none !important; }
@@ -1213,30 +1138,19 @@
             <!-- MAIN GAME AREA -->
             <div class="p-4 pt-0">
                 <div class="row g-3">
-                    <!-- LEFT: ROCKET & GAUGE -->
                     <div class="col-lg-7">
                         <div class="panel-card p-4">
                             <div class="row align-items-center mb-3">
                                 <div class="col-auto">
-                                    {{-- === LOTTIE ROCKET ANIMATION CONTAINER === --}}
-                                    <div class="rocket-animation-container" id="rocketAnimation">
-                                        {{-- The Lottie animation will be injected here by lottie-web --}}
-                                    </div>
-
-                                    {{-- OLD SVG ROCKET (hidden, kept as fallback) --}}
+                                    <div class="rocket-animation-container" id="rocketAnimation"></div>
                                     <div class="rocket-container" id="rocketContainer">
                                         <svg class="rocket-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                            <!-- Rocket Body -->
                                             <path d="M50 10 L60 70 L40 70 Z" fill="#64b5f6" stroke="#42a5f5" stroke-width="2"/>
-                                            <!-- Rocket Nose -->
                                             <circle cx="50" cy="10" r="8" fill="#ff6b6b"/>
-                                            <!-- Windows -->
                                             <circle cx="50" cy="30" r="5" fill="#fff" opacity="0.8"/>
                                             <circle cx="50" cy="45" r="5" fill="#fff" opacity="0.8"/>
-                                            <!-- Wings -->
                                             <path d="M40 60 L25 80 L40 70 Z" fill="#42a5f5"/>
                                             <path d="M60 60 L75 80 L60 70 Z" fill="#42a5f5"/>
-                                            <!-- Fire (animated) -->
                                             <g class="rocket-fire">
                                                 <path d="M45 70 L40 85 L50 78 Z" fill="#ff6b6b" opacity="0.9"/>
                                                 <path d="M50 70 L45 90 L55 90 L50 78 Z" fill="#ffa500" opacity="0.9"/>
@@ -1262,7 +1176,6 @@
                         </div>
                     </div>
 
-                    <!-- RIGHT: CANISTERS -->
                     <div class="col-lg-5">
                         <div class="panel-card p-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1273,15 +1186,12 @@
                                     Attached: 0
                                 </span>
                             </div>
-                            <div class="row g-2" id="canisterGrid">
-                                <!-- Dynamically generated -->
-                            </div>
+                            <div class="row g-2" id="canisterGrid"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- MESSAGE AREA -->
             <div class="p-4 pt-0">
                 <div class="message-area p-3 text-center" id="messageArea">
                     Click a canister to attach it to the rocket
@@ -1311,11 +1221,9 @@
     <!-- FLASH CARD INSTRUCTIONS & TUTORIAL DECK -->
     <div id="rmTutOverlay" class="fc-overlay" role="dialog" aria-modal="true" aria-label="Rocket Math Instructions">
         <div class="rm-fc-deck">
-            <!-- Physical Stack Layers -->
             <div class="rm-fc-deck-stack-1"></div>
             <div class="rm-fc-deck-stack-2"></div>
 
-            <!-- Active Front Flash Card -->
             <div class="rm-fc-card">
                 <div class="rm-fc-top">
                     <span class="rm-fc-badge" id="rmFcBadge">🃏 HOW TO PLAY • CARD 1 OF 4</span>
@@ -1324,7 +1232,6 @@
                     </button>
                 </div>
 
-                <!-- CARD 1: Read Mission Briefing -->
                 <div id="rmFcSlide1" class="rm-fc-slide">
                     <h3 class="rm-fc-title"><span>📖</span> Read Mission Briefing</h3>
                     <p class="rm-fc-desc">Each mission features a story problem at the top. Calculate the math answer to find your rocket's target fuel!</p>
@@ -1345,7 +1252,6 @@
                     </div>
                 </div>
 
-                <!-- CARD 2: Load Fuel Canisters -->
                 <div id="rmFcSlide2" class="rm-fc-slide hidden">
                     <h3 class="rm-fc-title" style="color:#34d399;"><span>⛽</span> Load Fuel Canisters</h3>
                     <p class="rm-fc-desc">Click fuel canisters on the right to attach them to the rocket. Click again to remove them!</p>
@@ -1366,7 +1272,6 @@
                     </div>
                 </div>
 
-                <!-- CARD 3: Watch the Fuel Gauge -->
                 <div id="rmFcSlide3" class="rm-fc-slide hidden">
                     <h3 class="rm-fc-title" style="color:#fbbf24;"><span>⚡</span> Hit Exact Fuel Level</h3>
                     <p class="rm-fc-desc">The fuel gauge on the left must be filled to <b>exactly</b> the target amount:</p>
@@ -1392,7 +1297,6 @@
                     </div>
                 </div>
 
-                <!-- CARD 4: Session Timer & Goals -->
                 <div id="rmFcSlide4" class="rm-fc-slide hidden">
                     <h3 class="rm-fc-title" style="color:#f59e0b;"><span>⏱️</span> 5-Min Timer &amp; Goals</h3>
                     <p class="rm-fc-desc">Launch as many rockets as you can in 5 minutes! Launch <b>8–10 rockets</b> to pass the level.</p>
@@ -1413,7 +1317,6 @@
                     </div>
                 </div>
 
-                <!-- Flashcard Footer Navigation -->
                 <div class="rm-fc-footer">
                     <button class="rm-fc-nav-btn" id="rmFcPrevBtn" type="button" onclick="rmStepFlashCard(-1)">
                         <i class="bi bi-arrow-left"></i> Prev
@@ -1504,58 +1407,144 @@
         </div>
     </div>
 
-    {{-- Bootstrap JS already loaded by layouts.app --}}
-
-    {{-- === LOTTIE-WEB LIBRARY (CDN) === --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
     <script>
         const RM_TUTORIAL_KEY = 'rm_tutorial_done';
 
-        // ===== PRACTICE ROUND CONFIG (these were referenced but never defined) =====
         const RM_TRIAL_TARGET = 5.0;
         const RM_TRIAL_CANS   = [1.0, 2.0, 3.0, 4.0];
         let rmTrialAttached   = new Set();
         let rmTrialTotal      = 0;
         let rmTutStep         = 0;
 
-        // ===== WORD PROBLEMS DATABASE =====
+               /* ============================================================
+           WORD PROBLEMS DATABASE — EXPANDED (32 per difficulty)
+           Add / Subtract / Multiply / Division mixed pools
+           ============================================================ */
         const WORD_PROBLEMS = {
             easy: [
+                // --- Addition / Subtraction / Multiplication ---
                 { text: "The alien captain needs <span class='problem-highlight'>5 liters</span> for takeoff and <span class='problem-highlight'>3 more liters</span> for landing. How much fuel in total?", answer: 8.0 },
                 { text: "Your spaceship has <span class='problem-highlight'>12 liters</span> of fuel. You use <span class='problem-highlight'>6 liters</span> to escape Earth's gravity. How much fuel remains?", answer: 6.0 },
                 { text: "A space station delivers <span class='problem-highlight'>4 liters</span> of fuel in the morning and <span class='problem-highlight'>5 liters</span> in the evening. How much fuel was delivered?", answer: 9.0 },
                 { text: "The rocket needs <span class='problem-highlight'>15 liters</span> to reach Mars, but you already have <span class='problem-highlight'>8 liters</span> loaded. How much more fuel do you need?", answer: 7.0 },
                 { text: "Each of <span class='problem-highlight'>3 fuel tanks</span> holds <span class='problem-highlight'>2 liters</span>. How many liters in total?", answer: 6.0 },
                 { text: "Mission Control says you need <span class='problem-highlight'>10 liters</span> for launch. You've loaded <span class='problem-highlight'>4 liters</span>. How much more?", answer: 6.0 },
+                { text: "A fuel drone delivers <span class='problem-highlight'>6 liters</span> to the launchpad, and a second drone brings <span class='problem-highlight'>3 more liters</span>. Total fuel on the pad?", answer: 9.0 },
+                { text: "Your reserve tank holds <span class='problem-highlight'>14 liters</span>. You pour <span class='problem-highlight'>5 liters</span> into the main engine. How many liters remain in reserve?", answer: 9.0 },
+                { text: "There are <span class='problem-highlight'>2 rows</span> of fuel cells, with <span class='problem-highlight'>4 cells</span> in each row. How many fuel cells in total?", answer: 8.0 },
+                { text: "The rocket's upper stage needs <span class='problem-highlight'>16 liters</span>. The lower stage already has <span class='problem-highlight'>7 liters</span>. How much more fuel is needed?", answer: 9.0 },
+                { text: "A crew member loads <span class='problem-highlight'>5 liters</span> in the morning and <span class='problem-highlight'>5 liters</span> at noon. Total fuel loaded?", answer: 10.0 },
+                { text: "You have <span class='problem-highlight'>2 fuel barrels</span>, each holding <span class='problem-highlight'>5 liters</span>. How many liters in total?", answer: 10.0 },
+                { text: "The fuel gauge reads <span class='problem-highlight'>13 liters</span>. After using <span class='problem-highlight'>6 liters</span> for lift-off, how much is left?", answer: 7.0 },
+                { text: "A cargo bay has <span class='problem-highlight'>4 liters</span> from one canister and <span class='problem-highlight'>4 liters</span> from another. Total fuel in the bay?", answer: 8.0 },
+                { text: "The mission requires <span class='problem-highlight'>7 liters</span> for navigation and <span class='problem-highlight'>2 liters</span> for docking. How much total?", answer: 9.0 },
+                { text: "You start with <span class='problem-highlight'>11 liters</span> and burn <span class='problem-highlight'>3 liters</span> during launch. How much fuel remains?", answer: 8.0 },
+                { text: "A space tanker unloads <span class='problem-highlight'>8 liters</span> and then <span class='problem-highlight'>2 more liters</span>. Total unloaded?", answer: 10.0 },
+                { text: "Your fuel supply starts at <span class='problem-highlight'>18 liters</span>. You use exactly half. How many liters are left?", answer: 9.0 },
+                { text: "There are <span class='problem-highlight'>3 fuel pods</span>, each holding <span class='problem-highlight'>3 liters</span>. Total fuel across all pods?", answer: 9.0 },
+                { text: "The launchpad holds <span class='problem-highlight'>20 liters</span> total. You've already loaded <span class='problem-highlight'>10 liters</span>. How much more can you load?", answer: 10.0 },
+                { text: "You start with <span class='problem-highlight'>9 liters</span> of fuel and use <span class='problem-highlight'>3 liters</span> for a manoeuvre. How much remains?", answer: 6.0 },
+                { text: "There are <span class='problem-highlight'>2 rows</span> of <span class='problem-highlight'>2 fuel cells</span> and <span class='problem-highlight'>4 extra cells</span> in storage. Total cells?", answer: 8.0 },
+                { text: "A canister has <span class='problem-highlight'>3 liters</span>, another has <span class='problem-highlight'>3 liters</span>, and a third has <span class='problem-highlight'>4 liters</span>. Total fuel in all three?", answer: 10.0 },
+                { text: "You start with <span class='problem-highlight'>16 liters</span>. You burn <span class='problem-highlight'>9 liters</span> during ascent. How much fuel remains?", answer: 7.0 },
+
+                // --- Division ---
+                { text: "A tanker delivers <span class='problem-highlight'>18 liters</span> shared equally among <span class='problem-highlight'>3 rockets</span>. How much fuel per rocket?", answer: 6.0 },
+                { text: "You have <span class='problem-highlight'>24 liters</span> split evenly into <span class='problem-highlight'>4 fuel cells</span>. How much in each cell?", answer: 6.0 },
+                { text: "The total fuel of <span class='problem-highlight'>20 liters</span> is divided equally among <span class='problem-highlight'>2 engines</span>. How much per engine?", answer: 10.0 },
+                { text: "<span class='problem-highlight'>15 liters</span> of fuel divided equally into <span class='problem-highlight'>3 pods</span>. How many liters per pod?", answer: 5.0 },
+                { text: "A <span class='problem-highlight'>16-liter tank</span> is split into <span class='problem-highlight'>2 equal halves</span>. How many liters in each half?", answer: 8.0 },
+                { text: "Mission control splits <span class='problem-highlight'>28 liters</span> among <span class='problem-highlight'>4 rockets</span>. How much does each rocket get?", answer: 7.0 },
+                { text: "<span class='problem-highlight'>36 liters</span> of fuel is distributed equally to <span class='problem-highlight'>6 rockets</span>. How much per rocket?", answer: 6.0 },
+                { text: "The <span class='problem-highlight'>21-liter supply</span> is split evenly across <span class='problem-highlight'>3 tanks</span>. How much per tank?", answer: 7.0 },
             ],
+
             medium: [
+                // --- Addition / Subtraction / Multiplication ---
                 { text: "Your rocket needs <span class='problem-highlight'>3.5 liters</span> per thruster and has <span class='problem-highlight'>2 thrusters</span>. How much fuel total?", answer: 7.0 },
                 { text: "The fuel gauge shows <span class='problem-highlight'>9.25 liters</span>. You burn <span class='problem-highlight'>2.5 liters</span> during takeoff. How much remains?", answer: 6.75 },
                 { text: "Each alien crew member needs <span class='problem-highlight'>1.25 liters</span> for their escape pod. There are <span class='problem-highlight'>5 crew members</span>. How much fuel needed?", answer: 6.25 },
                 { text: "You have <span class='problem-highlight'>15 liters</span> of fuel. The journey to the moon uses <span class='problem-highlight'>8.75 liters</span>. How much is left?", answer: 6.25 },
                 { text: "Three cargo ships each need <span class='problem-highlight'>2.5 liters</span>. How many liters total?", answer: 7.5 },
                 { text: "Your ship starts with <span class='problem-highlight'>12.5 liters</span>. After using <span class='problem-highlight'>5.25 liters</span>, how much remains?", answer: 7.25 },
+                { text: "The launch pad supplies <span class='problem-highlight'>4.5 liters</span> in the morning and <span class='problem-highlight'>3.5 liters</span> at noon. Total fuel delivered?", answer: 8.0 },
+                { text: "You start with <span class='problem-highlight'>11 liters</span> of fuel and use <span class='problem-highlight'>4.75 liters</span> for a burn. How much fuel is left?", answer: 6.25 },
+                { text: "A canister contains <span class='problem-highlight'>2.5 liters</span>, and a second contains <span class='problem-highlight'>3.75 liters</span>. Total fuel?", answer: 6.25 },
+                { text: "The fuel gauge reads <span class='problem-highlight'>6.5 liters</span>. After a burn, <span class='problem-highlight'>1.5 liters</span> are consumed. How much remains?", answer: 5.0 },
+                { text: "The rocket has <span class='problem-highlight'>4 fuel pods</span>, each holding <span class='problem-highlight'>1.5 liters</span>. Total fuel across all pods?", answer: 6.0 },
+                { text: "You have <span class='problem-highlight'>10 liters</span> total but the mission only uses <span class='problem-highlight'>2.5 liters</span>. How much fuel will remain unused?", answer: 7.5 },
+                { text: "One tanker delivers <span class='problem-highlight'>5.75 liters</span> and another delivers <span class='problem-highlight'>2.25 liters</span>. Total delivered?", answer: 8.0 },
+                { text: "Your fuel tank holds <span class='problem-highlight'>8.5 liters</span>, but <span class='problem-highlight'>1.25 liters</span> leaks out. How much remains?", answer: 7.25 },
+                { text: "You load <span class='problem-highlight'>2.25 liters</span> into tank A and <span class='problem-highlight'>4.75 liters</span> into tank B. How much fuel in total?", answer: 7.0 },
+                { text: "Each of <span class='problem-highlight'>3 engines</span> burns <span class='problem-highlight'>2.75 liters</span> for a short burn. Total fuel used?", answer: 8.25 },
+                { text: "You have <span class='problem-highlight'>9 liters</span> of fuel and consume <span class='problem-highlight'>1.5 liters</span> for a manoeuvre. How much remains?", answer: 7.5 },
+                { text: "A canister holds <span class='problem-highlight'>4.25 liters</span>, another holds <span class='problem-highlight'>3.5 liters</span>. Total fuel in both?", answer: 7.75 },
+                { text: "Your tank starts at <span class='problem-highlight'>7.75 liters</span>. You use <span class='problem-highlight'>2.25 liters</span> for navigation. How much remains?", answer: 5.5 },
+                { text: "There are <span class='problem-highlight'>4 fuel barrels</span>, each holding <span class='problem-highlight'>1.75 liters</span>. How many liters total?", answer: 7.0 },
+                { text: "You load <span class='problem-highlight'>2.5 liters</span>, then another <span class='problem-highlight'>2.5 liters</span>, and finally <span class='problem-highlight'>3 more liters</span>. Total fuel?", answer: 8.0 },
+                { text: "Your main tank has <span class='problem-highlight'>12 liters</span>. You transfer <span class='problem-highlight'>4.75 liters</span> to the auxiliary engine. How much remains in main?", answer: 7.25 },
+                { text: "A supply ship delivers <span class='problem-highlight'>6.25 liters</span>, and a drone brings <span class='problem-highlight'>1.75 liters</span> more. Total fuel received?", answer: 8.0 },
+                { text: "Your ship consumes <span class='problem-highlight'>1.5 liters per minute</span> for <span class='problem-highlight'>4 minutes</span> during a burn. Total fuel consumed?", answer: 6.0 },
+
+                // --- Division ---
+                { text: "<span class='problem-highlight'>13.5 liters</span> split evenly into <span class='problem-highlight'>2 tanks</span>. How much fuel per tank?", answer: 6.75 },
+                { text: "<span class='problem-highlight'>22.5 liters</span> divided equally among <span class='problem-highlight'>3 engines</span>. How much per engine?", answer: 7.5 },
+                { text: "<span class='problem-highlight'>16.5 liters</span> split into <span class='problem-highlight'>2 equal pods</span>. How much per pod?", answer: 8.25 },
+                { text: "<span class='problem-highlight'>17.5 liters</span> divided evenly across <span class='problem-highlight'>2 thrusters</span>. How much per thruster?", answer: 8.75 },
+                { text: "<span class='problem-highlight'>19.5 liters</span> split into <span class='problem-highlight'>3 fuel cells</span>. How much per cell?", answer: 6.5 },
+                { text: "<span class='problem-highlight'>14 liters</span> divided equally between <span class='problem-highlight'>2 rockets</span>. How much per rocket?", answer: 7.0 },
+                { text: "<span class='problem-highlight'>25 liters</span> divided evenly among <span class='problem-highlight'>4 tanks</span>. How much per tank?", answer: 6.25 },
+                { text: "<span class='problem-highlight'>20.25 liters</span> split into <span class='problem-highlight'>3 equal parts</span>. How much per part?", answer: 6.75 },
             ],
+
             hard: [
+                // --- Addition / Subtraction / Multiplication ---
                 { text: "A rocket burns <span class='problem-highlight'>1.5 liters per minute</span> for <span class='problem-highlight'>4 minutes</span>, then needs <span class='problem-highlight'>1.25 liters</span> for landing. Total fuel?", answer: 7.25 },
                 { text: "Four satellites each need <span class='problem-highlight'>1.75 liters</span> for deployment. How much fuel total?", answer: 7.0 },
                 { text: "Your mission needs <span class='problem-highlight'>18.5 liters</span> total. The main tank holds <span class='problem-highlight'>11.75 liters</span>. How much more from reserve tanks?", answer: 6.75 },
                 { text: "Each of <span class='problem-highlight'>8 boosters</span> uses <span class='problem-highlight'>0.875 liters</span>. How much fuel total?", answer: 7.0 },
                 { text: "Starting with <span class='problem-highlight'>20 liters</span>, you use <span class='problem-highlight'>7.5 liters</span> for orbit, then <span class='problem-highlight'>5.75 liters</span> for maneuvers. How much remains?", answer: 6.75 },
                 { text: "A space shuttle consumes <span class='problem-highlight'>2.25 liters</span> per stage for <span class='problem-highlight'>3 stages</span>. Total fuel needed?", answer: 6.75 },
+                { text: "Three identical burners each use <span class='problem-highlight'>2.5 liters</span>, plus a reserve of <span class='problem-highlight'>0.5 liters</span>. Total fuel?", answer: 8.0 },
+                { text: "Your main tank has <span class='problem-highlight'>12 liters</span>. You burn <span class='problem-highlight'>4.5 liters</span> to reach orbit. How much remains?", answer: 7.5 },
+                { text: "Three small thrusters each consume <span class='problem-highlight'>1.75 liters</span> during a burn. Total fuel?", answer: 5.25 },
+                { text: "The fuel gauge reads <span class='problem-highlight'>6.5 liters</span>. A supply drone adds <span class='problem-highlight'>1.75 liters</span>. New total?", answer: 8.25 },
+                { text: "Your tank holds <span class='problem-highlight'>11 liters</span>. After a <span class='problem-highlight'>2.25 liter</span> burn, how much remains?", answer: 8.75 },
+                { text: "Six fuel cells each hold <span class='problem-highlight'>1.25 liters</span>. How many liters total?", answer: 7.5 },
+                { text: "The gauge starts at <span class='problem-highlight'>9.5 liters</span>. You consume <span class='problem-highlight'>2.75 liters</span> for a manoeuvre. How much remains?", answer: 6.75 },
+                { text: "Two canisters hold <span class='problem-highlight'>4.5 liters</span> and <span class='problem-highlight'>3.25 liters</span>. Total fuel?", answer: 7.75 },
+                { text: "Each of <span class='problem-highlight'>3 tanks</span> holds <span class='problem-highlight'>2.75 liters</span>. Total fuel across all tanks?", answer: 8.25 },
+                { text: "Your rocket starts with <span class='problem-highlight'>14.5 liters</span>. After using <span class='problem-highlight'>7.25 liters</span>, how much remains?", answer: 7.25 },
+                { text: "There are <span class='problem-highlight'>5 fuel canisters</span>, each holding <span class='problem-highlight'>1.5 liters</span>. How many liters total?", answer: 7.5 },
+                { text: "Your fuel gauge shows <span class='problem-highlight'>8 liters</span>. After a leak of <span class='problem-highlight'>1.75 liters</span>, how much remains?", answer: 6.25 },
+                { text: "You load <span class='problem-highlight'>2.5 liters</span>, then <span class='problem-highlight'>2.5 liters</span>, then <span class='problem-highlight'>3.5 liters</span>. Total fuel loaded?", answer: 8.5 },
+                { text: "A main engine burns <span class='problem-highlight'>3.5 liters per thruster</span> across <span class='problem-highlight'>2 thrusters</span>, minus <span class='problem-highlight'>0.5 liters</span> saved. How much fuel used?", answer: 6.5 },
+                { text: "Two tanks hold <span class='problem-highlight'>4.5 liters</span> each. You use <span class='problem-highlight'>1 liter</span> for a burn. How much remains?", answer: 8.0 },
+                { text: "The mission starts with <span class='problem-highlight'>13 liters</span>. You burn <span class='problem-highlight'>5.25 liters</span> during ascent. How much remains?", answer: 7.75 },
+                { text: "A supply tanker delivers <span class='problem-highlight'>16.75 liters</span>. You immediately consume <span class='problem-highlight'>9.5 liters</span>. How much remains?", answer: 7.25 },
+                { text: "Four small tanks each hold <span class='problem-highlight'>1.5 liters</span>, plus one extra <span class='problem-highlight'>2 liter</span> reserve. Total fuel?", answer: 8.0 },
+
+                // --- Division (multi-step & decimals) ---
+                { text: "<span class='problem-highlight'>22.5 liters</span> of fuel split evenly into <span class='problem-highlight'>3 rockets</span>. How much per rocket?", answer: 7.5 },
+                { text: "A mission needs <span class='problem-highlight'>32.5 liters</span> split equally across <span class='problem-highlight'>5 pods</span>. How much per pod?", answer: 6.5 },
+                { text: "From a <span class='problem-highlight'>30-liter tank</span>, you fill <span class='problem-highlight'>4 equal canisters</span>. How much in each canister?", answer: 7.5 },
+                { text: "Your supply of <span class='problem-highlight'>27 liters</span> is divided equally into <span class='problem-highlight'>4 tanks</span>. How much per tank?", answer: 6.75 },
+                { text: "Total <span class='problem-highlight'>24.75 liters</span> divided evenly across <span class='problem-highlight'>3 rockets</span>. How much per rocket?", answer: 8.25 },
+                { text: "You divide <span class='problem-highlight'>35 liters</span> among <span class='problem-highlight'>5 fuel cells</span>. How much per cell?", answer: 7.0 },
+                { text: "<span class='problem-highlight'>18.75 liters</span> divided among <span class='problem-highlight'>3 equal containers</span>. How much per container?", answer: 6.25 },
+                { text: "After collecting <span class='problem-highlight'>4.5 liters</span> from a supply drone and adding it to <span class='problem-highlight'>18 liters</span> already loaded, you split the total evenly into <span class='problem-highlight'>3 rockets</span>. How much per rocket?", answer: 7.5 },
             ]
         };
 
-        // ===== GAME STATE =====
-        const WIN_SCORE    = 8;   // minimum correct launches to pass
-        const MAX_SCORE    = 10;  // launches cap per session
-        const SESSION_SECS = 300; // 5 minutes
+        const WIN_SCORE    = 8;
+        const MAX_SCORE    = 10;
+        const SESSION_SECS = 300;
         const MAX_LEVEL    = {{ $game->total_levels }};
         const GAME_ID      = {{ $game->id }};
         let currentLevel   = {{ $progress->current_level }};
 
-        // ===== COINS SYSTEM (50 initial coins, 5 per hint, Metric Quest reward logic) =====
         const COINS_KEY = 'eduplay_rocket_coins_' + '{{ auth()->id() ?? 0 }}';
 
         function getStoredCoins() {
@@ -1577,11 +1566,10 @@
             if (el) el.textContent = GameState.coins;
         }
 
-        // Function to determine difficulty based on current level
         function getDifficultyForLevel(level) {
-            if (level <= 5) return 'easy';        // Levels 1-5: Easy
-            else if (level <= 10) return 'medium'; // Levels 6-10: Medium
-            else return 'hard';                    // Levels 11+: Hard
+            if (level <= 5) return 'easy';
+            else if (level <= 10) return 'medium';
+            else return 'hard';
         }
 
         const GameState = {
@@ -1605,7 +1593,6 @@
             currentProblem: null,
         };
 
-        // ===== LOTTIE ROCKET ANIMATION SETUP =====
         let rocketAnimation = null;
 
         function initRocketAnimation() {
@@ -1627,7 +1614,6 @@
             });
         }
 
-        // ===== ROCKET SHIP SKINS (COLOR PALETTES) =====
         const ROCKET_SKINS = [
             { id: 'cyan', name: 'Cyan Explorer', filter: 'drop-shadow(0 0 25px rgba(56, 189, 248, 0.45)) hue-rotate(0deg)' },
             { id: 'violet', name: 'Cosmic Violet', filter: 'drop-shadow(0 0 25px rgba(168, 85, 247, 0.55)) hue-rotate(55deg) saturate(1.3)' },
@@ -1644,10 +1630,8 @@
             const skin = ROCKET_SKINS[currentSkinIdx];
             const rocketContainer = document.getElementById('rocketAnimation');
             const svgFallback = document.getElementById('rocketContainer');
-
             if (rocketContainer) rocketContainer.style.filter = skin.filter;
             if (svgFallback) svgFallback.style.filter = skin.filter;
-
             const nameEl = document.getElementById('skinName');
             if (nameEl) nameEl.textContent = skin.name;
         }
@@ -1661,7 +1645,6 @@
             applyRocketSkin(defaultSkinIdx);
         }
 
-        // ===== PAUSE =====
         window.togglePause = function() {
             if (GameState.sessionEnded) return;
             GameState.isPaused = !GameState.isPaused;
@@ -1674,7 +1657,6 @@
                     pauseBtn.innerHTML = '<i class="bi bi-play-fill"></i> <span>Resume</span>';
                     pauseBtn.title = "Resume Game";
                 }
-                // Freeze session timer
                 if (GameState.sessionInterval) {
                     clearInterval(GameState.sessionInterval);
                     GameState.sessionInterval = null;
@@ -1686,7 +1668,6 @@
                     pauseBtn.innerHTML = '<i class="bi bi-pause-fill"></i> <span>Pause</span>';
                     pauseBtn.title = "Pause Game";
                 }
-                // Resume session timer
                 if (!GameState.sessionEnded) {
                     startSessionTimer();
                 }
@@ -1694,14 +1675,12 @@
         };
         const togglePause = window.togglePause;
 
-        // Auto-pause when the phone locks / user switches app or tab
         document.addEventListener('visibilitychange', () => {
             if (document.hidden && GameState.gameStarted && !GameState.isPaused && !GameState.sessionEnded) {
                 togglePause();
             }
         });
 
-        // ===== SESSION TIMER =====
         function formatTime(secs) {
             const m = Math.floor(secs / 60);
             const s = secs % 60;
@@ -1715,7 +1694,6 @@
                 GameState.sessionTimer--;
                 document.getElementById('sessionTimerText').textContent = formatTime(GameState.sessionTimer);
 
-                // Urgency colour when < 60 s
                 const timerEl = document.getElementById('sessionTimerDisplay');
                 if (GameState.sessionTimer <= 60) {
                     timerEl.style.background = 'linear-gradient(135deg,#ef4444,#b91c1c)';
@@ -1731,7 +1709,6 @@
             }, 1000);
         }
 
-        // ===== END SESSION (time up) =====
         function endSession() {
             GameState.sessionEnded = true;
             GameState.isGameOver = true;
@@ -1739,7 +1716,6 @@
             showSessionResult(won);
         }
 
-        // ===== LEVEL COMPLETE (score hit 10) =====
         function triggerLevelComplete() {
             GameState.sessionEnded = true;
             if (GameState.sessionInterval) {
@@ -1749,9 +1725,7 @@
             showSessionResult(true);
         }
 
-        // ===== SHOW WIN / LOSE MODAL =====
         function showSessionResult(won) {
-            // Coin Earning Logic (Same logic as Metric Quest: 10 per correct + 50 for 3-star / 25 for 2-star)
             const accuracy = Math.round((GameState.score / MAX_SCORE) * 100);
             let stars = 0;
             if (accuracy >= 90) stars = 3;
@@ -1763,7 +1737,6 @@
             saveCoins();
 
             if (won) {
-                // Advance level FIRST, then save so the server receives the next level
                 if (currentLevel < MAX_LEVEL) currentLevel++;
                 document.getElementById('levelText').textContent = currentLevel;
 
@@ -1803,7 +1776,6 @@
             }, won ? 2200 : 400);
         }
 
-        // ===== INITIALIZE STARS (fewer on small/low-power screens) =====
         function initStars() {
             const container = document.getElementById('starsContainer');
             const count = window.innerWidth < 768 ? 45 : 100;
@@ -1817,7 +1789,6 @@
             }
         }
 
-        // ===== GAME LOGIC =====
         function generateCanisters(diff, target) {
             const count = 8;
             let decimals;
@@ -1832,7 +1803,6 @@
             target = target || 8.0;
             const cans = [];
 
-            // 1. Build a guaranteed solution set of 2 or 3 canisters summing to target
             const solCount = (target > 5.0 && Math.random() < 0.6) ? 3 : 2;
             let solCans = [];
 
@@ -1855,7 +1825,6 @@
                         break;
                     }
                 } else {
-                    // 3 canisters
                     const c1 = Math.round((1.0 + Math.floor(Math.random() * 3) + decimals[Math.floor(Math.random() * decimals.length)]) * 100) / 100;
                     if (c1 >= target - 1.0 || c1 > 5.0 || c1 <= 0) continue;
 
@@ -1871,7 +1840,6 @@
                 }
             }
 
-            // Fallback if loop didn't find split
             if (solCans.length === 0) {
                 if (target <= 5.0) {
                     solCans = [target];
@@ -1884,7 +1852,6 @@
 
             cans.push(...solCans);
 
-            // 2. Fill remaining slots with random distractor canisters matching the difficulty's decimal step
             while (cans.length < count) {
                 const whole = Math.floor(Math.random() * 5) + 1;
                 const dec = decimals[Math.floor(Math.random() * decimals.length)];
@@ -1893,13 +1860,16 @@
                 cans.push(val);
             }
 
-            // 3. Shuffle all 8 canisters so solution canisters are in random grid positions
             return shuffleArray(cans);
         }
 
-        // Shuffled-deck queues per difficulty — guarantees no consecutive repeats
+        /* ============================================================
+           SHUFFLED-DECK ANTI-REPEAT (expanded pools → no repeats)
+           ============================================================ */
         const problemQueues = { easy: [], medium: [], hard: [] };
-        let lastProblemText = '';
+        // Track the last N shown problems so a new cycle can't start with them
+        const RECENT_PROBLEM_LIMIT = 8;
+        let recentProblems = [];
 
         function shuffleArray(arr) {
             const a = arr.slice();
@@ -1912,17 +1882,26 @@
 
         function refillQueue(difficulty) {
             const shuffled = shuffleArray(WORD_PROBLEMS[difficulty]);
-            // If the first item after reshuffle matches the last shown, move it to end
-            if (shuffled.length > 1 && shuffled[0].text === lastProblemText) {
-                shuffled.push(shuffled.shift());
-            }
-            problemQueues[difficulty] = shuffled;
+            // Partition: all items NOT recently shown go first (in random order),
+            // then items that WERE recently shown go to the back. This guarantees
+            // the next `nonRecent.length` picks are all fresh.
+            const nonRecent = [];
+            const recent = [];
+            shuffled.forEach(p => {
+                if (recentProblems.includes(p.text)) {
+                    recent.push(p);
+                } else {
+                    nonRecent.push(p);
+                }
+            });
+            problemQueues[difficulty] = nonRecent.concat(recent);
         }
 
         function getRandomProblem(difficulty) {
             if (problemQueues[difficulty].length === 0) refillQueue(difficulty);
             const problem = problemQueues[difficulty].shift();
-            lastProblemText = problem.text;
+            recentProblems.push(problem.text);
+            if (recentProblems.length > RECENT_PROBLEM_LIMIT) recentProblems.shift();
             return problem;
         }
 
@@ -2051,13 +2030,12 @@
         }
 
         function resetRound() {
-            if (GameState.sessionEnded) return; // don't reset after session ends
+            if (GameState.sessionEnded) return;
             GameState.total = 0;
             GameState.attached = new Set();
             GameState.used = new Set();
             GameState.success = false;
             GameState.isGameOver = false;
-            // Update difficulty & automatically change rocket skin for every question
             GameState.difficulty = getDifficultyForLevel(currentLevel);
             cycleRocketSkin();
             loadProblem();
@@ -2067,12 +2045,10 @@
             updateGauge();
             setMessage('Tap canisters to attach fuel');
 
-            // Reset the Lottie animation to the standing frame
             if (rocketAnimation) {
                 rocketAnimation.goToAndStop(20, true);
             }
 
-            // Also reset the old SVG rocket (hidden, but just in case)
             const rocket = document.getElementById('rocketContainer');
             rocket.classList.remove('shake', 'flying');
             rocket.classList.add('returning');
@@ -2093,7 +2069,6 @@
             }
 
             if (GameState.attached.has(idx)) {
-                // Detach
                 GameState.attached.delete(idx);
                 GameState.total = Math.round((GameState.total - GameState.canisters[idx]) * 100) / 100;
                 setMessage(`Removed ${GameState.canisters[idx].toFixed(2)} liters`);
@@ -2102,7 +2077,6 @@
                 return;
             }
 
-            // Attach
             const newTotal = Math.round((GameState.total + GameState.canisters[idx]) * 100) / 100;
             if (newTotal > GameState.maxFuel) {
                 setMessage(`Would exceed ${GameState.maxFuel.toFixed(2)}L! Choose smaller canisters`);
@@ -2115,19 +2089,16 @@
             renderCanisters();
             updateGauge();
 
-            // Check win
             if (Math.abs(GameState.total - GameState.target) < 0.001) {
                 GameState.success = true;
                 GameState.score++;
                 document.getElementById('scoreDisplay').textContent = GameState.score;
                 setMessage(`🚀 Perfect fuel! Rockets launched: ${GameState.score} / ${MAX_SCORE}`);
 
-                // === PLAY THE LOTTIE LAUNCH ANIMATION ===
                 if (rocketAnimation) {
                     rocketAnimation.goToAndPlay(0, true);
                 }
 
-                // Keep the old particle effects
                 const rocket = document.getElementById('rocketContainer');
                 rocket.classList.remove('shake');
                 rocket.classList.add('flying');
@@ -2135,16 +2106,13 @@
                 createLaunchEffects();
                 updateGauge();
 
-                // On phones the rocket is above the canisters — bring it into view
                 if (window.innerWidth < 768) {
                     document.getElementById('rocketAnimation').scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
 
-                // Check if player hit the max score cap (10)
                 if (GameState.score >= MAX_SCORE) {
                     setTimeout(() => triggerLevelComplete(), 2200);
                 } else {
-                    // Show quick per-launch success then auto-next-round
                     setTimeout(() => {
                         document.getElementById('modalEmoji').textContent = '🚀';
                         document.getElementById('modalTitleText').textContent = 'Launch Successful!';
@@ -2161,13 +2129,11 @@
             }
         }
 
-        // ===== VISUAL EFFECTS =====
         function createLaunchEffects() {
             const container = document.body;
             const rocketRect = document.querySelector('.rocket-animation-container').getBoundingClientRect();
-            const particleCount = window.innerWidth < 768 ? 16 : 30; // lighter on phones
+            const particleCount = window.innerWidth < 768 ? 16 : 30;
 
-            // Fire trail particles
             const fireColors = ['#ff4500', '#ff6347', '#ffa500', '#ffff00', '#ff8c00'];
             for (let i = 0; i < particleCount; i++) {
                 setTimeout(() => {
@@ -2216,7 +2182,7 @@
         function createConfetti() {
             const container = document.body;
             const colors = ['#64b5f6', '#42a5f5', '#ffd866', '#ffeb3b', '#4caf50', '#8bc34a', '#ff6b6b'];
-            const pieces = window.innerWidth < 768 ? 28 : 50; // lighter on phones
+            const pieces = window.innerWidth < 768 ? 28 : 50;
 
             for (let i = 0; i < pieces; i++) {
                 setTimeout(() => {
@@ -2262,7 +2228,6 @@
             }
         }
 
-        // ===== UI SETUP =====
         function setupUI() {
             const newRound = document.getElementById('newRoundBtn');
             if (newRound) {
@@ -2275,7 +2240,6 @@
                 const gameModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('gameModal'));
                 gameModal.hide();
                 if (GameState.sessionEnded) {
-                    // Re-start a brand new session
                     GameState.gameStarted  = true;
                     GameState.isPaused     = false;
                     GameState.sessionEnded = false;
@@ -2290,7 +2254,6 @@
                 resetRound();
             });
 
-            // Keyboard shortcut: P or Escape to pause/resume
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'p' || e.key === 'P' || e.key === 'Escape') {
                     if (document.getElementById('pauseOverlay').classList.contains('active') ||
@@ -2301,7 +2264,6 @@
             });
         }
 
-        // ===== FLASH CARD INSTRUCTIONS & TUTORIAL CONTROLLER =====
         let rmTutOpenedFromGame = false;
         let rmCurrentFcCard = 1;
         const RM_TOTAL_FC_CARDS = 4;
@@ -2379,7 +2341,6 @@
                 }
             }
 
-            // Keep the card at the top when the overlay scrolls on small screens
             const ov = document.getElementById('rmTutOverlay');
             if (ov) ov.scrollTop = 0;
         }
@@ -2392,7 +2353,6 @@
             rmGoFlashCard(rmCurrentFcCard + delta);
         }
 
-        // Swipe left/right to flip flash cards on touch screens
         (function enableFlashCardSwipe() {
             let startX = 0, startY = 0;
             document.addEventListener('touchstart', (e) => {
@@ -2426,7 +2386,6 @@
             if (rmTutOpenedFromGame) {
                 if (GameState.isPaused) togglePause();
             } else {
-                // User closed the initial instruction deck -> proceed directly to real mission!
                 rmStartRealGame();
             }
         }
@@ -2481,7 +2440,6 @@
             const totalEl = document.getElementById('rmTrialTotal');
             totalEl.textContent = rmTrialTotal.toFixed(1);
             const pct = Math.min(100, (rmTrialTotal / RM_TRIAL_TARGET) * 100);
-            // Vertical gauge on desktop/tablet, horizontal bar on phones (see CSS)
             if (window.innerWidth < 768) {
                 fill.style.width = pct + '%';
                 fill.style.height = '100%';
@@ -2497,7 +2455,6 @@
         function rmStartRealGame() {
             localStorage.setItem(RM_TUTORIAL_KEY, '1');
             document.getElementById('rmReadyOverlay').classList.remove('show');
-            // Start the actual game session
             GameState.gameStarted  = true;
             GameState.isPaused     = false;
             GameState.sessionEnded = false;
@@ -2524,7 +2481,6 @@
         function rmSkipToRealGame() {
             localStorage.setItem(RM_TUTORIAL_KEY, '1');
             document.getElementById('rmTrialOverlay').classList.remove('show');
-            // Start the actual game session
             GameState.gameStarted  = true;
             GameState.isPaused     = false;
             GameState.sessionEnded = false;
@@ -2541,10 +2497,8 @@
 
         document.addEventListener('DOMContentLoaded', init);
 
-        // ===== INIT (override to check localStorage) =====
         function init() {
             initStars();
-            // === INIT LOTTIE ROCKET ANIMATION ===
             initRocketAnimation();
 
             GameState.difficulty = getDifficultyForLevel(currentLevel);
@@ -2557,21 +2511,16 @@
             updateGauge();
             document.getElementById('sessionTimerText').textContent = formatTime(SESSION_SECS);
 
-            // Hide pause button until mission actually begins
             const pb = document.getElementById('pauseBtn');
             if (pb) pb.style.display = 'none';
 
-            // ALWAYS show instructions flashcard deck before proceeding to the game
             rmOpenTut(false);
         }
 
-        // ===== TUTORIAL REOPEN =====
         function rmReopenTutorial() {
-            // Pause the session timer if game is running
             if (GameState.gameStarted && !GameState.isPaused && !GameState.sessionEnded) {
                 togglePause();
             }
-            // Reset to step 0
             rmTutStep = 0;
             document.querySelectorAll('.rm-step').forEach((el, i) => {
                 el.classList.toggle('active', i === 0);
@@ -2582,7 +2531,6 @@
             const next = document.getElementById('rmTutNext');
             if (back) back.disabled = true;
             if (next) next.textContent = 'Next →';
-            // Hide trial/ready overlays, show tutorial
             document.getElementById('rmTrialOverlay').classList.remove('show');
             document.getElementById('rmReadyOverlay').classList.remove('show');
             document.getElementById('rmTutOverlay').classList.add('show');

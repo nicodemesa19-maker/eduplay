@@ -6,6 +6,50 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string|null $username
+ * @property string|null $first_name
+ * @property string|null $middle_name
+ * @property string|null $last_name
+ * @property string $email
+ * @property string $password
+ * @property string $role
+ * @property string|null $grade_level
+ * @property string|null $student_id_number
+ * @property int|null $created_by_teacher_id
+ * @property string|null $character_avatar
+ * @property string|null $faculty_id_path
+ * @property string|null $school_id_path
+ * @property bool $is_approved
+ * @property bool $is_active
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $nickname
+ * @property string|null $avatar_character
+ * @property string|null $avatar_upload_path
+ * @property \Illuminate\Support\Carbon|null $birthdate
+ * @property string|null $favorite_math_topic
+ * @property string|null $bio
+ * @property array|null $hobbies
+ * @property string|null $game_mode_preference
+ * @property int|null $sound_effects_volume
+ * @property int|null $music_volume
+ * @property bool|null $practice_reminders
+ * @property bool|null $streak_alerts
+ * @property array|null $display_badge
+ * @property string|null $original_username
+ * @property string|null $display_name
+ * @property string|null $avatar_url
+ * @property string|null $pronouns
+ * @property \Illuminate\Support\Carbon|null $approved_at
+ * @property \Illuminate\Support\Carbon|null $last_username_change
+ * @property int|null $username_changes_count
+ * @property \Illuminate\Support\Carbon|null $profile_updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $remember_token
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;

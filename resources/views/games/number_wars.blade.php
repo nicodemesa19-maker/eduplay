@@ -1668,6 +1668,11 @@ let timerInterval = null;
 let currentProblem = null;
 let answering = false;
 
+// -- Anti-repeat state --------------------------------------------------------
+const RECENT_LIMIT = 40;   // how many past problems to remember
+let recentKeys = [];       // persists across restarts, so "Try Again" doesn't replay the same set
+let lastOp = null;         // previous operation, used to vary problem types
+
 // -- Helpers -------------------------------------------------------------------
 function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function pick(arr) { return arr[rand(0, arr.length - 1)]; }
@@ -1682,6 +1687,13 @@ function generateWordProblem() {
     if      (g <= 4) op = r < 0.60 ? '+' : r < 0.90 ? '-' : '×';
     else if (g === 5) op = r < 0.25 ? '+' : r < 0.50 ? '-' : r < 0.75 ? '×' : '÷';
     else              op = r < 0.20 ? '+' : r < 0.40 ? '-' : r < 0.70 ? '×' : '÷';
+
+    // Nudge away from repeating the same operation back-to-back
+    if (op === lastOp && Math.random() < 0.6) {
+        const ops = g <= 4 ? ['+','-','×'] : ['+','-','×','÷'];
+        op = pick(ops.filter(o => o !== lastOp));
+    }
+    lastOp = op;
 
     const name1 = pick(NAMES);
     let name2 = pick(NAMES); while (name2 === name1) name2 = pick(NAMES);
@@ -1733,7 +1745,9 @@ function generateWordProblem() {
         ]);
     }
 
-    return { text, answer };
+    // key is based on the operation + numbers (not the wording), so the same math
+    // in a different story still counts as a repeat
+    return { text, answer, key: `${op}|${num1}|${num2}` };
 }
 
 function generateChoices(answer) {
@@ -1750,6 +1764,20 @@ function generateChoices(answer) {
     }
     const choices = shuffle([answer, ...Array.from(wrongSet).slice(0, 3)]);
     return choices;
+}
+
+// Re-rolls until the problem hasn't been asked recently.
+// Gives up after 60 tries (tiny number pools) so it can never freeze the game.
+function generateUniqueProblem() {
+    let p, tries = 0;
+    do {
+        p = generateWordProblem();
+        tries++;
+    } while (recentKeys.includes(p.key) && tries < 60);
+
+    recentKeys.push(p.key);
+    if (recentKeys.length > RECENT_LIMIT) recentKeys.shift();
+    return p;
 }
 
 // -- Init ----------------------------------------------------------------------
@@ -1782,7 +1810,7 @@ function updateHUD() {
 function nextProblem() {
     if (!gameRunning) return;
     answering = false;
-    currentProblem = generateWordProblem();
+    currentProblem = generateUniqueProblem();
     const choices = generateChoices(currentProblem.answer);
     renderProblem(choices);
     startTimer();

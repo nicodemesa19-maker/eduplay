@@ -4,6 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property int $student_id
+ * @property int $game_id
+ * @property int $current_level
+ * @property int $high_score
+ * @property array|null $level_scores
+ * @property float $avg_score
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $student
+ * @property-read \App\Models\Game $game
+ */
 class StudentGameProgress extends Model
 {
     protected $fillable = ['student_id', 'game_id', 'current_level', 'high_score', 'level_scores'];
