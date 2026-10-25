@@ -294,7 +294,7 @@ select.inp { padding-right: 26px; background-image: linear-gradient(45deg, trans
       <div class="mast-in">
         <div style="display: flex; align-items: center; gap: 16px;">
           @if(Auth::user()->avatar_url)
-            <div style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 2px solid var(--line);">
+            <div style="width: 72px; height: 72px; border-radius: 50%; overflow: hidden; border: 3px solid var(--line); flex-shrink: 0;">
               @if(str_starts_with(Auth::user()->avatar_url, 'http'))
                 <img src="{{ Auth::user()->avatar_url }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
               @else
