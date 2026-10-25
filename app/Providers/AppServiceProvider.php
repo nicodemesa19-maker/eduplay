@@ -12,7 +12,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Register Supabase Storage Service
+        $this->app->singleton(\App\Services\SupabaseStorageService::class, function ($app) {
+            return new \App\Services\SupabaseStorageService();
+        });
     }
 
     /**

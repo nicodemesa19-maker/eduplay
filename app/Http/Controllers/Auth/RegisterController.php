@@ -106,38 +106,32 @@ class RegisterController extends Controller
 
         // Handle file upload
         if ($role === 'teacher') {
-            // Upload faculty ID to Supabase Storage (using service_role key for unauthenticated upload)
+            // Upload faculty ID to Supabase Storage (REQUIRED - no local fallback)
             $facultyIdFile = $request->file('faculty_id');
             $fileName = 'faculty_' . time() . '_' . uniqid() . '.' . $facultyIdFile->getClientOriginalExtension();
             
-            try {
-                $supabaseService = app(\App\Services\SupabaseStorageService::class);
-                
-                if ($supabaseService->isConfigured()) {
-                    $result = $supabaseService->uploadToPath($facultyIdFile, 'faculty_ids/' . $fileName);
-                    
-                    if ($result['success']) {
-                        $userData['faculty_id_path'] = $result['url'];
-                    } else {
-                        // Fallback to local storage on upload failure
-                        \Log::warning('Faculty ID Supabase upload failed, using local storage', [
-                            'error' => $result['error'] ?? 'Unknown error'
-                        ]);
-                        $path = $facultyIdFile->store('faculty_ids', 'public');
-                        $userData['faculty_id_path'] = $path;
-                    }
-                } else {
-                    // Supabase not configured, use local storage
-                    $path = $facultyIdFile->store('faculty_ids', 'public');
-                    $userData['faculty_id_path'] = $path;
-                }
-            } catch (\Exception $e) {
-                // On any exception, fallback to local storage
-                \Log::error('Exception during faculty ID upload', ['error' => $e->getMessage()]);
-                $path = $facultyIdFile->store('faculty_ids', 'public');
-                $userData['faculty_id_path'] = $path;
+            $supabaseService = app(\App\Services\SupabaseStorageService::class);
+            
+            if (!$supabaseService->isConfigured()) {
+                return back()->withErrors([
+                    'faculty_id' => 'Storage system not configured. Please contact administrator.'
+                ])->withInput();
             }
             
+            $result = $supabaseService->uploadToPath($facultyIdFile, 'faculty_ids/' . $fileName);
+            
+            if (!$result['success']) {
+                \Log::error('Faculty ID upload to Supabase failed', [
+                    'error' => $result['error'] ?? 'Unknown error',
+                    'fileName' => $fileName,
+                ]);
+                
+                return back()->withErrors([
+                    'faculty_id' => 'Failed to upload faculty ID: ' . ($result['error'] ?? 'Unknown error')
+                ])->withInput();
+            }
+            
+            $userData['faculty_id_path'] = $result['url'];
             $userData['is_approved'] = false; // Teachers need admin approval
         } else {
             $path = $request->file('school_id')->store('school_ids', 'public');
