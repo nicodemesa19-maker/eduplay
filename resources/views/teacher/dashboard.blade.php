@@ -304,7 +304,6 @@ select.inp { padding-right: 26px; background-image: linear-gradient(45deg, trans
           @endif
           <div>
             <h1>{{ Auth::user()->display_name ?: Auth::user()->name }}'s Dashboard</h1>
-            <p>Who is on track, who needs help, and which topics are hardest for your students.</p>
           </div>
         </div>
         <span class="who"><span class="dot"></span>{{ Auth::user()->name }}</span>
