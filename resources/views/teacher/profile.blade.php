@@ -368,8 +368,16 @@ textarea.form-input {
 <div class="profile-page">
   <div class="profile-header">
     <div class="container">
-      <h1>Teacher Profile</h1>
-      <p>Manage your profile information and preferences</p>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div>
+          <h1>Teacher Profile</h1>
+          <p>Manage your profile information and preferences</p>
+        </div>
+        <a href="{{ route('teacher.dashboard') }}" class="btn-primary" style="text-decoration: none; background: var(--surface-2); color: var(--ink); border: 1px solid var(--line);">
+          <i class="bi bi-arrow-left"></i>
+          Back to Dashboard
+        </a>
+      </div>
     </div>
   </div>
 
