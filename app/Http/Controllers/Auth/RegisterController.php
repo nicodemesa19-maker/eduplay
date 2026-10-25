@@ -164,17 +164,47 @@ class RegisterController extends Controller
                 ['token' => Hash::make($otp), 'created_at' => Carbon::now()]
             );
 
-            Mail::send([], [], function ($m) use ($user, $otp) {
-                $m->to($user->email)
-                  ->subject('Verify your EduPlay teacher email')
-                  ->html("<div style='font-family:Inter,sans-serif;background:#07081a;padding:40px 20px;'><div style='max-width:420px;margin:0 auto;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:36px;'><h2 style='color:#a78bfa;font-size:1.4rem;margin:0 0 8px;'>EduPlay</h2><p style='color:rgba(255,255,255,0.6);font-size:.9rem;margin:0 0 28px;'>Teacher email verification</p><p style='color:rgba(255,255,255,0.8);font-size:.9rem;margin:0 0 20px;'>Use this code to verify your teacher email before admin approval. It expires in <strong>10 minutes</strong>.</p><div style='background:rgba(99,102,241,0.15);border:2px solid rgba(99,102,241,0.5);border-radius:14px;padding:20px;text-align:center;margin:0 0 24px;'><span style='font-family:monospace;font-size:2.6rem;font-weight:900;color:#a78bfa;letter-spacing:10px;'>{$otp}</span></div><p style='color:rgba(255,255,255,0.35);font-size:.78rem;margin:0;'>If you didn't register as a teacher, ignore this email.</p></div></div>");
-            });
+            // Attempt to send email with error handling
+            $emailSent = false;
+            try {
+                \Log::info('Attempting to send verification email', [
+                    'email' => $user->email,
+                    'mail_mailer' => config('mail.mailers.smtp.transport'),
+                    'mail_host' => config('mail.mailers.smtp.host'),
+                    'mail_port' => config('mail.mailers.smtp.port'),
+                ]);
 
-            session(['otp_email' => $user->email, 'otp_purpose' => 'teacher_verification']);
-            Auth::logout();
+                Mail::send([], [], function ($m) use ($user, $otp) {
+                    $m->to($user->email)
+                      ->subject('Verify your EduPlay teacher email')
+                      ->html("<div style='font-family:Inter,sans-serif;background:#07081a;padding:40px 20px;'><div style='max-width:420px;margin:0 auto;background:rgba(255,255,255,0.05);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:36px;'><h2 style='color:#a78bfa;font-size:1.4rem;margin:0 0 8px;'>EduPlay</h2><p style='color:rgba(255,255,255,0.6);font-size:.9rem;margin:0 0 28px;'>Teacher email verification</p><p style='color:rgba(255,255,255,0.8);font-size:.9rem;margin:0 0 20px;'>Use this code to verify your teacher email before admin approval. It expires in <strong>10 minutes</strong>.</p><div style='background:rgba(99,102,241,0.15);border:2px solid rgba(99,102,241,0.5);border-radius:14px;padding:20px;text-align:center;margin:0 0 24px;'><span style='font-family:monospace;font-size:2.6rem;font-weight:900;color:#a78bfa;letter-spacing:10px;'>{$otp}</span></div><p style='color:rgba(255,255,255,0.35);font-size:.78rem;margin:0;'>If you didn't register as a teacher, ignore this email.</p></div></div>");
+                });
+                
+                \Log::info('Verification email sent successfully', ['email' => $user->email]);
+                $emailSent = true;
+            } catch (\Exception $e) {
+                \Log::error('Failed to send verification email', [
+                    'email' => $user->email,
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                ]);
+                
+                // Delete the user since email couldn't be sent
+                $user->delete();
+                DB::table('password_reset_tokens')->where('email', $user->email)->delete();
+                
+                return redirect()->back()
+                    ->withInput($request->except('password', 'password_confirmation', 'faculty_id'))
+                    ->withErrors(['email' => 'Unable to send verification email. Please contact support or try again later. Error: ' . $e->getMessage()]);
+            }
 
-            return redirect()->route('teacher.verify-email')
-                ->with('success', 'A verification code has been sent to your email. Verify it before admin approval.');
+            if ($emailSent) {
+                session(['otp_email' => $user->email, 'otp_purpose' => 'teacher_verification']);
+                Auth::logout();
+
+                return redirect()->route('teacher.verify-email')
+                    ->with('success', 'A verification code has been sent to your email. Verify it before admin approval.');
+            }
         }
 
         // Log the user in
