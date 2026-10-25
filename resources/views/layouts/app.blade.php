@@ -531,6 +531,13 @@
                     @endif
                 </a>
 
+                <!-- Profile Button (Teachers only) -->
+                @if(Auth::user()->role === 'teacher')
+                <a href="{{ route('teacher.profile.show') }}" class="notif-bell" title="My Profile">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+                @endif
+
                 <!-- User pill -->
                 <div class="user-pill d-none d-sm-flex">
                     <div class="user-avatar">{{ strtoupper(substr(Auth::user()->name,0,1)) }}</div>

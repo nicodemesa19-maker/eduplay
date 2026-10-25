@@ -303,6 +303,7 @@ select.inp { padding-right: 26px; background-image: linear-gradient(45deg, trans
         <a href="{{ route('teacher.classrooms') }}" class="tab"><i class="bi bi-building"></i> Classrooms</a>
         <a href="{{ route('teacher.students') }}" class="tab"><i class="bi bi-people"></i> Students</a>
         <a href="{{ route('teacher.export-progress') }}" class="tab"><i class="bi bi-download"></i> Export data</a>
+        <a href="{{ route('teacher.profile.show') }}" class="tab"><i class="bi bi-person-circle"></i> Profile</a>
       </nav>
     </div>
   </div>

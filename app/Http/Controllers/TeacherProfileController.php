@@ -46,6 +46,22 @@ class TeacherProfileController extends Controller
     }
 
     /**
+     * GET /teacher/profile/show
+     * Renders the teacher profile page
+     */
+    public function showProfile()
+    {
+        $teacher = Auth::user();
+
+        // Ensure user is a teacher
+        if ($teacher->role !== 'teacher') {
+            abort(403, 'Unauthorized');
+        }
+
+        return view('teacher.profile', compact('teacher'));
+    }
+
+    /**
      * PATCH /api/teacher/profile
      * Updates ONLY whitelisted fields: display_name, bio, pronouns
      * 

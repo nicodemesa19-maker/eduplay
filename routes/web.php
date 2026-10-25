@@ -123,6 +123,7 @@ Route::prefix('teacher')->middleware(['auth', 'teacher'])->name('teacher.')->gro
     
     // Teacher Profile Routes (API-style)
     Route::get('/profile', [\App\Http\Controllers\TeacherProfileController::class, 'getProfile'])->name('profile.get');
+    Route::get('/profile/show', [\App\Http\Controllers\TeacherProfileController::class, 'showProfile'])->name('profile.show');
     Route::patch('/profile', [\App\Http\Controllers\TeacherProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/avatar', [\App\Http\Controllers\TeacherProfileController::class, 'uploadAvatar'])->name('profile.avatar.upload');
     Route::post('/avatar/preset', [\App\Http\Controllers\TeacherProfileController::class, 'setPresetAvatar'])->name('profile.avatar.preset');
