@@ -30,8 +30,11 @@ class AppServiceProvider extends ServiceProvider
 
         // Register Brevo mailer transport
         Mail::extend('brevo', function ($config) {
+            $httpClient = \Symfony\Component\HttpClient\HttpClient::create();
+            
             $transport = new \Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoApiTransport(
-                config('services.brevo.key')
+                config('services.brevo.key'),
+                $httpClient
             );
             
             return new \Illuminate\Mail\Transport\Transport($transport);
