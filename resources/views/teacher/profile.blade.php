@@ -568,7 +568,13 @@ document.getElementById('profileForm')?.addEventListener('submit', async (e) => 
   document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
   
   const formData = new FormData(e.target);
-  const data = Object.fromEntries(formData.entries());
+  // Convert to object and remove _token (it's sent in header instead)
+  const data = {};
+  for (const [key, value] of formData.entries()) {
+    if (key !== '_token') {
+      data[key] = value;
+    }
+  }
   
   try {
     const response = await fetch('{{ route("teacher.profile.update") }}', {
