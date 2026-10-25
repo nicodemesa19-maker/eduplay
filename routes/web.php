@@ -35,7 +35,48 @@ Route::get('/debug-supabase', function () {
         'key_starts_with' => substr($key ?? '', 0, 30),
         'key_ends_with' => substr($key ?? '', -20),
         'bucket' => $bucket,
+        'service_configured' => app(\App\Services\SupabaseStorageService::class)->isConfigured(),
     ]);
+});
+
+// TEMPORARY: Test faculty ID upload to Supabase
+Route::get('/test-faculty-upload', function () {
+    try {
+        // Create a fake test file
+        $testImagePath = storage_path('app/test_faculty.jpg');
+        
+        // Create a simple 1x1 pixel JPG
+        $imageData = base64_decode('/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlbaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigD//2Q==');
+        file_put_contents($testImagePath, $imageData);
+        
+        $uploadedFile = new \Illuminate\Http\UploadedFile(
+            $testImagePath,
+            'test_faculty.jpg',
+            'image/jpeg',
+            null,
+            true
+        );
+        
+        $supabaseService = app(\App\Services\SupabaseStorageService::class);
+        $fileName = 'test_faculty_' . time() . '.jpg';
+        
+        $result = $supabaseService->uploadToPath($uploadedFile, 'faculty_ids/' . $fileName);
+        
+        // Clean up
+        @unlink($testImagePath);
+        
+        return response()->json([
+            'test' => 'Faculty ID upload test',
+            'service_configured' => $supabaseService->isConfigured(),
+            'upload_result' => $result,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'test' => 'Faculty ID upload test',
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ], 500);
+    }
 });
 
 // Guest welcome page
