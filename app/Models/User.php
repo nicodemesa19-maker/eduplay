@@ -84,6 +84,8 @@ class User extends Authenticatable
         'last_username_change' => 'datetime',
         'profile_updated_at' => 'datetime',
         'display_badge' => 'array',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     // ========== RELATIONSHIPS ==========

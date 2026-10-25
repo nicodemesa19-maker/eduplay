@@ -533,7 +533,7 @@ textarea.form-input {
 
         <div class="readonly-item">
           <div class="readonly-label">Account Created</div>
-          <div class="readonly-value">{{ $teacher->created_at->format('F j, Y') }}</div>
+          <div class="readonly-value">{{ $teacher->created_at ? $teacher->created_at->format('F j, Y') : 'N/A' }}</div>
         </div>
       </div>
 
