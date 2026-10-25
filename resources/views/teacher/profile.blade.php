@@ -527,13 +527,13 @@ textarea.form-input {
         <div class="readonly-item">
           <div class="readonly-label">Approved On</div>
           <div class="readonly-value">
-            {{ $teacher->approved_at ? $teacher->approved_at->format('F j, Y') : 'Not yet' }}
+            {{ $teacher->approved_at ? \Carbon\Carbon::parse($teacher->approved_at)->format('F j, Y') : 'Not yet' }}
           </div>
         </div>
 
         <div class="readonly-item">
           <div class="readonly-label">Account Created</div>
-          <div class="readonly-value">{{ $teacher->created_at ? $teacher->created_at->format('F j, Y') : 'N/A' }}</div>
+          <div class="readonly-value">{{ $teacher->created_at ? \Carbon\Carbon::parse($teacher->created_at)->format('F j, Y') : 'N/A' }}</div>
         </div>
       </div>
 
