@@ -292,9 +292,20 @@ select.inp { padding-right: 26px; background-image: linear-gradient(45deg, trans
   <div class="mast">
     <div class="container-lg px-4">
       <div class="mast-in">
-        <div>
-          <h1>Teacher dashboard</h1>
-          <p>Who is on track, who needs help, and which topics are hardest for your students.</p>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          @if(Auth::user()->avatar_url)
+            <div style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 2px solid var(--line);">
+              @if(str_starts_with(Auth::user()->avatar_url, 'http'))
+                <img src="{{ Auth::user()->avatar_url }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+              @else
+                <img src="{{ Storage::url(Auth::user()->avatar_url) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+              @endif
+            </div>
+          @endif
+          <div>
+            <h1>{{ Auth::user()->display_name ?: Auth::user()->name }}'s Dashboard</h1>
+            <p>Who is on track, who needs help, and which topics are hardest for your students.</p>
+          </div>
         </div>
         <span class="who"><span class="dot"></span>{{ Auth::user()->name }}</span>
       </div>
