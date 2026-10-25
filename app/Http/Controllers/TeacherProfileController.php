@@ -40,7 +40,7 @@ class TeacherProfileController extends Controller
                 'is_approved' => $teacher->is_approved,
                 'approved_at' => $teacher->approved_at?->format('F j, Y'),
                 'email' => $teacher->email,
-                'created_at' => $teacher->created_at->format('F j, Y'),
+                'created_at' => $teacher->created_at ? $teacher->created_at->format('F j, Y') : 'N/A',
             ],
         ]);
     }
