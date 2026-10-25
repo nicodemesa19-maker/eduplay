@@ -541,7 +541,7 @@
                 <!-- User pill -->
                 <div class="user-pill d-none d-sm-flex">
                     <div class="user-avatar">{{ strtoupper(substr(Auth::user()->name,0,1)) }}</div>
-                    <span class="user-name">{{ Auth::user()->name }}</span>
+                    <span class="user-name">{{ Auth::user()->display_name ?: Auth::user()->name }}</span>
                 </div>
 
                 <!-- Logout -->
