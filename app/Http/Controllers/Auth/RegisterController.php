@@ -106,23 +106,34 @@ class RegisterController extends Controller
 
         // Handle file upload
         if ($role === 'teacher') {
-            // Upload faculty ID to Supabase Storage
+            // Upload faculty ID to Supabase Storage (using service_role key for unauthenticated upload)
             $facultyIdFile = $request->file('faculty_id');
             $fileName = 'faculty_' . time() . '_' . uniqid() . '.' . $facultyIdFile->getClientOriginalExtension();
             
-            // Try Supabase first, fallback to local
-            $supabaseService = app(\App\Services\SupabaseStorageService::class);
-            if ($supabaseService->isConfigured()) {
-                $result = $supabaseService->uploadToPath($facultyIdFile, 'faculty_ids/' . $fileName);
-                if ($result['success']) {
-                    $userData['faculty_id_path'] = $result['url'];
+            try {
+                $supabaseService = app(\App\Services\SupabaseStorageService::class);
+                
+                if ($supabaseService->isConfigured()) {
+                    $result = $supabaseService->uploadToPath($facultyIdFile, 'faculty_ids/' . $fileName);
+                    
+                    if ($result['success']) {
+                        $userData['faculty_id_path'] = $result['url'];
+                    } else {
+                        // Fallback to local storage on upload failure
+                        \Log::warning('Faculty ID Supabase upload failed, using local storage', [
+                            'error' => $result['error'] ?? 'Unknown error'
+                        ]);
+                        $path = $facultyIdFile->store('faculty_ids', 'public');
+                        $userData['faculty_id_path'] = $path;
+                    }
                 } else {
-                    // Fallback to local storage
+                    // Supabase not configured, use local storage
                     $path = $facultyIdFile->store('faculty_ids', 'public');
                     $userData['faculty_id_path'] = $path;
                 }
-            } else {
-                // Fallback to local storage if Supabase not configured
+            } catch (\Exception $e) {
+                // On any exception, fallback to local storage
+                \Log::error('Exception during faculty ID upload', ['error' => $e->getMessage()]);
                 $path = $facultyIdFile->store('faculty_ids', 'public');
                 $userData['faculty_id_path'] = $path;
             }
