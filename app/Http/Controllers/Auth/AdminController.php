@@ -93,6 +93,7 @@ class AdminController extends Controller
         }
 
         $teacher->is_approved = true;
+        $teacher->approved_at = now(); // Set approval timestamp
         $teacher->save();
 
         // Send approval email to teacher

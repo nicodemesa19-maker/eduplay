@@ -120,6 +120,12 @@ Route::prefix('teacher')->middleware(['auth', 'teacher'])->name('teacher.')->gro
     Route::post('/student-profile/{studentId}/edit-username', [\App\Http\Controllers\TeacherStudentProfileController::class, 'editUsername'])->name('student-profile.edit-username');
     Route::post('/notification/{notificationId}/mark-read', [\App\Http\Controllers\TeacherStudentProfileController::class, 'markNotificationRead'])->name('notification.mark-read');
     Route::get('/notifications/unread-count', [\App\Http\Controllers\TeacherStudentProfileController::class, 'getUnreadCount'])->name('notifications.unread-count');
+    
+    // Teacher Profile Routes (API-style)
+    Route::get('/profile', [\App\Http\Controllers\TeacherProfileController::class, 'getProfile'])->name('profile.get');
+    Route::patch('/profile', [\App\Http\Controllers\TeacherProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/avatar', [\App\Http\Controllers\TeacherProfileController::class, 'uploadAvatar'])->name('profile.avatar.upload');
+    Route::post('/avatar/preset', [\App\Http\Controllers\TeacherProfileController::class, 'setPresetAvatar'])->name('profile.avatar.preset');
 });
 
 // Student Routes

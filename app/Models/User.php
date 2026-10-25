@@ -48,6 +48,11 @@ class User extends Authenticatable
         'streak_alerts',
         'display_badge',
         'original_username',
+        // Teacher profile fields
+        'display_name',
+        'avatar_url',
+        'pronouns',
+        'approved_at',
         'last_username_change',
         'username_changes_count',
         'profile_updated_at',
