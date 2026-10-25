@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
                 $httpClient
             );
             
-            return new \Illuminate\Mail\Transport\Transport($transport);
+            return new \Symfony\Component\Mailer\Mailer($transport);
         });
     }
 }
