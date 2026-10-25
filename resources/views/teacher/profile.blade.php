@@ -390,7 +390,11 @@ textarea.form-input {
     <div class="profile-preview">
       <div class="profile-avatar" id="previewAvatar">
         @if($teacher->avatar_url)
-          <img src="{{ Storage::url($teacher->avatar_url) }}" alt="Profile Picture">
+          @if(str_starts_with($teacher->avatar_url, 'http'))
+            <img src="{{ $teacher->avatar_url }}" alt="Profile Picture">
+          @else
+            <img src="{{ Storage::url($teacher->avatar_url) }}" alt="Profile Picture">
+          @endif
         @else
           <div class="profile-avatar-placeholder">
             <i class="bi bi-person-circle"></i>
@@ -537,7 +541,11 @@ textarea.form-input {
         <div style="margin-top: 20px;">
           <div class="readonly-label" style="margin-bottom: 8px;">Faculty ID (For Verification)</div>
           <div class="faculty-id-thumb">
-            <img src="{{ Storage::url($teacher->faculty_id_path) }}" alt="Faculty ID">
+            @if(str_starts_with($teacher->faculty_id_path, 'http'))
+              <img src="{{ $teacher->faculty_id_path }}" alt="Faculty ID">
+            @else
+              <img src="{{ Storage::url($teacher->faculty_id_path) }}" alt="Faculty ID">
+            @endif
           </div>
         </div>
       @endif

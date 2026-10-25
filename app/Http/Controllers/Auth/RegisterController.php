@@ -106,8 +106,27 @@ class RegisterController extends Controller
 
         // Handle file upload
         if ($role === 'teacher') {
-            $path = $request->file('faculty_id')->store('faculty_ids', 'public');
-            $userData['faculty_id_path'] = $path;
+            // Upload faculty ID to Supabase Storage
+            $facultyIdFile = $request->file('faculty_id');
+            $fileName = 'faculty_' . time() . '_' . uniqid() . '.' . $facultyIdFile->getClientOriginalExtension();
+            
+            // Try Supabase first, fallback to local
+            $supabaseService = app(\App\Services\SupabaseStorageService::class);
+            if ($supabaseService->isConfigured()) {
+                $result = $supabaseService->uploadToPath($facultyIdFile, 'faculty_ids/' . $fileName);
+                if ($result['success']) {
+                    $userData['faculty_id_path'] = $result['url'];
+                } else {
+                    // Fallback to local storage
+                    $path = $facultyIdFile->store('faculty_ids', 'public');
+                    $userData['faculty_id_path'] = $path;
+                }
+            } else {
+                // Fallback to local storage if Supabase not configured
+                $path = $facultyIdFile->store('faculty_ids', 'public');
+                $userData['faculty_id_path'] = $path;
+            }
+            
             $userData['is_approved'] = false; // Teachers need admin approval
         } else {
             $path = $request->file('school_id')->store('school_ids', 'public');

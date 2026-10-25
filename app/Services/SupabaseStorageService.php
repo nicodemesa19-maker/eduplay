@@ -32,6 +32,14 @@ class SupabaseStorageService
      */
     public function upload(UploadedFile $file, string $path): array
     {
+        return $this->uploadToPath($file, $path);
+    }
+
+    /**
+     * Upload file to a specific path in Supabase Storage
+     */
+    public function uploadToPath(UploadedFile $file, string $path): array
+    {
         try {
             $url = "{$this->supabaseUrl}/storage/v1/object/{$this->bucket}/{$path}";
             

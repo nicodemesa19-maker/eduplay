@@ -148,7 +148,11 @@
               </td>
               <td style="color:var(--text-muted);">{{ $teacher->email }}</td>
               <td>
-                <a href="{{ Storage::url($teacher->faculty_id_path) }}" target="_blank" class="view-id-link">
+                @if(str_starts_with($teacher->faculty_id_path, 'http'))
+                  <a href="{{ $teacher->faculty_id_path }}" target="_blank" class="view-id-link">
+                @else
+                  <a href="{{ Storage::url($teacher->faculty_id_path) }}" target="_blank" class="view-id-link">
+                @endif
                   <i class="bi bi-file-earmark-person-fill"></i>View ID
                 </a>
               </td>
