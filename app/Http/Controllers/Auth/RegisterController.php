@@ -77,9 +77,9 @@ class RegisterController extends Controller
         ];
 
         if ($role === 'teacher') {
-            $rules['faculty_id'] = 'required|image|mimes:jpeg,png,jpg|max:5120';
+            $rules['faculty_id'] = 'required|image|mimes:jpeg,png,jpg|max:3072'; // 3MB max
         } else {
-            $rules['school_id'] = 'required|image|mimes:jpeg,png,jpg|max:5120';
+            $rules['school_id'] = 'required|image|mimes:jpeg,png,jpg|max:3072'; // 3MB max
         }
 
         $request->validate($rules, [
