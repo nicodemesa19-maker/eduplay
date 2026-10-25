@@ -149,13 +149,46 @@ class TeacherProfileController extends Controller
             ]);
         }
 
-        // Delete old avatar if exists
-        if ($teacher->avatar_url && Storage::disk('public')->exists($teacher->avatar_url)) {
-            Storage::disk('public')->delete($teacher->avatar_url);
+        // Upload to Supabase Storage (persistent) with local fallback
+        $supabaseService = app(\App\Services\SupabaseStorageService::class);
+        $fileName = 'teacher_avatar_' . $teacher->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $uploadedToSupabase = false;
+        $path = null;
+
+        if ($supabaseService->isConfigured()) {
+            \Log::info('Attempting teacher avatar upload to Supabase', [
+                'teacher_id' => $teacher->id,
+                'fileName' => $fileName,
+            ]);
+            
+            $result = $supabaseService->uploadToPath($file, 'teacher_avatars/' . $fileName);
+            
+            if ($result['success']) {
+                \Log::info('Teacher avatar uploaded to Supabase successfully', ['url' => $result['url']]);
+                $path = $result['url'];
+                $uploadedToSupabase = true;
+            } else {
+                \Log::error('Teacher avatar Supabase upload failed', [
+                    'error' => $result['error'] ?? 'Unknown error',
+                ]);
+            }
+        } else {
+            \Log::warning('Supabase not configured for teacher avatar');
         }
 
-        // Store new avatar
-        $path = $file->store('avatars/teachers', 'public');
+        // Fallback to local storage if Supabase failed
+        if (!$uploadedToSupabase) {
+            \Log::info('Using local storage fallback for teacher avatar');
+            
+            // Delete old local avatar if exists
+            if ($teacher->avatar_url && 
+                !str_starts_with($teacher->avatar_url, 'http') &&
+                Storage::disk('public')->exists($teacher->avatar_url)) {
+                Storage::disk('public')->delete($teacher->avatar_url);
+            }
+            
+            $path = $file->store('avatars/teachers', 'public');
+        }
         
         // Update teacher record
         $teacher->update(['avatar_url' => $path]);
@@ -165,7 +198,8 @@ class TeacherProfileController extends Controller
             'message' => 'Avatar uploaded successfully',
             'data' => [
                 'avatar_url' => $path,
-                'avatar_full_url' => Storage::url($path),
+                'avatar_full_url' => $uploadedToSupabase ? $path : Storage::url($path),
+                'storage_type' => $uploadedToSupabase ? 'supabase' : 'local',
             ],
         ]);
     }
