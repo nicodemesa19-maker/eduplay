@@ -132,34 +132,37 @@
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
-  border: 1px solid var(--card-border);
-  background: var(--card-bg-raised);
-  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(230, 232, 236, 0.7);
   text-decoration: none;
   transition: all 0.15s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
 }
 
 .pagination-wrap nav a:hover {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent);
+  border-color: rgba(79, 124, 255, 0.5);
+  background: rgba(79, 124, 255, 0.12);
+  color: #6b9aff;
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(79, 124, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(79, 124, 255, 0.2);
 }
 
 .pagination-wrap nav span[aria-current="page"] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
+  background: rgba(79, 124, 255, 0.2);
+  border-color: rgba(79, 124, 255, 0.4);
+  color: #8fb4ff;
   font-weight: 700;
-  box-shadow: 0 2px 6px rgba(79, 124, 255, 0.25);
+  box-shadow: 0 0 0 1px rgba(79, 124, 255, 0.2);
 }
 
 .pagination-wrap nav span[aria-disabled="true"] {
-  opacity: 0.4;
+  opacity: 0.25;
   cursor: not-allowed;
   pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(230, 232, 236, 0.3);
 }
 
 .pagination-wrap svg {
