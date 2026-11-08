@@ -98,28 +98,29 @@
 .btn-delete:hover { border-color: var(--danger); }
 
 .pagination-wrap { 
-  padding: 20px;
-  border-top: 1px solid var(--card-border2);
+  padding: 24px 20px !important;
+  border-top: 1px solid var(--card-border2) !important;
+  margin-top: 8px !important;
 }
 
 /* Custom pagination styles */
 .pagination-wrap nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
 }
 
 .pagination-wrap nav > div:first-child {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
 }
 
 .pagination-wrap p {
-  display: none; /* Hide "Showing X to Y" text to save space */
+  display: none !important; /* Hide "Showing X to Y" text to save space */
 }
 
 .pagination-wrap nav a,
@@ -129,11 +130,12 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  min-width: 36px !important;
-  height: 36px !important;
-  padding: 0 10px !important;
-  border-radius: 8px !important;
-  font-size: 0.85rem !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  padding: 0 12px !important;
+  margin: 0 !important;
+  border-radius: 10px !important;
+  font-size: 0.9rem !important;
   font-weight: 600 !important;
   border: 1px solid rgba(79, 124, 255, 0.3) !important;
   background: rgba(20, 24, 35, 0.8) !important;
