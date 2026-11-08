@@ -117,9 +117,10 @@
 }
 
 .pagination-wrap p {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: rgba(167, 139, 250, 0.8);
   margin: 0;
+  font-weight: 500;
 }
 
 .pagination-wrap nav > div {
@@ -132,35 +133,42 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  height: 36px;
-  padding: 0 12px;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
   font-weight: 600;
-  border: 1px solid var(--card-border);
-  background: var(--card-bg-raised);
-  color: var(--text);
+  border: 1.5px solid rgba(99, 102, 241, 0.2);
+  background: rgba(99, 102, 241, 0.08);
+  color: #a78bfa;
   text-decoration: none;
-  transition: all 0.15s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .pagination-wrap nav a:hover {
-  border-color: var(--accent-border);
-  background: var(--accent-soft);
-  color: var(--accent);
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(99, 102, 241, 0.15);
+  color: #c4b5fd;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
 }
 
 .pagination-wrap nav span[aria-current="page"] {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-color: #6366f1;
   color: white;
   font-weight: 700;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
 .pagination-wrap nav span[aria-disabled="true"] {
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(230, 232, 236, 0.3);
 }
 
 .pagination-wrap svg {
