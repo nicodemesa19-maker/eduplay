@@ -81,7 +81,8 @@ class AdminController extends Controller
     public function pendingTeachers()
     {
         $teachers = User::where('role', 'teacher')->where('is_approved', false)->get();
-        return view('admin.pending-teachers', compact('teachers'));
+        $pendingCount = $teachers->count();
+        return view('admin.pending-teachers', compact('teachers', 'pendingCount'));
     }
 
     public function approveTeacher($id)
@@ -171,8 +172,9 @@ class AdminController extends Controller
         $teacherCount = User::where('role', 'teacher')->count();
         $studentCount = User::where('role', 'student')->count();
         $totalCount = $teacherCount + $studentCount;
+        $pendingCount = User::where('role', 'teacher')->where('is_approved', false)->count();
         
-        return view('admin.manage-users', compact('users', 'teacherCount', 'studentCount', 'totalCount'));
+        return view('admin.manage-users', compact('users', 'teacherCount', 'studentCount', 'totalCount', 'pendingCount'));
     }
 
     public function deleteUser($id)

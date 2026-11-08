@@ -90,6 +90,14 @@
 .empty-state i { font-size: 2rem; color: var(--success); display: block; margin-bottom: 12px; }
 .empty-state .title { color: var(--text); font-weight: 700; font-size: .95rem; margin-bottom: 3px; }
 .empty-state .sub { color: var(--text-muted); font-size: .85rem; }
+
+/* ---------- Nav tabs ---------- */
+.nav-tabs-wrapper { display: flex; align-items: center; gap: 4px; margin-top: 20px; overflow-x: auto; padding-bottom: 0; border-bottom: 1px solid var(--head-border); }
+.nav-tabs-wrapper::-webkit-scrollbar { height: 0; }
+.nav-tab { display: inline-flex; align-items: center; gap: 7px; padding: 10px 14px; font-size: .86rem; font-weight: 600; color: var(--text-muted); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; }
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+.nav-tab .tab-badge { background: var(--warning-soft); color: var(--warning); border-radius: 99px; padding: 1px 7px; font-size: .7rem; font-weight: 700; }
 </style>
 
 <div class="admin-page">
@@ -103,6 +111,21 @@
         </div>
         <a href="{{ route('admin.dashboard') }}" class="back-link">
           <i class="bi bi-house-fill"></i> Dashboard
+        </a>
+      </div>
+
+      <div class="nav-tabs-wrapper">
+        <a href="{{ url('/admin/dashboard') }}" class="nav-tab">
+          <i class="bi bi-house-fill"></i> Dashboard
+        </a>
+        <a href="{{ route('admin.pending-teachers') }}" class="nav-tab active">
+          <i class="bi bi-person-check-fill"></i> Pending Teachers
+          @if($pendingCount > 0)
+          <span class="tab-badge">{{ $pendingCount }}</span>
+          @endif
+        </a>
+        <a href="{{ route('admin.manage-users') }}" class="nav-tab">
+          <i class="bi bi-people-fill"></i> Manage Users
         </a>
       </div>
     </div>
