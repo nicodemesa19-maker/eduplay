@@ -97,7 +97,7 @@
 .btn-delete:hover { border-color: var(--danger); }
 
 .pagination-wrap { 
-  padding: 24px 20px; 
+  padding: 18px 20px; 
   border-top: 1px solid var(--card-border2); 
   display: flex;
   align-items: center;
@@ -114,19 +114,19 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
 }
 
 .pagination-wrap p {
-  font-size: 0.9rem;
-  color: rgba(167, 139, 250, 0.8);
+  font-size: 0.85rem;
+  color: var(--text-muted);
   margin: 0;
   font-weight: 500;
 }
 
 .pagination-wrap nav > div {
   display: flex;
-  gap: 10px;
+  gap: 6px;
 }
 
 .pagination-wrap nav a,
@@ -134,34 +134,34 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  height: 44px;
-  padding: 0 16px;
-  border-radius: 12px;
-  font-size: 0.95rem;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 0.88rem;
   font-weight: 600;
-  border: 1.5px solid rgba(99, 102, 241, 0.2);
-  background: rgba(99, 102, 241, 0.08);
-  color: #a78bfa;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg-raised);
+  color: var(--text-muted);
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .pagination-wrap nav a:hover {
-  border-color: rgba(99, 102, 241, 0.5);
-  background: rgba(99, 102, 241, 0.15);
-  color: #c4b5fd;
+  border-color: rgba(79, 124, 255, 0.4);
+  background: rgba(79, 124, 255, 0.08);
+  color: var(--accent);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 2px 6px rgba(79, 124, 255, 0.15);
 }
 
 .pagination-wrap nav span[aria-current="page"] {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  border-color: #6366f1;
+  background: var(--accent);
+  border-color: var(--accent);
   color: white;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 2px 8px rgba(79, 124, 255, 0.3);
 }
 
 .pagination-wrap nav span[aria-disabled="true"] {
