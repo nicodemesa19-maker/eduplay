@@ -97,36 +97,28 @@
 .btn-delete:hover { border-color: var(--danger); }
 
 .pagination-wrap { 
-  padding: 18px 20px; 
-  border-top: 1px solid var(--card-border2); 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 20px;
+  border-top: 1px solid var(--card-border2);
 }
 
 /* Custom pagination styles */
 .pagination-wrap nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 
-.pagination-wrap .flex {
+.pagination-wrap nav > div:first-child {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 8px;
 }
 
 .pagination-wrap p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0;
-  font-weight: 500;
-}
-
-.pagination-wrap nav > div {
-  display: flex;
-  gap: 6px;
+  display: none; /* Hide "Showing X to Y" text to save space */
 }
 
 .pagination-wrap nav a,
@@ -134,26 +126,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 38px;
-  height: 38px;
-  padding: 0 12px;
-  border-radius: 10px;
-  font-size: 0.88rem;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
   font-weight: 600;
   border: 1px solid var(--card-border);
   background: var(--card-bg-raised);
   color: var(--text-muted);
   text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .pagination-wrap nav a:hover {
-  border-color: rgba(79, 124, 255, 0.4);
-  background: rgba(79, 124, 255, 0.08);
+  border-color: var(--accent);
+  background: var(--accent-soft);
   color: var(--accent);
   transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(79, 124, 255, 0.15);
+  box-shadow: 0 2px 4px rgba(79, 124, 255, 0.15);
 }
 
 .pagination-wrap nav span[aria-current="page"] {
@@ -161,15 +153,13 @@
   border-color: var(--accent);
   color: white;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(79, 124, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(79, 124, 255, 0.25);
 }
 
 .pagination-wrap nav span[aria-disabled="true"] {
-  opacity: 0.3;
+  opacity: 0.4;
   cursor: not-allowed;
-  border-color: rgba(255, 255, 255, 0.05);
-  background: rgba(255, 255, 255, 0.02);
-  color: rgba(230, 232, 236, 0.3);
+  pointer-events: none;
 }
 
 .pagination-wrap svg {
