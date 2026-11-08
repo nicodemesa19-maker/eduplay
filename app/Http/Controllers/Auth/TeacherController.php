@@ -278,15 +278,14 @@ class TeacherController extends Controller
             ->firstOrFail();
 
         // Create student — username is custom, password is the ID number
-        $dummyEmail = 'std_' . Str::slug($username, '_') . '_' . substr(md5($request->student_id_number . time()), 0, 6) . '@student.local';
-
+        // Students don't need email, only username for login
         $student = User::create([
             'name'                  => $fullName,
             'username'              => $username,
             'first_name'            => $firstName,
             'middle_name'           => $middleName,
             'last_name'             => $lastName,
-            'email'                 => $dummyEmail,
+            'email'                 => null, // Students don't need email
             'password'              => Hash::make(trim($request->student_id_number)),
             'role'                  => 'student',
             'grade_level'           => $request->grade_level,

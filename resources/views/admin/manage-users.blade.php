@@ -214,7 +214,7 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Email</th>
+              <th>Email / Username</th>
               <th>Role</th>
               <th>Activity</th>
               <th>Action</th>
@@ -229,7 +229,13 @@
                   <span class="t-text" style="font-weight:600;">{{ $user->name }}</span>
                 </div>
               </td>
-              <td style="color:var(--text-muted);">{{ $user->email }}</td>
+              <td style="color:var(--text-muted);">
+                @if($user->role === 'student')
+                  <i class="bi bi-person-badge me-1" style="color:var(--accent);"></i>{{ $user->username ?? 'N/A' }}
+                @else
+                  {{ $user->email }}
+                @endif
+              </td>
               <td>
                 @php
                   $roleClass = match($user->role) {
