@@ -17,6 +17,9 @@ php artisan view:clear
 # Run database migrations
 php artisan migrate --force --no-interaction
 
+# Clean up dummy student emails (if any exist from before the migration)
+php artisan tinker --execute="DB::table('users')->where('role', 'student')->where('email', 'like', '%@student.local')->update(['email' => null]);" || true
+
 # Seed games table if needed
 php artisan db:seed --class=GamesTableSeeder --force --no-interaction || true
 
