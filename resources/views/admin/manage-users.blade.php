@@ -2,6 +2,7 @@
 @section('content')
 <style>
 /* stylelint-disable */
+/* Version 2.1 - Forced dark pagination colors */
 :root {
   --pg-bg: #0b0d12;
   --card-bg: #12151c;
@@ -122,47 +123,52 @@
 }
 
 .pagination-wrap nav a,
-.pagination-wrap nav span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 36px;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(230, 232, 236, 0.7);
-  text-decoration: none;
-  transition: all 0.15s ease;
-  box-shadow: none;
+.pagination-wrap nav span,
+.pagination-wrap nav a.page-link,
+.pagination-wrap nav span.page-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  padding: 0 10px !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(79, 124, 255, 0.3) !important;
+  background: rgba(20, 24, 35, 0.8) !important;
+  color: rgba(140, 160, 200, 0.9) !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
+  box-shadow: none !important;
 }
 
-.pagination-wrap nav a:hover {
-  border-color: rgba(79, 124, 255, 0.5);
-  background: rgba(79, 124, 255, 0.12);
-  color: #6b9aff;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(79, 124, 255, 0.2);
+.pagination-wrap nav a:hover,
+.pagination-wrap nav a.page-link:hover {
+  border-color: rgba(79, 124, 255, 0.6) !important;
+  background: rgba(79, 124, 255, 0.15) !important;
+  color: #8fb4ff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(79, 124, 255, 0.25) !important;
 }
 
-.pagination-wrap nav span[aria-current="page"] {
-  background: rgba(79, 124, 255, 0.2);
-  border-color: rgba(79, 124, 255, 0.4);
-  color: #8fb4ff;
-  font-weight: 700;
-  box-shadow: 0 0 0 1px rgba(79, 124, 255, 0.2);
+.pagination-wrap nav span[aria-current="page"],
+.pagination-wrap nav span.page-link[aria-current="page"] {
+  background: rgba(79, 124, 255, 0.25) !important;
+  border-color: rgba(79, 124, 255, 0.5) !important;
+  color: #a8c5ff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 0 2px rgba(79, 124, 255, 0.2) !important;
 }
 
-.pagination-wrap nav span[aria-disabled="true"] {
-  opacity: 0.25;
-  cursor: not-allowed;
-  pointer-events: none;
-  border-color: rgba(255, 255, 255, 0.05);
-  background: rgba(255, 255, 255, 0.02);
-  color: rgba(230, 232, 236, 0.3);
+.pagination-wrap nav span[aria-disabled="true"],
+.pagination-wrap nav span.page-link[aria-disabled="true"] {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(20, 24, 35, 0.4) !important;
+  color: rgba(140, 160, 200, 0.4) !important;
 }
 
 .pagination-wrap svg {
