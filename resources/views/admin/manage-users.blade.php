@@ -67,18 +67,18 @@
 .alert-success { display: flex; align-items: center; gap: 9px; background: var(--success-soft); border: 1px solid var(--success-border); color: var(--success); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: .85rem; }
 
 .section-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
-.section-head { padding: 15px 20px; border-bottom: 1px solid var(--card-border2); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.section-head .lbl { font-size: .8rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; }
+.section-head { padding: 18px 24px; border-bottom: 1px solid var(--card-border2); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.section-head .lbl { font-size: .82rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
 .section-head .lbl i { color: var(--accent); }
 .count-badge { background: var(--accent-soft); border: 1px solid var(--accent-border); color: var(--accent); border-radius: 99px; padding: 3px 10px; font-size: .72rem; font-weight: 700; }
 
 .admin-table { width: 100%; border-collapse: collapse; }
-.admin-table th { padding: 11px 20px; font-size: .68rem; font-weight: 700; color: var(--text-faint); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--card-border); background: var(--card-bg); }
-.admin-table td { padding: 13px 20px; border-bottom: 1px solid var(--card-border2); font-size: .85rem; color: var(--text); vertical-align: middle; }
+.admin-table th { padding: 14px 24px; font-size: .7rem; font-weight: 700; color: var(--text-faint); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--card-border); background: var(--card-bg); }
+.admin-table td { padding: 16px 24px; border-bottom: 1px solid var(--card-border2); font-size: .88rem; color: var(--text); vertical-align: middle; }
 .admin-table tr:last-child td { border-bottom: none; }
 .admin-table tr:hover td { background: var(--card-bg-raised); }
 
-.avatar-circle { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-soft); border: 1px solid var(--accent-border); display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+.avatar-circle { width: 36px; height: 36px; border-radius: 9px; background: var(--accent-soft); border: 1px solid var(--accent-border); display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700; color: var(--accent); flex-shrink: 0; }
 
 .role-badge { border-radius: 99px; padding: 3px 10px; font-size: .7rem; font-weight: 700; display: inline-block; }
 .role-admin   { background: var(--danger-soft); border: 1px solid var(--danger-border); color: var(--danger); }
@@ -88,7 +88,7 @@
 .status-active   { display: inline-flex; align-items: center; gap: 5px; font-size: .75rem; font-weight: 700; color: var(--success); }
 .status-inactive { display: inline-flex; align-items: center; gap: 5px; font-size: .75rem; font-weight: 700; color: var(--danger); }
 
-.btn-action { border-radius: 7px; padding: 5px 12px; font-size: .75rem; font-weight: 600; cursor: pointer; transition: background .15s, border-color .15s; }
+.btn-action { border-radius: 8px; padding: 7px 14px; font-size: .78rem; font-weight: 600; cursor: pointer; transition: background .15s, border-color .15s; }
 .btn-deactivate { background: var(--danger-soft); border: 1px solid var(--danger-border); color: var(--danger); }
 .btn-deactivate:hover { border-color: var(--danger); }
 .btn-activate { background: var(--success-soft); border: 1px solid var(--success-border); color: var(--success); }
@@ -97,7 +97,7 @@
 .btn-delete:hover { border-color: var(--danger); }
 
 .pagination-wrap { 
-  padding: 16px 20px; 
+  padding: 24px 20px; 
   border-top: 1px solid var(--card-border2); 
   display: flex;
   align-items: center;
@@ -114,11 +114,11 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 20px;
 }
 
 .pagination-wrap p {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: rgba(167, 139, 250, 0.8);
   margin: 0;
   font-weight: 500;
@@ -126,7 +126,7 @@
 
 .pagination-wrap nav > div {
   display: flex;
-  gap: 6px;
+  gap: 10px;
 }
 
 .pagination-wrap nav a,
@@ -134,11 +134,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 40px;
-  height: 40px;
-  padding: 0 14px;
-  border-radius: 10px;
-  font-size: 0.9rem;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-size: 0.95rem;
   font-weight: 600;
   border: 1.5px solid rgba(99, 102, 241, 0.2);
   background: rgba(99, 102, 241, 0.08);
@@ -217,13 +217,13 @@
   <div class="container-lg px-4">
 
     <!-- Filter Section -->
-    <div class="section-card mb-3">
+    <div class="section-card mb-4">
       <div class="section-head">
         <span class="lbl"><i class="bi bi-funnel-fill me-2"></i>Filters</span>
       </div>
-      <div style="padding: 20px;">
+      <div style="padding: 24px;">
         <form method="GET" action="{{ route('admin.manage-users') }}" id="filter-form">
-          <div class="row g-3 align-items-end">
+          <div class="row g-4 align-items-end">
             <!-- Role Filter -->
             <div class="col-md-3">
               <label style="font-size: .75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; display: block;">
