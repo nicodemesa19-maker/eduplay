@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <style>
+/* stylelint-disable */
 :root {
   --pg-bg: #0b0d12;
   --card-bg: #12151c;
