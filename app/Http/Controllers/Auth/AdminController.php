@@ -143,8 +143,36 @@ class AdminController extends Controller
 
     public function manageUsers()
     {
-        $users = User::whereIn('role', ['teacher', 'student'])->paginate(20);
-        return view('admin.manage-users', compact('users'));
+        $query = User::whereIn('role', ['teacher', 'student']);
+        
+        // Filter by role if provided
+        if (request()->has('role') && request('role') !== 'all') {
+            $query->where('role', request('role'));
+        }
+        
+        // Filter by status if provided
+        if (request()->has('status') && request('status') !== 'all') {
+            $isActive = request('status') === 'active';
+            $query->where('is_active', $isActive);
+        }
+        
+        // Search by name or email
+        if (request()->has('search') && request('search') !== '') {
+            $search = request('search');
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+        
+        $users = $query->paginate(20)->withQueryString();
+        
+        // Count users by role for filter badges
+        $teacherCount = User::where('role', 'teacher')->count();
+        $studentCount = User::where('role', 'student')->count();
+        $totalCount = $teacherCount + $studentCount;
+        
+        return view('admin.manage-users', compact('users', 'teacherCount', 'studentCount', 'totalCount'));
     }
 
     public function deleteUser($id)

@@ -96,6 +96,26 @@
 .btn-delete:hover { border-color: var(--danger); }
 
 .pagination-wrap { padding: 16px 20px; border-top: 1px solid var(--card-border2); }
+
+.filter-select {
+  background: var(--card-bg-raised);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.filter-select:focus {
+  background: var(--card-bg);
+  border-color: var(--accent-border);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.filter-select option {
+  background: var(--card-bg);
+  color: var(--text);
+}
 </style>
 
 <div class="admin-page">
@@ -116,10 +136,77 @@
 
   <div class="container-lg px-4">
 
+    <!-- Filter Section -->
+    <div class="section-card mb-3">
+      <div class="section-head">
+        <span class="lbl"><i class="bi bi-funnel-fill me-2"></i>Filters</span>
+      </div>
+      <div style="padding: 20px;">
+        <form method="GET" action="{{ route('admin.manage-users') }}" id="filter-form">
+          <div class="row g-3 align-items-end">
+            <!-- Role Filter -->
+            <div class="col-md-3">
+              <label style="font-size: .75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; display: block;">
+                <i class="bi bi-person-badge"></i> User Role
+              </label>
+              <select name="role" class="form-control filter-select" onchange="document.getElementById('filter-form').submit()">
+                <option value="all" {{ request('role', 'all') === 'all' ? 'selected' : '' }}>All Roles</option>
+                <option value="teacher" {{ request('role') === 'teacher' ? 'selected' : '' }}>Teachers ({{ $teacherCount }})</option>
+                <option value="student" {{ request('role') === 'student' ? 'selected' : '' }}>Students ({{ $studentCount }})</option>
+              </select>
+            </div>
+
+            <!-- Status Filter -->
+            <div class="col-md-3">
+              <label style="font-size: .75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; display: block;">
+                <i class="bi bi-toggle-on"></i> Account Status
+              </label>
+              <select name="status" class="form-control filter-select" onchange="document.getElementById('filter-form').submit()">
+                <option value="all" {{ request('status', 'all') === 'all' ? 'selected' : '' }}>All Statuses</option>
+                <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>Active Only</option>
+                <option value="inactive" {{ request('status') === 'inactive' ? 'selected' : '' }}>Inactive Only</option>
+              </select>
+            </div>
+
+            <!-- Search -->
+            <div class="col-md-4">
+              <label style="font-size: .75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; display: block;">
+                <i class="bi bi-search"></i> Search
+              </label>
+              <input type="text" name="search" class="form-control filter-select" 
+                     placeholder="Search by name or email..." 
+                     value="{{ request('search') }}">
+            </div>
+
+            <!-- Actions -->
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-action btn-primary w-100" style="background: var(--accent); color: white; border: none; padding: 8px;">
+                <i class="bi bi-search"></i> Search
+              </button>
+              @if(request()->hasAny(['role', 'status', 'search']))
+              <a href="{{ route('admin.manage-users') }}" class="btn btn-action w-100 mt-2" 
+                 style="background: var(--card-bg-raised); color: var(--text-muted); border: 1px solid var(--card-border); padding: 8px; text-align: center; display: block; text-decoration: none;">
+                <i class="bi bi-x-circle"></i> Clear
+              </a>
+              @endif
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <div class="section-card">
       <div class="section-head">
-        <span class="lbl"><i class="bi bi-people-fill me-2"></i>All Users</span>
-        <span class="count-badge">{{ $users->total() }} total</span>
+        <span class="lbl"><i class="bi bi-people-fill me-2"></i>
+          @if(request('role') === 'teacher')
+            Teachers
+          @elseif(request('role') === 'student')
+            Students
+          @else
+            All Users
+          @endif
+        </span>
+        <span class="count-badge">{{ $users->total() }} found</span>
       </div>
 
       <div style="overflow-x:auto;">
