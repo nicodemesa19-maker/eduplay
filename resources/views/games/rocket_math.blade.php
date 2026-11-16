@@ -595,33 +595,24 @@
 }
 #rmTutOverlay.fc-overlay.show { display: flex !important; }
 
-.rm-fc-deck {
-    position: relative;
-    width: 100%;
-    max-width: 780px;
-    margin: auto;
-}
+.rm-fc-deck { position: relative; width: 100%; max-width: 780px; margin: auto; }
 
 .rm-fc-deck-stack-1 {
-    position: absolute;
-    inset: 10px 18px -10px;
+    position: absolute; inset: 10px 18px -10px;
     background: rgba(56, 189, 248, 0.18);
     border: 1.5px solid rgba(100, 181, 246, 0.25);
     border-radius: 26px;
     transform: rotate(-2.8deg);
-    z-index: 1;
-    pointer-events: none;
+    z-index: 1; pointer-events: none;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
 }
 .rm-fc-deck-stack-2 {
-    position: absolute;
-    inset: 5px 8px -5px;
+    position: absolute; inset: 5px 8px -5px;
     background: rgba(15, 25, 55, 0.9);
     border: 1.5px solid rgba(100, 181, 246, 0.35);
     border-radius: 26px;
     transform: rotate(2deg);
-    z-index: 2;
-    pointer-events: none;
+    z-index: 2; pointer-events: none;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
 }
 
@@ -645,25 +636,17 @@
 }
 
 .rm-fc-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 12px;
 }
 .rm-fc-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
     background: rgba(100, 181, 246, 0.18);
     border: 1px solid rgba(100, 181, 246, 0.45);
     border-radius: 99px;
     padding: 4px 12px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #64b5f6;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
+    font-size: 1.1rem; font-weight: 800; color: #64b5f6;
+    letter-spacing: 1.2px; text-transform: uppercase;
 }
 .rm-fc-quick-action-btn {
     background: rgba(255, 255, 255, 0.08);
@@ -672,12 +655,9 @@
     border-radius: 99px;
     padding: 4px 12px;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.74rem;
-    font-weight: 700;
+    font-size: 0.74rem; font-weight: 700;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    display: inline-flex; align-items: center; gap: 4px;
     transition: all 0.2s ease;
     flex-shrink: 0;
 }
@@ -687,12 +667,8 @@
     color: #fff;
 }
 .rm-fc-quick-action-btn.is-close {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    justify-content: center;
-    font-size: 1.2rem;
-    border-radius: 10px;
+    width: 32px; height: 32px; padding: 0; justify-content: center;
+    font-size: 1.2rem; border-radius: 10px;
 }
 .rm-fc-quick-action-btn.is-close:hover {
     background: rgba(239, 68, 68, 0.25);
@@ -701,10 +677,8 @@
 }
 
 .rm-fc-slide {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
     min-height: 245px;
     animation: rmFcSlideIn 0.25s cubic-bezier(.34,1.56,.64,1);
 }
@@ -716,44 +690,23 @@
 
 .rm-fc-title {
     font-family: 'Space Grotesk', sans-serif !important;
-    font-size: 1.42rem !important;
-    font-weight: 900 !important;
-    margin: 0 0 6px !important;
-    letter-spacing: -0.3px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: center;
+    font-size: 1.42rem !important; font-weight: 900 !important;
+    margin: 0 0 6px !important; letter-spacing: -0.3px;
+    display: flex; align-items: center; gap: 8px; justify-content: center;
     color: #64b5f6;
 }
-.rm-fc-desc {
-    font-size: 0.88rem;
-    color: rgba(220, 235, 255, 0.85);
-    line-height: 1.4;
-    margin: 0 auto 12px;
-    max-width: 440px;
-}
-
+.rm-fc-desc { font-size: 0.88rem; color: rgba(220, 235, 255, 0.85); line-height: 1.4; margin: 0 auto 12px; max-width: 440px; }
 .rm-fc-box {
     background: rgba(0, 0, 0, 0.35);
     border: 1.5px solid rgba(100, 181, 246, 0.25);
     border-radius: 16px;
-    padding: 12px 14px;
-    margin-bottom: 12px;
-    width: 100%;
+    padding: 12px 14px; margin-bottom: 12px; width: 100%;
 }
-.rm-fc-row-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-}
+.rm-fc-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
 .rm-fc-item {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 12px;
-    padding: 10px 10px;
-    text-align: center;
+    border-radius: 12px; padding: 10px 10px; text-align: center;
 }
 .rm-fc-item-ico { font-size: 1.5rem; margin-bottom: 2px; }
 .rm-fc-item-lbl { font-size: 0.88rem; font-weight: 800; color: #64b5f6; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px; }
@@ -763,72 +716,40 @@
 .rm-fc-tip {
     background: rgba(100, 181, 246, 0.12);
     border: 1px solid rgba(100, 181, 246, 0.35);
-    border-radius: 10px;
-    padding: 6px 12px;
-    font-size: 0.95rem;
-    color: #e0f2fe;
-    width: 100%;
-    text-align: center;
-    line-height: 1.35;
+    border-radius: 10px; padding: 6px 12px;
+    font-size: 0.95rem; color: #e0f2fe;
+    width: 100%; text-align: center; line-height: 1.35;
 }
 .rm-fc-tip b { color: #64b5f6; }
 
 .rm-fc-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding-top: 14px;
-    margin-top: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding-top: 14px; margin-top: 6px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 .rm-fc-nav-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.16);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 11px;
+    color: #fff; padding: 8px 16px; border-radius: 11px;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.84rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
+    font-size: 0.84rem; font-weight: 800;
+    cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
 }
-.rm-fc-nav-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.14);
-    transform: translateY(-1px);
-}
+.rm-fc-nav-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.14); transform: translateY(-1px); }
 .rm-fc-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-.rm-fc-nav-btn.primary {
-    background: linear-gradient(135deg, #0284c7 0%, #0891b2 100%);
-    border: none;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.45);
-}
-.rm-fc-nav-btn.primary:hover {
-    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.65);
-    transform: translateY(-2px);
-}
+.rm-fc-nav-btn.primary { background: linear-gradient(135deg, #0284c7 0%, #0891b2 100%); border: none; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.45); }
+.rm-fc-nav-btn.primary:hover { box-shadow: 0 6px 20px rgba(2, 132, 199, 0.65); transform: translateY(-2px); }
 
 .rm-fc-dots { display: flex; align-items: center; gap: 6px; }
 .rm-fc-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 99px;
+    width: 8px; height: 8px; border-radius: 99px;
     background: rgba(255, 255, 255, 0.22);
-    border: none;
-    cursor: pointer;
+    border: none; cursor: pointer;
     transition: all 0.25s cubic-bezier(.34,1.56,.64,1);
     padding: 0;
 }
-.rm-fc-dot.active {
-    width: 22px;
-    background: #38bdf8;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
-}
+.rm-fc-dot.active { width: 22px; background: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.7); }
 
         .rm-tut-box{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2.5px solid rgba(100,181,246,.45);border-radius:24px;padding:36px 38px 30px;width:100%;max-width:780px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(100,200,255,.12);overflow-y:auto;max-height:94vh;}
         .rm-tut-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(100,181,246,.15);border:1.5px solid rgba(100,181,246,.38);border-radius:99px;padding:5px 16px;font-size:11px;font-weight:800;color:#64b5f6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
@@ -847,39 +768,26 @@
         .btn-skin {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.22), rgba(56, 189, 248, 0.22));
             border: 1.5px solid rgba(168, 85, 247, 0.5);
-            color: #e9d5ff;
-            font-weight: 700;
-            font-size: 0.82rem;
-            border-radius: 8px;
-            padding: 5px 14px;
+            color: #e9d5ff; font-weight: 700; font-size: 0.82rem;
+            border-radius: 8px; padding: 5px 14px;
             transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
         }
         .btn-skin:hover {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(56, 189, 248, 0.4));
-            border-color: #c084fc;
-            color: #ffffff;
+            border-color: #c084fc; color: #ffffff;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.45);
         }
 
         .btn-hint-coin {
             background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #ffffff !important;
-            font-weight: 700;
-            font-size: 1.0rem;
+            color: #ffffff !important; font-weight: 700; font-size: 1.0rem;
             border: 1px solid rgba(251, 191, 36, 0.4);
-            border-radius: 0.65rem;
-            padding: 0.45rem 1rem;
+            border-radius: 0.65rem; padding: 0.45rem 1rem;
             box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
             transition: all 0.22s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
         }
         .btn-hint-coin:hover:not(:disabled) {
             transform: translateY(-2px);
@@ -891,8 +799,7 @@
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.15);
             color: rgba(255, 255, 255, 0.45) !important;
-            box-shadow: none;
-            cursor: default;
+            box-shadow: none; cursor: default;
         }
 
         .demo-gauge-wrap{display:flex;gap:12px;align-items:center;justify-content:center;margin:10px 0;}
@@ -1078,6 +985,84 @@
             .star, .canister.attached, .gauge-fill.overweight, .gauge-fill.success,
             .warning-box, .modal-icon-badge, .modal-top-bar { animation: none !important; }
         }
+
+/* ============================================================
+   TUTORIAL VISUAL DEMOS (reduces text, adds motion/interaction)
+   ============================================================ */
+
+/* Slide 1: story → target flow */
+.rm-demo-flow { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 8px 0 4px; width: 100%; }
+.rm-demo-story { flex: 1; max-width: 220px; }
+.rm-demo-story-bubble { position: relative; background: rgba(100,181,246,0.15); border: 1.5px solid rgba(100,181,246,0.4); border-radius: 14px; padding: 10px 12px; font-size: 0.85rem; color: #e8f0ff; line-height: 1.45; text-align: left; }
+.rm-demo-story-bubble b { color: #38bdf8; font-weight: 900; }
+.rm-demo-story-bubble::after { content: ''; position: absolute; right: -7px; top: 50%; width: 12px; height: 12px; background: rgba(100,181,246,0.15); border-right: 1.5px solid rgba(100,181,246,0.4); border-top: 1.5px solid rgba(100,181,246,0.4); transform: translateY(-50%) rotate(45deg); }
+.rm-demo-story-label { text-align: center; font-size: 0.68rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #64b5f6; margin-top: 6px; }
+.rm-demo-arrow { font-size: 1.9rem; color: #38bdf8; font-weight: 900; animation: rmArrowPulse 1.4s ease-in-out infinite; }
+@keyframes rmArrowPulse { 0%,100%{transform:translateX(0)} 50%{transform:translateX(5px)} }
+.rm-demo-target { flex: 1; max-width: 170px; text-align: center; }
+.rm-demo-target-num { font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 900; color: #38bdf8; line-height: 1; text-shadow: 0 0 22px rgba(56,189,248,0.75); animation: rmFlt 2.4s ease-in-out infinite; }
+.rm-demo-target-label { font-size: 0.72rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #a78bfa; margin-top: 4px; }
+
+/* Slide 2: interactive tap demo */
+.rm-demo-tap-row { display: flex; gap: 14px; justify-content: center; margin: 14px 0 6px; }
+.rm-demo-can { position: relative; background: rgba(100,181,246,0.18); border: 2.5px solid #4a5a8a; border-radius: 14px; padding: 14px 18px; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 800; color: #64b5f6; cursor: pointer; min-width: 82px; touch-action: manipulation; transition: transform 0.2s cubic-bezier(.34,1.56,.64,1), background 0.2s, border-color 0.2s, box-shadow 0.2s; animation: rmCanBob 2.2s ease-in-out infinite; }
+.rm-demo-can:nth-child(2) { animation-delay: -1.1s; }
+@keyframes rmCanBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+.rm-demo-can:hover { border-color: #64b5f6; }
+.rm-demo-can.attached { background: linear-gradient(135deg,#4caf50,#8bc34a); color:#fff; border-color:#4caf50; box-shadow: 0 6px 20px rgba(76,175,80,0.55); transform: translateY(-4px) scale(1.06); animation: none; }
+.rm-demo-total-row { text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; color: rgba(200,225,255,0.65); margin: 4px 0 6px; }
+.rm-demo-total-row #rmDemoTotal { color: #fff; font-size: 1.35rem; font-weight: 900; }
+
+/* Slide 3: 3-state gauge demo */
+.rm-demo-gauge-row { display: flex; gap: 18px; justify-content: center; align-items: flex-end; margin: 12px 0 6px; width: 100%; }
+.rm-demo-gauge-card { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.rm-demo-gauge { position: relative; width: 48px; height: 110px; background: rgba(0,0,0,0.35); border: 2px solid #4a5a8a; border-radius: 10px; overflow: hidden; }
+.rm-demo-gauge-fill { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 8px; transition: height 0.4s ease; }
+.rm-demo-gauge-fill.low { height: 40%; background: linear-gradient(to top,#42a5f5,#64b5f6); }
+.rm-demo-gauge-fill.exact { height: 80%; background: linear-gradient(to top,#4caf50,#8bc34a); box-shadow: 0 0 15px rgba(76,175,80,0.8); animation: rmPulseGreen 1.4s ease-in-out infinite; }
+.rm-demo-gauge-fill.over { height: 100%; background: linear-gradient(to top,#ff4444,#ff6b6b); animation: rmPulseRed 1s ease-in-out infinite; }
+@keyframes rmPulseGreen { 0%,100%{box-shadow:0 0 15px rgba(76,175,80,0.8)} 50%{box-shadow:0 0 28px rgba(76,175,80,1)} }
+@keyframes rmPulseRed { 0%,100%{opacity:1} 50%{opacity:0.7} }
+.rm-demo-gauge-label { font-size: 0.75rem; font-weight: 800; color: #64b5f6; white-space: nowrap; }
+
+/* Slide 4: goal cards */
+.rm-demo-goal-row { display: flex; gap: 14px; justify-content: center; margin: 10px 0 14px; width: 100%; }
+.rm-demo-goal { flex: 1; max-width: 170px; background: rgba(0,0,0,0.35); border: 1.5px solid rgba(100,181,246,0.3); border-radius: 14px; padding: 12px 8px; text-align: center; }
+.rm-demo-goal-icon { font-size: 1.9rem; line-height: 1; margin-bottom: 4px; animation: rmFlt 2.6s ease-in-out infinite; }
+.rm-demo-goal:nth-child(2) .rm-demo-goal-icon { animation-delay: -1.3s; }
+.rm-demo-goal-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.65rem; font-weight: 900; color: #fff; line-height: 1; }
+.rm-demo-goal-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #64b5f6; margin-top: 5px; }
+
+@media (max-width: 767.98px) {
+    .rm-demo-flow { gap: 8px; }
+    .rm-demo-story-bubble { font-size: 0.75rem; padding: 8px 10px; }
+    .rm-demo-target-num { font-size: 1.9rem; }
+    .rm-demo-arrow { font-size: 1.4rem; }
+    .rm-demo-can { padding: 12px 14px; font-size: 1.05rem; min-width: 72px; }
+    .rm-demo-gauge { width: 40px; height: 90px; }
+    .rm-demo-gauge-row { gap: 12px; }
+    .rm-demo-gauge-label { font-size: 0.66rem; }
+    .rm-demo-goal { padding: 10px 6px; }
+    .rm-demo-goal-num { font-size: 1.3rem; }
+    .rm-demo-goal-icon { font-size: 1.5rem; }
+    .rm-demo-goal-row { gap: 10px; }
+}
+@media (hover: none) { .rm-demo-can:hover { border-color: #4a5a8a; } }
+
+/* Lean tutorial: live gauge + cans on one card */
+.rm-demo-live-row { display: flex; gap: 26px; align-items: center; justify-content: center; margin: 8px 0 12px; width: 100%; }
+.rm-demo-live-row .rm-demo-gauge { width: 58px; height: 150px; }
+.rm-demo-live-row .rm-demo-gauge-fill { height: 0%; }
+.rm-demo-live-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.rm-demo-live-cans { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 300px; }
+.rm-demo-live-cans .rm-demo-can:nth-child(3) { animation-delay: -.5s; }
+.rm-demo-live-cans .rm-demo-can { font-size: 1.35rem; padding: 16px 20px; }
+@media (max-width: 767.98px) {
+    .rm-demo-live-row { gap: 14px; }
+    .rm-demo-live-row .rm-demo-gauge { width: 46px; height: 120px; }
+    .rm-demo-live-cans { gap: 8px; max-width: 200px; }
+    .rm-demo-live-cans .rm-demo-can { font-size: 1.1rem; padding: 12px 14px; min-width: 70px; }
+}
 </style>
 
 <!-- STARS BACKGROUND -->
@@ -1171,7 +1156,7 @@
                                 </div>
                             </div>
                             <div class="warning-box p-3 text-center" id="warningArea" style="display:none;">
-                                <i class="bi bi-exclamation-triangle"></i> OVERWEIGHT! Remove some fuel canisters!
+                                <i class="bi bi-exclamation-triangle"></i> OVERLOAD! Remove some fuel canisters!
                             </div>
                         </div>
                     </div>
@@ -1226,94 +1211,70 @@
 
             <div class="rm-fc-card">
                 <div class="rm-fc-top">
-                    <span class="rm-fc-badge" id="rmFcBadge">🃏 HOW TO PLAY • CARD 1 OF 4</span>
+                    <span class="rm-fc-badge" id="rmFcBadge">🃏 HOW TO PLAY • CARD 1 OF 3</span>
                     <button class="rm-fc-quick-action-btn" id="rmFcQuickActionBtn" type="button" onclick="rmCloseTut(true)" title="Skip to Play">
                         <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
                     </button>
                 </div>
 
+                <!-- ============ SLIDE 1 — Solve the Story ============ -->
                 <div id="rmFcSlide1" class="rm-fc-slide">
-                    <h3 class="rm-fc-title"><span>📖</span> Read Mission Briefing</h3>
-                    <p class="rm-fc-desc">Each mission features a story problem at the top. Calculate the math answer to find your rocket's target fuel!</p>
-                    <div class="rm-fc-row-2 rm-fc-box">
-                        <div class="rm-fc-item">
-                            <div class="rm-fc-item-ico">📜</div>
-                            <div class="rm-fc-item-lbl">Story Problem</div>
-                            <div class="rm-fc-item-sub">"5L for takeoff + 3L for landing. Total fuel?"</div>
+                    <h3 class="rm-fc-title"><span>📖</span> Solve the Story</h3>
+                    <div class="rm-demo-flow">
+                        <div class="rm-demo-story">
+                            <div class="rm-demo-story-bubble">“<b>5L</b> for takeoff<br>+ <b>3L</b> for landing”</div>
+                            <div class="rm-demo-story-label">Story Problem</div>
                         </div>
-                        <div class="rm-fc-item">
-                            <div class="rm-fc-item-ico">🎯</div>
-                            <div class="rm-fc-item-lbl">Target Fuel</div>
-                            <div class="rm-fc-item-math" style="color:#38bdf8;margin-top:6px;">8.0 Liters</div>
+                        <div class="rm-demo-arrow">➜</div>
+                        <div class="rm-demo-target">
+                            <div class="rm-demo-target-num">8.0</div>
+                            <div class="rm-demo-target-label">🎯 Target Fuel</div>
                         </div>
                     </div>
-                    <div class="rm-fc-tip">
-                        💡 <b>Concept:</b> Solve the word problem to know the exact fuel target!
-                    </div>
+                    <div class="rm-fc-tip">🧠 Solve the problem → load that exact amount</div>
                 </div>
 
+                <!-- ============ SLIDE 2 — Tap to Load (interactive, live gauge) ============ -->
                 <div id="rmFcSlide2" class="rm-fc-slide hidden">
-                    <h3 class="rm-fc-title" style="color:#34d399;"><span>⛽</span> Load Fuel Canisters</h3>
-                    <p class="rm-fc-desc">Click fuel canisters on the right to attach them to the rocket. Click again to remove them!</p>
-                    <div class="rm-fc-row-2 rm-fc-box">
-                        <div class="rm-fc-item">
-                            <div class="rm-fc-item-ico">⛽</div>
-                            <div class="rm-fc-item-lbl" style="color:#34d399;">Canister 3.0L</div>
-                            <div class="rm-fc-item-sub">Attached ✓ (Glows green)</div>
+                    <h3 class="rm-fc-title" style="color:#34d399;"><span>⛽</span> Tap to Load 8.0L!</h3>
+                    <div class="rm-demo-live-row">
+                        <div class="rm-demo-live-col">
+                            <div class="rm-demo-gauge"><div class="rm-demo-gauge-fill" id="rmDemoGaugeFill"></div></div>
+                            <div class="rm-demo-total-row"><span id="rmDemoTotal">0.0</span> / 8.0L</div>
                         </div>
-                        <div class="rm-fc-item">
-                            <div class="rm-fc-item-ico">⛽</div>
-                            <div class="rm-fc-item-lbl" style="color:#34d399;">Canister 5.0L</div>
-                            <div class="rm-fc-item-sub">Attached ✓ (3.0 + 5.0 = 8.0L)</div>
+                        <div class="rm-demo-live-cans">
+                            <button type="button" class="rm-demo-can" data-val="3.0" onclick="rmDemoToggleCan(this)">3.0L</button>
+                            <button type="button" class="rm-demo-can" data-val="5.0" onclick="rmDemoToggleCan(this)">5.0L</button>
+                            <button type="button" class="rm-demo-can" data-val="2.0" onclick="rmDemoToggleCan(this)">2.0L</button>
                         </div>
                     </div>
-                    <div class="rm-fc-tip">
-                        💡 <b>Loading Strategy:</b> Combine canisters to equal the target fuel amount!
-                    </div>
+                    <div class="rm-fc-tip" id="rmDemoTapMsg">👆 Tap cans to fill the gauge!</div>
                 </div>
 
+                <!-- ============ SLIDE 3 — Launch Challenge ============ -->
                 <div id="rmFcSlide3" class="rm-fc-slide hidden">
-                    <h3 class="rm-fc-title" style="color:#fbbf24;"><span>⚡</span> Hit Exact Fuel Level</h3>
-                    <p class="rm-fc-desc">The fuel gauge on the left must be filled to <b>exactly</b> the target amount:</p>
-                    <div class="rm-fc-box" style="display:flex;justify-content:space-around;text-align:center;">
-                        <div>
-                            <div style="font-size:1.4rem;">📉</div>
-                            <div style="font-size:0.75rem;font-weight:700;color:#64b5f6;">Too Low</div>
-                            <div style="font-size:0.68rem;color:rgba(200,225,255,0.6);">Needs more</div>
+                    <h3 class="rm-fc-title" style="color:#f59e0b;"><span>⏱️</span> Launch Challenge</h3>
+                    <div class="rm-demo-goal-row">
+                        <div class="rm-demo-goal">
+                            <div class="rm-demo-goal-icon">⏱️</div>
+                            <div class="rm-demo-goal-num">5:00</div>
+                            <div class="rm-demo-goal-label">Timer</div>
                         </div>
-                        <div>
-                            <div style="font-size:1.4rem;">🎯</div>
-                            <div style="font-size:0.75rem;font-weight:800;color:#34d399;">Exact Match!</div>
-                            <div style="font-size:0.68rem;color:#a7f3d0;">Auto Blastoff!</div>
-                        </div>
-                        <div>
-                            <div style="font-size:1.4rem;">📈</div>
-                            <div style="font-size:0.75rem;font-weight:700;color:#f87171;">Overloaded</div>
-                            <div style="font-size:0.68rem;color:rgba(200,225,255,0.6);">Detach a can</div>
+                        <div class="rm-demo-goal">
+                            <div class="rm-demo-goal-icon">🚀</div>
+                            <div class="rm-demo-goal-num">8+</div>
+                            <div class="rm-demo-goal-label">Rockets</div>
                         </div>
                     </div>
-                    <div class="rm-fc-tip">
-                        💡 <b>Careful:</b> Don't overload! When fuel hits the exact number, launch begins!
-                    </div>
-                </div>
-
-                <div id="rmFcSlide4" class="rm-fc-slide hidden">
-                    <h3 class="rm-fc-title" style="color:#f59e0b;"><span>⏱️</span> 5-Min Timer &amp; Goals</h3>
-                    <p class="rm-fc-desc">Launch as many rockets as you can in 5 minutes! Launch <b>8–10 rockets</b> to pass the level.</p>
-                    <div class="rm-fc-row-2 rm-fc-box">
+                    <div class="rm-fc-row-2" style="width:100%;">
                         <button type="button" class="rm-fc-item" onclick="rmStartPracticeFromTut()" style="cursor:pointer;background:rgba(56,189,248,0.14);border-color:rgba(56,189,248,0.4);color:#fff;">
                             <div class="rm-fc-item-ico">🎮</div>
-                            <div class="rm-fc-item-lbl" style="color:#38bdf8;">Practice Round</div>
-                            <div class="rm-fc-item-sub">Test 5.0L target first</div>
+                            <div class="rm-fc-item-lbl" style="color:#38bdf8;">Practice</div>
                         </button>
                         <button type="button" class="rm-fc-item" onclick="rmCloseTut(true)" style="cursor:pointer;background:rgba(16,185,129,0.16);border-color:rgba(52,211,153,0.4);color:#fff;">
                             <div class="rm-fc-item-ico">🚀</div>
-                            <div class="rm-fc-item-lbl" style="color:#34d399;">Real Mission</div>
-                            <div class="rm-fc-item-sub">Start 5-min session</div>
+                            <div class="rm-fc-item-lbl" style="color:#34d399;">Play Now</div>
                         </button>
-                    </div>
-                    <div class="rm-fc-tip">
-                        💡 <b>Pro Tip:</b> Spend coins for hints, or click "New Round" if you want a fresh mission!
                     </div>
                 </div>
 
@@ -1326,7 +1287,6 @@
                         <button class="rm-fc-dot active" type="button" onclick="rmGoFlashCard(1)" title="Card 1"></button>
                         <button class="rm-fc-dot" type="button" onclick="rmGoFlashCard(2)" title="Card 2"></button>
                         <button class="rm-fc-dot" type="button" onclick="rmGoFlashCard(3)" title="Card 3"></button>
-                        <button class="rm-fc-dot" type="button" onclick="rmGoFlashCard(4)" title="Card 4"></button>
                     </div>
 
                     <button class="rm-fc-nav-btn primary" id="rmFcNextBtn" type="button" onclick="rmStepFlashCard(1)">
@@ -1336,6 +1296,55 @@
             </div>
         </div>
     </div>
+
+<script src="{{ asset('js/game-feedback.js') }}"></script>
+<script src="{{ asset('js/game-music-player.js') }}"></script>
+<script>
+let musicPlayer;
+if (window.GameMusicPlayer) {
+    musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
+}
+</script>
+
+<script>
+/* Tutorial-only interactive demo — isolated from game state */
+window.rmDemoUpdate = function () {
+    const TARGET = 8.0;
+    let sum = 0;
+    document.querySelectorAll('#rmFcSlide2 .rm-demo-can.attached').forEach(c => { sum += parseFloat(c.dataset.val); });
+    sum = Math.round(sum * 100) / 100;
+    const totalEl = document.getElementById('rmDemoTotal');
+    const msgEl   = document.getElementById('rmDemoTapMsg');
+    const fillEl  = document.getElementById('rmDemoGaugeFill');
+    if (totalEl) totalEl.textContent = sum.toFixed(1);
+    if (fillEl) {
+        fillEl.style.height = Math.min(100, (sum / TARGET) * 100) + '%';
+        fillEl.className = 'rm-demo-gauge-fill' + (sum === 0 ? '' : Math.abs(sum - TARGET) < 0.001 ? ' exact' : sum > TARGET ? ' over' : ' low');
+    }
+    if (!msgEl) return;
+    if (sum === 0) {
+        msgEl.innerHTML = '👆 Tap cans to fill the gauge!';
+        msgEl.style.color = '#64b5f6';
+    } else if (Math.abs(sum - TARGET) < 0.001) {
+        msgEl.innerHTML = '🎯 Exact! <b>BLAST OFF!</b> 🚀';
+        msgEl.style.color = '#34d399';
+    } else if (sum > TARGET) {
+        msgEl.innerHTML = '📈 Too full! Tap a can to remove it.';
+        msgEl.style.color = '#f87171';
+    } else {
+        msgEl.innerHTML = '📉 Too low — need <b>' + (TARGET - sum).toFixed(1) + 'L</b> more.';
+        msgEl.style.color = '#fbbf24';
+    }
+};
+window.rmDemoToggleCan = function (btn) {
+    btn.classList.toggle('attached');
+    window.rmDemoUpdate();
+};
+window.rmDemoReset = function () {
+    document.querySelectorAll('#rmFcSlide2 .rm-demo-can').forEach(c => c.classList.remove('attached'));
+    window.rmDemoUpdate();
+};
+</script>
 
     <!-- RESULTS MODAL -->
     <div class="modal fade" id="gameModal" tabindex="-1" aria-hidden="true">
@@ -1462,7 +1471,6 @@
             ],
 
             medium: [
-                // --- Addition / Subtraction / Multiplication ---
                 { text: "Your rocket needs <span class='problem-highlight'>3.5 liters</span> per thruster and has <span class='problem-highlight'>2 thrusters</span>. How much fuel total?", answer: 7.0 },
                 { text: "The fuel gauge shows <span class='problem-highlight'>9.25 liters</span>. You burn <span class='problem-highlight'>2.5 liters</span> during takeoff. How much remains?", answer: 6.75 },
                 { text: "Each alien crew member needs <span class='problem-highlight'>1.25 liters</span> for their escape pod. There are <span class='problem-highlight'>5 crew members</span>. How much fuel needed?", answer: 6.25 },
@@ -1500,7 +1508,6 @@
             ],
 
             hard: [
-                // --- Addition / Subtraction / Multiplication ---
                 { text: "A rocket burns <span class='problem-highlight'>1.5 liters per minute</span> for <span class='problem-highlight'>4 minutes</span>, then needs <span class='problem-highlight'>1.25 liters</span> for landing. Total fuel?", answer: 7.25 },
                 { text: "Four satellites each need <span class='problem-highlight'>1.75 liters</span> for deployment. How much fuel total?", answer: 7.0 },
                 { text: "Your mission needs <span class='problem-highlight'>18.5 liters</span> total. The main tank holds <span class='problem-highlight'>11.75 liters</span>. How much more from reserve tanks?", answer: 6.75 },
@@ -1594,6 +1601,7 @@
         };
 
         let rocketAnimation = null;
+        let overloadAlarm = null;
 
         function initRocketAnimation() {
             rocketAnimation = lottie.loadAnimation({
@@ -1651,6 +1659,7 @@
             const overlay = document.getElementById('pauseOverlay');
             const pauseBtn = document.getElementById('pauseBtn');
             if (GameState.isPaused) {
+                stopOverloadAlarm();
                 if (overlay) overlay.classList.add('active');
                 if (pauseBtn) {
                     pauseBtn.classList.add('paused');
@@ -1712,12 +1721,14 @@
         function endSession() {
             GameState.sessionEnded = true;
             GameState.isGameOver = true;
+            stopOverloadAlarm();
             const won = GameState.score >= WIN_SCORE;
             showSessionResult(won);
         }
 
         function triggerLevelComplete() {
             GameState.sessionEnded = true;
+            stopOverloadAlarm();
             if (GameState.sessionInterval) {
                 clearInterval(GameState.sessionInterval);
                 GameState.sessionInterval = null;
@@ -1772,7 +1783,12 @@
             setTimeout(() => {
                 const gameModal = new bootstrap.Modal(document.getElementById('gameModal'));
                 gameModal.show();
-                if (won) createConfetti();
+                if (won) {
+                    window.playCorrectSound();
+                    createConfetti();
+                } else {
+                    window.playWrongSound();
+                }
             }, won ? 2200 : 400);
         }
 
@@ -1882,9 +1898,6 @@
 
         function refillQueue(difficulty) {
             const shuffled = shuffleArray(WORD_PROBLEMS[difficulty]);
-            // Partition: all items NOT recently shown go first (in random order),
-            // then items that WERE recently shown go to the back. This guarantees
-            // the next `nonRecent.length` picks are all fresh.
             const nonRecent = [];
             const recent = [];
             shuffled.forEach(p => {
@@ -1937,13 +1950,16 @@
 
             if (GameState.success) {
                 fill.classList.add('success');
+                stopOverloadAlarm();
             } else if (GameState.total > GameState.target) {
                 fill.classList.add('overweight');
                 rocket.classList.add('shake');
                 document.getElementById('warningArea').style.display = 'block';
+                playOverloadAlarm();
             } else {
                 rocket.classList.remove('shake');
                 document.getElementById('warningArea').style.display = 'none';
+                stopOverloadAlarm();
             }
 
             const status = document.getElementById('fuelStatus');
@@ -1951,7 +1967,7 @@
                 status.innerHTML = '<i class="bi bi-check-circle"></i> Ready for launch!';
                 status.style.color = '#7aff7a';
             } else if (GameState.total > GameState.target) {
-                status.innerHTML = '<i class="bi bi-exclamation-triangle"></i> OVERWEIGHT! Remove fuel!';
+                status.innerHTML = '<i class="bi bi-exclamation-triangle"></i> OVERLOAD! Remove fuel!';
                 status.style.color = '#ff4a4a';
             } else if (Math.abs(GameState.total - GameState.target) < 0.001 && GameState.total > 0) {
                 status.innerHTML = '<i class="bi bi-bullseye"></i> Perfect! Launch!';
@@ -1963,6 +1979,24 @@
                     status.innerHTML = `<i class="bi bi-fuel-pump"></i> ${GameState.total.toFixed(2)} / ❓❓❓ (Target Hidden)`;
                 }
                 status.style.color = '#8899bb';
+            }
+        }
+
+        function playOverloadAlarm() {
+            if (!overloadAlarm) {
+                overloadAlarm = new Audio('/sounds/overload-alarm.mp3');
+                overloadAlarm.loop = true;
+                overloadAlarm.volume = 0.5;
+            }
+            if (overloadAlarm.paused) {
+                overloadAlarm.play().catch(e => console.log('Alarm play failed:', e));
+            }
+        }
+
+        function stopOverloadAlarm() {
+            if (overloadAlarm && !overloadAlarm.paused) {
+                overloadAlarm.pause();
+                overloadAlarm.currentTime = 0;
             }
         }
 
@@ -2031,6 +2065,7 @@
 
         function resetRound() {
             if (GameState.sessionEnded) return;
+            stopOverloadAlarm();
             GameState.total = 0;
             GameState.attached = new Set();
             GameState.used = new Set();
@@ -2114,6 +2149,7 @@
                     setTimeout(() => triggerLevelComplete(), 2200);
                 } else {
                     setTimeout(() => {
+                        window.playCorrectSound();
                         document.getElementById('modalEmoji').textContent = '🚀';
                         document.getElementById('modalTitleText').textContent = 'Launch Successful!';
                         document.getElementById('modalDesc').textContent =
@@ -2266,7 +2302,7 @@
 
         let rmTutOpenedFromGame = false;
         let rmCurrentFcCard = 1;
-        const RM_TOTAL_FC_CARDS = 4;
+        const RM_TOTAL_FC_CARDS = 3;
 
         window.rmOpenTut = rmOpenTut;
         window.rmCloseTut = rmCloseTut;
@@ -2298,6 +2334,7 @@
             }
 
             if (ov) ov.classList.add('show');
+            if (window.rmDemoReset) window.rmDemoReset();
             rmGoFlashCard(1);
         }
 
@@ -2318,7 +2355,7 @@
 
             const badge = document.getElementById('rmFcBadge');
             if (badge) {
-                const tags = ['MISSION BRIEFING', 'CANISTERS', 'FUEL GAUGE', 'TIMER & GOALS'];
+                const tags = ['STORY', 'TRY IT', 'LAUNCH'];
                 const prefix = rmTutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
                 badge.textContent = '🃏 ' + prefix + ' • CARD ' + rmCurrentFcCard + ' OF ' + RM_TOTAL_FC_CARDS + ' • ' + tags[rmCurrentFcCard - 1];
             }

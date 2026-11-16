@@ -837,7 +837,7 @@
   }
 
   /* ==========================================================================
-     ILLUSTRATED FLASHCARD TUTORIAL DECK (5-Card Rich Illustrated Deck)
+     ILLUSTRATED FLASHCARD TUTORIAL DECK (3-Card Lean Deck)
      ========================================================================== */
   .tut-overlay {
     position: fixed; inset: 0;
@@ -1078,6 +1078,48 @@
     background: rgba(251, 191, 36, 0.16);
     color: #ffffff;
     border-color: rgba(251, 191, 36, 0.5);
+  }
+
+  /* ===== Lean Field Guide ===== */
+  .mq-row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+  .mq-row3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+  .mq-tile { background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12); border-radius:16px; padding:14px 10px; text-align:center; }
+  .mq-big { font-size:2.5rem; line-height:1; margin-bottom:6px; animation:mqFloat 2.4s ease-in-out infinite; }
+  .mq-tile:nth-child(2) .mq-big { animation-delay:-.6s; }
+  .mq-tile:nth-child(3) .mq-big { animation-delay:-1.2s; }
+  .mq-tile:nth-child(4) .mq-big { animation-delay:-1.8s; }
+  .mq-lbl { font-size:1.15rem; font-weight:800; color:#fff; }
+  .mq-units { font-family:var(--font-mono); font-size:.95rem; font-weight:700; color:#94a3b8; margin-top:3px; }
+  .mq-tip { background:rgba(251,191,36,.08); border:1px solid rgba(251,191,36,.25); border-radius:12px; padding:10px 14px; font-size:1.05rem; color:#fde68a; text-align:center; }
+  .mq-rule { border-radius:14px; padding:12px 10px; text-align:center; border:1.5px solid; }
+  .mq-rule .mq-big { font-size:2rem; animation:none; margin-bottom:4px; }
+  .mq-rule-lbl { font-weight:800; font-size:1.05rem; color:#fff; }
+  .mq-rule-eg { font-size:.92rem; color:#94a3b8; margin-top:2px; }
+  .mq-try-q { text-align:center; font-size:1.25rem; font-weight:800; color:#f1f5f9; margin-bottom:10px; }
+  .mq-try-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:8px; }
+  .mq-try-btn { background:rgba(56,189,248,.14); border:2px solid rgba(56,189,248,.5); color:#e2e8f0; font-family:var(--font-body); font-weight:800; font-size:1.2rem; padding:12px 22px; border-radius:14px; cursor:pointer; min-height:48px; transition:transform .15s; }
+  .mq-try-btn:hover { transform:scale(1.06); }
+  .mq-try-btn.ok { background:rgba(16,185,129,.25); border-color:#10b981; color:#34d399; animation:mqPop .4s ease; }
+  .mq-try-btn.no { background:rgba(239,68,68,.18); border-color:#ef4444; color:#f87171; animation:mqShake .4s ease; }
+  #mqTryMsg { min-height:32px; text-align:center; font-weight:800; font-size:1.1rem; color:#38bdf8; margin-bottom:12px; }
+  .mq-chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px; }
+  .mq-chip { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:10px; padding:8px 6px; text-align:center; font-family:var(--font-mono); font-weight:800; font-size:1rem; color:#e2e8f0; }
+  @keyframes mqFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+  @keyframes mqPop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  @keyframes mqShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  @media (max-width: 600px) {
+    .mq-row3 { gap:6px; }
+    .mq-tile { padding:10px 6px; }
+    .mq-big { font-size:2rem; }
+    .mq-lbl { font-size:.95rem; }
+    .mq-units { font-size:.8rem; }
+    .mq-tip { font-size:.92rem; }
+    .mq-rule-lbl { font-size:.92rem; }
+    .mq-rule-eg { font-size:.8rem; }
+    .mq-try-q { font-size:1.05rem; }
+    .mq-try-btn { font-size:1.05rem; padding:11px 14px; }
+    .mq-chips { grid-template-columns:repeat(2,1fr); }
+    .mq-chip { font-size:.88rem; }
   }
 
   /* ==========================================================================
@@ -1820,145 +1862,69 @@
 </div>
 
 <!-- ==========================================================================
-     ILLUSTRATED FLASHCARD TUTORIAL DECK (5-CARD MODAL)
+     ILLUSTRATED FLASHCARD TUTORIAL DECK (3-CARD MODAL)
      ========================================================================== -->
 <div class="tut-overlay" id="tutOverlay" role="dialog" aria-modal="true" aria-labelledby="tutTag">
   <div class="tut-deck">
     <div class="tut-deck-header">
       <span class="tut-deck-tag" id="tutTag">
-        <i class="bi bi-journal-bookmark-fill"></i> Field Guide &amp; Instructions • Card <span id="fcPageNum">1 / 5</span>
+        <i class="bi bi-journal-bookmark-fill"></i> Field Guide &amp; Instructions • Card <span id="fcPageNum">1 / 3</span>
       </span>
       <button type="button" class="btn-close-tut" onclick="closeTutorial()" title="Close Instructions" aria-label="Close instructions">&times;</button>
     </div>
 
-    <!-- CARD 1: Welcome & Mission -->
+    <!-- CARD 1: Realms -->
     <div class="fc-card active" id="fcCard1">
-      <h3 class="fc-title">🧭 Welcome to The Metric Quest!</h3>
-      <p class="fc-desc">
-        Welcome, Time Traveler! Your mission is to master measurements across 50 expedition levels covering <b>Length</b>, <b>Mass</b>, <b>Capacity</b>, and <b>Time</b>.
-      </p>
-      <div class="fc-visual-box">
-        <div class="fc-grid-2">
-          <div class="fc-mini-card">
-            <h5>📏 Length Realm</h5>
-            <p>Convert kilometers (km), meters (m), centimeters (cm), and millimeters (mm).</p>
-          </div>
-          <div class="fc-mini-card">
-            <h5>⚖️ Mass Realm</h5>
-            <p>Weigh treasures using kilograms (kg), grams (g), and milligrams (mg).</p>
-          </div>
-          <div class="fc-mini-card">
-            <h5>💧 Capacity Realm</h5>
-            <p>Measure liquids and potions in liters (L) and milliliters (mL).</p>
-          </div>
-          <div class="fc-mini-card">
-          <h5>🕐 Chrono Realm</h5>
-            <p>Navigate seconds, minutes, hours, days, weeks, months, and years.</p>
-          </div>
-        </div>
+      <h3 class="fc-title">🧭 Master the Metric World!</h3>
+      <p class="fc-desc">Pick a realm. Convert units. Win coins!</p>
+      <div class="mq-row2">
+        <div class="mq-tile"><div class="mq-big">📏</div><div class="mq-lbl">Length</div><div class="mq-units">km · m · cm · mm</div></div>
+        <div class="mq-tile"><div class="mq-big">⚖️</div><div class="mq-lbl">Mass</div><div class="mq-units">kg · g · mg</div></div>
+        <div class="mq-tile"><div class="mq-big">💧</div><div class="mq-lbl">Capacity</div><div class="mq-units">L · mL</div></div>
+        <div class="mq-tile"><div class="mq-big">🕐</div><div class="mq-lbl">Time</div><div class="mq-units">s · min · hr · day</div></div>
       </div>
+      <div class="mq-tip">🗺️ 50 expedition levels await!</div>
     </div>
 
-    <!-- CARD 2: The Golden Rule (Multiply vs Divide) -->
+    <!-- CARD 2: Golden Rule + Try It -->
     <div class="fc-card" id="fcCard2">
-      <h3 class="fc-title">⚡ The Golden Metric Rule</h3>
-      <p class="fc-desc">
-        How do you know whether to <b>multiply</b> or <b>divide</b>? Just look at the size of the units!
-      </p>
-      <div class="fc-visual-box">
-        <div class="fc-ladder-visual">
-          <div class="ladder-rule-row">
-            <div>
-              <b style="color:#ffffff;">BIG Unit ➔ SMALL Unit</b><br>
-              <small style="color:#94a3b8;">e.g., Kilometers to Meters, or Hours to Minutes</small>
-            </div>
-            <span class="rule-badge multiply"><i class="bi bi-x-lg"></i> MULTIPLY (×)</span>
-          </div>
-          <div class="ladder-rule-row">
-            <div>
-              <b style="color:#ffffff;">SMALL Unit ➔ BIG Unit</b><br>
-              <small style="color:#94a3b8;">e.g., Centimeters to Meters, or Grams to Kilograms</small>
-            </div>
-            <span class="rule-badge divide"><i class="bi bi-slash-lg"></i> DIVIDE (÷)</span>
-          </div>
+      <h3 class="fc-title">⚡ Try the Golden Rule!</h3>
+      <div class="mq-row2" style="margin-bottom:12px;">
+        <div class="mq-rule" style="border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.1);">
+          <div class="mq-big">🐘➡️🐜</div>
+          <div class="mq-rule-lbl" style="color:#34d399;">BIG ➔ small = ✖️</div>
+          <div class="mq-rule-eg">km ➔ m</div>
+        </div>
+        <div class="mq-rule" style="border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.1);">
+          <div class="mq-big">🐜➡️🐘</div>
+          <div class="mq-rule-lbl" style="color:#38bdf8;">small ➔ BIG = ➗</div>
+          <div class="mq-rule-eg">cm ➔ m</div>
         </div>
       </div>
-      <p style="font-size:0.84rem; color:#fde68a; margin:0;">
-        💡 <b>Mnemonic:</b> <i>"Going down to smaller pieces? Multiply to get more pieces! Going up to big bundles? Divide!"</i>
-      </p>
+      <div class="mq-try-q">👆 2 km = ? m</div>
+      <div class="mq-try-row">
+        <button type="button" class="mq-try-btn" onclick="mqTry(this,0)">20 m</button>
+        <button type="button" class="mq-try-btn" onclick="mqTry(this,0)">200 m</button>
+        <button type="button" class="mq-try-btn" onclick="mqTry(this,1)">2,000 m</button>
+      </div>
+      <div id="mqTryMsg">Give it a go! 🧭</div>
     </div>
 
-    <!-- CARD 3: Length & Mass Formulas -->
+    <!-- CARD 3: Key numbers + controls -->
     <div class="fc-card" id="fcCard3">
-      <h3 class="fc-title">📏 Length &amp; ⚖️ Mass Key Numbers</h3>
-      <p class="fc-desc">
-        The metric system is built on powers of 10! Remember these foundational conversion ratios:
-      </p>
-      <div class="fc-visual-box">
-        <div class="fc-grid-2">
-          <div class="fc-mini-card" style="border-color:rgba(56,189,248,0.3);">
-            <h5 style="color:#38bdf8;">📏 Length Chart</h5>
-            <div style="font-family:var(--font-mono); font-size:0.8rem; line-height:1.8; color:#e2e8f0;">
-              <div>• 1 km = 1,000 m</div>
-              <div>• 1 m = 100 cm</div>
-              <div>• 1 cm = 10 mm</div>
-            </div>
-          </div>
-          <div class="fc-mini-card" style="border-color:rgba(16,185,129,0.3);">
-            <h5 style="color:#34d399;">⚖️ Mass Chart</h5>
-            <div style="font-family:var(--font-mono); font-size:0.8rem; line-height:1.8; color:#e2e8f0;">
-              <div>• 1 kg = 1,000 g</div>
-              <div>• 1 g = 1,000 mg</div>
-              <div>• 1 L = 1,000 mL (Capacity)</div>
-            </div>
-          </div>
-        </div>
+      <h3 class="fc-title">🚀 Ready to Explore?</h3>
+      <div class="mq-chips">
+        <div class="mq-chip">1 km = 1,000 m</div>
+        <div class="mq-chip">1 m = 100 cm</div>
+        <div class="mq-chip">1 kg = 1,000 g</div>
+        <div class="mq-chip">1 L = 1,000 mL</div>
+        <div class="mq-chip">1 hr = 60 min</div>
+        <div class="mq-chip">1 day = 24 hr</div>
       </div>
-      <p style="font-size:0.84rem; color:#cbd5e1; margin:0;">
-        ⭐ Notice how <b>Kilo</b> always means <b>1,000</b> and <b>Milli</b> always means <b>1/1,000</b>!
-      </p>
-    </div>
-
-    <!-- CARD 4: Time Travel Chrono Chart -->
-    <div class="fc-card" id="fcCard4">
-      <h3 class="fc-title">🕐 Time Units &amp; Chrono Conversions</h3>
-      <p class="fc-desc">
-        Time conversions use special clocks and calendars instead of base-10:
-      </p>
-      <div class="fc-visual-box">
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:8px; font-family:var(--font-mono); font-size:0.82rem; color:#e2e8f0;">
-          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">⏱️ 1 min = 60 s</div>
-          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">🕐 1 hr = 60 min</div>
-          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">🌅 1 day = 24 hr</div>
-          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">📅 1 week = 7 days</div>
-          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">🗓️ 1 month ≈ 4 weeks</div>
-          <div style="background:rgba(255,255,255,0.04); padding:6px 10px; border-radius:6px;">🌍 1 year = 12 months</div>
-        </div>
-      </div>
-      <p style="font-size:0.84rem; color:#cbd5e1; margin:0;">
-        💡 <b>Mixed Units:</b> <i>Convert the bigger unit first, then add the leftover smaller unit!</i>
-      </p>
-    </div>
-
-    <!-- CARD 5: Controls, Coins & Hints -->
-    <div class="fc-card" id="fcCard5">
-      <h3 class="fc-title">🪙 Coins, Hints &amp; Hotkeys</h3>
-      <p class="fc-desc">
-        Everything you need to play quickly and efficiently:
-      </p>
-      <div class="fc-visual-box">
-        <div class="ladder-rule-row" style="margin-bottom:8px;">
-          <div><b style="color:#fbbf24;">🪙 Coin Hints</b><br><small style="color:#94a3b8;">Spend 5 coins to see the exact formula and step guidance.</small></div>
-          <span style="color:#fbbf24; font-weight:800;">-5 🪙</span>
-        </div>
-        <div class="ladder-rule-row" style="margin-bottom:8px;">
-          <div><b style="color:#38bdf8;">⌨️ Hotkeys</b><br><small style="color:#94a3b8;">On a keyboard, press 1, 2, 3, or 4 to instantly select an answer. On a phone or tablet, just tap.</small></div>
-          <span style="color:#38bdf8; font-weight:800;">Keys 1–4</span>
-        </div>
-        <div class="ladder-rule-row">
-          <div><b style="color:#a78bfa;">📐 Metric Lab</b><br><small style="color:#94a3b8;">Click the Metric Lab button at any time to open the full reference table.</small></div>
-          <span style="color:#a78bfa; font-weight:800;">Open Anytime</span>
-        </div>
+      <div class="mq-row3">
+        <div class="mq-tile"><div class="mq-big">🪙</div><div class="mq-lbl">Hint</div><div class="mq-units">-5 coins</div></div>
+        <div class="mq-tile"><div class="mq-big">⌨️</div><div class="mq-lbl">Keys 1–4</div><div class="mq-units">or just tap</div></div>
+        <div class="mq-tile"><div class="mq-big">📐</div><div class="mq-lbl">Metric Lab</div><div class="mq-units">open anytime</div></div>
       </div>
     </div>
 
@@ -1968,8 +1934,6 @@
         <span class="tut-dot active" onclick="goFlashCard(0)"></span>
         <span class="tut-dot" onclick="goFlashCard(1)"></span>
         <span class="tut-dot" onclick="goFlashCard(2)"></span>
-        <span class="tut-dot" onclick="goFlashCard(3)"></span>
-        <span class="tut-dot" onclick="goFlashCard(4)"></span>
       </div>
 
       <div class="tut-nav-btns">
@@ -2186,6 +2150,23 @@
   </div>
 </div>
 
+<script src="{{ asset('js/game-feedback.js') }}?v=20250116"></script>
+<script src="{{ asset('js/game-music-player.js') }}"></script>
+<script>
+// Initialize music player
+let musicPlayer;
+if (window.GameMusicPlayer) {
+    musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
+}
+
+// Verify feedback is loaded
+if (typeof window.showGameFeedback === 'undefined') {
+    console.error('CRITICAL: game-feedback.js did not load! Feedback will not work.');
+} else {
+    console.log('✓ game-feedback.js loaded successfully');
+}
+</script>
+
 <script>
 (function(){
   "use strict";
@@ -2296,16 +2277,7 @@
   function soundClick() {
     playTone(480, 0.08, 'triangle', 0.12);
   }
-  function soundCorrect() {
-    playTone(523.25, 0.1, 'sine', 0.18);
-    setTimeout(() => playTone(659.25, 0.1, 'sine', 0.18), 80);
-    setTimeout(() => playTone(783.99, 0.14, 'sine', 0.22), 160);
-    setTimeout(() => playTone(1046.50, 0.3, 'sine', 0.26), 240);
-  }
-  function soundWrong() {
-    playTone(280, 0.16, 'sawtooth', 0.14);
-    setTimeout(() => playTone(220, 0.22, 'sawtooth', 0.14), 140);
-  }
+
   function soundHint() {
     playTone(987, 0.1, 'triangle', 0.2);
     setTimeout(() => playTone(1318, 0.2, 'triangle', 0.2), 100);
@@ -3031,7 +3003,7 @@
     state.answered = true;
     state.streak = 0;
     updateStatsUI();
-    soundWrong();
+    window.playWrongSound();
 
     const q = state.questions[state.currentQ];
     document.querySelectorAll('.answer-card').forEach(card => {
@@ -3060,7 +3032,10 @@
 
     if (selected === q.correct) {
       cardEl.classList.add('correct');
-      soundCorrect();
+      
+      // Play correct sound
+      if (window.playCorrectSound) window.playCorrectSound();
+      
       state.correctCount++;
       state.streak++;
       if (state.streak > state.maxStreak) state.maxStreak = state.streak;
@@ -3077,11 +3052,44 @@
       `;
 
       if (state.streak >= 3) spawnConfetti(isSmallScreen() ? 10 : 18);
+      
+      // Show success feedback with ruler icon and Continue button
+      if (window.showGameFeedback) {
+        const nextAction = () => {
+          state.currentQ++;
+          if (state.currentQ < state.questions.length) {
+            loadQuestion();
+          } else {
+            finishStage();
+          }
+        };
+        window.showGameFeedback(true, q.correct, 2000, nextAction, null, '📏');
+      }
+      
+      // Fallback if showGameFeedback doesn't exist
+      if (!window.showGameFeedback) {
+        setTimeout(() => {
+          state.currentQ++;
+          if (state.currentQ < state.questions.length) {
+            loadQuestion();
+          } else {
+            finishStage();
+          }
+        }, 2000);
+      }
     } else {
       cardEl.classList.add('wrong');
-      soundWrong();
+      
+      // Play wrong sound
+      try {
+        if (window.playWrongSound) window.playWrongSound();
+      } catch(e) {
+        console.error('Error playing wrong sound:', e);
+      }
+      
       state.streak = 0;
 
+      // Show wrong answers
       document.querySelectorAll('.answer-card').forEach(b => {
         if (b.getAttribute('data-answer') === q.correct) {
           b.classList.add('correct');
@@ -3093,11 +3101,134 @@
         <i class="bi bi-x-circle-fill"></i>
         <span><b>Not quite!</b> The correct conversion is <b>${q.correct}</b>.</span>
       `;
+      
+      // Build conversion explanation
+      const conversionExplanation = buildConversionExplanation(q);
+      
+      // Show feedback modal with Continue button
+      if (window.showGameFeedback) {
+        const nextAction = () => {
+          state.currentQ++;
+          if (state.currentQ < state.questions.length) {
+            loadQuestion();
+          } else {
+            finishStage();
+          }
+        };
+        window.showGameFeedback(false, q.correct, 3000, nextAction, conversionExplanation, '📏');
+      }
+      
+      // Fallback if showGameFeedback doesn't exist
+      if (!window.showGameFeedback) {
+        setTimeout(() => {
+          state.currentQ++;
+          if (state.currentQ < state.questions.length) {
+            loadQuestion();
+          } else {
+            finishStage();
+          }
+        }, 3000);
+      }
     }
 
     updateStatsUI();
     scrollFeedbackIntoView();
-    advanceToNextQuestion(1900);
+  }
+  
+  function buildConversionExplanation(q) {
+    // Safety check
+    if (!q || (!q.question && !q.text)) {
+      return `<div style="margin-top:8px;"><div>The correct answer is: <b>${q?.correct || 'N/A'}</b></div></div>`;
+    }
+    
+    // Extract conversion info from question (use question property, fallback to text)
+    const questionText = q.question || q.text || '';
+    let explanation = `<div style="margin-top:8px;">`;
+    
+    // Try to extract the number being converted
+    const numberMatch = questionText.match(/(\d+(?:\.\d+)?)\s*(cm|m|km|g|kg|L|mL|ml)/i);
+    const fromValue = numberMatch ? parseFloat(numberMatch[1]) : null;
+    const fromUnit = numberMatch ? numberMatch[2].toLowerCase() : null;
+    
+    // Common conversion rules with step-by-step computation
+    if (questionText.includes('centimeters') && questionText.includes('meters')) {
+      explanation += `<div><b>Remember:</b> 1 meter = 100 centimeters</div>`;
+      if (questionText.toLowerCase().includes('cm to m') || questionText.toLowerCase().includes('centimeters to meters')) {
+        explanation += `<div><b>To convert cm to m:</b> divide by 100</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} cm ÷ 100 = ${fromValue / 100} m</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      } else {
+        explanation += `<div><b>To convert m to cm:</b> multiply by 100</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} m × 100 = ${fromValue * 100} cm</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      }
+    } else if (questionText.includes('meters') && questionText.includes('kilometers')) {
+      explanation += `<div><b>Remember:</b> 1 kilometer = 1,000 meters</div>`;
+      if (questionText.toLowerCase().includes('m to km') || questionText.toLowerCase().includes('meters to k')) {
+        explanation += `<div><b>To convert m to km:</b> divide by 1,000</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} m ÷ 1,000 = ${fromValue / 1000} km</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      } else {
+        explanation += `<div><b>To convert km to m:</b> multiply by 1,000</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} km × 1,000 = ${fromValue * 1000} m</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      }
+    } else if (questionText.includes('grams') && questionText.includes('kilograms')) {
+      explanation += `<div><b>Remember:</b> 1 kilogram = 1,000 grams</div>`;
+      if (questionText.toLowerCase().includes('g to kg') || questionText.toLowerCase().includes('grams to k')) {
+        explanation += `<div><b>To convert g to kg:</b> divide by 1,000</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} g ÷ 1,000 = ${fromValue / 1000} kg</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      } else {
+        explanation += `<div><b>To convert kg to g:</b> multiply by 1,000</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} kg × 1,000 = ${fromValue * 1000} g</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      }
+    } else if (questionText.includes('liters') && questionText.includes('milliliters')) {
+      explanation += `<div><b>Remember:</b> 1 liter = 1,000 milliliters</div>`;
+      if (questionText.toLowerCase().includes('ml to l') || questionText.toLowerCase().includes('milliliters to l')) {
+        explanation += `<div><b>To convert mL to L:</b> divide by 1,000</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} mL ÷ 1,000 = ${fromValue / 1000} L</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      } else {
+        explanation += `<div><b>To convert L to mL:</b> multiply by 1,000</div>`;
+        if (fromValue) {
+          explanation += `<div style="margin-top:8px;"><b>Computation:</b></div>`;
+          explanation += `<div>${fromValue} L × 1,000 = ${fromValue * 1000} mL</div>`;
+          explanation += `<div>✓ Answer: <b>${q.correct}</b></div>`;
+        }
+      }
+    } else {
+      // Fallback: Show basic explanation with the number extracted
+      if (fromValue && fromUnit) {
+        explanation += `<div><b>Given:</b> ${fromValue} ${fromUnit}</div>`;
+      }
+      explanation += `<div><b>Correct Answer:</b> ${q.correct}</div>`;
+    }
+    
+    explanation += `</div>`;
+    return explanation;
   }
 
   function advanceToNextQuestion(delayMs) {
@@ -3188,7 +3319,7 @@
       const nextLevelNum = Math.min(state.currentLevel + 2, 50);
       saveProgressToBackend(nextLevelNum, state.score);
     } else {
-      soundWrong();
+      window.playWrongSound();
       icon.textContent = '🧭';
       title.textContent = 'Keep Exploring!';
       subtitle.textContent = `You earned ${accuracy}%. Review the Metric Lab and try again!`;
@@ -3229,13 +3360,14 @@
      FLASHCARD TUTORIAL DECK LOGIC
      ========================================================================== */
   let currentCardIdx = 0;
-  const TOTAL_CARDS = 5;
+  const TOTAL_CARDS = 3;
 
   function openTutorial() {
     initAudio();
     soundClick();
     clearInterval(state.timer);
     currentCardIdx = 0;
+    resetMqTry();
     updateFlashCardUI();
     const ov = document.getElementById('tutOverlay');
     ov.classList.add('active');
@@ -3300,6 +3432,24 @@
       if (skipBtn) skipBtn.style.display = 'inline-flex';
     }
   }
+
+  /* "Try It" mini question in the Field Guide */
+  function resetMqTry() {
+    document.querySelectorAll('.mq-try-btn').forEach(b => b.classList.remove('ok', 'no'));
+    const m = document.getElementById('mqTryMsg');
+    if (m) m.textContent = 'Give it a go! 🧭';
+  }
+  window.mqTry = function(btn, ok) {
+    initAudio();
+    const msg = document.getElementById('mqTryMsg');
+    btn.classList.remove('ok', 'no');
+    void btn.offsetWidth;
+    btn.classList.add(ok ? 'ok' : 'no');
+    if (ok) { window.playCorrectSound(); } else { soundClick(); }
+    if (msg) msg.textContent = ok
+      ? '🎉 Yes! Big ➔ small = multiply: 2 × 1,000 = 2,000 m'
+      : '❌ Not quite! km ➔ m is Big ➔ small, so multiply by 1,000';
+  };
 
   // Swipe left/right to flip tutorial cards on touch screens
   (function enableTutorialSwipe() {

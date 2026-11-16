@@ -244,6 +244,151 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 }
 .fc-tip b { color: #c4b5fd; }
 
+/* ============================================================
+   VISUAL INSTRUCTION ELEMENTS (replaces text-heavy slides)
+   ============================================================ */
+.fc-demo-row{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    margin:16px 0 14px;
+}
+.fc-demo-card{
+    width:68px;height:88px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:2rem;
+    background:linear-gradient(160deg,#1e1058,#130b3a);
+    border:2px solid rgba(139,92,246,.7);
+    box-shadow:0 8px 20px rgba(88,28,135,.5);
+    animation:fcBob 2.2s ease-in-out infinite;
+}
+.fc-demo-card.fc-demo-a{
+    background:linear-gradient(160deg,#0c3050,#061a30);
+    border-color:rgba(34,211,238,.7);
+    box-shadow:0 8px 20px rgba(8,145,178,.5);
+    animation-delay:-1.1s;
+}
+.fc-demo-arrow{
+    font-size:1.5rem;color:#a78bfa;
+    animation:fcArrow 1.4s ease-in-out infinite;
+}
+@keyframes fcBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes fcArrow{0%,100%{transform:translateX(0);opacity:.6}50%{transform:translateX(6px);opacity:1}}
+
+/* Pair chips */
+.fc-pair-strip{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin-bottom:14px;flex-wrap:wrap;
+}
+.fc-chip{
+    background:rgba(124,58,237,.18);
+    border:1.5px solid rgba(167,139,250,.5);
+    color:#e9d5ff;
+    font-family:'Space Grotesk',sans-serif;font-weight:800;
+    font-size:.95rem;padding:6px 14px;border-radius:99px;
+}
+.fc-chip.fc-chip-ans{
+    background:rgba(34,211,238,.15);
+    border-color:rgba(34,211,238,.5);
+    color:#a5f3fc;
+}
+
+/* Tap demo */
+.fc-tap-row{
+    display:flex;align-items:center;justify-content:center;gap:18px;
+    margin:18px 0 10px;
+}
+.fc-tap-card{
+    width:62px;height:80px;border-radius:10px;
+    background:repeating-linear-gradient(135deg,#3b0764 0,#3b0764 6px,#4c0789 6px,#4c0789 12px);
+    border:2px solid rgba(167,139,250,.65);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.6rem;position:relative;
+    animation:fcTap 2s ease-in-out infinite;
+}
+.fc-tap-card.fc-tap-2{animation-delay:.4s}
+.fc-tap-card.fc-tap-3{
+    animation-delay:.8s;
+    background:linear-gradient(160deg,#064e3b,#022c22);
+    border-color:#34d399;
+}
+@keyframes fcTap{0%,45%,100%{transform:scale(1)}15%{transform:scale(.88)}25%{transform:scale(1.08)}}
+.fc-tap-hand{
+    position:absolute;bottom:-10px;right:-10px;font-size:1.1rem;
+    animation:fcHandTap 2s ease-in-out infinite;
+}
+@keyframes fcHandTap{
+    0%,45%,100%{transform:translate(0,0) rotate(0deg);opacity:0}
+    10%{transform:translate(-2px,-2px) rotate(-10deg);opacity:1}
+    20%{transform:translate(0,0) rotate(0deg);opacity:0}
+}
+.fc-result-row{display:flex;gap:10px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;}
+.fc-result{
+    font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:.9rem;
+    padding:6px 14px;border-radius:99px;
+}
+.fc-result-ok{background:rgba(52,211,153,.18);border:1.5px solid rgba(52,211,153,.55);color:#a7f3d0;}
+.fc-result-no{background:rgba(248,113,113,.15);border:1.5px solid rgba(248,113,113,.5);color:#fecaca;}
+
+/* Star badges */
+.fc-star-badges{
+    display:flex;gap:10px;justify-content:center;
+    margin:14px 0 14px;flex-wrap:wrap;
+}
+.fc-star-badge{
+    flex:1;min-width:90px;max-width:120px;
+    background:rgba(255,255,255,.04);
+    border:1.5px solid rgba(251,191,36,.3);
+    border-radius:14px;padding:12px 8px 10px;text-align:center;
+    animation:fcBob 2.4s ease-in-out infinite;
+}
+.fc-star-badge:nth-child(2){animation-delay:-.8s}
+.fc-star-badge:nth-child(3){animation-delay:-1.6s}
+.fc-star-icons{font-size:1.1rem;letter-spacing:2px;margin-bottom:6px;}
+.fc-star-badge:nth-child(1) .fc-star-icons{
+    font-size:1.4rem;
+    filter:drop-shadow(0 0 8px rgba(251,191,36,.9));
+}
+.fc-star-threshold{
+    font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:1rem;color:#fde68a;
+}
+
+/* Action buttons (practice/play) */
+.fc-action-row{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;
+    margin-top:6px;width:100%;
+}
+.fc-action-btn{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:14px 10px;border-radius:14px;
+    font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:1rem;
+    border:none;cursor:pointer;min-height:68px;
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;
+    touch-action:manipulation;
+}
+.fc-action-btn span:first-child{font-size:1.7rem;line-height:1;}
+.fc-action-practice{
+    background:rgba(34,211,238,.12);
+    border:1.5px solid rgba(34,211,238,.45);
+    color:#a5f3fc;
+}
+.fc-action-practice:hover{background:rgba(34,211,238,.22);transform:translateY(-2px);}
+.fc-action-play{
+    background:linear-gradient(135deg,#7c3aed,#4f46e5);
+    color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.5);
+}
+.fc-action-play:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,58,237,.7);}
+
+@media (max-width:620px){
+    .fc-demo-card{width:58px;height:76px;font-size:1.7rem;}
+    .fc-demo-arrow{font-size:1.25rem;}
+    .fc-chip{font-size:.85rem;padding:5px 12px;}
+    .fc-tap-card{width:54px;height:70px;font-size:1.4rem;}
+    .fc-tap-row{gap:14px;}
+    .fc-star-badge{padding:10px 6px;}
+    .fc-star-threshold{font-size:.9rem;}
+    .fc-action-btn{min-height:64px;font-size:.95rem;padding:12px 8px;}
+    .fc-action-btn span:first-child{font-size:1.5rem;}
+}
+
 .fc-footer {
     display: flex;
     align-items: center;
@@ -616,7 +761,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     .hv{font-size:17px;}
 }
 
-/* Landscape phones: wide board (6 � 2), compact chrome */
+/* Landscape phones: wide board (6 × 2), compact chrome */
 @media (max-height:520px) and (orientation:landscape){
     #gameScreen{padding:2px 0;}
     .gi{max-width:none;gap:6px;}
@@ -656,89 +801,66 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <!-- Active Front Flash Card -->
             <div class="fc-card">
                 <div class="fc-top">
-                    <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 4</span>
+                    <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 3</span>
                     <button class="fc-quick-action-btn" id="fcQuickActionBtn" type="button" onclick="closeTut(true)" title="Skip to Play">
                         <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
                     </button>
                 </div>
 
-                <!-- CARD 1: Word Problem & Answer Pairs -->
+                <!-- CARD 1: Match the Pairs! -->
                 <div id="fcSlide1" class="fc-slide">
-                    <h3 class="fc-title"><span>🎯</span> Match Problems to Answers</h3>
-                    <p class="fc-desc">Hidden on the board are <b>6 Word Problem cards (❓)</b> and <b>6 Answer cards (💡)</b>. Find all matching pairs!</p>
-                    <div class="fc-row-2 fc-box">
-                        <div class="fc-item">
-                            <div class="fc-item-ico">❓</div>
-                            <div class="fc-item-lbl">Word Problem</div>
-                            <div class="fc-item-sub">"Maya had 5 space rocks and found 3 more."</div>
-                        </div>
-                        <div class="fc-item">
-                            <div class="fc-item-ico">💡</div>
-                            <div class="fc-item-lbl">Matching Answer</div>
-                            <div class="fc-item-math" style="color:#2dd4bf;margin-top:6px;">8 Space Rocks</div>
-                        </div>
+                    <h3 class="fc-title"><span>🎯</span> Match the Pairs!</h3>
+                    <div class="fc-demo-row">
+                        <div class="fc-demo-card">❓</div>
+                        <div class="fc-demo-arrow">➡️</div>
+                        <div class="fc-demo-card fc-demo-a">💡</div>
                     </div>
-                    <div class="fc-tip">
-                        💡 <b>Concept:</b> One card states the story problem, and the other shows the answer!
+                    <div class="fc-pair-strip">
+                        <span class="fc-chip">"5 + 3"</span>
+                        <span style="color:#a78bfa;font-weight:900;">=</span>
+                        <span class="fc-chip fc-chip-ans">8</span>
                     </div>
+                    <div class="fc-tip">Find the <b>story</b> and its <b>answer</b>!</div>
                 </div>
 
-                <!-- CARD 2: How to Flip & Match -->
+                <!-- CARD 2: Tap 2 Cards -->
                 <div id="fcSlide2" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#38bdf8;"><span>🔄</span> Flip Two Cards at a Time</h3>
-                    <p class="fc-desc">Tap (or click) any card to flip it over, then tap a second card to look for its match!</p>
-                    <div class="fc-row-2 fc-box">
-                        <div class="fc-item">
-                            <div class="fc-item-ico">✅</div>
-                            <div class="fc-item-lbl" style="color:#34d399;">Cards Match!</div>
-                            <div class="fc-item-sub">They stay revealed, glow green, and you score <b>+10 points</b>!</div>
-                        </div>
-                        <div class="fc-item">
-                            <div class="fc-item-ico">❌</div>
-                            <div class="fc-item-lbl" style="color:#f87171;">No Match</div>
-                            <div class="fc-item-sub">Both cards flip back. <b>Remember</b> where they are!</div>
-                        </div>
+                    <h3 class="fc-title" style="color:#38bdf8;"><span>👆</span> Tap 2 Cards</h3>
+                    <div class="fc-tap-row">
+                        <div class="fc-tap-card">❓<span class="fc-tap-hand">👆</span></div>
+                        <div class="fc-tap-card fc-tap-2">💡<span class="fc-tap-hand">👆</span></div>
+                        <div class="fc-tap-card fc-tap-3">✅</div>
                     </div>
-                    <div class="fc-tip">
-                        🧠 <b>Memory Strategy:</b> Memorize the locations of cards you've already seen!
+                    <div class="fc-result-row">
+                        <span class="fc-result fc-result-ok">✅ Match = Stay!</span>
+                        <span class="fc-result fc-result-no">❌ No match = Flip back</span>
                     </div>
                 </div>
 
-                <!-- CARD 3: Speed & Few Tries = 3 Stars! -->
+                <!-- CARD 3: Faster = More Stars -->
                 <div id="fcSlide3" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#fbbf24;"><span>⏱️</span> Speed &amp; Fewer Tries = ⭐⭐⭐</h3>
-                    <p class="fc-desc">Complete the board quickly with as few tries as possible to earn top honors:</p>
-                    <div class="fc-box" style="text-align:center;border-color:rgba(251,191,36,0.35);">
-                        <div style="font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:900;color:#fbbf24;margin-bottom:4px;">Star Goals</div>
-                        <div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:6px;font-size:0.8rem;font-weight:700;">
-                            <div>⭐⭐⭐ &lt; 1:30</div>
-                            <div>⭐⭐ &lt; 2:30</div>
-                            <div>⭐ 3:30+</div>
+                    <h3 class="fc-title" style="color:#fbbf24;"><span>⭐</span> Faster = More Stars!</h3>
+                    <div class="fc-star-badges">
+                        <div class="fc-star-badge">
+                            <div class="fc-star-icons">⭐⭐⭐</div>
+                            <div class="fc-star-threshold">&lt; 1:30</div>
+                        </div>
+                        <div class="fc-star-badge">
+                            <div class="fc-star-icons">⭐⭐</div>
+                            <div class="fc-star-threshold">&lt; 2:30</div>
+                        </div>
+                        <div class="fc-star-badge">
+                            <div class="fc-star-icons">⭐</div>
+                            <div class="fc-star-threshold">Finish</div>
                         </div>
                     </div>
-                    <div class="fc-tip">
-                        ⏸️ <b>Need a breather?</b> Tap <b>Pause</b> or press <b>P</b> anytime!
-                    </div>
-                </div>
-
-                <!-- CARD 4: Clear Board & Practice Option -->
-                <div id="fcSlide4" class="fc-slide hidden">
-                    <h3 class="fc-title" style="color:#ec4899;"><span>🚀</span> Ready to Match!</h3>
-                    <p class="fc-desc">Match all <b>6 pairs</b> to clear the level and advance! You can do a quick practice round or jump into the real game:</p>
-                    <div class="fc-row-2 fc-box">
-                        <button type="button" class="fc-item" onclick="startPracticeFromTut()" style="cursor:pointer;background:rgba(34,211,238,0.12);border-color:rgba(34,211,238,0.35);color:#fff;">
-                            <div class="fc-item-ico">🎮</div>
-                            <div class="fc-item-lbl" style="color:#38bdf8;">Practice Round</div>
-                            <div class="fc-item-sub">Try 2 pairs first</div>
+                    <div class="fc-action-row">
+                        <button class="fc-action-btn fc-action-practice" type="button" onclick="startPracticeFromTut()">
+                            <span>🎮</span> Practice
                         </button>
-                        <button type="button" class="fc-item" onclick="closeTut(true)" style="cursor:pointer;background:rgba(124,58,237,0.18);border-color:rgba(167,139,250,0.45);color:#fff;">
-                            <div class="fc-item-ico">🎯</div>
-                            <div class="fc-item-lbl" style="color:#c4b5fd;">Real Game</div>
-                            <div class="fc-item-sub">Start 6 pairs now</div>
+                        <button class="fc-action-btn fc-action-play" type="button" onclick="closeTut(true)">
+                            <span>🚀</span> Play!
                         </button>
-                    </div>
-                    <div class="fc-tip">
-                        🎯 <b>Goal:</b> Find all 6 matches before time runs out!
                     </div>
                 </div>
 
@@ -752,7 +874,6 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                         <button class="fc-dot active" type="button" onclick="goFlashCard(1)" title="Card 1"></button>
                         <button class="fc-dot" type="button" onclick="goFlashCard(2)" title="Card 2"></button>
                         <button class="fc-dot" type="button" onclick="goFlashCard(3)" title="Card 3"></button>
-                        <button class="fc-dot" type="button" onclick="goFlashCard(4)" title="Card 4"></button>
                     </div>
 
                     <button class="fc-nav-btn primary" id="fcNextBtn" type="button" onclick="stepFlashCard(1)">
@@ -891,6 +1012,15 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     </div>
 </div>
 
+<script src="{{ asset('js/game-feedback.js') }}"></script>
+<script src="{{ asset('js/game-music-player.js') }}"></script>
+<script>
+// Initialize music player
+let musicPlayer;
+if (window.GameMusicPlayer) {
+    musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
+}
+</script>
 <script>
 (function(){
 'use strict';
@@ -918,9 +1048,9 @@ const TUTORIAL_KEY='mcm_tutorial_done';
 /* -------------------------------------------------------
    DOM REFS
 ------------------------------------------------------- */
-const tutorialScreen=document.getElementById('tutorialScreen'); // legacy (not in DOM) � guarded below
+const tutorialScreen=document.getElementById('tutorialScreen'); // legacy (not in DOM) — guarded below
 const trialScreen=document.getElementById('trialScreen');
-const instrScreen=document.getElementById('instrScreen');       // legacy (not in DOM) � guarded below
+const instrScreen=document.getElementById('instrScreen');       // legacy (not in DOM) — guarded below
 const gameScreen=document.getElementById('gameScreen');
 const readyOverlay=document.getElementById('readyOverlay');
 
@@ -1008,7 +1138,7 @@ document.addEventListener('visibilitychange',()=>{
 ------------------------------------------------------- */
 let tutOpenedFromGame = false;
 let currentFcCard = 1;
-const TOTAL_FC_CARDS = 4;
+const TOTAL_FC_CARDS = 3;
 
 window.openTut = function(fromGame = false){
     tutOpenedFromGame = fromGame;
@@ -1053,7 +1183,7 @@ window.goFlashCard = function(cardNum){
 
     const badge = document.getElementById('fcBadge');
     if (badge){
-        const tags = ['THE BOARD', 'HOW TO MATCH', 'STAR GOALS', 'READY TO PLAY'];
+        const tags = ['THE PAIRS', 'HOW TO TAP', 'STARS & GO'];
         const prefix = tutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
         badge.textContent = '🃏 ' + prefix + ' • CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' • ' + tags[currentFcCard - 1];
     }
@@ -1187,21 +1317,27 @@ function onTrialCardClick(idx,cardEl){
         const[first,second]=trialFlipped;
         const isMatch=first.cd.pid===second.cd.pid&&first.cd.type!==second.cd.type;
         if(isMatch){
+            // Correct match - play sound
+            if (window.playCorrectSound) window.playCorrectSound();
+            
+            first.cd.matched=true;second.cd.matched=true;
+            first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
+            trialMatched++;updateTrialHUD();
+            spawnBurst('✨',first.cardEl);spawnBurst('💫',second.cardEl);
             setTimeout(()=>{
-                first.cd.matched=true;second.cd.matched=true;
-                first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
-                trialMatched++;updateTrialHUD();
-                spawnBurst('✨',first.cardEl);spawnBurst('💫',second.cardEl);
                 trialFlipped=[];trialLock=false;
                 if(trialMatched>=TRIAL_PAIRS)setTimeout(()=>showReadyModal(),600);
-            },380);
+            }, 800);
         }else{
+            // Wrong match - play sound
+            if (window.playWrongSound) window.playWrongSound();
+            
             first.cardEl.classList.add('wrong');second.cardEl.classList.add('wrong');
             setTimeout(()=>{
                 first.cardEl.classList.remove('flipped','wrong');
                 second.cardEl.classList.remove('flipped','wrong');
                 trialFlipped=[];trialLock=false;
-            },780);
+            }, 800);
         }
     }
 }
@@ -1364,21 +1500,28 @@ function onCardClick(idx,cardEl){
         const[first,second]=flipped;
         const isMatch=first.cd.pid===second.cd.pid&&first.cd.type!==second.cd.type;
         if(isMatch){
+            // Correct match - play sound
+            if (window.playCorrectSound) window.playCorrectSound();
+            
+            first.cd.matched=true;second.cd.matched=true;
+            first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
+            matchedCount++;score+=10;updateHUD();
+            spawnBurst('✨',first.cardEl);spawnBurst('💫',second.cardEl);
             setTimeout(()=>{
-                first.cd.matched=true;second.cd.matched=true;
-                first.cardEl.classList.add('matched');second.cardEl.classList.add('matched');
-                matchedCount++;score+=10;updateHUD();
-                spawnBurst('✨',first.cardEl);spawnBurst('💫',second.cardEl);
                 flipped=[];lockBoard=false;
                 if(matchedCount>=WIN_PAIRS)setTimeout(()=>endGame(true),500);
-            },380);
+            }, 800);
         }else{
+            // Wrong match - play sound
+            if (window.playWrongSound) window.playWrongSound();
+            
+            tries++;
             first.cardEl.classList.add('wrong');second.cardEl.classList.add('wrong');
             setTimeout(()=>{
                 first.cardEl.classList.remove('flipped','wrong');
                 second.cardEl.classList.remove('flipped','wrong');
                 flipped=[];lockBoard=false;
-            },780);
+            }, 800);
         }
     }
 }
@@ -1402,7 +1545,7 @@ function startTimer(){
     timerInt=setInterval(()=>{
         seconds++;
         timeValEl.textContent=fmtTime(seconds);
-        // colour urgency: green ? amber ? red
+        // colour urgency: green -> amber -> red
         if(seconds<=90)      timeValEl.style.color='#34d399';   // 3-star zone
         else if(seconds<=150) timeValEl.style.color='#fbbf24';  // 2-star zone
         else                  timeValEl.style.color='#f87171';  // 1-star zone
@@ -1424,9 +1567,9 @@ function spawnBurst(emoji,refEl){
 function endGame(won){
     clearInterval(timerInt);gameActive=false;
     // -- Time-based star rating --
-    // = 90s  (1:30) ? 3 stars  ? score 100
-    // = 150s (2:30) ? 2 stars  ? score 70
-    // > 150s        ? 1 star   ? score 40
+    // <= 90s  (1:30) -> 3 stars -> score 100
+    // <= 150s (2:30) -> 2 stars -> score 70
+    // > 150s         -> 1 star  -> score 40
     const st = seconds <= 90 ? 3 : seconds <= 150 ? 2 : 1;
     const starScore = st === 3 ? 100 : st === 2 ? 70 : 40;
     endStars.textContent='⭐'.repeat(st);
@@ -1483,7 +1626,7 @@ function initGame(){
    FULLSCREEN & CONTROL BUTTONS
 ------------------------------------------------------- */
 if(fsBtn){
-    // iPhone Safari doesn't support the Fullscreen API on elements � hide the button there
+    // iPhone Safari doesn't support the Fullscreen API on elements — hide the button there
     const fsSupported = !!(gwEl && (gwEl.requestFullscreen || gwEl.webkitRequestFullscreen));
     if(!fsSupported){ fsBtn.style.display='none'; }
     fsBtn.addEventListener('click',()=>{

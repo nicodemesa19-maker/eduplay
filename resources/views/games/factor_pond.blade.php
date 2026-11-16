@@ -186,34 +186,12 @@ button{-webkit-tap-highlight-color:transparent;}
     max-width: 440px;
 }
 
-.fc-box {
-    background: rgba(0, 0, 0, 0.35);
-    border: 1.5px solid rgba(94, 234, 212, 0.2);
-    border-radius: 16px;
-    padding: 16px 18px;
-    margin-bottom: 12px;
-    width: 100%;
-}
 .fc-row-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     width: 100%;
 }
-.fc-item {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 12px;
-    padding: 14px 13px;
-    text-align: center;
-}
-.fc-item-ico { font-size: 1.5rem; margin-bottom: 2px; }
-.fc-item-lbl { font-size: 1.05rem; font-weight: 800; color: #5eead4; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px; }
-.fc-item-math { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 900; color: #fff; }
-.fc-item-sub { font-size: 1.05rem; color: rgba(204, 251, 241, 0.75); margin-top: 3px; line-height: 1.3; }
-.fc-item-badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.9rem; font-weight: 800; margin-top: 4px; }
-.fc-item-badge.good { background: rgba(52, 211, 153, 0.2); color: #34d399; }
-.fc-item-badge.bad { background: rgba(248, 113, 113, 0.2); color: #f87171; }
 
 .fc-tip {
     background: rgba(20, 184, 166, 0.12);
@@ -241,6 +219,7 @@ button{-webkit-tap-highlight-color:transparent;}
     padding-top: 14px;
     margin-top: 6px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
 }
 .fc-nav-btn {
     display: inline-flex;
@@ -297,11 +276,21 @@ button{-webkit-tap-highlight-color:transparent;}
     box-shadow: 0 0 10px rgba(94, 234, 212, 0.7);
 }
 
-.demo-strip{display:flex;gap:12px;justify-content:center;margin:6px 0 10px;}
-.demo-fish{width:62px;height:62px;border-radius:50%;background:rgba(20,184,166,.15);border:2px solid rgba(94,234,212,.4);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:900;color:#67e8f9;flex-direction:column;gap:2px;}
-.demo-fish.selected{background:rgba(251,191,36,.22);border-color:rgba(251,191,36,.8);color:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.45);}
-.demo-fish-lbl{font-size:14px;font-weight:800;color:rgba(255,255,255,.55);text-align:center;margin-top:3px;}
-.demo-fish-wrap{display:flex;flex-direction:column;align-items:center;}
+/* ===== Lean tutorial ===== */
+.fc-big{font-size:3.2rem;line-height:1;animation:flt 2.4s ease-in-out infinite;}
+.fc-short{font-size:1.25rem;font-weight:800;color:#fff;font-family:'Space Grotesk',sans-serif;}
+.fc-tile{background:rgba(255,255,255,.05);border:2px solid rgba(94,234,212,.3);border-radius:16px;padding:16px 10px;text-align:center;}
+.fc-tile .fc-big{font-size:2.4rem;margin-bottom:6px;animation:none;}
+.fc-tile .fc-short{font-size:1.1rem;}
+.fc-eg{margin-top:8px;font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:900;color:#fbbf24;}
+.try-strip{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0;}
+.try-fish{width:66px;height:66px;border-radius:50%;background:rgba(20,184,166,.18);border:2px solid rgba(94,234,212,.5);color:#67e8f9;font:900 26px 'Space Grotesk',sans-serif;cursor:pointer;transition:transform .15s;touch-action:manipulation;animation:flt 2.2s ease-in-out infinite;}
+.try-fish:nth-child(even){animation-delay:-1s;}
+.try-fish:hover{transform:scale(1.12);}
+.try-fish.ok{background:rgba(52,211,153,.3);border-color:#34d399;color:#fff;animation:correctB .5s ease;}
+.try-fish.no{background:rgba(248,113,113,.25);border-color:#f87171;color:#fff;animation:shakeF .4s ease;}
+#tryMsg{min-height:34px;font-size:1.2rem;font-weight:800;color:#5eead4;text-align:center;}
+.hearts-row{font-size:2rem;letter-spacing:4px;}
 
 /* ============================================================
    GAME SCREEN & HUD
@@ -793,20 +782,19 @@ button{-webkit-tap-highlight-color:transparent;}
     .fc-slide { min-height: 0; }
     .fc-title { font-size: 1.25rem !important; }
     .fc-desc { font-size: .92rem; }
-    .fc-box { padding: 12px; }
-    .fc-row-2 { grid-template-columns: 1fr; gap: 8px; }
-    .fc-item { padding: 10px; }
-    .fc-item-lbl { font-size: .9rem; }
-    .fc-item-math { font-size: 1rem; }
-    .fc-item-sub { font-size: .9rem; }
     .fc-tip { font-size: .9rem; }
     .fc-nav-btn { padding: 10px 12px; font-size: .95rem; }
     .fc-footer { gap: 8px; }
     .fc-dots { gap: 4px; }
     .fc-dot { width: 7px; height: 7px; }
     .fc-dot.active { width: 16px; }
-    .demo-strip { gap: 8px; }
-    .demo-fish { width: 54px; height: 54px; font-size: 21px; }
+    .fc-tile { padding: 12px 6px; }
+    .fc-tile .fc-big { font-size: 2rem; }
+    .fc-tile .fc-short { font-size: .95rem; }
+    .fc-eg { font-size: 1rem; }
+    .hearts-row { font-size: 1.4rem; letter-spacing: 2px; }
+    .try-fish { width: 54px; height: 54px; font-size: 22px; }
+    #tryMsg { font-size: 1rem; }
 }
 
 @media (max-width: 380px) {
@@ -903,118 +891,69 @@ button{-webkit-tap-highlight-color:transparent;}
 
       <div class="fc-card">
         <div class="fc-top">
-          <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 5</span>
+          <span class="fc-badge" id="fcBadge">🃏 HOW TO PLAY • CARD 1 OF 3</span>
           <button class="fc-quick-action-btn" id="fcQuickActionBtn" type="button" onclick="closeTut(true)" title="Skip to Play">
             <span>Skip to Play</span> <i class="bi bi-arrow-right-short"></i>
           </button>
         </div>
 
         <div id="fcSlide1" class="fc-slide">
-          <h3 class="fc-title" style="color:#5eead4;"><span>🎯</span> Look Before You Fish!</h3>
-          <p class="fc-desc">Read the mission banner before tapping fish. You will hunt for either <b>Factors</b> or <b>Multiples</b>:</p>
-          <div class="fc-row-2 fc-box">
-            <div class="fc-item">
-              <div class="fc-item-ico">🔢</div>
-              <div class="fc-item-lbl">Factors Mission</div>
-              <div class="fc-item-math">Target: 16</div>
-              <div class="fc-item-badge good">Catch: 1, 2, 4, 8, 16</div>
+          <h3 class="fc-title" style="color:#5eead4;"><span>🎣</span> Catch the Right Fish!</h3>
+          <p class="fc-desc">Check the banner. What's the mission?</p>
+          <div class="fc-row-2" style="margin-bottom:12px;">
+            <div class="fc-tile">
+              <div class="fc-big">🔢</div>
+              <div class="fc-short">FACTORS</div>
+              <div class="fc-eg">12 ÷ 4 = 3 ✅</div>
             </div>
-            <div class="fc-item">
-              <div class="fc-item-ico">✖️</div>
-              <div class="fc-item-lbl">Multiples Mission</div>
-              <div class="fc-item-math">Target: 5</div>
-              <div class="fc-item-badge good">Catch: 5, 10, 15, 20...</div>
+            <div class="fc-tile">
+              <div class="fc-big">✖️</div>
+              <div class="fc-short">MULTIPLES</div>
+              <div class="fc-eg">5 · 10 · 15 · 20</div>
             </div>
           </div>
-          <div class="fc-tip">
-            💡 <b>Rule of Thumb:</b> Glance at the mission banner first so you know which fish to catch!
-          </div>
+          <div class="fc-tip">💡 No leftover = factor. Skip count = multiple.</div>
         </div>
 
         <div id="fcSlide2" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#22d3ee;"><span>🔢</span> What is a Factor?</h3>
-          <p class="fc-desc">A factor divides the target number with <b>0 remainder</b>. If there is a remainder, it is NOT a factor!</p>
-          <div class="fc-row-2 fc-box">
-            <div class="fc-item">
-              <div class="fc-item-ico">✅</div>
-              <div class="fc-item-lbl">Target: 12</div>
-              <div class="fc-item-math">12 ÷ 4 = 3</div>
-              <div class="fc-item-badge good">0 Remainder ➔ Factor!</div>
-            </div>
-            <div class="fc-item">
-              <div class="fc-item-ico">❌</div>
-              <div class="fc-item-lbl">Target: 12</div>
-              <div class="fc-item-math">12 ÷ 5 = 2 R 2</div>
-              <div class="fc-item-badge bad">Remainder 2 ➔ Not Factor</div>
-            </div>
+          <h3 class="fc-title" style="color:#fbbf24;"><span>👆</span> Try It!</h3>
+          <p class="fc-desc">Tap the <b>FACTORS of 6</b></p>
+          <div class="try-strip" id="tryStrip">
+            <button type="button" class="try-fish" data-ok="1">1</button>
+            <button type="button" class="try-fish" data-ok="1">2</button>
+            <button type="button" class="try-fish" data-ok="1">3</button>
+            <button type="button" class="try-fish" data-ok="0">4</button>
+            <button type="button" class="try-fish" data-ok="0">5</button>
+            <button type="button" class="try-fish" data-ok="1">6</button>
           </div>
-          <div class="fc-tip">
-            💡 <b>Golden Rule:</b> Factors are <b>always equal to or smaller</b> than the target number.
-          </div>
+          <div id="tryMsg">Tap a fish! 🐟</div>
         </div>
 
         <div id="fcSlide3" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#fbbf24;"><span>✖️</span> What is a Multiple?</h3>
-          <p class="fc-desc">Multiples come from your times table or skip-counting! Multiply the target by 1, 2, 3, 4, 5 and so on.</p>
-          <div class="fc-box" style="text-align:center;border-color:rgba(251,191,36,0.35);">
-            <div style="font-size:0.95rem;font-weight:800;color:#fbbf24;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Multiples of 6 (Skip Counting)</div>
-            <div style="font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:900;color:#fff;letter-spacing:1px;margin-bottom:6px;">6, 12, 18, 24, 30, 36...</div>
-            <div style="font-size:0.95rem;color:rgba(254,240,138,0.85);font-weight:700;">6×1=6 &bull; 6×2=12 &bull; 6×3=18 &bull; 6×4=24</div>
-          </div>
-          <div class="fc-tip">
-            💡 <b>Golden Rule:</b> Multiples are <b>always equal to or bigger</b> than the target number.
-          </div>
-        </div>
-
-        <div id="fcSlide4" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#34d399;"><span>🐟</span> Tap Fish &amp; Cast Net</h3>
-          <p class="fc-desc">Tap fish to pick them. Selected fish glow with a bright <b style="color:#fbbf24;">golden ring ✨</b>:</p>
-          <div class="demo-strip" style="margin:4px 0 10px;">
-            <div class="demo-fish-wrap"><div class="demo-fish selected">2</div><div class="demo-fish-lbl">✅ Picked</div></div>
-            <div class="demo-fish-wrap"><div class="demo-fish">5</div><div class="demo-fish-lbl">Not picked</div></div>
-            <div class="demo-fish-wrap"><div class="demo-fish selected">4</div><div class="demo-fish-lbl">✅ Picked</div></div>
-          </div>
-          <div class="fc-tip">
-            💡 <b>Need to unpick?</b> Tap any picked fish again. When ready, tap <b>🪝 Cast Net!</b>
-          </div>
-        </div>
-
-        <div id="fcSlide5" class="fc-slide hidden">
-          <h3 class="fc-title" style="color:#f43f5e;"><span>❤️</span> 5 Lives &amp; 10 to Win</h3>
-          <p class="fc-desc">Keep your hearts safe and fill your net to clear the level!</p>
-          <div class="fc-row-2 fc-box">
-            <div class="fc-item">
-              <div class="fc-item-ico">💔</div>
-              <div class="fc-item-lbl">Lose 1 Life</div>
-              <div class="fc-item-sub">Picking wrong fish or leaving a matching fish behind.</div>
+          <h3 class="fc-title" style="color:#f43f5e;"><span>🏆</span> Ready to Win?</h3>
+          <div class="fc-row-2" style="margin:10px 0 12px;">
+            <div class="fc-tile">
+              <div class="hearts-row">❤️❤️❤️❤️❤️</div>
+              <div class="fc-short">5 Lives</div>
             </div>
-            <div class="fc-item">
-              <div class="fc-item-ico">🏆</div>
-              <div class="fc-item-lbl">Win Level</div>
-              <div class="fc-item-sub">Make <b>10 perfect net casts</b> to unlock the next level!</div>
+            <div class="fc-tile">
+              <div class="hearts-row">🐟 × 10</div>
+              <div class="fc-short">Perfect Casts</div>
             </div>
           </div>
-          <div class="fc-tip kbd-tip">
-            💡 <b>Shortcuts:</b> Press <b>P</b> to pause anytime. Press <b>Space</b> to Cast Net!
-          </div>
-          <div class="fc-tip touch-tip">
-            💡 <b>Tip:</b> Tap <b>Pause</b> anytime to rest. Tap <b>🪝 Cast Net!</b> when you're ready!
-          </div>
+          <div class="fc-tip">Pick fish, then tap <b>🪝 Cast Net!</b></div>
+          <div class="fc-tip kbd-tip" style="margin-top:6px;">⌨️ <b>Space</b> = Cast &nbsp;•&nbsp; <b>P</b> = Pause</div>
         </div>
 
         <div class="fc-footer">
           <button class="fc-nav-btn" id="fcPrevBtn" type="button" onclick="stepFlashCard(-1)">
             <i class="bi bi-arrow-left"></i> Prev
           </button>
-
           <div class="fc-dots" id="fcDots" role="tablist" aria-label="Flash Cards">
             <button class="fc-dot active" type="button" onclick="goFlashCard(1)" title="Card 1"></button>
             <button class="fc-dot" type="button" onclick="goFlashCard(2)" title="Card 2"></button>
             <button class="fc-dot" type="button" onclick="goFlashCard(3)" title="Card 3"></button>
-            <button class="fc-dot" type="button" onclick="goFlashCard(4)" title="Card 4"></button>
-            <button class="fc-dot" type="button" onclick="goFlashCard(5)" title="Card 5"></button>
           </div>
-
           <button class="fc-nav-btn primary" id="fcNextBtn" type="button" onclick="stepFlashCard(1)">
             <span>Next</span> <i class="bi bi-arrow-right"></i>
           </button>
@@ -1035,6 +974,15 @@ button{-webkit-tap-highlight-color:transparent;}
   </div>
 </div>
 
+<script src="{{ asset('js/game-feedback.js') }}"></script>
+<script src="{{ asset('js/game-music-player.js') }}"></script>
+<script>
+// Initialize music player
+let musicPlayer;
+if (window.GameMusicPlayer) {
+    musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
+}
+</script>
 <script>
 (function(){
 'use strict';
@@ -1784,17 +1732,46 @@ function castNet(){
     if (isPerfect){
         score++;
         spawnSplashText('🎯 Perfect Catch! +1', cx, cy);
+        // Show success feedback with Continue button
+        if (window.showGameFeedback) {
+            const nextAction = () => {
+                pondLocked = false;
+                if (score >= WIN_POINTS){ endGame(true); }
+                else { generateMission(); }
+            };
+            window.showGameFeedback(true, null, 2000, nextAction, null, '🐟');
+        }
         updateHUD();
-        setTimeout(() => {
-            pondLocked = false;
-            if (score >= WIN_POINTS){ endGame(true); }
-            else { generateMission(); }
-        }, 1000);
+        // Feedback replaces the setTimeout
     } else {
         lives--;
         updateHUD();
         spawnSplashText('💔 -1 Life', cx, cy);
-        setTimeout(showWrongModal, 750);
+        // Show encouraging feedback for wrong answer with Continue button
+        const correct = Array.from(correctSet).sort((a,b) => a - b);
+        const correctAnswer = joinList(correct);
+        if (window.showGameFeedback) {
+            const nextAction = () => {
+                if (lives <= 0) { 
+                    endGame(false); 
+                } else {
+                    pondLocked = false;
+                    generateMission();
+                }
+            };
+            window.showGameFeedback(false, correctAnswer, 3000, nextAction, null, '🐟');
+        }
+        // Fallback if showGameFeedback doesn't exist
+        if (!window.showGameFeedback) {
+            setTimeout(() => {
+                if (lives <= 0) { 
+                    endGame(false); 
+                } else {
+                    pondLocked = false;
+                    generateMission();
+                }
+            }, 3000);
+        }
     }
 }
 
@@ -1952,7 +1929,7 @@ window.addEventListener('keydown', (e) => {
 
 let tutOpenedFromGame = false;
 let currentFcCard = 1;
-const TOTAL_FC_CARDS = 5;
+const TOTAL_FC_CARDS = 3;
 
 window.openTut = function(fromGame = false){
     tutOpenedFromGame = fromGame;
@@ -1982,6 +1959,7 @@ window.openTut = function(fromGame = false){
         ov.classList.remove('hidden');
         ov.scrollTop = 0;
     }
+    resetTry();
     goFlashCard(1);
 };
 
@@ -2002,7 +1980,7 @@ window.goFlashCard = function(cardNum){
 
     const badge = document.getElementById('fcBadge');
     if (badge){
-        const tags = ['THE MISSION', 'FACTORS', 'MULTIPLES', 'HOW TO PLAY', 'LIVES & WIN'];
+        const tags = ['THE MISSION', 'TRY IT', 'LET\'S GO'];
         const prefix = tutOpenedFromGame ? 'TUTORIAL' : 'HOW TO PLAY';
         badge.textContent = '🃏 ' + prefix + ' • CARD ' + currentFcCard + ' OF ' + TOTAL_FC_CARDS + ' • ' + tags[currentFcCard - 1];
     }
@@ -2053,6 +2031,29 @@ window.closeTut = function(andStartGame = false){
         }
     }
 };
+
+/* ============================================================
+   TUTORIAL "TRY IT" MINI GAME
+   ============================================================ */
+const tryMsgEl = document.getElementById('tryMsg');
+function resetTry(){
+    document.querySelectorAll('#tryStrip .try-fish').forEach(b => b.classList.remove('ok', 'no'));
+    if (tryMsgEl) tryMsgEl.textContent = 'Tap a fish! 🐟';
+}
+document.querySelectorAll('#tryStrip .try-fish').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const ok = btn.dataset.ok === '1';
+        btn.classList.remove('ok', 'no');
+        void btn.offsetWidth;
+        btn.classList.add(ok ? 'ok' : 'no');
+        tryMsgEl.textContent = ok
+            ? '🎉 Yes! 6 ÷ ' + btn.textContent + ' has no leftover!'
+            : '❌ Oops! ' + btn.textContent + ' leaves a leftover.';
+        if (document.querySelectorAll('#tryStrip .try-fish.ok').length === 4){
+            tryMsgEl.textContent = '🌟 You found them all! 1, 2, 3, 6!';
+        }
+    });
+});
 
 (function init(){
     openTut(false);
