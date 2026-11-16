@@ -181,7 +181,7 @@
 .filter-select {
   background: var(--card-bg-raised);
   border: 1px solid var(--card-border);
-  color: var(--text);
+  color: var(--text) !important;
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 0.85rem;
@@ -196,6 +196,10 @@
 .filter-select option {
   background: var(--card-bg);
   color: var(--text);
+}
+.filter-select::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1;
 }
 
 /* ---------- Nav tabs ---------- */
