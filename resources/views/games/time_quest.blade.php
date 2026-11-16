@@ -14,7 +14,7 @@
 <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js"></script>
 
 <!-- Google Fonts: EduPlay Arcade Theme -->
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Baloo+2:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Baloo+2:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
 
 <style>
   *{box-sizing:border-box}
@@ -63,7 +63,9 @@
     --gold:#FFD93D;
     --purple:#A78BFA;
     --mint:#2ddc82;
+    --mint-soft:#8affc1;
     --rose:#ff4d6d;
+    --rose-soft:#ff8fa3;
     --ink:#EAF6FF;
     --ink-dim:rgba(234,246,255,.65);
     --surface:rgba(255,255,255,.08);
@@ -103,6 +105,7 @@
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
+    padding-right: 60px; /* Make room for burger button */
   }
   .tq-exit{
     display:inline-flex;align-items:center;gap:6px;flex:none;
@@ -173,12 +176,12 @@
 
   /* ---------- Nav buttons with arcade glow ---------- */
   .tq .eduplay-game-nav{
-    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    display:none;align-items:center;gap:8px;flex-wrap:wrap;
   }
   
   /* Burger menu button */
   .burger-menu-btn {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 42px;
@@ -193,7 +196,7 @@
     position: absolute;
     top: 16px;
     right: 16px;
-    z-index: 1002;
+    z-index: 10001;
   }
   .burger-menu-btn:hover {
     background: rgba(0,229,255,.25);
@@ -209,18 +212,19 @@
   
   /* Mobile menu overlay */
   .mobile-menu-overlay {
-    display: none;
+    display: block;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,.85);
     backdrop-filter: blur(8px);
-    z-index: 1000;
+    z-index: 9999;
     opacity: 0;
+    pointer-events: none;
     transition: opacity .3s;
   }
   .mobile-menu-overlay.active {
-    display: block;
     opacity: 1;
+    pointer-events: auto;
   }
   
   /* Mobile menu panel */
@@ -235,7 +239,7 @@
     box-shadow: -10px 0 40px rgba(0,0,0,.8), 0 0 30px rgba(0,229,255,.2);
     transform: translateX(100%);
     transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1001;
+    z-index: 10000;
     overflow-y: auto;
     padding: 24px 20px;
   }
@@ -302,6 +306,16 @@
     display: block !important;
     visibility: visible !important;
   }
+  /* Music row in mobile menu */
+  #game-music-controls { display:none !important; }
+  .tq-music-row { display:flex; align-items:center; gap:10px; padding:12px 16px; background:rgba(0,229,255,.08); border:1.5px solid rgba(0,229,255,.3); border-radius:14px; }
+  .tq-mute-btn { width:40px; height:40px; border-radius:10px; background:rgba(0,229,255,.15); border:1.5px solid rgba(0,229,255,.4); color:#00e5ff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; flex-shrink:0; transition:all .2s; }
+  .tq-mute-btn:hover { background:rgba(0,229,255,.28); }
+  .tq-mute-btn.muted { background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.45); color:#f87171; }
+  .tq-vol-slider { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,.12); appearance:none; cursor:pointer; accent-color:#00e5ff; }
+  .tq-vol-slider::-webkit-slider-thumb { appearance:none; width:15px; height:15px; border-radius:50%; background:#00e5ff; cursor:pointer; }
+  .tq-vol-slider::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:#00e5ff; cursor:pointer; border:none; }
+  .tq-vol-value { font-size:.8rem; font-weight:700; color:#00e5ff; min-width:34px; text-align:right; }
   .tq .eduplay-nav-btn{
     display:inline-flex;align-items:center;justify-content:center;gap:6px;
     min-height:40px;padding:0 14px;border-radius:10px;
@@ -720,8 +734,8 @@
   .option.correct::after,.option.wrong::after{
     position:absolute;top:10px;right:14px;font-weight:800;font-size:1.4rem;
   }
-  .option.correct::after{content:"?";color:var(--lime);filter:drop-shadow(0 0 8px rgba(182,255,61,.8))}
-  .option.wrong::after{content:"?";color:var(--pink);filter:drop-shadow(0 0 8px rgba(255,61,174,.8))}
+  .option.correct::after{content:"✓";color:var(--lime);filter:drop-shadow(0 0 8px rgba(182,255,61,.8))}
+  .option.wrong::after{content:"✗";color:var(--pink);filter:drop-shadow(0 0 8px rgba(255,61,174,.8))}
 
   .pop-anim{animation:popUp .4s ease-out}
   @keyframes popUp{0%{transform:scale(1)}50%{transform:scale(1.3);color:var(--cyan)}100%{transform:scale(1)}}
@@ -1253,13 +1267,7 @@
       display: none !important;
     }
 
-    /* Nav: hide desktop buttons, show burger */
-    .tq .eduplay-game-nav {
-      display: none;
-    }
-    .burger-menu-btn {
-      display: flex;
-    }
+    /* Nav: desktop buttons already hidden, burger already visible */
     
     /* Map and quiz panels - maximize space */
     .map-panel {
@@ -1575,14 +1583,21 @@
         <i class="bi bi-question-circle-fill"></i>
         <span>Tutorial</span>
       </button>
-      <button type="button" class="eduplay-nav-btn eduplay-btn-pause" title="Pause Game" onclick="togglePause(); toggleMobileMenu();">
-        <i class="bi bi-pause-fill"></i>
-        <span>Pause</span>
+      <button type="button" class="eduplay-nav-btn eduplay-btn-pause" title="Resume Game" onclick="toggleMobileMenu();">
+        <i class="bi bi-play-fill"></i>
+        <span>Resume</span>
       </button>
       <a href="{{ route('student.map', 'time_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
         <i class="bi bi-map-fill"></i>
         <span>Game Map</span>
       </a>
+      <div class="tq-music-row">
+        <button type="button" class="tq-mute-btn" id="muteBtn" onclick="toggleMute()" title="Mute / Unmute">
+          <i class="bi bi-volume-up-fill" id="muteIcon"></i>
+        </button>
+        <input type="range" class="tq-vol-slider" id="volumeSlider" min="0" max="100" value="50" oninput="setVolume(this.value)">
+        <span class="tq-vol-value" id="volumeValue">50%</span>
+      </div>
       <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
         <i class="bi bi-box-arrow-right"></i>
         <span>Exit</span>
@@ -1625,7 +1640,7 @@
         </div>
       </div>
       <div class="quiz-top">
-        <div class="q-label" id="qLabel">Get ready—</div>
+        <div class="q-label" id="qLabel">Get ready…</div>
         <div class="pips" id="pips" aria-hidden="true"></div>
         <button type="button" class="hint-btn-quiz" id="hintBtn" onclick="useHint()" title="Use 20 coins to eliminate 2 wrong answers">
           <i class="bi bi-lightbulb-fill"></i>
@@ -1634,12 +1649,12 @@
         </button>
       </div>
       <div class="quiz-mid">
-        <div id="qText">Loading—</div>
+        <div id="qText">Loading…</div>
         <div id="options" role="group" aria-label="Answer choices"></div>
         <div id="feedback" role="status" aria-live="polite"></div>
         <button id="next" class="btn" type="button">Next round</button>
       </div>
-      <p class="hint">Press 1—4 to answer, Enter for next round.</p>
+      <p class="hint">Press 1–4 to answer, Enter for next round.</p>
     </aside>
   </main>
 </div>
@@ -1647,9 +1662,9 @@
 <!-- Pause overlay -->
 <div class="pause-overlay" id="pauseOverlay">
   <div class="pause-card">
-    <div style="font-size:3rem;margin-bottom:0.5rem;">?</div>
+    <div style="font-size:3rem;margin-bottom:0.5rem;">⏸️</div>
     <h2>Quest Paused</h2>
-    <p>The clock has stopped. Take a breather and resume when you—re ready to continue your time zone adventure!</p>
+    <p>The clock has stopped. Take a breather and resume when you're ready to continue your time zone adventure!</p>
     <button class="btn" style="width:100%;margin-bottom:10px;" onclick="togglePause()">▶️ Resume Quest</button>
     <button class="btn ghost" style="width:100%;min-height:46px;font-size:0.92rem;" onclick="openTut(true)">
       <i class="bi bi-mortarboard-fill" style="margin-right:6px;"></i> 📚 How to Play / Tutorial
@@ -1815,7 +1830,7 @@
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut()">Skip Tutorial</button>
         <div class="btn-row">
           <button class="btn ghost back" type="button" onclick="nextTut(1)">◀️ Back</button>
-          <button class="btn" type="button" onclick="nextTut(3)">Next: Going West ?</button>
+          <button class="btn" type="button" onclick="nextTut(3)">Next: Going West ▶️</button>
         </div>
       </div>
     </div>
@@ -1853,7 +1868,7 @@
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut()">Skip Tutorial</button>
         <div class="btn-row">
           <button class="btn ghost back" type="button" onclick="nextTut(2)">◀️ Back</button>
-          <button class="btn" type="button" onclick="nextTut(4)">Next: Crossing Midnight ?</button>
+          <button class="btn" type="button" onclick="nextTut(4)">Next: Crossing Midnight ▶️</button>
         </div>
       </div>
     </div>
@@ -1892,7 +1907,7 @@
         <button class="tq-tut-skip-btn" type="button" onclick="closeTut()">Skip Tutorial</button>
         <div class="btn-row">
           <button class="btn ghost back" type="button" onclick="nextTut(3)">◀️ Back</button>
-          <button class="btn" type="button" onclick="nextTut(5)">Next: Half-Hours &amp; Tips ?</button>
+          <button class="btn" type="button" onclick="nextTut(5)">Next: Half-Hours &amp; Tips ▶️</button>
         </div>
       </div>
     </div>
@@ -1907,7 +1922,7 @@
       <div class="tq-tips-grid">
         <div class="tq-tip-box">
           <div class="tq-tip-ico">⌨️</div>
-          <div class="tq-tip-tit">Keyboard 1—4</div>
+          <div class="tq-tip-tit">Keyboard 1–4</div>
           <p class="tq-tip-txt">Press number keys to pick choices instantly without moving your cursor.</p>
         </div>
         <div class="tq-tip-box">
@@ -1960,28 +1975,61 @@ if (window.GameMusicPlayer) {
 function toggleMobileMenu() {
   const overlay = document.getElementById('mobileMenuOverlay');
   const burgerBtn = document.getElementById('burgerMenuBtn');
+  const pauseOverlay = document.getElementById('pauseOverlay');
   
   if (overlay && burgerBtn) {
+    const opening = !overlay.classList.contains('active');
     overlay.classList.toggle('active');
     burgerBtn.classList.toggle('active');
     
-    // Update icon
     const icon = burgerBtn.querySelector('i');
     if (icon) {
-      if (overlay.classList.contains('active')) {
-        icon.className = 'bi bi-x';
-      } else {
-        icon.className = 'bi bi-list';
-      }
+      icon.className = overlay.classList.contains('active') ? 'bi bi-x' : 'bi bi-list';
     }
     
-    // Prevent body scroll when menu is open
-    if (overlay.classList.contains('active')) {
+    if (opening) {
       document.body.style.overflow = 'hidden';
+      // Pause the game but hide the pause modal
+      if (typeof togglePause === 'function' && pauseOverlay && !pauseOverlay.classList.contains('active')) {
+        togglePause();
+      }
+      // Hide pause modal if visible
+      if (pauseOverlay) {
+        pauseOverlay.style.display = 'none';
+      }
     } else {
       document.body.style.overflow = '';
+      // Resume the game and restore pause modal visibility
+      if (typeof togglePause === 'function' && pauseOverlay) {
+        const wasPaused = pauseOverlay.classList.contains('active');
+        pauseOverlay.style.display = '';
+        if (wasPaused) {
+          togglePause();
+        }
+      }
     }
   }
+}
+
+function toggleMute() {
+  if (!musicPlayer) return;
+  const btn = document.getElementById('muteBtn');
+  const icon = document.getElementById('muteIcon');
+  if (musicPlayer.isPlaying) {
+    musicPlayer.pause();
+    if (icon) icon.className = 'bi bi-volume-mute-fill';
+    if (btn) btn.classList.add('muted');
+  } else {
+    musicPlayer.play();
+    if (icon) icon.className = 'bi bi-volume-up-fill';
+    if (btn) btn.classList.remove('muted');
+  }
+}
+
+function setVolume(val) {
+  const v = document.getElementById('volumeValue');
+  if (v) v.textContent = val + '%';
+  if (musicPlayer) musicPlayer.setVolume(val / 100);
 }
 
 /* ============================================================
@@ -2012,7 +2060,7 @@ const CITIES = [
   {name:'Paris',        flag:'🇫🇷', tz:'Europe/Paris',                   lon:2.35,   lat:48.86, tier:2},
   {name:'Berlin',       flag:'🇩🇪', tz:'Europe/Berlin',                  lon:13.40,  lat:52.52, tier:2},
   {name:'Madrid',       flag:'🇪🇸', tz:'Europe/Madrid',                  lon:-3.70,  lat:40.42, tier:2},
-  {name:'Reykjav—k',    flag:'🇮🇸', tz:'Atlantic/Reykjavik',             lon:-21.94, lat:64.15, tier:2},
+  {name:'Reykjavík',    flag:'🇮🇸', tz:'Atlantic/Reykjavik',             lon:-21.94, lat:64.15, tier:2},
   {name:'New York',     flag:'🇺🇸', tz:'America/New_York',               lon:-74.01, lat:40.71, tier:2},
   {name:'Chicago',      flag:'🇺🇸', tz:'America/Chicago',                lon:-87.63, lat:41.88, tier:2},
   {name:'Los Angeles',  flag:'🇺🇸', tz:'America/Los_Angeles',            lon:-118.24,lat:34.05, tier:2},
@@ -2021,7 +2069,7 @@ const CITIES = [
   {name:'Mexico City',  flag:'🇲🇽', tz:'America/Mexico_City',            lon:-99.13, lat:19.43, tier:2},
   {name:'Anchorage',    flag:'🇺🇸', tz:'America/Anchorage',              lon:-149.90,lat:61.22, tier:2},
   {name:'Honolulu',     flag:'🇺🇸', tz:'Pacific/Honolulu',               lon:-157.86,lat:21.31, tier:2},
-  {name:'S—o Paulo',    flag:'🇧🇷', tz:'America/Sao_Paulo',              lon:-46.63, lat:-23.55,tier:2},
+  {name:'São Paulo',    flag:'🇧🇷', tz:'America/Sao_Paulo',              lon:-46.63, lat:-23.55,tier:2},
   {name:'Buenos Aires', flag:'🇦🇷', tz:'America/Argentina/Buenos_Aires', lon:-58.38, lat:-34.60,tier:2},
   {name:'Lima',         flag:'🇵🇪', tz:'America/Lima',                   lon:-77.04, lat:-12.05,tier:2},
   {name:'Santiago',     flag:'🇨🇱', tz:'America/Santiago',               lon:-70.65, lat:-33.46,tier:2},
@@ -2029,7 +2077,7 @@ const CITIES = [
   {name:'Casablanca',   flag:'🇲🇦', tz:'Africa/Casablanca',              lon:-7.58,  lat:33.57, tier:2},
   {name:'Riyadh',       flag:'🇸🇦', tz:'Asia/Riyadh',                    lon:46.67,  lat:24.71, tier:2},
   {name:'Rome',         flag:'🇮🇹', tz:'Europe/Rome',                    lon:12.49,  lat:41.90, tier:2},
-  {name:'Bogot—',       flag:'🇨🇴', tz:'America/Bogota',                 lon:-74.07, lat:4.71,  tier:2},
+  {name:'Bogotá',       flag:'🇨🇴', tz:'America/Bogota',                 lon:-74.07, lat:4.71,  tier:2},
 
   {name:'Yangon',       flag:'🇲🇲', tz:'Asia/Yangon',                    lon:96.16,  lat:16.87, tier:3},
   {name:'Kathmandu',    flag:'🇳🇵', tz:'Asia/Kathmandu',                 lon:85.32,  lat:27.72, tier:3},
@@ -2845,9 +2893,9 @@ window.openTut = function(fromGame = false) {
       state.timerInt = null;
     }
     const skipBtns = document.querySelectorAll('.tq-tut-skip-btn');
-    skipBtns.forEach(btn => btn.textContent = '? Return to Game');
+    skipBtns.forEach(btn => btn.textContent = '↩️ Return to Game');
     const startMissionBtn = el('tutStartMissionBtn');
-    if (startMissionBtn) startMissionBtn.textContent = '? Return to Game';
+    if (startMissionBtn) startMissionBtn.textContent = '↩️ Return to Game';
   } else {
     const skipBtns = document.querySelectorAll('.tq-tut-skip-btn');
     skipBtns.forEach(btn => btn.textContent = '◀️ Back to Instructions');

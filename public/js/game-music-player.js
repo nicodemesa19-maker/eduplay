@@ -274,17 +274,23 @@ class GameMusicPlayer {
             });
         }
         
-        // Auto-play when user interacts with the page
-        const startMusic = () => {
-            if (!this.isPlaying) {
-                this.play();
-            }
-            document.removeEventListener('click', startMusic);
-            document.removeEventListener('keydown', startMusic);
-        };
-        
-        document.addEventListener('click', startMusic);
-        document.addEventListener('keydown', startMusic);
+        // Try to autoplay immediately; if blocked, play on first user interaction
+        this.audio.play().then(() => {
+            this.isPlaying = true;
+        }).catch(() => {
+            // Autoplay blocked — wait for first interaction
+            const startOnInteraction = () => {
+                if (!this.isPlaying) {
+                    this.play();
+                }
+                document.removeEventListener('click', startOnInteraction);
+                document.removeEventListener('keydown', startOnInteraction);
+                document.removeEventListener('touchstart', startOnInteraction);
+            };
+            document.addEventListener('click', startOnInteraction);
+            document.addEventListener('keydown', startOnInteraction);
+            document.addEventListener('touchstart', startOnInteraction);
+        });
     }
     
     play() {

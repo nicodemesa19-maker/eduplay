@@ -31,16 +31,54 @@
   .geo-title { font-weight:900; font-size:clamp(1.5rem,3vw,2.3rem); background:linear-gradient(135deg,#818cf8,#38bdf8,#34d399); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
   .geo-top-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .geo-badge { background:linear-gradient(135deg,#f59e0b,#d97706); color:#1e1b02; font-weight:800; font-size:.85rem; letter-spacing:1px; padding:7px 20px; border-radius:50px; box-shadow:0 0 20px rgba(245,158,11,.35); white-space:nowrap; }
+  
+  /* BURGER MENU */
+  .geo-burger-btn { width:44px; height:44px; border-radius:12px; background:rgba(99,102,241,.15); border:2px solid rgba(99,102,241,.4); color:#818cf8; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; transition:all .2s; position:relative; z-index:100; }
+  .geo-burger-btn:hover { background:rgba(99,102,241,.25); transform:scale(1.05); }
+  .geo-burger-line { width:22px; height:2.5px; background:currentColor; border-radius:2px; transition:all .3s; }
+  .geo-burger-btn.active .geo-burger-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .geo-burger-btn.active .geo-burger-line:nth-child(2) { opacity:0; }
+  .geo-burger-btn.active .geo-burger-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+  
+  .geo-burger-menu { position:fixed; top:0; right:-100%; width:min(320px, 85vw); height:100vh; height:100dvh; background:linear-gradient(160deg,#0f172a,#1e293b); border-left:2px solid rgba(99,102,241,.3); backdrop-filter:blur(20px); z-index:10000; transition:right .35s ease; box-shadow:-10px 0 40px rgba(0,0,0,.6); display:flex; flex-direction:column; padding:20px; padding-top:70px; }
+  .geo-burger-menu.active { right:0; }
+  .geo-burger-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:9999; opacity:0; pointer-events:none; transition:opacity .3s; }
+  .geo-burger-overlay.active { opacity:1; pointer-events:all; }
+  
+  .geo-burger-header { margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.1); }
+  .geo-burger-title { font-size:1.3rem; font-weight:900; color:white; display:flex; align-items:center; gap:10px; }
+  .geo-burger-subtitle { font-size:.8rem; color:#64748b; margin-top:6px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+  
+  .geo-burger-nav { display:flex; flex-direction:column; gap:12px; }
+  .geo-burger-nav .eduplay-nav-btn { width:100%; padding:16px 20px; min-height:56px; display:flex; align-items:center; gap:12px; font-size:1rem; font-weight:700; border-radius:14px; text-decoration:none; transition:all .2s; justify-content:flex-start; }
+  .geo-burger-nav .eduplay-btn-guide { background:rgba(56,189,248,.15); border:2px solid rgba(56,189,248,.4); color:#38bdf8; }
+  .geo-burger-nav .eduplay-btn-guide:hover { background:rgba(56,189,248,.25); transform:translateX(4px); }
+  .geo-burger-nav .eduplay-btn-pause { background:rgba(251,191,36,.15); border:2px solid rgba(251,191,36,.4); color:#fbbf24; }
+  .geo-burger-nav .eduplay-btn-pause:hover { background:rgba(251,191,36,.25); transform:translateX(4px); }
+  .geo-burger-nav .eduplay-btn-map { background:rgba(52,211,153,.15); border:2px solid rgba(52,211,153,.4); color:#34d399; }
+  .geo-burger-nav .eduplay-btn-map:hover { background:rgba(52,211,153,.25); transform:translateX(4px); }
+  .geo-burger-nav .eduplay-btn-exit { background:rgba(239,68,68,.15); border:2px solid rgba(239,68,68,.4); color:#ef4444; }
+  .geo-burger-nav .eduplay-btn-exit:hover { background:rgba(239,68,68,.25); transform:translateX(4px); }
+  .geo-burger-nav .eduplay-nav-btn i { font-size:1.3rem; }
+  .geo-burger-nav .eduplay-nav-btn span { flex:1; text-align:left; display:inline !important; }
+  
+  /* Inline music row in burger nav */
+  #game-music-controls { display:none !important; }
+  .geo-burger-music-row { display:flex; align-items:center; gap:10px; padding:12px 16px; background:rgba(139,92,246,.1); border:1.5px solid rgba(139,92,246,.35); border-radius:14px; margin-bottom:12px; }
+  .geo-mute-btn { width:40px; height:40px; border-radius:10px; background:rgba(139,92,246,.2); border:1.5px solid rgba(139,92,246,.5); color:#c4b5fd; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; flex-shrink:0; transition:all .2s; }
+  .geo-mute-btn:hover { background:rgba(139,92,246,.35); }
+  .geo-mute-btn.muted { background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.45); color:#f87171; }
+  .geo-vol-slider { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,.12); appearance:none; cursor:pointer; accent-color:#8b5cf6; }
+  .geo-vol-slider::-webkit-slider-thumb { appearance:none; width:15px; height:15px; border-radius:50%; background:#8b5cf6; cursor:pointer; }
+  .geo-vol-slider::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:#8b5cf6; cursor:pointer; border:none; }
+  .geo-vol-value { font-size:.8rem; font-weight:700; color:#a78bfa; min-width:34px; text-align:right; }
   .geo-timer { background:linear-gradient(135deg,#6366f1,#4f46e5); color:white; box-shadow:0 0 20px rgba(99,102,241,.35); transition:all .3s; font-variant-numeric:tabular-nums; }
   .geo-timer.warning { background:linear-gradient(135deg,#f59e0b,#d97706); color:#1e1b02; animation:timerPulse 1s infinite; }
   .geo-timer.danger { background:linear-gradient(135deg,#ef4444,#dc2626); color:white; animation:timerPulse .5s infinite; }
   @keyframes timerPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
-  .geo-control-btn { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; border:2px solid; cursor:pointer; transition:all .2s; text-decoration:none; }
-  .geo-pause-btn { background:rgba(251,191,36,.15); border-color:rgba(251,191,36,.4); color:#fbbf24; }
-  .geo-pause-btn:hover { background:rgba(251,191,36,.3); transform:scale(1.05); }
-  .geo-pause-btn.paused { background:rgba(52,211,153,.15); border-color:rgba(52,211,153,.4); color:#34d399; }
-  .geo-exit-btn { background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.4); color:#ef4444; }
-  .geo-exit-btn:hover { background:rgba(239,68,68,.3); transform:scale(1.05); }
+  
+  /* Hide original inline navigation */
+  .eduplay-game-nav { display:none; }
   .geo-shape-tag { padding:7px 16px; border-radius:50px; font-weight:700; font-size:.82rem; white-space:nowrap; }
   .geo-q-type-tag { padding:5px 14px; border-radius:50px; font-weight:700; font-size:.78rem; letter-spacing:.5px; white-space:nowrap; }
   .qtag-computation { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.3); }
@@ -581,11 +619,6 @@
     .geo-shape-tag { font-size: .72rem; padding: 6px 11px; }
     .geo-q-type-tag { font-size: .68rem; padding: 5px 10px; }
 
-    /* Game nav: icon-only, full-width row, large tap targets */
-    .eduplay-game-nav { display: flex !important; width: 100%; gap: 8px; margin-top: 2px; }
-    .eduplay-game-nav .eduplay-nav-btn { flex: 1; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: .78rem; padding: 8px 6px; }
-    .eduplay-game-nav .eduplay-nav-btn span { font-size: .75rem; }
-
     .geo-progress-row { margin-bottom: 12px; }
     .geo-progress-label { font-size: .68rem; }
     .geo-progress-count { font-size: .78rem; }
@@ -676,7 +709,6 @@
   /* Very small phones */
   @media (max-width: 360px) {
     .geo-badge { padding: 5px 9px; font-size: .7rem; }
-    .eduplay-game-nav .eduplay-nav-btn span { display: none; }
     .q-text { font-size: .98rem; }
     .ans-btn { font-size: .9rem; }
   }
@@ -722,22 +754,12 @@
         <span class="geo-q-type-tag qtag-computation" id="qTypeTag">🧮 COMPUTATION</span>
         <span class="geo-badge geo-timer" id="timerBadge"><i class="bi bi-clock-fill"></i> 5:00</span>
         <span class="geo-badge" id="levelBadge">LEVEL 1</span>
-        <div class="eduplay-game-nav">
-          <button type="button" class="eduplay-nav-btn eduplay-btn-guide" id="guideBtn" onclick="openTutorialGuide()" title="Field Guide &amp; Instructions">
-            <i class="bi bi-book-half"></i> <span>Field Guide</span>
-          </button>
-          <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="pauseBtn" onclick="togglePause()" title="Pause Game">
-            <i class="bi bi-pause-fill"></i> <span>Pause</span>
-          </button>
-          <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
-            <i class="bi bi-map-fill"></i> <span>Game Map</span>
-          </a>
-          <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
-            <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
-          </a>
-        </div>
+        <button type="button" class="geo-burger-btn" id="burgerBtn" onclick="toggleBurgerMenu()" aria-label="Open menu">
+          <div class="geo-burger-line"></div>
+          <div class="geo-burger-line"></div>
+          <div class="geo-burger-line"></div>
+        </button>
       </div>
-
     </div>
 
     <!-- PROGRESS -->
@@ -884,6 +906,42 @@
   </div>
 </div>
 
+<!-- BURGER MENU OVERLAY -->
+<div class="geo-burger-overlay" id="burgerOverlay" onclick="toggleBurgerMenu()"></div>
+
+<!-- BURGER MENU -->
+<div class="geo-burger-menu" id="burgerMenu">
+  <div class="geo-burger-header">
+    <div class="geo-burger-title">
+      <i class="fas fa-shapes"></i>
+      Game Menu
+    </div>
+    <div class="geo-burger-subtitle">Geometry Grid Explorer</div>
+  </div>
+  
+  <nav class="geo-burger-nav">
+    <button type="button" class="eduplay-nav-btn eduplay-btn-guide" onclick="openTutorialGuide(); toggleBurgerMenu();" title="Field Guide & Instructions">
+      <i class="bi bi-book-half"></i> <span>Field Guide</span>
+    </button>
+    <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="pauseBtnBurger" onclick="toggleBurgerMenu();" title="Resume Game">
+      <i class="bi bi-play-fill"></i> <span>Resume</span>
+    </button>
+    <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
+      <i class="bi bi-map-fill"></i> <span>Game Map</span>
+    </a>
+    <div class="geo-burger-music-row">
+      <button type="button" class="geo-mute-btn" id="muteBtn" onclick="toggleMute()" title="Mute / Unmute">
+        <i class="bi bi-volume-up-fill" id="muteIcon"></i>
+      </button>
+      <input type="range" class="geo-vol-slider" id="volumeSlider" min="0" max="100" value="50" oninput="setVolume(this.value)">
+      <span class="geo-vol-value" id="volumeValue">50%</span>
+    </div>
+    <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
+      <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
+    </a>
+  </nav>
+</div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -895,6 +953,67 @@ let musicPlayer;
 if (window.GameMusicPlayer) {
     musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
 }
+
+// Burger menu toggle — auto-pause on open, auto-resume on close
+function toggleBurgerMenu() {
+  const burgerBtn = document.getElementById('burgerBtn');
+  const burgerMenu = document.getElementById('burgerMenu');
+  const burgerOverlay = document.getElementById('burgerOverlay');
+  if (!burgerMenu) return;
+  const opening = !burgerMenu.classList.contains('active');
+
+  if (burgerBtn) burgerBtn.classList.toggle('active');
+  burgerMenu.classList.toggle('active');
+  if (burgerOverlay) burgerOverlay.classList.toggle('active');
+
+  if (opening) {
+    document.body.style.overflow = 'hidden';
+    if (typeof togglePause === 'function') togglePause();
+  } else {
+    document.body.style.overflow = '';
+    if (typeof togglePause === 'function') togglePause();
+  }
+}
+
+function toggleMute() {
+  if (!musicPlayer) return;
+  const btn = document.getElementById('muteBtn');
+  const icon = document.getElementById('muteIcon');
+  if (musicPlayer.isPlaying) {
+    musicPlayer.pause();
+    icon.className = 'bi bi-volume-mute-fill';
+    btn.classList.add('muted');
+  } else {
+    musicPlayer.play();
+    icon.className = 'bi bi-volume-up-fill';
+    btn.classList.remove('muted');
+  }
+}
+
+function setVolume(val) {
+  document.getElementById('volumeValue').textContent = val + '%';
+  if (musicPlayer) musicPlayer.setVolume(val / 100);
+}
+
+// Volume control
+document.addEventListener('DOMContentLoaded', function() {
+  const volumeSlider = document.getElementById('volumeSlider');
+  if (volumeSlider) {
+    volumeSlider.addEventListener('input', function() {
+      setVolume(this.value);
+    });
+  }
+
+  // Initialize music player state
+  if (musicPlayer) {
+    setTimeout(function() {
+      if (musicPlayer.isPlaying) {
+        document.getElementById('muteIcon').className = 'bi bi-volume-up-fill';
+        document.getElementById('muteBtn').classList.remove('muted');
+      }
+    }, 500);
+  }
+});
 </script>
 <script>
 (function(){

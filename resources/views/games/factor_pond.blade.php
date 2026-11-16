@@ -621,6 +621,52 @@ button{-webkit-tap-highlight-color:transparent;}
 .pause-card h2 { color: #5eead4; font-size: 1.7rem; font-weight: 800; margin: 0 0 6px; font-family: 'Space Grotesk', sans-serif; }
 .pause-card p { color: rgba(204, 251, 241, 0.7); margin: 0 0 16px; font-size: 1.1rem; }
 
+/* ============================================================
+   BURGER MENU
+   ============================================================ */
+.game-burger-btn { width:44px; height:44px; border-radius:12px; background:rgba(20,184,166,.15); border:2px solid rgba(94,234,212,.4); color:#5eead4; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; transition:all .2s; position:relative; z-index:100; }
+.game-burger-btn:hover { background:rgba(20,184,166,.25); transform:scale(1.05); }
+.game-burger-line { width:22px; height:2.5px; background:currentColor; border-radius:2px; transition:all .3s; }
+.game-burger-btn.active .game-burger-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.game-burger-btn.active .game-burger-line:nth-child(2) { opacity:0; }
+.game-burger-btn.active .game-burger-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+.game-burger-menu { position:fixed; top:0; right:-100%; width:min(320px, 85vw); height:100vh; height:100dvh; background:linear-gradient(160deg,rgba(8,40,51,0.98),rgba(3,22,28,0.98)); border-left:2px solid rgba(94,234,212,.4); backdrop-filter:blur(20px); z-index:10000; transition:right .35s ease; box-shadow:-10px 0 40px rgba(0,0,0,.8); display:flex; flex-direction:column; padding:20px; padding-top:70px; }
+.game-burger-menu.active { right:0; }
+.game-burger-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:9999; opacity:0; pointer-events:none; transition:opacity .3s; }
+.game-burger-overlay.active { opacity:1; pointer-events:all; }
+
+.game-burger-header { margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.1); }
+.game-burger-title { font-size:1.3rem; font-weight:900; color:white; display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; }
+.game-burger-subtitle { font-size:.8rem; color:#64748b; margin-top:6px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+
+.game-burger-nav { display:flex; flex-direction:column; gap:12px; }
+.game-burger-nav .eduplay-nav-btn { width:100%; padding:16px 20px; min-height:56px; display:flex !important; align-items:center; gap:12px; font-size:1rem; font-weight:700; border-radius:14px; text-decoration:none; transition:all .2s; justify-content:flex-start; }
+.game-burger-nav .eduplay-btn-help { background:rgba(56,189,248,.15); border:2px solid rgba(56,189,248,.4); color:#38bdf8; }
+.game-burger-nav .eduplay-btn-help:hover { background:rgba(56,189,248,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-btn-pause { background:rgba(251,191,36,.15); border:2px solid rgba(251,191,36,.4); color:#fbbf24; }
+.game-burger-nav .eduplay-btn-pause:hover { background:rgba(251,191,36,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-btn-map { background:rgba(52,211,153,.15); border:2px solid rgba(52,211,153,.4); color:#34d399; }
+.game-burger-nav .eduplay-btn-map:hover { background:rgba(52,211,153,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-btn-exit { background:rgba(239,68,68,.15); border:2px solid rgba(239,68,68,.4); color:#ef4444; }
+.game-burger-nav .eduplay-btn-exit:hover { background:rgba(239,68,68,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-nav-btn i { font-size:1.3rem; }
+.game-burger-nav .eduplay-nav-btn span { flex:1; text-align:left; display:inline !important; }
+
+/* Inline music row in burger nav */
+#game-music-controls { display:none !important; }
+.game-burger-music-row { display:flex; align-items:center; gap:10px; padding:12px 16px; background:rgba(20,184,166,.1); border:1.5px solid rgba(94,234,212,.35); border-radius:14px; }
+.game-mute-btn { width:40px; height:40px; border-radius:10px; background:rgba(20,184,166,.2); border:1.5px solid rgba(94,234,212,.5); color:#5eead4; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; flex-shrink:0; transition:all .2s; }
+.game-mute-btn:hover { background:rgba(20,184,166,.35); }
+.game-mute-btn.muted { background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.45); color:#f87171; }
+.game-vol-slider { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,.12); appearance:none; cursor:pointer; accent-color:#14b8a6; }
+.game-vol-slider::-webkit-slider-thumb { appearance:none; width:15px; height:15px; border-radius:50%; background:#14b8a6; cursor:pointer; }
+.game-vol-slider::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:#14b8a6; cursor:pointer; border:none; }
+.game-vol-value { font-size:.8rem; font-weight:700; color:#5eead4; min-width:34px; text-align:right; }
+
+/* Hide original inline nav */
+.eduplay-game-nav { display:none !important; }
+
 /* End Banner */
 #endBanner{display:none;width:100%;}
 #endBanner.show{display:block;animation:bannerDrop .5s cubic-bezier(.34,1.56,.64,1);}
@@ -822,23 +868,11 @@ button{-webkit-tap-highlight-color:transparent;}
           <div class="hs-sub">Best: <span id="hsVal">{{ $progress->high_score ?? 0 }}</span> <span class="score-pill-chip">⭐ Score: <span id="scoreVal">0</span>/10</span></div>
         </div>
 
-        <div class="eduplay-game-nav">
-          <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play &amp; Tutorial" onclick="openTut(true)">
-            <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
-          </button>
-          <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="pauseBtn" title="Pause Game" onclick="togglePause()">
-            <i class="bi bi-pause-fill"></i> <span>Pause</span>
-          </button>
-          <button type="button" class="eduplay-nav-btn eduplay-btn-fs" id="fsBtn" title="Toggle Fullscreen" onclick="toggleFullscreen()">
-            <i class="bi bi-fullscreen"></i> <span>Full</span>
-          </button>
-          <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
-            <i class="bi bi-map-fill"></i> <span>Map</span>
-          </a>
-          <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
-            <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
-          </a>
-        </div>
+        <button type="button" class="game-burger-btn" id="burgerBtn" onclick="toggleBurgerMenu()" aria-label="Open menu">
+          <div class="game-burger-line"></div>
+          <div class="game-burger-line"></div>
+          <div class="game-burger-line"></div>
+        </button>
       </div>
 
       <div>
@@ -963,6 +997,46 @@ button{-webkit-tap-highlight-color:transparent;}
   </div>
 </div>
 
+<!-- BURGER MENU OVERLAY -->
+<div class="game-burger-overlay" id="burgerOverlay" onclick="toggleBurgerMenu()"></div>
+
+<!-- BURGER MENU -->
+<div class="game-burger-menu" id="burgerMenu">
+  <div class="game-burger-header">
+    <div class="game-burger-title">
+      <i class="bi bi-menu-button-wide-fill"></i>
+      Game Menu
+    </div>
+    <div class="game-burger-subtitle">Factor Pond</div>
+  </div>
+  
+  <nav class="game-burger-nav">
+    <!-- Music Settings Button (with collapsible controls) -->
+    <button type="button" class="eduplay-nav-btn eduplay-btn-help" onclick="openTut(true); toggleBurgerMenu();" title="How to Play & Tutorial">
+      <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
+    </button>
+    <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="pauseBtnBurger" onclick="toggleBurgerMenu();" title="Resume Game">
+      <i class="bi bi-play-fill"></i> <span>Resume</span>
+    </button>
+    <button type="button" class="eduplay-nav-btn eduplay-btn-help" onclick="toggleFullscreen(); toggleBurgerMenu();" title="Toggle Fullscreen" style="background:rgba(139,92,246,.15);border-color:rgba(139,92,246,.4);color:#c4b5fd;">
+      <i class="bi bi-fullscreen"></i> <span>Fullscreen</span>
+    </button>
+    <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
+      <i class="bi bi-map-fill"></i> <span>Game Map</span>
+    </a>
+    <div class="game-burger-music-row">
+      <button type="button" class="game-mute-btn" id="muteBtn" onclick="toggleMute()" title="Mute / Unmute">
+        <i class="bi bi-volume-up-fill" id="muteIcon"></i>
+      </button>
+      <input type="range" class="game-vol-slider" id="volumeSlider" min="0" max="100" value="50" oninput="setVolume(this.value)">
+      <span class="game-vol-value" id="volumeValue">50%</span>
+    </div>
+    <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
+      <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
+    </a>
+  </nav>
+</div>
+
 <div id="wrongOverlay">
   <div class="wrong-box">
     <div class="wrong-ico">🤔</div>
@@ -982,6 +1056,69 @@ let musicPlayer;
 if (window.GameMusicPlayer) {
     musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
 }
+
+// Burger menu toggle — auto-pause on open, auto-resume on close
+function toggleBurgerMenu() {
+  const burgerBtn = document.getElementById('burgerBtn');
+  const burgerMenu = document.getElementById('burgerMenu');
+  const burgerOverlay = document.getElementById('burgerOverlay');
+  if (!burgerMenu) return;
+  const opening = !burgerMenu.classList.contains('active');
+
+  if (burgerBtn) burgerBtn.classList.toggle('active');
+  burgerMenu.classList.toggle('active');
+  if (burgerOverlay) burgerOverlay.classList.toggle('active');
+
+  if (opening) {
+    document.body.style.overflow = 'hidden';
+    if (typeof togglePause === 'function') togglePause();
+  } else {
+    document.body.style.overflow = '';
+    if (typeof togglePause === 'function') togglePause();
+  }
+}
+
+// Toggle music settings panel
+function toggleMusicSettings() {}
+
+// Music controls
+function toggleMute() {
+  if (!musicPlayer) return;
+  const btn = document.getElementById('muteBtn');
+  const icon = document.getElementById('muteIcon');
+  if (musicPlayer.isPlaying) {
+    musicPlayer.pause();
+    if (icon) icon.className = 'bi bi-volume-mute-fill';
+    if (btn) btn.classList.add('muted');
+  } else {
+    musicPlayer.play();
+    if (icon) icon.className = 'bi bi-volume-up-fill';
+    if (btn) btn.classList.remove('muted');
+  }
+}
+
+function setVolume(val) {
+  const v = document.getElementById('volumeValue');
+  if (v) v.textContent = val + '%';
+  if (musicPlayer) musicPlayer.setVolume(val / 100);
+}
+
+// Volume control
+document.addEventListener('DOMContentLoaded', function() {
+  const volumeSlider = document.getElementById('volumeSlider');
+  if (volumeSlider) volumeSlider.addEventListener('input', function() { setVolume(this.value); });
+
+  if (musicPlayer) {
+    setTimeout(function() {
+      const icon = document.getElementById('muteIcon');
+      const btn = document.getElementById('muteBtn');
+      if (musicPlayer.isPlaying) {
+        if (icon) icon.className = 'bi bi-volume-up-fill';
+        if (btn) btn.classList.remove('muted');
+      }
+    }, 500);
+  }
+});
 </script>
 <script>
 (function(){

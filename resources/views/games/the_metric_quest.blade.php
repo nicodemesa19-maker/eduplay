@@ -1276,6 +1276,85 @@
     font-size: 0.92rem;
     margin: 0 0 20px;
   }
+
+  /* ============================================================
+     BURGER MENU
+     ============================================================ */
+  .game-burger-btn { width:44px; height:44px; border-radius:12px; background:rgba(245,158,11,.15); border:2px solid rgba(245,158,11,.4); color:#f59e0b; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; transition:all .2s; }
+  .game-burger-btn:hover { background:rgba(245,158,11,.25); transform:scale(1.05); }
+  .game-burger-line { width:22px; height:2.5px; background:currentColor; border-radius:2px; transition:all .3s; }
+  .game-burger-btn.active .game-burger-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .game-burger-btn.active .game-burger-line:nth-child(2) { opacity:0; }
+  .game-burger-btn.active .game-burger-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+  .game-burger-menu { position:fixed; top:0; right:-100%; width:min(320px, 85vw); height:100vh; height:100dvh; background:linear-gradient(160deg,rgba(14,23,46,0.98),rgba(17,30,61,0.98)); border-left:2px solid rgba(245,158,11,.4); backdrop-filter:blur(20px); z-index:10000; transition:right .35s ease; box-shadow:-10px 0 40px rgba(0,0,0,.8); display:flex; flex-direction:column; padding:20px; padding-top:70px; }
+  .game-burger-menu.active { right:0; }
+  .game-burger-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:9999; opacity:0; pointer-events:none; transition:opacity .3s; }
+  .game-burger-overlay.active { opacity:1; pointer-events:all; }
+  .game-burger-header { margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.1); }
+  .game-burger-title { font-size:1.3rem; font-weight:900; color:white; display:flex; align-items:center; gap:10px; font-family:var(--font-heading); }
+  .game-burger-subtitle { font-size:.8rem; color:#64748b; margin-top:6px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+  .game-burger-nav { display:flex; flex-direction:column; gap:12px; }
+  .game-burger-nav .eduplay-nav-btn { width:100%; padding:16px 20px; min-height:56px; display:flex !important; align-items:center; gap:12px; font-size:1rem; font-weight:700; border-radius:14px; text-decoration:none; transition:all .2s; justify-content:flex-start; }
+  .game-burger-nav .eduplay-btn-guide { background:rgba(56,189,248,.15); border:2px solid rgba(56,189,248,.4); color:#38bdf8; }
+  .game-burger-nav .eduplay-btn-guide:hover { background:rgba(56,189,248,.25); transform:translateX(4px); }
+  .game-burger-nav .eduplay-btn-pause { background:rgba(251,191,36,.15); border:2px solid rgba(251,191,36,.4); color:#fbbf24; }
+  .game-burger-nav .eduplay-btn-pause:hover { background:rgba(251,191,36,.25); transform:translateX(4px); }
+  .game-burger-nav .eduplay-btn-map { background:rgba(52,211,153,.15); border:2px solid rgba(52,211,153,.4); color:#34d399; }
+  .game-burger-nav .eduplay-btn-map:hover { background:rgba(52,211,153,.25); transform:translateX(4px); }
+  .game-burger-nav .eduplay-btn-exit { background:rgba(239,68,68,.15); border:2px solid rgba(239,68,68,.4); color:#ef4444; }
+  .game-burger-nav .eduplay-btn-exit:hover { background:rgba(239,68,68,.25); transform:translateX(4px); }
+  .game-burger-nav .eduplay-nav-btn i { font-size:1.3rem; }
+  .game-burger-nav .eduplay-nav-btn span { flex:1; text-align:left; display:inline !important; }
+  .game-burger-music { margin-top:auto; padding-top:20px; border-top:1px solid rgba(255,255,255,.1); }
+  .game-burger-music-title { font-size:.85rem; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+  .game-music-controls { display:flex; flex-direction:column; gap:10px; }
+  .game-music-btn { width:100%; padding:14px 18px; min-height:52px; display:flex; align-items:center; gap:12px; font-size:.95rem; font-weight:700; border-radius:12px; background:rgba(245,158,11,.15); border:2px solid rgba(245,158,11,.4); color:#fbbf24; cursor:pointer; transition:all .2s; }
+  .game-music-btn:hover { background:rgba(245,158,11,.25); transform:translateX(4px); }
+  .game-music-btn i { font-size:1.2rem; }
+  .game-music-btn span { flex:1; text-align:left; }
+  .game-volume-control { display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:12px; }
+  .game-volume-control i { font-size:1.1rem; color:#f59e0b; }
+  .game-volume-slider { flex:1; height:6px; border-radius:3px; background:rgba(255,255,255,.1); appearance:none; cursor:pointer; }
+  .game-volume-slider::-webkit-slider-thumb { appearance:none; width:16px; height:16px; border-radius:50%; background:#f59e0b; cursor:pointer; }
+  .game-volume-slider::-moz-range-thumb { width:16px; height:16px; border-radius:50%; background:#f59e0b; cursor:pointer; border:none; }
+  .game-volume-value { font-size:.8rem; font-weight:700; color:#f59e0b; min-width:35px; text-align:right; }
+  .eduplay-game-nav { display:none !important; }
+  /* ── Burger Menu ── */
+  #game-music-controls { display:none !important; }
+  .mq-burger-btn { width:44px; height:44px; border-radius:12px; background:rgba(245,158,11,.15); border:2px solid rgba(245,158,11,.4); color:#fbbf24; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; transition:all .2s; padding:0; flex-shrink:0; position:relative; z-index:100; }
+  .mq-burger-btn:hover { background:rgba(245,158,11,.28); transform:scale(1.05); }
+  .mq-burger-line { width:20px; height:2px; background:currentColor; border-radius:2px; transition:all .3s; display:block; }
+  .mq-burger-btn.active .mq-burger-line:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .mq-burger-btn.active .mq-burger-line:nth-child(2) { opacity:0; }
+  .mq-burger-btn.active .mq-burger-line:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .mq-burger-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:9999; opacity:0; pointer-events:none; transition:opacity .3s; }
+  .mq-burger-overlay.active { opacity:1; pointer-events:all; }
+  .mq-burger-menu { position:fixed; top:0; right:-100%; width:min(320px,85vw); height:100vh; height:100dvh; background:linear-gradient(160deg,rgba(14,23,46,.98),rgba(17,30,61,.98)); border-left:2px solid rgba(245,158,11,.4); backdrop-filter:blur(20px); z-index:10000; transition:right .35s ease; box-shadow:-10px 0 40px rgba(0,0,0,.8); display:flex; flex-direction:column; padding:20px; padding-top:70px; overflow-y:auto; }
+  .mq-burger-menu.active { right:0; }
+  .mq-burger-header { margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.1); }
+  .mq-burger-title { font-size:1.3rem; font-weight:900; color:white; display:flex; align-items:center; gap:10px; }
+  .mq-burger-subtitle { font-size:.8rem; color:#64748b; margin-top:6px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+  .mq-burger-nav { display:flex; flex-direction:column; gap:12px; }
+  .mq-burger-nav .eduplay-nav-btn { width:100% !important; padding:16px 20px; min-height:56px; display:flex !important; align-items:center; gap:12px; font-size:1rem; font-weight:700; border-radius:14px; text-decoration:none; transition:all .2s; justify-content:flex-start; }
+  .mq-burger-nav .eduplay-nav-btn span { display:inline !important; flex:1; text-align:left; }
+  .mq-burger-nav .eduplay-nav-btn i { font-size:1.3rem; }
+  .mq-burger-nav .eduplay-btn-guide { background:rgba(56,189,248,.15); border:2px solid rgba(56,189,248,.4); color:#38bdf8; }
+  .mq-burger-nav .eduplay-btn-guide:hover { background:rgba(56,189,248,.25); transform:translateX(4px); }
+  .mq-burger-nav .eduplay-btn-pause { background:rgba(251,191,36,.15); border:2px solid rgba(251,191,36,.4); color:#fbbf24; }
+  .mq-burger-nav .eduplay-btn-pause:hover { background:rgba(251,191,36,.25); transform:translateX(4px); }
+  .mq-burger-nav .eduplay-btn-map { background:rgba(52,211,153,.15); border:2px solid rgba(52,211,153,.4); color:#34d399; }
+  .mq-burger-nav .eduplay-btn-map:hover { background:rgba(52,211,153,.25); transform:translateX(4px); }
+  .mq-burger-nav .eduplay-btn-exit { background:rgba(239,68,68,.15); border:2px solid rgba(239,68,68,.4); color:#ef4444; }
+  .mq-burger-nav .eduplay-btn-exit:hover { background:rgba(239,68,68,.25); transform:translateX(4px); }
+  .mq-music-row { display:flex; align-items:center; gap:10px; padding:12px 16px; background:rgba(245,158,11,.1); border:1.5px solid rgba(245,158,11,.35); border-radius:14px; }
+  .mq-mute-btn { width:40px; height:40px; border-radius:10px; background:rgba(245,158,11,.2); border:1.5px solid rgba(245,158,11,.5); color:#fbbf24; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; flex-shrink:0; transition:all .2s; }
+  .mq-mute-btn:hover { background:rgba(245,158,11,.35); }
+  .mq-mute-btn.muted { background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.45); color:#f87171; }
+  .mq-vol-slider { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,.12); appearance:none; cursor:pointer; accent-color:#f59e0b; }
+  .mq-vol-slider::-webkit-slider-thumb { appearance:none; width:15px; height:15px; border-radius:50%; background:#f59e0b; cursor:pointer; }
+  .mq-vol-slider::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:#f59e0b; cursor:pointer; border:none; }
+  .mq-vol-value { font-size:.8rem; font-weight:700; color:#fbbf24; min-width:34px; text-align:right; }
+
   .resume-btn {
     width: 100%;
     padding: 12px 0;
@@ -1698,6 +1777,10 @@
         <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
       </a>
     </div>
+    <!-- Burger button -->
+    <button type="button" class="mq-burger-btn" id="burgerBtn" onclick="toggleBurgerMenu()" aria-label="Game menu">
+      <span class="mq-burger-line"></span><span class="mq-burger-line"></span><span class="mq-burger-line"></span>
+    </button>
   </header>
 
   <!-- ============ DYNAMIC METRIC CONVERSION LADDER BANNER ============ -->
@@ -2150,6 +2233,36 @@
   </div>
 </div>
 
+<!-- BURGER MENU -->
+<div class="mq-burger-overlay" id="burgerOverlay" onclick="toggleBurgerMenu()"></div>
+<div class="mq-burger-menu" id="burgerMenu">
+  <div class="mq-burger-header">
+    <div class="mq-burger-title"><i class="bi bi-menu-button-wide-fill"></i> Game Menu</div>
+    <div class="mq-burger-subtitle">The Metric Quest</div>
+  </div>
+  <nav class="mq-burger-nav">
+    <button type="button" class="eduplay-nav-btn eduplay-btn-guide" onclick="document.getElementById('btnOpenTutorial').click(); toggleBurgerMenu();" title="Field Guide">
+      <i class="bi bi-book-half"></i> <span>Field Guide</span>
+    </button>
+    <button type="button" class="eduplay-nav-btn eduplay-btn-pause" onclick="toggleBurgerMenu();" title="Resume Game">
+      <i class="bi bi-play-fill"></i> <span>Resume</span>
+    </button>
+    <a href="{{ route('student.map', 'the_metric_quest') }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
+      <i class="bi bi-map-fill"></i> <span>Game Map</span>
+    </a>
+    <div class="mq-music-row">
+      <button type="button" class="mq-mute-btn" id="muteBtn" onclick="toggleMute()" title="Mute / Unmute">
+        <i class="bi bi-volume-up-fill" id="muteIcon"></i>
+      </button>
+      <input type="range" class="mq-vol-slider" id="volumeSlider" min="0" max="100" value="50" oninput="setVolume(this.value)">
+      <span class="mq-vol-value" id="volumeValue">50%</span>
+    </div>
+    <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
+      <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
+    </a>
+  </nav>
+</div>
+
 <script src="{{ asset('js/game-feedback.js') }}?v=20250116"></script>
 <script src="{{ asset('js/game-music-player.js') }}"></script>
 <script>
@@ -2158,7 +2271,42 @@ let musicPlayer;
 if (window.GameMusicPlayer) {
     musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
 }
+function toggleBurgerMenu() {
+  const burgerBtn = document.getElementById('burgerBtn');
+  const burgerMenu = document.getElementById('burgerMenu');
+  const burgerOverlay = document.getElementById('burgerOverlay');
+  if (!burgerMenu) return;
+  const opening = !burgerMenu.classList.contains('active');
 
+  if (burgerBtn) burgerBtn.classList.toggle('active');
+  burgerMenu.classList.toggle('active');
+  if (burgerOverlay) burgerOverlay.classList.toggle('active');
+
+  if (opening) {
+    if (typeof togglePause === 'function') togglePause();
+  } else {
+    if (typeof togglePause === 'function') togglePause();
+  }
+}
+function toggleMute() {
+  if (!musicPlayer) return;
+  const btn = document.getElementById('muteBtn');
+  const icon = document.getElementById('muteIcon');
+  if (musicPlayer.isPlaying) {
+    musicPlayer.pause();
+    if (icon) icon.className = 'bi bi-volume-mute-fill';
+    if (btn) btn.classList.add('muted');
+  } else {
+    musicPlayer.play();
+    if (icon) icon.className = 'bi bi-volume-up-fill';
+    if (btn) btn.classList.remove('muted');
+  }
+}
+function setVolume(val) {
+  const v = document.getElementById('volumeValue');
+  if (v) v.textContent = val + '%';
+  if (musicPlayer) musicPlayer.setVolume(val / 100);
+}
 // Verify feedback is loaded
 if (typeof window.showGameFeedback === 'undefined') {
     console.error('CRITICAL: game-feedback.js did not load! Feedback will not work.');

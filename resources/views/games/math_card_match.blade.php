@@ -645,6 +645,52 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .pause-card p { color: #94a3b8; margin: 0 0 20px; font-size: 0.95rem; }
 
 /* ============================================================
+   BURGER MENU
+   ============================================================ */
+.game-burger-btn { width:44px; height:44px; border-radius:12px; background:rgba(124,58,237,.15); border:2px solid rgba(167,139,250,.4); color:#a78bfa; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; transition:all .2s; position:relative; z-index:100; }
+.game-burger-btn:hover { background:rgba(124,58,237,.25); transform:scale(1.05); }
+.game-burger-line { width:22px; height:2.5px; background:currentColor; border-radius:2px; transition:all .3s; }
+.game-burger-btn.active .game-burger-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.game-burger-btn.active .game-burger-line:nth-child(2) { opacity:0; }
+.game-burger-btn.active .game-burger-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+.game-burger-menu { position:fixed; top:0; right:-100%; width:min(320px, 85vw); height:100vh; height:100dvh; background:linear-gradient(160deg,rgba(20,10,45,0.98),rgba(10,5,25,0.98)); border-left:2px solid rgba(167,139,250,.4); backdrop-filter:blur(20px); z-index:10000; transition:right .35s ease; box-shadow:-10px 0 40px rgba(0,0,0,.8); display:flex; flex-direction:column; padding:20px; padding-top:70px; }
+.game-burger-menu.active { right:0; }
+.game-burger-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:9999; opacity:0; pointer-events:none; transition:opacity .3s; }
+.game-burger-overlay.active { opacity:1; pointer-events:all; }
+
+.game-burger-header { margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.1); }
+.game-burger-title { font-size:1.3rem; font-weight:900; color:white; display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; }
+.game-burger-subtitle { font-size:.8rem; color:#64748b; margin-top:6px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+
+.game-burger-nav { display:flex; flex-direction:column; gap:12px; }
+.game-burger-nav .eduplay-nav-btn { width:100%; padding:16px 20px; min-height:56px; display:flex !important; align-items:center; gap:12px; font-size:1rem; font-weight:700; border-radius:14px; text-decoration:none; transition:all .2s; justify-content:flex-start; }
+.game-burger-nav .eduplay-btn-help { background:rgba(56,189,248,.15); border:2px solid rgba(56,189,248,.4); color:#38bdf8; }
+.game-burger-nav .eduplay-btn-help:hover { background:rgba(56,189,248,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-btn-pause { background:rgba(251,191,36,.15); border:2px solid rgba(251,191,36,.4); color:#fbbf24; }
+.game-burger-nav .eduplay-btn-pause:hover { background:rgba(251,191,36,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-btn-map { background:rgba(52,211,153,.15); border:2px solid rgba(52,211,153,.4); color:#34d399; }
+.game-burger-nav .eduplay-btn-map:hover { background:rgba(52,211,153,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-btn-exit { background:rgba(239,68,68,.15); border:2px solid rgba(239,68,68,.4); color:#ef4444; }
+.game-burger-nav .eduplay-btn-exit:hover { background:rgba(239,68,68,.25); transform:translateX(4px); }
+.game-burger-nav .eduplay-nav-btn i { font-size:1.3rem; }
+.game-burger-nav .eduplay-nav-btn span { flex:1; text-align:left; display:inline !important; }
+
+/* Inline music row in burger nav */
+#game-music-controls { display:none !important; }
+.game-burger-music-row { display:flex; align-items:center; gap:10px; padding:12px 16px; background:rgba(139,92,246,.1); border:1.5px solid rgba(139,92,246,.35); border-radius:14px; }
+.game-mute-btn { width:40px; height:40px; border-radius:10px; background:rgba(139,92,246,.2); border:1.5px solid rgba(139,92,246,.5); color:#c4b5fd; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; flex-shrink:0; transition:all .2s; }
+.game-mute-btn:hover { background:rgba(139,92,246,.35); }
+.game-mute-btn.muted { background:rgba(239,68,68,.15); border-color:rgba(239,68,68,.45); color:#f87171; }
+.game-vol-slider { flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,.12); appearance:none; cursor:pointer; accent-color:#8b5cf6; }
+.game-vol-slider::-webkit-slider-thumb { appearance:none; width:15px; height:15px; border-radius:50%; background:#8b5cf6; cursor:pointer; }
+.game-vol-slider::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:#8b5cf6; cursor:pointer; border:none; }
+.game-vol-value { font-size:.8rem; font-weight:700; color:#a78bfa; min-width:34px; text-align:right; }
+
+/* Hide original inline nav */
+.eduplay-game-nav { display:none !important; }
+
+/* ============================================================
    RESPONSIVE / MOBILE-ADAPTIVE
    ============================================================ */
 
@@ -669,16 +715,10 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     /* HUD ? 4-column grid: level row on top, stats row, nav row */
     #hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 4px;padding:10px 8px;border-radius:14px;}
     #hud .hc{grid-column:1/-1;order:-1;flex-direction:row;justify-content:space-between;gap:8px;}
-    #hud .eduplay-game-nav{grid-column:1/-1;}
     .hv{font-size:19px;}
     .hl{font-size:7.5px;letter-spacing:1.5px;text-align:center;}
     #starGoalHint{display:block;font-size:8px !important;letter-spacing:0 !important;}
     .lvlbadge{font-size:12px;padding:5px 12px;}
-
-    /* Game nav buttons (classes come from the shared layout) */
-    .eduplay-game-nav{display:flex !important;gap:8px;width:100%;}
-    .eduplay-game-nav .eduplay-nav-btn{flex:1;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:.75rem;padding:8px 6px;}
-    .eduplay-game-nav .eduplay-nav-btn span{font-size:.72rem;}
 
     .legend{gap:14px;}
     .leg-item{font-size:10.5px;}
@@ -755,7 +795,6 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     #board{gap:6px;}
     .card.type-problem .face-front .ftext{font-size:9.5px;}
     .card.type-answer .face-front .ftext{font-size:19px;}
-    .eduplay-game-nav .eduplay-nav-btn span{display:none;}
     .fc-row-2{grid-template-columns:1fr;}
     .fc-nav-btn span{font-size:.85rem;}
     .hv{font-size:17px;}
@@ -938,16 +977,11 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
                     <span class="hl">Time <span id="starGoalHint" style="font-size:9px;color:rgba(251,191,36,.55);letter-spacing:0;">⭐⭐⭐ &lt;1:30</span></span>
                     <span class="hv rose" id="timeVal" style="font-variant-numeric:tabular-nums;">0:00</span>
                 </div>
-                <div class="eduplay-game-nav">
-                    <button type="button" class="eduplay-nav-btn eduplay-btn-help" id="helpNavBtn" title="How to Play" onclick="openTut(true)">
-                        <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
-                    </button>
-                    <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="pauseBtn" title="Pause Game" onclick="togglePause()">
-                        <i class="bi bi-pause-fill"></i> <span>Pause</span>
-                    </button>
-                    <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map"><i class="bi bi-map-fill"></i> <span>Game Map</span></a>
-                    <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena"><i class="bi bi-box-arrow-right"></i> <span>Exit</span></a>
-                </div>
+                <button type="button" class="game-burger-btn" id="burgerBtn" onclick="toggleBurgerMenu()" aria-label="Open menu">
+                  <div class="game-burger-line"></div>
+                  <div class="game-burger-line"></div>
+                  <div class="game-burger-line"></div>
+                </button>
             </div>
             <div><div id="ptrack"><div id="pfill"></div></div><div id="pmeta"><span id="plabel">0 / 6 matched</span><span id="ppct">0%</span></div></div>
             <div class="legend">
@@ -995,6 +1029,43 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 
 </div>
 
+<!-- BURGER MENU OVERLAY -->
+<div class="game-burger-overlay" id="burgerOverlay" onclick="toggleBurgerMenu()"></div>
+
+<!-- BURGER MENU -->
+<div class="game-burger-menu" id="burgerMenu">
+  <div class="game-burger-header">
+    <div class="game-burger-title">
+      <i class="bi bi-menu-button-wide-fill"></i>
+      Game Menu
+    </div>
+    <div class="game-burger-subtitle">Math Card Match</div>
+  </div>
+  
+  <nav class="game-burger-nav">
+    <!-- Music Settings Button (with collapsible controls) -->
+    <button type="button" class="eduplay-nav-btn eduplay-btn-help" onclick="openTut(true); toggleBurgerMenu();" title="How to Play">
+      <i class="bi bi-question-circle-fill"></i> <span>Tutorial</span>
+    </button>
+    <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="pauseBtnBurger" onclick="toggleBurgerMenu();" title="Resume Game">
+      <i class="bi bi-play-fill"></i> <span>Resume</span>
+    </button>
+    <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
+      <i class="bi bi-map-fill"></i> <span>Game Map</span>
+    </a>
+    <div class="game-burger-music-row">
+      <button type="button" class="game-mute-btn" id="muteBtn" onclick="toggleMute()" title="Mute / Unmute">
+        <i class="bi bi-volume-up-fill" id="muteIcon"></i>
+      </button>
+      <input type="range" class="game-vol-slider" id="volumeSlider" min="0" max="100" value="50" oninput="setVolume(this.value)">
+      <span class="game-vol-value" id="volumeValue">50%</span>
+    </div>
+    <a href="{{ route('student.games') }}" class="eduplay-nav-btn eduplay-btn-exit" title="Exit to Game Arena">
+      <i class="bi bi-box-arrow-right"></i> <span>Exit</span>
+    </a>
+  </nav>
+</div>
+
 <!-- ------------------------------------------
      READY MODAL (outside #gw for z-index)
 ------------------------------------------ -->
@@ -1020,6 +1091,64 @@ let musicPlayer;
 if (window.GameMusicPlayer) {
     musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
 }
+
+// Burger menu toggle — auto-pause on open, auto-resume on close
+function toggleBurgerMenu() {
+  const burgerBtn = document.getElementById('burgerBtn');
+  const burgerMenu = document.getElementById('burgerMenu');
+  const burgerOverlay = document.getElementById('burgerOverlay');
+  if (!burgerMenu) return;
+  const opening = !burgerMenu.classList.contains('active');
+
+  if (burgerBtn) burgerBtn.classList.toggle('active');
+  burgerMenu.classList.toggle('active');
+  if (burgerOverlay) burgerOverlay.classList.toggle('active');
+
+  if (opening) {
+    document.body.style.overflow = 'hidden';
+    if (typeof togglePause === 'function') togglePause();
+  } else {
+    document.body.style.overflow = '';
+    if (typeof togglePause === 'function') togglePause();
+  }
+}
+
+function toggleMute() {
+  if (!musicPlayer) return;
+  const btn = document.getElementById('muteBtn');
+  const icon = document.getElementById('muteIcon');
+  if (musicPlayer.isPlaying) {
+    musicPlayer.pause();
+    if (icon) icon.className = 'bi bi-volume-mute-fill';
+    if (btn) btn.classList.add('muted');
+  } else {
+    musicPlayer.play();
+    if (icon) icon.className = 'bi bi-volume-up-fill';
+    if (btn) btn.classList.remove('muted');
+  }
+}
+
+function setVolume(val) {
+  const v = document.getElementById('volumeValue');
+  if (v) v.textContent = val + '%';
+  if (musicPlayer) musicPlayer.setVolume(val / 100);
+}
+
+// Volume control
+document.addEventListener('DOMContentLoaded', function() {
+  const volumeSlider = document.getElementById('volumeSlider');
+  if (volumeSlider) volumeSlider.addEventListener('input', function() { setVolume(this.value); });
+  if (musicPlayer) {
+    setTimeout(function() {
+      const icon = document.getElementById('muteIcon');
+      const btn = document.getElementById('muteBtn');
+      if (musicPlayer.isPlaying) {
+        if (icon) icon.className = 'bi bi-volume-up-fill';
+        if (btn) btn.classList.remove('muted');
+      }
+    }, 500);
+  }
+});
 </script>
 <script>
 (function(){
