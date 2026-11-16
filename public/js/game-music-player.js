@@ -62,8 +62,8 @@ class GameMusicPlayer {
         style.textContent = `
             .game-music-controls {
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
+                top: 80px;
+                right: 16px;
                 z-index: 999997;
                 display: flex;
                 align-items: center;
@@ -167,35 +167,78 @@ class GameMusicPlayer {
                 text-align: right;
             }
             
-            /* Mobile responsive */
-            @media (max-width: 640px) {
+            /* Mobile responsive - compact vertical layout */
+            @media (max-width: 768px) {
                 .game-music-controls {
-                    bottom: 10px;
+                    top: 70px;
                     right: 10px;
-                    padding: 10px 12px;
-                    gap: 10px;
+                    flex-direction: column;
+                    padding: 8px;
+                    gap: 8px;
+                    border-radius: 14px;
                 }
                 
                 .music-control-btn {
-                    width: 38px;
-                    height: 38px;
-                    font-size: 1.1rem;
+                    width: 36px;
+                    height: 36px;
+                    font-size: 1rem;
+                }
+                
+                .music-volume-container {
+                    flex-direction: column;
+                    gap: 6px;
                 }
                 
                 .music-volume-slider {
-                    width: 80px;
+                    width: 60px;
+                    transform: rotate(-90deg);
+                    transform-origin: center;
                 }
                 
                 .volume-indicator {
-                    font-size: 0.8rem;
-                    min-width: 35px;
+                    font-size: 0.75rem;
+                    min-width: auto;
                 }
             }
             
-            /* Hide on very small screens in landscape */
-            @media (max-width: 480px) and (max-height: 400px) {
+            /* Very small mobile - icon only */
+            @media (max-width: 480px) {
+                .game-music-controls {
+                    top: 65px;
+                    right: 8px;
+                    padding: 6px;
+                }
+                
+                .music-control-btn {
+                    width: 32px;
+                    height: 32px;
+                    font-size: 0.9rem;
+                }
+                
                 .music-volume-container {
                     display: none;
+                }
+            }
+            
+            /* Landscape mobile - move to corner */
+            @media (max-width: 768px) and (max-height: 500px) {
+                .game-music-controls {
+                    top: auto;
+                    bottom: 10px;
+                    right: 10px;
+                    flex-direction: row;
+                    padding: 6px 10px;
+                    gap: 8px;
+                }
+                
+                .music-volume-container {
+                    flex-direction: row;
+                    gap: 8px;
+                }
+                
+                .music-volume-slider {
+                    transform: none;
+                    width: 60px;
                 }
             }
             
