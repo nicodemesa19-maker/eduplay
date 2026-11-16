@@ -310,7 +310,7 @@
             All Users
           @endif
         </span>
-        <span class="count-badge">{{ $users->total() }} found</span>
+        <span class="count-badge">{{ is_object($users) && method_exists($users, 'total') ? $users->total() : count($users) }} found</span>
       </div>
 
       <div style="overflow-x:auto;">

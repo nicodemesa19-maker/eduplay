@@ -483,6 +483,35 @@
   }
   .tut-start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6); }
 
+  /* ===== Lean "How to Play" ===== */
+  .tg-row3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+  .tg-tile { background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12); border-radius:16px; padding:14px 8px; text-align:center; }
+  .tg-big { font-size:2.4rem; line-height:1; margin-bottom:6px; animation:tgFloat 2.4s ease-in-out infinite; }
+  .tg-tile:nth-child(2) .tg-big { animation-delay:-.8s; }
+  .tg-tile:nth-child(3) .tg-big { animation-delay:-1.6s; }
+  .tg-lbl { font-size:1.1rem; font-weight:800; color:#fff; }
+  .tg-sub { font-size:.95rem; font-weight:700; color:#94a3b8; margin-top:2px; }
+  .tg-chips { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:14px; }
+  .tg-chip { padding:7px 14px; border-radius:50px; font-weight:800; font-size:1.0rem; border:1.5px solid; }
+  .tg-try-q { text-align:center; font-size:1.2rem; font-weight:800; color:#f1f5f9; margin-bottom:10px; }
+  .tg-try-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:8px; }
+  .tg-try-btn { background:rgba(99,102,241,.15); border:2px solid rgba(99,102,241,.5); color:#e2e8f0; font-family:'Outfit',sans-serif; font-weight:800; font-size:1.2rem; padding:12px 22px; border-radius:14px; cursor:pointer; min-height:48px; transition:transform .15s; }
+  .tg-try-btn:hover { transform:scale(1.06); }
+  .tg-try-btn.ok { background:rgba(16,185,129,.25); border-color:#10b981; color:#34d399; animation:tgPop .4s ease; }
+  .tg-try-btn.no { background:rgba(239,68,68,.18); border-color:#ef4444; color:#f87171; animation:tgShake .4s ease; }
+  #tgTryMsg { min-height:32px; text-align:center; font-weight:800; font-size:1.1rem; color:#38bdf8; margin-bottom:12px; }
+  @keyframes tgFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+  @keyframes tgPop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  @keyframes tgShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  @media (max-width:600px){
+    .tg-big { font-size:1.9rem; }
+    .tg-lbl { font-size:.9rem; }
+    .tg-sub { font-size:.8rem; }
+    .tg-chip { font-size:.85rem; padding:6px 11px; }
+    .tg-try-q { font-size:1.05rem; }
+    .tg-try-btn { font-size:1.05rem; padding:11px 16px; }
+  }
+
   /* COMPLETE */
   .complete-overlay { position:fixed; inset:0; background:rgba(0,0,0,.92); backdrop-filter:blur(15px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .3s; overflow-y:auto; }
   .complete-overlay.show { opacity:1; pointer-events:all; }
@@ -691,7 +720,7 @@
       <div class="geo-top-meta">
         <span class="geo-shape-tag shape-tag-triangle" id="shapeTag">🔺 TRIANGLE</span>
         <span class="geo-q-type-tag qtag-computation" id="qTypeTag">🧮 COMPUTATION</span>
-        <span class="geo-badge geo-timer" id="timerBadge">⏱️ 5:00</span>
+        <span class="geo-badge geo-timer" id="timerBadge"><i class="bi bi-clock-fill"></i> 5:00</span>
         <span class="geo-badge" id="levelBadge">LEVEL 1</span>
         <div class="eduplay-game-nav">
           <button type="button" class="eduplay-nav-btn eduplay-btn-guide" id="guideBtn" onclick="openTutorialGuide()" title="Field Guide &amp; Instructions">
@@ -858,6 +887,15 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('js/game-feedback.js') }}"></script>
+<script src="{{ asset('js/game-music-player.js') }}"></script>
+<script>
+// Initialize music player
+let musicPlayer;
+if (window.GameMusicPlayer) {
+    musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
+}
+</script>
 <script>
 (function(){
   // Ensure a mobile viewport exists (in case layouts.app doesn't define one)
@@ -1383,83 +1421,56 @@
         html: `
           <div class="tut-card-hero">
             <div class="tut-hero-icon" style="color:#38bdf8;">🎮</div>
-            <div>
-              <h3 class="tut-card-title">Welcome to Geometry Grid Explorer!</h3>
-              <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Master calculating areas, perimeters, and geometric properties across 15 levels!</p>
-            </div>
+            <h3 class="tut-card-title">Explore the Shapes!</h3>
           </div>
-          <p class="tut-card-desc">
-            Explore coordinate shapes to calculate dimensions for <b>Triangles</b>, <b>Parallelograms</b>, and <b>Trapezoids</b> using formulas and interactive visual clues.
-          </p>
-          <div class="tut-visual-grid">
-            <div class="tut-mini-box">
-              <h5 style="color:#38bdf8;"><i class="fas fa-border-all"></i> The 1-cm Dot Grid</h5>
-              <p>Each grid dot represents exactly <b>1 cm</b> (1 grid unit = 1 cm). Count grid steps along the base and height to verify lengths!</p>
-            </div>
-            <div class="tut-mini-box">
-              <h5 style="color:#34d399;"><i class="fas fa-palette"></i> Canvas Color Codes</h5>
-              <p><b style="color:#34d399;">Solid Green</b> = Base (b)<br><b style="color:#f43f5e;">Dashed Rose</b> = Height (h)<br><b style="color:#fbbf24;">Yellow</b> = Vertices &amp; Special Points</p>
-            </div>
+          <div class="tg-row3">
+            <div class="tg-tile"><div class="tg-big" style="color:#34d399;">🔺</div><div class="tg-lbl">Triangle</div></div>
+            <div class="tg-tile"><div class="tg-big" style="color:#60a5fa;">🔷</div><div class="tg-lbl">Parallelogram</div></div>
+            <div class="tg-tile"><div class="tg-big" style="color:#fbbf24;">⏢</div><div class="tg-lbl">Trapezoid</div></div>
+          </div>
+          <div class="tg-chips">
+            <span class="tg-chip" style="color:#34d399;border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);">🟩 Base</span>
+            <span class="tg-chip" style="color:#f43f5e;border-color:rgba(244,63,94,.5);background:rgba(244,63,94,.12);">🟥 Height</span>
+            <span class="tg-chip" style="color:#fbbf24;border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.12);">🟨 Special</span>
           </div>
           <div class="tut-callout">
-            <i class="fas fa-lightbulb"></i>
-            <span><b>Crucial Tip:</b> Always use the <b>perpendicular (straight-up) height</b>, NEVER the slanted side!</span>
+            <span>⚪ 1 dot = 1 cm  •  Height goes <b>straight up ⬆️</b>, never slanted!</span>
           </div>
         `
       },
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#a78bfa;">📐</div>
-            <div>
-              <h3 class="tut-card-title">The 3 Question Missions &amp; Controls</h3>
-              <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Each level tests your knowledge with 3 different question types.</p>
-            </div>
+            <div class="tut-hero-icon" style="color:#a78bfa;">🎯</div>
+            <h3 class="tut-card-title">3 Kinds of Questions</h3>
           </div>
-          <div class="tut-visual-grid">
-            <div class="tut-mini-box" style="border-color:rgba(52,211,153,0.3);">
-              <h5 style="color:#34d399;">🧮 Computation</h5>
-              <p>Calculate Area, Perimeter, or missing side dimensions using geometric formulas and grid measurements.</p>
-            </div>
-            <div class="tut-mini-box" style="border-color:rgba(251,191,36,0.3);">
-              <h5 style="color:#fbbf24;">👁️ Visual Inspection</h5>
-              <p>Identify geometric features on the canvas (e.g. altitudes, medians, centroids, midsegments, hypotenuses).</p>
-            </div>
-            <div class="tut-mini-box" style="border-color:rgba(129,140,248,0.3);">
-              <h5 style="color:#818cf8;">📚 Fact &amp; Theory</h5>
-              <p>Test your understanding of angle sums, polygon properties, theorems, and famous mathematical discoveries.</p>
-            </div>
-            <div class="tut-mini-box" style="border-color:rgba(56,189,248,0.3);">
-              <h5 style="color:#38bdf8;">🎮 Controls</h5>
-              <p>Tap an answer to choose it, then tap <b>Next</b>. On a keyboard: <b>[1]</b>–<b>[4]</b> or <b>[A]</b>–<b>[D]</b> to answer, <b>[Enter]</b> to advance.</p>
-            </div>
+          <div class="tg-row3">
+            <div class="tg-tile" style="border-color:rgba(52,211,153,.4);"><div class="tg-big">🧮</div><div class="tg-lbl" style="color:#34d399;">Compute</div><div class="tg-sub">Find the area</div></div>
+            <div class="tg-tile" style="border-color:rgba(251,191,36,.4);"><div class="tg-big">👁️</div><div class="tg-lbl" style="color:#fbbf24;">Look</div><div class="tg-sub">Spot it on the grid</div></div>
+            <div class="tg-tile" style="border-color:rgba(129,140,248,.4);"><div class="tg-big">📚</div><div class="tg-lbl" style="color:#818cf8;">Know</div><div class="tg-sub">Facts &amp; rules</div></div>
+          </div>
+          <div class="tut-callout">
+            <span>👆 Tap an answer, then tap <b>Next ➡️</b>  •  ⌨️ <b>1–4</b> to answer, <b>Enter</b> = Next</span>
           </div>
         `
       },
       {
         html: `
           <div class="tut-card-hero">
-            <div class="tut-hero-icon" style="color:#f59e0b;">⏱️</div>
-            <div>
-              <h3 class="tut-card-title">Timer, Scoring &amp; Level Passing</h3>
-              <p style="color:#94a3b8; margin:0; font-size:1.0rem;">Score high to earn 3 stars and unlock the next geometry expedition!</p>
-            </div>
+            <div class="tut-hero-icon" style="color:#f59e0b;">🚀</div>
+            <h3 class="tut-card-title">Try It, Then Win!</h3>
           </div>
-          <div class="tut-visual-grid">
-            <div class="tut-mini-box">
-              <h5 style="color:#f59e0b;"><i class="fas fa-stopwatch"></i> 5:00 Level Timer</h5>
-              <p>You have 5 minutes per level. The timer <b>freezes automatically</b> whenever this Field Guide is open or paused!</p>
-            </div>
-            <div class="tut-mini-box">
-              <h5 style="color:#34d399;"><i class="fas fa-trophy"></i> Passing Requirement</h5>
-              <p>Answer at least <b>8 questions correctly</b> to pass the level and unlock the next stage on your map.</p>
-            </div>
+          <div class="tg-try-q">🔺 base = 6 cm, height = 4 cm. Tap the area!</div>
+          <div class="tg-try-row">
+            <button type="button" class="tg-try-btn" onclick="tutTry(this,0)">24 cm²</button>
+            <button type="button" class="tg-try-btn" onclick="tutTry(this,1)">12 cm²</button>
+            <button type="button" class="tg-try-btn" onclick="tutTry(this,0)">10 cm²</button>
           </div>
-          <div class="tut-example-card">
-            <b>⭐ Star Rating System:</b><br>
-            • <b>3 Stars (⭐⭐⭐):</b> 8+ correct answers with high accuracy<br>
-            • <b>2 Stars (⭐⭐):</b> 4–7 correct answers<br>
-            • <b>1 Star (⭐):</b> 1–3 correct answers
+          <div id="tgTryMsg">Give it a go! 👆</div>
+          <div class="tg-row3">
+            <div class="tg-tile"><div class="tg-big">⏱️</div><div class="tg-lbl">5:00</div><div class="tg-sub">per level</div></div>
+            <div class="tg-tile"><div class="tg-big">✅</div><div class="tg-lbl">8 correct</div><div class="tg-sub">to pass</div></div>
+            <div class="tg-tile"><div class="tg-big">⭐</div><div class="tg-lbl">1 · 2 · 3</div><div class="tg-sub">1–3 · 4–7 · 8+</div></div>
           </div>
         `
       }
@@ -1880,21 +1891,28 @@
      TIMER
   --------------------------------------------------- */
   function startTimer(){
-    if(S.timerStarted || !S.gameStarted || S.paused) return;
+    // Don't start if not ready
+    if(!S.gameStarted || S.paused) return;
     const tutEl = document.getElementById('tutOverlay');
     if(tutEl && tutEl.classList.contains('show')) return;
+    
+    // If already running, don't create another interval
+    if(S.timerInterval) return;
 
     S.timerStarted = true;
     updateTimerDisplay();
     
-    clearInterval(S.timerInterval);
     S.timerInterval = setInterval(()=>{
+      // Skip ticks while paused but keep the interval running
       if(S.paused || !S.gameStarted) return;
+      
       S.timeLeft--;
       updateTimerDisplay();
       
       if(S.timeLeft <= 0){
         clearInterval(S.timerInterval);
+        S.timerInterval = null;
+        S.timerStarted = false;
         timeUp();
       }
     }, 1000);
@@ -1911,9 +1929,9 @@
   function updateTimerDisplay(){
     const minutes = Math.floor(S.timeLeft / 60);
     const seconds = S.timeLeft % 60;
-    const display = `? ${minutes}:${seconds.toString().padStart(2,'0')}`;
+    const display = `<i class="bi bi-clock-fill"></i> ${minutes}:${seconds.toString().padStart(2,'0')}`;
     const badge = document.getElementById('timerBadge');
-    badge.textContent = display;
+    badge.innerHTML = display;
     
     // Update styling based on time left
     badge.classList.remove('warning','danger');
@@ -1940,19 +1958,18 @@
     const icon = btn.querySelector('i');
     
     if(S.paused){
-      // Pause the game
-      stopTimer();
+      // Pause the game (timer keeps running but skips ticks)
       overlay.classList.add('show');
       btn.classList.add('paused');
       icon.className = 'bi bi-play-fill';
       btn.title = 'Resume Game';
     } else {
       // Resume the game
-      if(S.timerStarted) startTimer();
       overlay.classList.remove('show');
       btn.classList.remove('paused');
       icon.className = 'bi bi-pause-fill';
       btn.title = 'Pause Game';
+      // Timer continues automatically since S.paused is now false
     }
 
   };
@@ -2097,6 +2114,16 @@
     }
   };
 
+  window.tutTry = function(btn, ok){
+    const msg = document.getElementById('tgTryMsg');
+    btn.classList.remove('ok','no');
+    void btn.offsetWidth;
+    btn.classList.add(ok ? 'ok' : 'no');
+    if(msg) msg.textContent = ok
+      ? '🎉 Yes! ½ × 6 × 4 = 12 cm²'
+      : '❌ Not quite! Remember ½ × b × h';
+  };
+
   /* Swipe left/right to navigate guide slides on touch screens */
   (function(){
     const el = document.getElementById('tutOverlay');
@@ -2177,24 +2204,161 @@
     document.querySelectorAll('.ans-btn').forEach(b=>b.disabled=true);
     const fb=document.getElementById('feedbackDiv');
     const nb=document.getElementById('nextBtn');
+    const currentQ = S.questions[S.qi];
+    const explanation = currentQ.explanation || generateExplanation(currentQ);
+    
+    // Get thematic icon based on current shape
+    const shape = getShape(S.lvl);
+    const shapeIcons = {
+      'triangle': '🔺',
+      'parallelogram': '🔷',
+      'trapezoid': '⏢'
+    };
+    const customIcon = shapeIcons[shape] || '📐';
+    
     if(selected===correct){
       btn.classList.add('correct'); S.correct++; S.streak++;
       const pts=10+Math.min(S.streak,5)*3;
       S.score+=pts;
-      fb.className='geo-fb correct show';
-      fb.innerHTML=`✓ Correct! +${pts} points${S.streak>=3?' 🔥 '+S.streak+' streak!':''}`;
+      
+      // Show success feedback with shape icon, explanation and Continue button
+      if (window.showGameFeedback) {
+        window.showGameFeedback(true, correct, 2000, advanceQ, explanation, customIcon);
+        // Hide inline feedback and next button when using modal
+        fb.className='geo-fb';
+        nb.className='geo-next';
+      } else {
+        // Fallback: use inline feedback
+        fb.className='geo-fb correct show';
+        fb.innerHTML=`✓ Correct! +${pts} points${S.streak>=3?' 🔥 '+S.streak+' streak!':''}`;
+        nb.className='geo-next show';
+        nb.onclick=advanceQ;
+      }
       if(S.streak>=3) fireConfetti(18);
     } else {
       btn.classList.add('wrong'); S.streak=0;
+      
+      // Show encouraging feedback with shape icon, correct answer, explanation and Continue button
+      if (window.showGameFeedback) {
+        window.showGameFeedback(false, correct, 3000, advanceQ, explanation, customIcon);
+        // Hide inline feedback and next button when using modal
+        fb.className='geo-fb';
+        nb.className='geo-next';
+      } else {
+        // Fallback: use inline feedback
+        fb.className='geo-fb wrong show';
+        fb.innerHTML=`? Not quite! Correct answer: <strong>${correct}</strong>`;
+        nb.className='geo-next show';
+        nb.onclick=advanceQ;
+      }
+      
       document.querySelectorAll('.ans-btn').forEach(b=>{
         if(b.querySelectorAll('span')[1].textContent===correct) b.classList.add('correct');
       });
-      fb.className='geo-fb wrong show';
-      fb.innerHTML=`? Not quite! Correct answer: <strong>${correct}</strong>`;
     }
     updateScores();
-    nb.className='geo-next show';
-    nb.onclick=advanceQ;
+  }
+
+  function generateExplanation(q) {
+    // Only generate explanations for computation type questions
+    if (q.type !== 'computation') return null;
+    
+    const text = q.q;
+    const correct = q.correct;
+    
+    // Triangle area calculation
+    if (text.includes('triangle') && text.includes('area')) {
+      const baseMatch = text.match(/base\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*cm/i);
+      const heightMatch = text.match(/height\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*cm/i);
+      if (baseMatch && heightMatch) {
+        const base = parseFloat(baseMatch[1]);
+        const height = parseFloat(heightMatch[1]);
+        return `
+          <strong>Formula:</strong> Area = ½ × base × height<br>
+          <strong>Given:</strong> base = ${base} cm, height = ${height} cm<br>
+          <strong>Solution:</strong><br>
+          • Area = ½ × ${base} × ${height}<br>
+          • Area = ½ × ${base * height}<br>
+          • Area = <strong>${correct}</strong>
+        `;
+      }
+    }
+    
+    // Parallelogram area calculation
+    if (text.includes('parallelogram') && text.includes('area')) {
+      const baseMatch = text.match(/base\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*cm/i);
+      const heightMatch = text.match(/height\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*cm/i);
+      if (baseMatch && heightMatch) {
+        const base = parseFloat(baseMatch[1]);
+        const height = parseFloat(heightMatch[1]);
+        return `
+          <strong>Formula:</strong> Area = base × height<br>
+          <strong>Given:</strong> base = ${base} cm, height = ${height} cm<br>
+          <strong>Solution:</strong><br>
+          • Area = ${base} × ${height}<br>
+          • Area = <strong>${correct}</strong>
+        `;
+      }
+    }
+    
+    // Trapezoid area calculation
+    if (text.includes('trapezoid') && text.includes('area')) {
+      const base1Match = text.match(/bases?\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*cm\s+and\s+(\d+(?:\.\d+)?)\s*cm/i);
+      const heightMatch = text.match(/height\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*cm/i);
+      if (base1Match && heightMatch) {
+        const b1 = parseFloat(base1Match[1]);
+        const b2 = parseFloat(base1Match[2]);
+        const height = parseFloat(heightMatch[1]);
+        return `
+          <strong>Formula:</strong> Area = ½ × (b₁ + b₂) × height<br>
+          <strong>Given:</strong> b₁ = ${b1} cm, b₂ = ${b2} cm, height = ${height} cm<br>
+          <strong>Solution:</strong><br>
+          • Area = ½ × (${b1} + ${b2}) × ${height}<br>
+          • Area = ½ × ${b1 + b2} × ${height}<br>
+          • Area = ${(b1 + b2) / 2} × ${height}<br>
+          • Area = <strong>${correct}</strong>
+        `;
+      }
+    }
+    
+    // Perimeter calculations
+    if (text.includes('perimeter')) {
+      // Parallelogram perimeter
+      if (text.includes('parallelogram')) {
+        const sidesMatch = text.match(/sides\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*cm\s+and\s+(\d+(?:\.\d+)?)\s*cm/i);
+        if (sidesMatch) {
+          const a = parseFloat(sidesMatch[1]);
+          const b = parseFloat(sidesMatch[2]);
+          return `
+            <strong>Formula:</strong> Perimeter = 2(a + b)<br>
+            <strong>Given:</strong> sides = ${a} cm and ${b} cm<br>
+            <strong>Solution:</strong><br>
+            • P = 2(${a} + ${b})<br>
+            • P = 2 × ${a + b}<br>
+            • P = <strong>${correct}</strong>
+          `;
+        }
+      }
+      // Trapezoid perimeter
+      if (text.includes('trapezoid') && text.includes('four sides')) {
+        const sidesMatch = text.match(/(\d+(?:\.\d+)?)\s*cm,\s*(\d+(?:\.\d+)?)\s*cm,\s*(\d+(?:\.\d+)?)\s*cm,\s*and\s+(\d+(?:\.\d+)?)\s*cm/i);
+        if (sidesMatch) {
+          const s1 = parseFloat(sidesMatch[1]);
+          const s2 = parseFloat(sidesMatch[2]);
+          const s3 = parseFloat(sidesMatch[3]);
+          const s4 = parseFloat(sidesMatch[4]);
+          return `
+            <strong>Formula:</strong> Perimeter = sum of all sides<br>
+            <strong>Given:</strong> sides = ${s1} cm, ${s2} cm, ${s3} cm, ${s4} cm<br>
+            <strong>Solution:</strong><br>
+            • P = ${s1} + ${s2} + ${s3} + ${s4}<br>
+            • P = <strong>${correct}</strong>
+          `;
+        }
+      }
+    }
+    
+    return null;
   }
 
   function advanceQ(){S.qi++;if(S.qi>=S.questions.length) endLevel();else loadQ();}

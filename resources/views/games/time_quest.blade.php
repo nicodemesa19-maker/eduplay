@@ -1608,7 +1608,7 @@
     <aside class="quiz-panel" aria-label="Quiz">
       <div class="quiz-stats">
         <div class="quiz-stat time">
-          <span class="quiz-stat-label">Time</span>
+          <span class="quiz-stat-label"><i class="bi bi-clock-fill"></i> Time</span>
           <span class="quiz-stat-val" id="uiTime">05:00</span>
         </div>
         <div class="quiz-stat score">
@@ -1942,6 +1942,16 @@
 </div>
 
 </div><!-- /.tq -->
+
+<script src="{{ asset('js/game-feedback.js') }}"></script>
+<script src="{{ asset('js/game-music-player.js') }}"></script>
+<script>
+// Initialize music player
+let musicPlayer;
+if (window.GameMusicPlayer) {
+    musicPlayer = new window.GameMusicPlayer("{{ asset('sounds/Joystick_Rhapsody.mp3') }}");
+}
+</script>
 
 <script>
 /* ============================================================
@@ -2434,6 +2444,12 @@ function answer(selected, btn){
     state.streak++;
     state.best = Math.max(state.best, state.streak);
     gained = 100 + Math.min(state.streak - 1, 6) * 25;
+    
+    // Show success feedback with clock icon and Continue button
+    if (window.showGameFeedback) {
+        window.showGameFeedback(true, state.answerLabel, 2000, startRound, null, '🕐');
+    }
+    
     state.score += gained;
     
     // Award coins for correct answers
@@ -2452,6 +2468,35 @@ function answer(selected, btn){
     coinsEl.classList.add('pop-anim');
   } else {
     btn.classList.add('wrong');
+    
+    // Build step-by-step time calculation explanation
+    const cityOff   = offsetMinutes(state.frozen, state.target.tz);
+    const manilaOff = offsetMinutes(state.frozen, MANILA.tz);
+    const diff = cityOff - manilaOff;
+    const shift = state.mode === 'A' ? diff : -diff;
+    const known = state.knownParts, ans = state.answerParts;
+    
+    let stepExplanation;
+    if (shift === 0){
+      stepExplanation = `Same time zone, so the time doesn't change: <b>${fmtFull(ans)}</b>.`;
+    } else {
+      const dayNote = known.weekday !== ans.weekday
+        ? (shift > 0 ? '<br>The clock passes midnight, so the day moves forward.' : '<br>You cross midnight backwards, so it is the previous day.')
+        : '';
+      stepExplanation = `
+        <div style="margin-top:8px;">
+          <div>Manila time: <code>${fmtTime(known)}</code></div>
+          <div>Time difference: <code>${shift > 0 ? '+' : ''}${fmtDur(Math.abs(shift))}</code></div>
+          <div>Calculation: ${fmtTime(known)} ${shift > 0 ? '+' : '−'} ${fmtDur(Math.abs(shift))} = <b>${fmtFull(ans)}</b>${dayNote}</div>
+        </div>
+      `;
+    }
+    
+    // Show encouraging feedback with clock icon, correct answer and time calculation explanation
+    if (window.showGameFeedback) {
+        window.showGameFeedback(false, state.answerLabel, 3000, startRound, stepExplanation, '🕐');
+    }
+    
     state.streak = 0;
   }
 
