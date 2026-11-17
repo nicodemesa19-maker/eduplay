@@ -430,7 +430,7 @@
     .challenge-input { font-size: 1.2rem; padding: 10px; }
     .submit-btn { padding: 0 20px; }
     .key-btn { padding: 12px 0; font-size: 1.1rem; }
-    .fc-overlay { padding: 10px; align-items: flex-start; overflow-y: auto; }
+    .fc-overlay { padding: 10px; overflow-y: auto; }
     .fc-deck-stack-1, .fc-deck-stack-2 { display: none; }
     .fc-card { padding: 18px 16px; border-radius: 22px; max-height: 96dvh; overflow-y: auto; }
     .fc-badge { font-size: 0.74rem; letter-spacing: 0.4px; }

@@ -184,18 +184,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
     border: 2px solid var(--cyan);
     background: linear-gradient(135deg,rgba(0,229,255,.15),rgba(0,229,255,.08));
     color: var(--cyan);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     cursor: pointer;
     transition: all .2s;
-    position: absolute;
-    top: 16px;
-    right: 16px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
     z-index: 10001;
   }
   .burger-menu-btn:hover {
@@ -204,10 +204,32 @@
     transform: scale(1.05);
   }
   .burger-menu-btn.active {
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-    pointer-events: none;
+    background: rgba(0,229,255,.2);
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+  
+  /* Mobile adjustments for burger button */
+  @media (max-width: 768px) {
+    .burger-menu-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+      top: 12px;
+      right: 12px;
+      border-radius: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .burger-menu-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      top: 10px;
+      right: 10px;
+      border-radius: 8px;
+    }
   }
   
   /* Mobile menu overlay */
@@ -819,7 +841,7 @@
   /* ---------- Overlays (start / tutorial / results) ---------- */
   .overlay{
     position:fixed;inset:0;z-index:99999;isolation:isolate;
-    display:flex;padding:16px;overflow-y:auto;
+    display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto;
     background:rgba(3,8,18,.9);
     -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
   }
@@ -1384,13 +1406,6 @@
     }
     .stat .label { font-size: .68rem; }
     .stat .val { font-size: 1.05rem; }
-    .burger-menu-btn {
-      width: 38px;
-      height: 38px;
-      font-size: 1.2rem;
-      top: 14px;
-      right: 14px;
-    }
     .map-panel {
       min-height: clamp(180px, 32dvh, 280px);
     }
@@ -1500,13 +1515,6 @@
     }
     .stat .label { font-size: .65rem; }
     .stat .val { font-size: 1rem; }
-    .burger-menu-btn {
-      width: 36px;
-      height: 36px;
-      font-size: 1.1rem;
-      top: 12px;
-      right: 12px;
-    }
     .tq-head {
       padding-right: 46px;
     }
