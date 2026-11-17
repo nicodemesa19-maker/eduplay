@@ -315,7 +315,7 @@ function injectFeedbackStyles() {
                 0 25px 70px rgba(0, 0, 0, 0.9),
                 0 0 60px rgba(56, 189, 248, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            z-index: 10000;
+            z-index: 999999;
             min-width: 440px;
             max-width: 90vw;
             opacity: 0;
