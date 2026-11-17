@@ -7,7 +7,7 @@ class GameMusicPlayer {
     constructor(musicPath) {
         this.audio = new Audio(musicPath);
         this.audio.loop = true;
-        this.audio.volume = 0.3; // Default volume at 30%
+        this.audio.volume = 0.1; // Default volume at 10%
         this.isPlaying = false;
         this.isMuted = false;
         

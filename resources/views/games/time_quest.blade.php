@@ -184,18 +184,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
     border: 2px solid var(--cyan);
     background: linear-gradient(135deg,rgba(0,229,255,.15),rgba(0,229,255,.08));
     color: var(--cyan);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     cursor: pointer;
     transition: all .2s;
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
     z-index: 10001;
   }
   .burger-menu-btn:hover {
@@ -204,14 +204,14 @@
     transform: scale(1.05);
   }
   .burger-menu-btn.active {
-    background: rgba(0,229,255,.2);
-    border-color: var(--cyan);
-    color: var(--cyan);
+    opacity: 0;
+    pointer-events: none;
   }
   
-  /* Mobile adjustments for burger button */
+  /* Mobile adjustments for burger button - top right corner and smaller */
   @media (max-width: 768px) {
     .burger-menu-btn {
+      position: fixed;
       width: 40px;
       height: 40px;
       font-size: 1.2rem;
@@ -223,6 +223,7 @@
   
   @media (max-width: 480px) {
     .burger-menu-btn {
+      position: fixed;
       width: 36px;
       height: 36px;
       font-size: 1.1rem;
@@ -1220,30 +1221,35 @@
     /* Header stacks vertically on mobile */
     .tq-head {
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       gap: 12px;
       margin-bottom: 12px;
-      padding-right: 54px; /* Make room for smaller burger button */
+      padding-right: 0;
       position: relative;
     }
-    .tq-title { width: 100%; margin-bottom: 2px; }
-    .tq-title h1 { font-size: 1.3rem; line-height: 1.3; }
+    .tq-title { width: 100%; margin-bottom: 2px; text-align: center; }
+    .tq-title h1 { font-size: 1.3rem; line-height: 1.3; justify-content: center; }
     .tq-title h1 .sub { font-size: .78rem; margin-top: 2px; }
     
-    /* Right container becomes full-width and left-aligned on mobile */
+    /* Right container becomes full-width and centered on mobile */
     .tq-head-right {
       width: 100%;
-      align-items: stretch;
+      align-items: center;
       gap: 10px;
+      justify-content: center;
+      padding-right: 0;
     }
 
     /* Stats: evenly sized 3x2 grid with maximized space */
     .stats {
       width: 100%;
+      max-width: 100%;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 1fr);
       gap: 8px;
+      margin: 0 auto;
+      padding: 0;
     }
     .stat {
       padding: 12px 10px;
@@ -1394,7 +1400,7 @@
     .tq-head {
       gap: 10px;
       margin-bottom: 10px;
-      padding-right: 50px;
+      padding-right: 0;
     }
     .tq-title h1 { font-size: 1.2rem; }
     .stats {
@@ -1516,7 +1522,7 @@
     .stat .label { font-size: .65rem; }
     .stat .val { font-size: 1rem; }
     .tq-head {
-      padding-right: 46px;
+      padding-right: 0;
     }
     .quiz-stat { padding: 5px 6px; }
     .quiz-stat-label { font-size: .6rem; }
@@ -1533,7 +1539,7 @@
   }
 
   @media (max-width: 340px) {
-    .tq-head { padding-right: 44px; }
+    .tq-head { padding-right: 0; }
   }
 
   /* ---------- Reduced motion ---------- */

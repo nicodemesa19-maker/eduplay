@@ -62,6 +62,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
   .masthead-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .masthead-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .title-group h1 {
     font-family: var(--font-heading); font-weight: 900; font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #34d399 100%);
@@ -336,6 +337,16 @@
   .game-burger-btn.active .game-burger-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
   .game-burger-btn.active .game-burger-line:nth-child(2) { opacity:0; }
   .game-burger-btn.active .game-burger-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+  
+  @media (max-width: 768px) {
+    .game-burger-btn { position: fixed; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 10px; }
+    .game-burger-line { width: 20px; height: 2.5px; }
+  }
+  
+  @media (max-width: 480px) {
+    .game-burger-btn { position: fixed; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 8px; gap: 3px; }
+    .game-burger-line { width: 18px; height: 2px; }
+  }
 
   .game-burger-menu { position:fixed; top:0; right:-100%; width:min(320px, 85vw); height:100vh; height:100dvh; background:linear-gradient(160deg,rgba(15,23,42,0.98),rgba(30,41,59,0.98)); border-left:2px solid rgba(99,102,241,.4); backdrop-filter:blur(20px); z-index:10000; transition:right .35s ease; box-shadow:-10px 0 40px rgba(0,0,0,.8); display:flex; flex-direction:column; padding:20px; padding-top:70px; }
   .game-burger-menu.active { right:0; }
@@ -389,8 +400,8 @@
   @media (max-width: 680px) {
     .app-container { width: 100%; padding: 6px 10px calc(130px + env(safe-area-inset-bottom, 0px)); }
     .masthead { gap: 8px; margin-bottom: 6px; padding-bottom: 6px; }
-    .masthead-left { gap: 8px; width: 100%; }
-    .title-group { order: 3; width: 100%; }
+    .masthead-right { gap: 8px; }
+    .title-group { width: 100%; }
     .title-group h1 { font-size: 1.5rem; }
     .title-group p { display: none; }
     .level-badge, .coins-pill { font-size: 0.74rem; padding: 4px 10px; }
@@ -457,23 +468,23 @@
 
 <div class="app-container">
   <header class="masthead">
-    <div class="masthead-left">
+    <div class="title-group">
+      <h1>MDAS Maze</h1>
+      <p>Order of Operations: Multiplication &amp; Division first, then Addition &amp; Subtraction!</p>
+    </div>
+    <div class="masthead-right">
       <div class="level-badge" id="levelBadge">
         <i class="bi bi-star-fill"></i> Level {{ $progress->current_level ?? 1 }} of 10
       </div>
       <div class="coins-pill" id="coinsPill" title="Your Coins Bank">
         🪙 <span id="coinDisplay">50</span> Coins
       </div>
-      <div class="title-group">
-        <h1>MDAS Maze</h1>
-        <p>Order of Operations: Multiplication &amp; Division first, then Addition &amp; Subtraction!</p>
-      </div>
+      <button type="button" class="game-burger-btn" id="burgerBtn" onclick="toggleBurgerMenu()" aria-label="Open menu">
+        <div class="game-burger-line"></div>
+        <div class="game-burger-line"></div>
+        <div class="game-burger-line"></div>
+      </button>
     </div>
-    <button type="button" class="game-burger-btn" id="burgerBtn" onclick="toggleBurgerMenu()" aria-label="Open menu">
-      <div class="game-burger-line"></div>
-      <div class="game-burger-line"></div>
-      <div class="game-burger-line"></div>
-    </button>
   </header>
 
   <div class="mdas-order-ribbon">

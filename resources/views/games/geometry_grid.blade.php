@@ -40,6 +40,16 @@
   .geo-burger-btn.active .geo-burger-line:nth-child(2) { opacity:0; }
   .geo-burger-btn.active .geo-burger-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
   
+  @media (max-width: 768px) {
+    .geo-burger-btn { position: fixed; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 10px; }
+    .geo-burger-line { width: 20px; }
+  }
+  
+  @media (max-width: 480px) {
+    .geo-burger-btn { position: fixed; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 8px; gap: 3px; }
+    .geo-burger-line { width: 18px; height: 2px; }
+  }
+  
   .geo-burger-menu { position:fixed; top:0; right:-100%; width:min(320px, 85vw); height:100vh; height:100dvh; background:linear-gradient(160deg,#0f172a,#1e293b); border-left:2px solid rgba(99,102,241,.3); backdrop-filter:blur(20px); z-index:10000; transition:right .35s ease; box-shadow:-10px 0 40px rgba(0,0,0,.6); display:flex; flex-direction:column; padding:20px; padding-top:70px; }
   .geo-burger-menu.active { right:0; }
   .geo-burger-overlay { position:fixed; inset:0; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:9999; opacity:0; pointer-events:none; transition:opacity .3s; }
