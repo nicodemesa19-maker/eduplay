@@ -874,8 +874,7 @@ kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
     </div>
 
     <div id="controls">
-        <div class="hint-keys"><kbd>1-4</kbd> select &nbsp;·&nbsp; <kbd>F</kbd> fullscreen &nbsp;·&nbsp; <kbd>P</kbd> pause</div>
-        <button class="ctrl-btn btn-fs" id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+        <div class="hint-keys"><kbd>1-4</kbd> select &nbsp;·&nbsp; <kbd>P</kbd> pause</div>
     </div>
 </div>
 </div>
@@ -1578,17 +1577,6 @@ function togglePause() {
     else          { if (ov) ov.classList.remove('active'); }
 }
 
-function toggleFullscreen() {
-    const el = document.getElementById('gameWrapper');
-    if (!document.fullscreenElement) {
-        if (el.requestFullscreen) el.requestFullscreen();
-        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    }
-}
-
 /* ==========================================================================
    KEYBOARD HANDLERS
    ========================================================================== */
@@ -1633,8 +1621,6 @@ document.addEventListener('keydown', (e) => {
 
     if (e.key === 'p' || e.key === 'P' || e.key === 'Escape') {
         e.preventDefault(); togglePause();
-    } else if (e.key === 'f' || e.key === 'F') {
-        toggleFullscreen();
     } else if (['1','2','3','4'].includes(e.key)) {
         const ships = document.querySelectorAll('.ship');
         const idx = parseInt(e.key, 10) - 1;

@@ -1032,7 +1032,6 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
             <div id="board"></div>
             <div id="ctrl">
                 <button class="cbtn cbtn-restart" id="restartBtn"><i class="bi bi-arrow-clockwise"></i> Restart</button>
-                <button class="cbtn cbtn-fs" id="fsBtn"><i class="bi bi-fullscreen"></i> Fullscreen</button>
             </div>
         </div>
     </div>
@@ -1764,20 +1763,6 @@ function initGame(){
 /* -------------------------------------------------------
    FULLSCREEN & CONTROL BUTTONS
 ------------------------------------------------------- */
-if(fsBtn){
-    // iPhone Safari doesn't support the Fullscreen API on elements — hide the button there
-    const fsSupported = !!(gwEl && (gwEl.requestFullscreen || gwEl.webkitRequestFullscreen));
-    if(!fsSupported){ fsBtn.style.display='none'; }
-    fsBtn.addEventListener('click',()=>{
-        if(!document.fullscreenElement){
-            if(gwEl.requestFullscreen) gwEl.requestFullscreen();
-            else if(gwEl.webkitRequestFullscreen) gwEl.webkitRequestFullscreen();
-        }else{
-            if(document.exitFullscreen) document.exitFullscreen();
-        }
-    });
-    document.addEventListener('fullscreenchange',()=>{fsBtn.innerHTML=document.fullscreenElement?'<i class="bi bi-fullscreen-exit"></i> Exit Full':'<i class="bi bi-fullscreen"></i> Fullscreen';});
-}
 if(startBtn) startBtn.addEventListener('click',()=>{if(instrScreen)instrScreen.style.display='none';if(gameScreen)gameScreen.style.display='flex';initGame();});
 if(restartBtn) restartBtn.addEventListener('click',()=>{endModal.classList.remove('show');initGame();});
 if(modalBtn) modalBtn.addEventListener('click',()=>{endModal.classList.remove('show');if(currentLevel>MAX_LVL)currentLevel=CURR_LVL;initGame();});

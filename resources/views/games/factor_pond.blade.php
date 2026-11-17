@@ -1028,9 +1028,6 @@ button{-webkit-tap-highlight-color:transparent;}
     <button type="button" class="eduplay-nav-btn eduplay-btn-pause" id="pauseBtnBurger" onclick="toggleBurgerMenu();" title="Resume Game">
       <i class="bi bi-play-fill"></i> <span>Resume</span>
     </button>
-    <button type="button" class="eduplay-nav-btn eduplay-btn-help" onclick="toggleFullscreen(); toggleBurgerMenu();" title="Toggle Fullscreen" style="background:rgba(139,92,246,.15);border-color:rgba(139,92,246,.4);color:#c4b5fd;">
-      <i class="bi bi-fullscreen"></i> <span>Fullscreen</span>
-    </button>
     <a href="{{ route('student.map', $game->name) }}" class="eduplay-nav-btn eduplay-btn-map" title="Game Map">
       <i class="bi bi-map-fill"></i> <span>Game Map</span>
     </a>
@@ -2014,26 +2011,6 @@ bnrPlayBtn.addEventListener('click', () => {
 });
 
 castBtn.addEventListener('click', castNet);
-
-window.toggleFullscreen = function(){
-    const w = document.getElementById('gw') || document.documentElement;
-    if (!document.fullscreenElement) {
-        if (w.requestFullscreen) w.requestFullscreen();
-        else if (w.webkitRequestFullscreen) w.webkitRequestFullscreen();
-    } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    }
-};
-document.addEventListener('fullscreenchange', () => {
-    const fsBtn = document.getElementById('fsBtn');
-    if (fsBtn){
-        fsBtn.innerHTML = document.fullscreenElement
-            ? '<i class="bi bi-fullscreen-exit"></i> <span>Exit</span>'
-            : '<i class="bi bi-fullscreen"></i> <span>Full</span>';
-    }
-    setTimeout(refreshBounds, 200);
-});
 
 window.togglePause = function(){
     if (!gameOn) return;

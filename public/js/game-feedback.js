@@ -21,6 +21,8 @@ const ENCOURAGING_MESSAGES = [
     "That answer took a detour. Let's get back on track!"
 ];
 
+const FEEDBACK_OVERLAY_ID = 'game-feedback-overlay';
+
 /**
  * Get a random encouraging message
  */
@@ -29,18 +31,28 @@ function getEncouragingMessage() {
 }
 
 /**
+ * Returns the element that new feedback UI should be attached to.
+ * In fullscreen, only the fullscreen element (and its children) is rendered,
+ * so everything must live inside it.
+ */
+function getFeedbackHost() {
+    return document.fullscreenElement ||
+           document.webkitFullscreenElement ||
+           document.mozFullScreenElement ||
+           document.msFullscreenElement ||
+           document.body;
+}
+
+/**
  * Play correct answer sound effect
  */
 let correctSoundAudio = null;
 function playCorrectSound() {
     try {
-        // Create audio element if it doesn't exist
         if (!correctSoundAudio) {
             correctSoundAudio = new Audio('/sounds/correct-answer.mp3');
-            correctSoundAudio.volume = 0.5; // Set volume to 50%
+            correctSoundAudio.volume = 0.5;
         }
-        
-        // Reset and play
         correctSoundAudio.currentTime = 0;
         correctSoundAudio.play().catch(err => {
             console.log('Could not play correct answer sound:', err);
@@ -56,13 +68,10 @@ function playCorrectSound() {
 let wrongSoundAudio = null;
 function playWrongSound() {
     try {
-        // Create audio element if it doesn't exist
         if (!wrongSoundAudio) {
             wrongSoundAudio = new Audio('/sounds/wrong-answer.mp3');
-            wrongSoundAudio.volume = 0.5; // Set volume to 50%
+            wrongSoundAudio.volume = 0.5;
         }
-        
-        // Reset and play
         wrongSoundAudio.currentTime = 0;
         wrongSoundAudio.play().catch(err => {
             console.log('Could not play wrong answer sound:', err);
@@ -76,66 +85,57 @@ function playWrongSound() {
  * Create enhanced confetti effect for correct answers
  */
 function createConfetti() {
-    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#a29bfe', '#fd79a8', '#fdcb6e', 
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#a29bfe', '#fd79a8', '#fdcb6e',
                     '#ff9ff3', '#54a0ff', '#48dbfb', '#1dd1a1', '#feca57', '#ff6348', '#ee5a6f', '#c44569'];
     const shapes = ['square', 'circle', 'triangle', 'star', 'ribbon'];
-    const confettiCount = window.innerWidth < 768 ? 60 : 120; // Doubled the count
-    
-    // Create confetti bursts from multiple points
+    const confettiCount = window.innerWidth < 768 ? 60 : 120;
+
     const burstPoints = [
         { x: 25, y: -10 },
         { x: 50, y: -10 },
         { x: 75, y: -10 }
     ];
-    
+
     burstPoints.forEach((point, burstIndex) => {
         const particlesPerBurst = Math.floor(confettiCount / burstPoints.length);
-        
+
         for (let i = 0; i < particlesPerBurst; i++) {
             setTimeout(() => {
                 const confetti = document.createElement('div');
                 const shape = shapes[Math.floor(Math.random() * shapes.length)];
                 confetti.className = `game-confetti game-confetti-${shape}`;
-                
-                // Randomize starting position around burst point
+
                 const spreadX = (Math.random() - 0.5) * 20;
                 confetti.style.left = `calc(${point.x}vw + ${spreadX}vw)`;
-                
-                // Random delay for staggered effect
+
                 const delay = Math.random() * 0.3;
                 confetti.style.animationDelay = `${delay}s`;
-                
-                // Vibrant colors with occasional sparkle
+
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.backgroundColor = color;
                 confetti.style.boxShadow = `0 0 10px ${color}`;
-                
-                // Varied sizes for depth
+
                 const size = Math.random() * 15 + 8;
                 confetti.style.width = `${size}px`;
                 confetti.style.height = `${size}px`;
-                
-                // Random rotation
+
                 confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                
-                // Add different animation durations for variety
+
                 const duration = 2.5 + Math.random() * 1.5;
                 confetti.style.animationDuration = `${duration}s`;
-                
-                // Random horizontal drift
+
                 const drift = (Math.random() - 0.5) * 100;
                 confetti.style.setProperty('--drift-x', `${drift}px`);
-                
-                document.body.appendChild(confetti);
-                
+
+                getFeedbackHost().appendChild(confetti);
+
                 setTimeout(() => {
                     confetti.remove();
                 }, duration * 1000);
-            }, i * 8 + burstIndex * 150); // Faster spawn rate
+            }, i * 8 + burstIndex * 150);
         }
     });
-    
-    // Add some emoji confetti for extra celebration
+
     const emojis = ['⭐', '✨', '🎉', '🎊', '💫', '🌟', '⚡'];
     for (let i = 0; i < 15; i++) {
         setTimeout(() => {
@@ -145,12 +145,12 @@ function createConfetti() {
             emoji.style.left = Math.random() * 100 + 'vw';
             emoji.style.animationDelay = Math.random() * 0.2 + 's';
             emoji.style.fontSize = (Math.random() * 10 + 20) + 'px';
-            
+
             const duration = 2 + Math.random() * 1;
             emoji.style.animationDuration = `${duration}s`;
-            
-            document.body.appendChild(emoji);
-            
+
+            getFeedbackHost().appendChild(emoji);
+
             setTimeout(() => {
                 emoji.remove();
             }, duration * 1000);
@@ -162,14 +162,17 @@ function createConfetti() {
  * Show feedback notification
  * @param {boolean} isCorrect - Whether the answer was correct
  * @param {string} correctAnswer - The correct answer (always shown)
- * @param {number} duration - Deprecated, kept for compatibility (now ignored, only Continue button dismisses)
+ * @param {number} duration - Deprecated, kept for compatibility (ignored, only Continue button dismisses)
  * @param {function} onContinue - Callback function when Continue button is clicked
  * @param {string} explanation - Optional step-by-step solution/explanation
  * @param {string} customIcon - Optional custom icon (emoji or HTML) for the feedback header
  */
 function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onContinue = null, explanation = null, customIcon = null) {
+    // Make sure styles exist (covers the case where the script loaded before <head> was ready)
+    injectFeedbackStyles();
+
     // Remove any existing feedback
-    const existing = document.getElementById('game-feedback-notification');
+    const existing = document.getElementById(FEEDBACK_OVERLAY_ID);
     if (existing) {
         existing.remove();
     }
@@ -181,29 +184,30 @@ function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onConti
         playWrongSound();
     }
 
-    // Create notification element
+    // Overlay: full-viewport, flex-centers the notification. Always fixed, always centered.
+    const overlay = document.createElement('div');
+    overlay.id = FEEDBACK_OVERLAY_ID;
+
+    // Notification card
     const notification = document.createElement('div');
     notification.id = 'game-feedback-notification';
     notification.className = 'game-feedback-notification';
-    
-    // Determine icon to use
+
     const icon = customIcon || (isCorrect ? '🚀' : '💭');
-    
+
     if (isCorrect) {
         notification.classList.add('feedback-correct');
-        
-        // Always show correct answer, even for correct responses
+
         let answerDisplay = '';
         if (correctAnswer) {
             answerDisplay = `<div class="feedback-answer feedback-answer-correct">Correct answer: <strong>${correctAnswer}</strong></div>`;
         }
-        
-        // Show explanation if provided
+
         let explanationHTML = '';
         if (explanation) {
             explanationHTML = `<div class="feedback-explanation">${explanation}</div>`;
         }
-        
+
         notification.innerHTML = `
             <div class="feedback-header">
                 <div class="feedback-icon">${icon}</div>
@@ -220,20 +224,17 @@ function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onConti
                 </button>
             </div>
         `;
-        
-        // Trigger confetti for correct answers
+
         createConfetti();
     } else {
         const encouragingMsg = getEncouragingMessage();
         notification.classList.add('feedback-incorrect');
-        
-        // Always show the correct answer for learning
+
         let correctAnswerHTML = '';
         if (correctAnswer) {
             correctAnswerHTML = `<div class="feedback-answer">The correct answer is: <strong>${correctAnswer}</strong></div>`;
         }
-        
-        // Show step-by-step solution if provided
+
         let explanationHTML = '';
         if (explanation) {
             explanationHTML = `
@@ -245,7 +246,7 @@ function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onConti
                 </div>
             `;
         }
-        
+
         notification.innerHTML = `
             <div class="feedback-header">
                 <div class="feedback-icon">${icon}</div>
@@ -264,11 +265,10 @@ function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onConti
         `;
     }
 
-    // Add to page - append to fullscreen element if in fullscreen, otherwise body
-    const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || 
-                             document.mozFullScreenElement || document.msFullscreenElement;
-    const targetElement = fullscreenElement || document.body;
-    targetElement.appendChild(notification);
+    overlay.appendChild(notification);
+
+    // Attach to the fullscreen element if there is one, otherwise body
+    getFeedbackHost().appendChild(overlay);
 
     // Trigger animation
     setTimeout(() => {
@@ -276,14 +276,14 @@ function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onConti
     }, 10);
 
     // Handle continue button click (ONLY way to dismiss)
-    const continueBtn = document.getElementById('feedbackContinueBtn');
+    const continueBtn = notification.querySelector('#feedbackContinueBtn');
     if (continueBtn) {
         continueBtn.addEventListener('click', () => {
             notification.classList.remove('show');
             setTimeout(() => {
-                notification.remove();
+                overlay.remove();
             }, 300);
-            
+
             if (onContinue && typeof onContinue === 'function') {
                 onContinue();
             }
@@ -291,8 +291,26 @@ function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onConti
     }
 
     // NO auto-dismiss - feedback stays until Continue is clicked
-    // Duration parameter is now ignored for user control
 }
+
+/**
+ * If the user enters/exits fullscreen while feedback is showing,
+ * move it into whichever element is actually being rendered.
+ */
+function relocateFeedback() {
+    const host = getFeedbackHost();
+    const overlay = document.getElementById(FEEDBACK_OVERLAY_ID);
+    if (overlay && overlay.parentNode !== host) {
+        host.appendChild(overlay);
+    }
+    document.querySelectorAll('.game-confetti').forEach(c => {
+        if (c.parentNode !== host) host.appendChild(c);
+    });
+}
+document.addEventListener('fullscreenchange', relocateFeedback);
+document.addEventListener('webkitfullscreenchange', relocateFeedback);
+document.addEventListener('mozfullscreenchange', relocateFeedback);
+document.addEventListener('MSFullscreenChange', relocateFeedback);
 
 /**
  * Inject CSS styles if not already present
@@ -305,43 +323,55 @@ function injectFeedbackStyles() {
     const style = document.createElement('style');
     style.id = 'game-feedback-styles';
     style.textContent = `
+        /* Full-viewport centering layer.
+           !important is required: pages like the Number Wars game have
+           "#gameWrapper > * { position: relative }" which beats class selectors. */
+        #${FEEDBACK_OVERLAY_ID} {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: auto !important;
+            height: auto !important;
+            margin: 0 !important;
+            padding: 16px !important;
+            box-sizing: border-box !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 2147483647 !important;
+            pointer-events: none !important;
+            overflow-y: auto;
+        }
+
         .game-feedback-notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
+            position: relative;
+            flex: 0 1 auto;
+            transform: scale(0.8);
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.97) 0%, rgba(30, 41, 59, 0.99) 50%, rgba(15, 23, 42, 0.97) 100%);
             border: 1.5px solid rgba(56, 189, 248, 0.4);
             border-radius: 24px;
             padding: 0;
-            box-shadow: 
+            box-shadow:
                 0 25px 70px rgba(0, 0, 0, 0.9),
                 0 0 60px rgba(56, 189, 248, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            z-index: 999999;
-            min-width: 440px;
-            max-width: 90vw;
+            width: min(440px, 100%);
+            max-height: 100%;
+            overflow-y: auto;
             opacity: 0;
             transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
             pointer-events: none;
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            overflow: hidden;
+            margin: auto;
         }
 
         .game-feedback-notification.show {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+            transform: scale(1);
             pointer-events: all;
-        }
-        
-        /* Ensure visibility in fullscreen mode */
-        :fullscreen .game-feedback-notification,
-        :-webkit-full-screen .game-feedback-notification,
-        :-moz-full-screen .game-feedback-notification,
-        :-ms-fullscreen .game-feedback-notification {
-            position: fixed !important;
-            z-index: 2147483647 !important;
         }
 
         .game-feedback-notification::before {
@@ -393,16 +423,16 @@ function injectFeedbackStyles() {
         .feedback-correct .feedback-icon {
             background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(52, 211, 153, 0.15) 60%, transparent 100%);
             border: 2px solid rgba(16, 185, 129, 0.6);
-            box-shadow: 
-                0 0 30px rgba(16, 185, 129, 0.4), 
+            box-shadow:
+                0 0 30px rgba(16, 185, 129, 0.4),
                 inset 0 0 20px rgba(16, 185, 129, 0.2);
         }
 
         .feedback-incorrect .feedback-icon {
             background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(251, 191, 36, 0.15) 60%, transparent 100%);
             border: 2px solid rgba(245, 158, 11, 0.6);
-            box-shadow: 
-                0 0 30px rgba(245, 158, 11, 0.4), 
+            box-shadow:
+                0 0 30px rgba(245, 158, 11, 0.4),
                 inset 0 0 20px rgba(245, 158, 11, 0.2);
         }
 
@@ -464,7 +494,7 @@ function injectFeedbackStyles() {
             box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.4);
             text-align: center;
         }
-        
+
         .feedback-answer * {
             color: rgba(226, 232, 240, 0.95) !important;
         }
@@ -492,7 +522,6 @@ function injectFeedbackStyles() {
             color: #fbbf24 !important;
         }
 
-        /* Correct answer shown on correct responses */
         .feedback-answer-correct {
             background: rgba(16, 185, 129, 0.08);
             border: 1px solid rgba(16, 185, 129, 0.3);
@@ -532,7 +561,6 @@ function injectFeedbackStyles() {
             font-size: 1.3rem;
         }
 
-        /* Explanation/Solution section */
         .feedback-explanation {
             margin-bottom: 18px;
             padding: 16px 20px;
@@ -545,7 +573,7 @@ function injectFeedbackStyles() {
             text-align: left;
             color: rgba(226, 232, 240, 0.95) !important;
         }
-        
+
         .feedback-explanation * {
             color: rgba(226, 232, 240, 0.95) !important;
         }
@@ -571,7 +599,7 @@ function injectFeedbackStyles() {
             color: rgba(226, 232, 240, 0.95) !important;
             padding-left: 0;
         }
-        
+
         .explanation-content div {
             color: rgba(226, 232, 240, 0.95) !important;
             margin-bottom: 8px;
@@ -602,7 +630,7 @@ function injectFeedbackStyles() {
             font-size: 0.92em;
             border: 1px solid rgba(52, 211, 153, 0.25);
         }
-        
+
         .explanation-content br {
             line-height: 1.8;
         }
@@ -610,8 +638,7 @@ function injectFeedbackStyles() {
         /* Mobile responsive */
         @media (max-width: 640px) {
             .game-feedback-notification {
-                min-width: 320px;
-                max-width: 95vw;
+                width: min(440px, 100%);
             }
 
             .feedback-header {
@@ -664,25 +691,26 @@ function injectFeedbackStyles() {
             }
         }
 
-        /* Confetti animations */
+        /* Confetti animations.
+           position/z-index use !important so page rules like
+           "#gameWrapper > * { position: relative; z-index: 1 }" can't break them in fullscreen. */
         .game-confetti {
-            position: fixed;
+            position: fixed !important;
             top: -10px;
-            z-index: 9999;
+            z-index: 2147483646 !important;
             pointer-events: none;
             animation: confettiFall 3s ease-out forwards;
             will-change: transform, opacity;
         }
-        
-        /* Different confetti shapes */
+
         .game-confetti-square {
             border-radius: 2px;
         }
-        
+
         .game-confetti-circle {
             border-radius: 50%;
         }
-        
+
         .game-confetti-triangle {
             width: 0 !important;
             height: 0 !important;
@@ -692,17 +720,17 @@ function injectFeedbackStyles() {
             border-bottom-color: inherit;
             background: transparent !important;
         }
-        
+
         .game-confetti-star {
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
-        
+
         .game-confetti-ribbon {
             border-radius: 4px;
             width: 8px !important;
             height: 20px !important;
         }
-        
+
         .game-confetti-emoji {
             font-size: 24px;
             animation: emojiFloat 2.5s ease-out forwards;
@@ -722,7 +750,7 @@ function injectFeedbackStyles() {
                 opacity: 0;
             }
         }
-        
+
         @keyframes emojiFloat {
             0% {
                 transform: translateY(0) translateX(0) rotate(0deg) scale(1);

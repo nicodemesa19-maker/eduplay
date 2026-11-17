@@ -91,6 +91,22 @@ body{background:var(--bg);font-family:'Baloo 2',sans-serif;color:var(--text);ove
   margin:0;
 }
 
+.eq-ticker{
+  display:inline-block;
+  background:rgba(0,0,0,.3);
+  border:2px solid var(--lime);
+  border-radius:8px;
+  padding:4px 14px;
+  font-family:'Space Mono',monospace;
+  font-size:0.88rem;
+  font-weight:700;
+  color:var(--lime);
+  box-shadow:var(--glow-lime);
+  max-width:100%;
+  word-break:break-word;
+  transition:opacity .3s;
+}
+
 /* Game cards */
 .game-card{
   border-radius:16px;
@@ -292,7 +308,7 @@ body{background:var(--bg);font-family:'Baloo 2',sans-serif;color:var(--text);ove
       <i class="bi bi-arrow-left"></i>Dashboard
     </a>
     <h1 class="page-title"><i class="bi bi-controller me-2" style="color:var(--cyan);"></i>Game Arena</h1>
-    <p class="page-subtitle">Choose a game and start playing!</p>
+    <div class="eq-ticker" id="arena-ticker">Pick your math challenge and jump in!</div>
   </div>
 </div>
 
@@ -404,6 +420,33 @@ body{background:var(--bg);font-family:'Baloo 2',sans-serif;color:var(--text);ove
     wrap.appendChild(el);
   }
 })();
+
+// Arena ticker animation
+(function(){
+  const phrases=[
+    "Pick your math challenge and jump in!",
+    "Time to play! Pick a math game to start.",
+    "Which math challenge are you taking on today?",
+    "Math + Games = Fun. Choose yours!",
+    "Pick a game, solve the math, and win.",
+    "Pick a game and level up your math skills!",
+    "Choose your math challenge and jump in.",
+    "Ready to play? Pick a math game below.",
+    "Select your math mission."
+  ];
+  let i=0;
+  const el=document.getElementById('arena-ticker');
+  if(!el) return;
+  el.style.transition='opacity .3s';
+  setInterval(()=>{
+    el.style.opacity='0';
+    setTimeout(()=>{
+      el.textContent=phrases[i++%phrases.length];
+      el.style.opacity='1';
+    },300);
+  },2800);
+})();
+
 setTimeout(()=>{
   document.querySelectorAll('[data-width]').forEach(b=>{ b.style.width=b.dataset.width+'%'; });
 },500);
