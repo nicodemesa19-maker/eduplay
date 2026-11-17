@@ -264,8 +264,11 @@ function showGameFeedback(isCorrect, correctAnswer = null, duration = 0, onConti
         `;
     }
 
-    // Add to page
-    document.body.appendChild(notification);
+    // Add to page - append to fullscreen element if in fullscreen, otherwise body
+    const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || 
+                             document.mozFullScreenElement || document.msFullscreenElement;
+    const targetElement = fullscreenElement || document.body;
+    targetElement.appendChild(notification);
 
     // Trigger animation
     setTimeout(() => {
@@ -330,6 +333,15 @@ function injectFeedbackStyles() {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
             pointer-events: all;
+        }
+        
+        /* Ensure visibility in fullscreen mode */
+        :fullscreen .game-feedback-notification,
+        :-webkit-full-screen .game-feedback-notification,
+        :-moz-full-screen .game-feedback-notification,
+        :-ms-fullscreen .game-feedback-notification {
+            position: fixed !important;
+            z-index: 2147483647 !important;
         }
 
         .game-feedback-notification::before {
