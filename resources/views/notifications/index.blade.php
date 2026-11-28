@@ -233,35 +233,52 @@ h1,h2,h3{font-family:'Bungee',sans-serif;}
 @media (max-width:575px){
   .hero{
     padding: max(20px, env(safe-area-inset-top)) 0 18px;
+    position: relative;
   }
   .hero-title{font-size:clamp(1.4rem, 6vw, 1.75rem);}
   .hero-sub{font-size:.85rem;}
 
-  /* Hero header stacks; buttons become a 2-up equal row */
-  .hero > .container > .d-flex { gap: 12px !important; }
+  /* Make hero header layout simpler on mobile */
+  .hero > .container > .d-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  /* Position Back button in top right corner */
   .hero .d-flex.gap-2 {
-    width: 100%;
-    flex-wrap: nowrap;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: auto;
+    gap: 8px !important;
   }
-  /* Form wrapper (Mark All Read) participates in the flex row */
-  .hero .d-flex.gap-2 form {
-    flex: 1 1 0;
-    min-width: 0;
-    display: flex;
-  }
-  .hero .d-flex.gap-2 form .btn-neon { width: 100%; }
+
+  /* Make Back button smaller */
   .hero .d-flex.gap-2 > a.btn-neon {
-    flex: 1 1 0;
-    min-width: 0;
+    padding: 8px 12px;
+    font-size: .8rem;
+    min-height: 36px;
+    border-radius: 8px;
   }
-  .hero .btn-neon{
-    min-height: 44px;
+  .hero .d-flex.gap-2 > a.btn-neon i {
+    font-size: .85rem;
+  }
+
+  /* Mark All Read button takes full width below title */
+  .hero .d-flex.gap-2 form {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .hero .d-flex.gap-2 form .btn-neon {
+    width: 100%;
     padding: 10px 12px;
     font-size: .85rem;
-    gap: 4px;
+    min-height: 44px;
   }
-  .hero .btn-neon i { font-size: 1rem; }
-  .hero .btn-neon i.me-2 { margin-right: 0 !important; }
+
+  .hero .btn-neon i.me-2 { margin-right: 6px !important; }
 
   /* Content container padding + safe-area */
   .container.py-5 {
