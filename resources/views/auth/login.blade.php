@@ -504,7 +504,7 @@
                      placeholder="Teacher: email / Student: username" required autofocus autocomplete="username">
             </div>
             @error('login')<div class="field-error">{{ $message }}</div>@enderror
-            <div class="hint"><i class="bi bi-info-circle"></i><span>Teachers and admins use their email. Students use their username or full name.</span></div>
+            <div class="hint"><i class="bi bi-info-circle"></i><span>Teachers and admins use their email. Students use their username or full name (e.g., "Miguel Reyes").</span></div>
           </div>
 
           <div class="field">
