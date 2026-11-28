@@ -439,6 +439,39 @@ h1,h2,h3,.font-display{font-family:'Bungee',sans-serif;}
   .badge-grid{grid-template-columns:1fr;}
   .avatar-box{width:60px;height:60px;font-size:2rem;}
 }
+
+@media(max-width:575px){
+  .hero{
+    padding: max(20px, env(safe-area-inset-top)) 0 18px;
+    position: relative;
+  }
+  
+  /* Stack hero content */
+  .hero .d-flex.justify-content-between{
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+  }
+  
+  /* Position Back button in top right corner */
+  .hero .btn-neon{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 8px 12px;
+    font-size: .8rem;
+    min-height: 36px;
+  }
+  
+  .hero .btn-neon i{
+    font-size: .85rem;
+  }
+  
+  .container.py-5{
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+}
 </style>
 
 <!-- Hero Header -->
