@@ -501,7 +501,7 @@
               <i class="lead-icon bi bi-person"></i>
               <input type="text" id="loginField" name="login" value="{{ old('login') }}"
                      class="input {{ $errors->has('login') ? 'is-invalid' : '' }}"
-                     placeholder="Enter your email or username" required autofocus autocomplete="username">
+                     placeholder="Teacher: email / Student: username" required autofocus autocomplete="username">
             </div>
             @error('login')<div class="field-error">{{ $message }}</div>@enderror
             <div class="hint"><i class="bi bi-info-circle"></i><span>Teachers and admins use their email. Students use their username or full name.</span></div>
